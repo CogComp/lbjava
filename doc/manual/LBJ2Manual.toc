@@ -1,0 +1,72 @@
+\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}
+\contentsline {section}{\numberline {1.1}Motivation}{1}{section.1.1}
+\contentsline {section}{\numberline {1.2}LBJ}{1}{section.1.2}
+\contentsline {chapter}{\numberline {2}LBJ Definitions}{3}{chapter.2}
+\contentsline {chapter}{\numberline {3}Tutorial: 20 Newsgroups}{7}{chapter.3}
+\contentsline {section}{\numberline {3.1}Setting Up}{7}{section.3.1}
+\contentsline {section}{\numberline {3.2}Classifier Declarations}{9}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Hard-coded classifiers}{9}{subsection.3.2.1}
+\contentsline {subsection}{\numberline {3.2.2}Learners}{10}{subsection.3.2.2}
+\contentsline {section}{\numberline {3.3}Using {\tt NewsgroupClassifier} in a Java Program}{11}{section.3.3}
+\contentsline {section}{\numberline {3.4}Compiling Our Learning Based Program with LBJ}{11}{section.3.4}
+\contentsline {chapter}{\numberline {4}The LBJ Language}{13}{chapter.4}
+\contentsline {section}{\numberline {4.1}Classifiers}{13}{section.4.1}
+\contentsline {subsection}{\numberline {4.1.1}Classifier Declarations}{13}{subsection.4.1.1}
+\contentsline {subsection}{\numberline {4.1.2}Classifier Expressions}{16}{subsection.4.1.2}
+\contentsline {subsubsection}{\numberline {4.1.2.1}Classifier Names}{17}{subsubsection.4.1.2.1}
+\contentsline {subsubsection}{\numberline {4.1.2.2}Method Bodies}{17}{subsubsection.4.1.2.2}
+\contentsline {subsubsection}{\numberline {4.1.2.3}Classifier Cast Expressions}{17}{subsubsection.4.1.2.3}
+\contentsline {subsubsection}{\numberline {4.1.2.4}Conjunctions}{18}{subsubsection.4.1.2.4}
+\contentsline {subsubsection}{\numberline {4.1.2.5}Composite Generators}{19}{subsubsection.4.1.2.5}
+\contentsline {subsubsection}{\numberline {4.1.2.6}Learning Classifier Expressions}{19}{subsubsection.4.1.2.6}
+\contentsline {subsubsection}{\numberline {4.1.2.7}Inference Invocations}{22}{subsubsection.4.1.2.7}
+\contentsline {subsection}{\numberline {4.1.3}Method Bodies}{22}{subsection.4.1.3}
+\contentsline {subsubsection}{\numberline {4.1.3.1}The Sense Statement}{22}{subsubsection.4.1.3.1}
+\contentsline {subsubsection}{\numberline {4.1.3.2}Invoking Classifiers}{23}{subsubsection.4.1.3.2}
+\contentsline {subsubsection}{\numberline {4.1.3.3}Syntax Limitations}{24}{subsubsection.4.1.3.3}
+\contentsline {section}{\numberline {4.2}Constraints}{24}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Constraint Statements}{24}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}Constraint Declarations}{26}{subsection.4.2.2}
+\contentsline {section}{\numberline {4.3}Inference}{26}{section.4.3}
+\contentsline {section}{\numberline {4.4}``Makefile'' Behavior}{27}{section.4.4}
+\contentsline {chapter}{\numberline {5}The LBJ Library}{29}{chapter.5}
+\contentsline {section}{\numberline {5.1}{\tt LBJ2.classify}}{29}{section.5.1}
+\contentsline {subsection}{\numberline {5.1.1}{\tt LBJ2.classify.Classifier}}{29}{subsection.5.1.1}
+\contentsline {subsection}{\numberline {5.1.2}{\tt LBJ2.classify.Feature}}{31}{subsection.5.1.2}
+\contentsline {subsection}{\numberline {5.1.3}{\tt LBJ2.classify.FeatureVector}}{31}{subsection.5.1.3}
+\contentsline {subsection}{\numberline {5.1.4}{\tt LBJ2.classify.Score}}{32}{subsection.5.1.4}
+\contentsline {subsection}{\numberline {5.1.5}{\tt LBJ2.classify.ScoreSet}}{32}{subsection.5.1.5}
+\contentsline {subsection}{\numberline {5.1.6}{\tt LBJ2.classify.ValueComparer}}{32}{subsection.5.1.6}
+\contentsline {subsection}{\numberline {5.1.7}Vector Returners}{32}{subsection.5.1.7}
+\contentsline {subsection}{\numberline {5.1.8}{\tt LBJ2.classify.TestDiscrete}}{32}{subsection.5.1.8}
+\contentsline {section}{\numberline {5.2}{\tt LBJ2.learn}}{33}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}{\tt LBJ2.learn.Learner}}{33}{subsection.5.2.1}
+\contentsline {subsection}{\numberline {5.2.2}{\tt LBJ2.learn.LinearThresholdUnit}}{35}{subsection.5.2.2}
+\contentsline {subsection}{\numberline {5.2.3}{\tt LBJ2.learn.SparsePerceptron}}{35}{subsection.5.2.3}
+\contentsline {subsection}{\numberline {5.2.4}{\tt LBJ2.learn.SparseAveragedPerceptron}}{35}{subsection.5.2.4}
+\contentsline {subsection}{\numberline {5.2.5}{\tt LBJ2.learn.SparseWinnow}}{36}{subsection.5.2.5}
+\contentsline {subsection}{\numberline {5.2.6}{\tt LBJ2.learn.SparseNetworkLearner}}{36}{subsection.5.2.6}
+\contentsline {subsection}{\numberline {5.2.7}{\tt LBJ2.learn.NaiveBayes}}{36}{subsection.5.2.7}
+\contentsline {subsection}{\numberline {5.2.8}{\tt LBJ2.learn.StochasticGradientDescent}}{36}{subsection.5.2.8}
+\contentsline {subsection}{\numberline {5.2.9}{\tt LBJ2.learn.Normalizer}}{37}{subsection.5.2.9}
+\contentsline {subsection}{\numberline {5.2.10}{\tt LBJ2.learn.WekaWrapper}}{37}{subsection.5.2.10}
+\contentsline {section}{\numberline {5.3}{\tt LBJ2.infer}}{38}{section.5.3}
+\contentsline {subsection}{\numberline {5.3.1}{\tt LBJ2.infer.Inference}}{38}{subsection.5.3.1}
+\contentsline {subsection}{\numberline {5.3.2}{\tt LBJ2.infer.GLPK}}{38}{subsection.5.3.2}
+\contentsline {section}{\numberline {5.4}{\tt LBJ2.parse}}{39}{section.5.4}
+\contentsline {subsection}{\numberline {5.4.1}{\tt LBJ2.parse.Parser}}{39}{subsection.5.4.1}
+\contentsline {subsection}{\numberline {5.4.2}{\tt LBJ2.parse.LineByLine}}{39}{subsection.5.4.2}
+\contentsline {subsection}{\numberline {5.4.3}{\tt LBJ2.parse.ChildrenFromVectors}}{40}{subsection.5.4.3}
+\contentsline {subsection}{\numberline {5.4.4}{\tt LBJ2.parse.FeatureVectorParser}}{40}{subsection.5.4.4}
+\contentsline {subsection}{\numberline {5.4.5}{\tt LBJ2.parse.LinkedChild}}{40}{subsection.5.4.5}
+\contentsline {subsection}{\numberline {5.4.6}{\tt LBJ2.parse.LinkedVector}}{41}{subsection.5.4.6}
+\contentsline {section}{\numberline {5.5}{\tt LBJ2.nlp}}{41}{section.5.5}
+\contentsline {subsection}{\numberline {5.5.1}Internal Representations}{41}{subsection.5.5.1}
+\contentsline {subsection}{\numberline {5.5.2}Parsers}{41}{subsection.5.5.2}
+\contentsline {chapter}{\numberline {6}Installation and Command Line Usage}{43}{chapter.6}
+\contentsline {section}{\numberline {6.1}Installation}{43}{section.6.1}
+\contentsline {section}{\numberline {6.2}Command Line Usage}{46}{section.6.2}
+\contentsline {chapter}{\numberline {7}Licenses and Copyrights}{49}{chapter.7}
+\contentsline {section}{\numberline {7.1}LBJ's License}{49}{section.7.1}
+\contentsline {section}{\numberline {7.2}JLex's License}{50}{section.7.2}
+\contentsline {section}{\numberline {7.3}CUP's License}{50}{section.7.3}

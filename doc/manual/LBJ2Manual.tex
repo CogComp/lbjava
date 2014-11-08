@@ -1,0 +1,51 @@
+\documentclass[11pt]{book}
+\usepackage{LBJ2Manual}
+\usepackage{jeffe}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{fullpage}
+\usepackage{url}
+\usepackage{hyperref}
+\hypersetup{%
+  pdftitle = {Learning Based Java Manual},
+  pdfkeywords = {LBP, LBJ},
+  pdfauthor = {Nicholas D. Rizzolo}
+}
+
+\setcounter{secnumdepth}{4}
+
+\newcommand*\justify{%
+  \fontdimen2\font=0.4em% interword space
+  \fontdimen3\font=0.2em% interword stretch
+  \fontdimen4\font=0.1em% interword shrink
+  \fontdimen7\font=0.1em% extra space
+  \hyphenchar\font=`\-% allowing hyphenation
+}
+
+\begin{document}
+
+
+\title{
+  \LARGE{An Introduction to}\\
+  \Huge{Learning Based Java}\\
+  \vspace{.3cm}
+  \Large{Version 2.8.3}}
+\author{Nicholas Delmonico Rizzolo}
+\maketitle
+\frontmatter
+\tableofcontents
+\mainmatter
+
+
+\input{introduction}
+\input{definitions}
+\input{tutorial}
+\input{language}
+\input{library}
+\input{installation}
+\input{licenses}
+
+\bibliography{LBJ2Manual}
+\bibliographystyle{aaai}
+\end{document}
+\endinput
+
