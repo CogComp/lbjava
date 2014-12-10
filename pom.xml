@@ -1,12 +1,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>LBJava</artifactId>
 	<groupId>edu.illinois.cs.cogcomp</groupId>
 	<name>Learning Based Java</name>
 	<url>http://cogcomp.cs.illinois.edu/page/software_view/LBJ</url>
-	<version>1.0.1</version>
-	<description>A port of LBJ-2.8.2 into Maven</description>
+	<version>1.0.2</version>
+
+	<description>Learning Based Java</description>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -22,7 +23,8 @@
 		<dependency>
 			<groupId>gurobi</groupId>
 			<artifactId>gurobi</artifactId>
-			<version>5.0.1</version>	
+			<version>5.0.1</version>
+			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>nz.ac.waikato.cms.weka</groupId>
@@ -58,17 +60,17 @@
 		</extensions>
 		<plugins>
 			<plugin>
-			  <groupId>org.apache.maven.plugins</groupId>
-			  <artifactId>maven-source-plugin</artifactId>
-			  <version>2.2.1</version>
-			  <executions>
-				<execution>
-				  <id>attach-sources</id>
-				  <goals>
-					<goal>jar</goal>
-				  </goals>
-				</execution>
-			  </executions>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.2.1</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 			<!-- Copies all the Maven dependencies before compiling
 				(needed for using java_cup -->
