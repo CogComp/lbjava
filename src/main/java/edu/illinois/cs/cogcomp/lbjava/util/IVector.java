@@ -299,7 +299,8 @@ public class IVector implements Cloneable, java.io.Serializable
 
   public double[] toArrayDouble() {
 	  double[] result = new double[size];
-	  System.arraycopy(vector, 0, result, 0, size);
+	  for (int i = 0; i < size; i++)
+	      result[i] = (double) vector[i];
 	  return result;
   }
 
