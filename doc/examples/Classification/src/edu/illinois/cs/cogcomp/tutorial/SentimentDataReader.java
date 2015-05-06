@@ -13,7 +13,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
-import LBJ2.parse.Parser;
+import edu.illinois.cs.cogcomp.lbjava.parse.Parser;
 
 /**
  * @author Vivek Srikumar

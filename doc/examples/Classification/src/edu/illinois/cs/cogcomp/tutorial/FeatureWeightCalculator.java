@@ -1,9 +1,9 @@
 package edu.illinois.cs.cogcomp.tutorial;
 
-import LBJ2.classify.Feature;
-import LBJ2.classify.FeatureVector;
-import LBJ2.classify.ScoreSet;
-import LBJ2.learn.Lexicon;
+import edu.illinois.cs.cogcomp.lbjava.classify.Feature;
+import edu.illinois.cs.cogcomp.lbjava.classify.FeatureVector;
+import edu.illinois.cs.cogcomp.lbjava.classify.ScoreSet;
+import edu.illinois.cs.cogcomp.lbjava.learn.Lexicon;
 
 public class FeatureWeightCalculator {
 
