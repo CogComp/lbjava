@@ -10,7 +10,7 @@ constraint noEmptyNeighborhoods(City c) {
 inference SetCover head City c {
   Neighborhood n  { return n.getParentCity(); }
   subjectto { @noEmptyNeighborhoods(c); } 
-  with new ILPInference(new GLPKHook())
+  with new ILPInference(new GurobiHook())
 }
 
 discrete{false, true} containsStationConstrained(Neighborhood n) <-
