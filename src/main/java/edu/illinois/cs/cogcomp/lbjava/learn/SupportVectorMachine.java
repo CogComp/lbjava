@@ -33,7 +33,7 @@ import edu.illinois.cs.cogcomp.lbjava.util.OVector;
   * produce error messages if this assumption does not hold.
   *
   * <p> When calling this algorithm in a <code>with</code> clause inside an
-  * LBJ source file, there is no need to specify the <code>rounds</code>
+  * LBJava source file, there is no need to specify the <code>rounds</code>
   * clause.  At runtime, calling {@link #learn(Object)} merely performs
   * feature extraction and stores an indexed representation of the example
   * vector in memory.  The learning algorithm executes when
@@ -517,7 +517,7 @@ public class SupportVectorMachine extends Learner
         newLabelLexicon = labelLexicon;
       else if (newLabelLexicon.size() > labelLexicon.size()) {
         System.err.println(
-            "LBJ ERROR: SupportVectorMachine: new label lexicon is too big!");
+            "LBJava ERROR: SupportVectorMachine: new label lexicon is too big!");
         new Exception().printStackTrace();
         System.exit(1);
       }
@@ -735,7 +735,7 @@ public class SupportVectorMachine extends Learner
   public Feature featureValue(int[] f, double[] v) {
     if (weights == null && allLabels != null && !warningPrinted) {
       System.err.println(
-          "LBJ WARNING: SupportVectorMachine's doneLearning() method should "
+          "LBJava WARNING: SupportVectorMachine's doneLearning() method should "
           + "be called before attempting to make predictions.");
       warningPrinted = true;
     }
@@ -805,7 +805,7 @@ public class SupportVectorMachine extends Learner
     if (weights == null) {
       if (allLabels != null && !warningPrinted) {
         System.err.println(
-          "LBJ WARNING: SupportVectorMachine's doneLearning() method should "
+          "LBJava WARNING: SupportVectorMachine's doneLearning() method should "
           + "be called before attempting to make predictions.");
         warningPrinted = true;
       }
@@ -883,7 +883,7 @@ public class SupportVectorMachine extends Learner
     if (weights == null) {
       if (allLabels != null && !warningPrinted) {
         System.err.println(
-          "LBJ WARNING: SupportVectorMachine's doneLearning() method should "
+          "LBJava WARNING: SupportVectorMachine's doneLearning() method should "
           + "be called before attempting to make predictions.");
         warningPrinted = true;
       }
@@ -949,7 +949,7 @@ public class SupportVectorMachine extends Learner
                          Collection candidates) {
     if (weights == null && allLabels != null && !warningPrinted) {
       System.err.println(
-          "LBJ WARNING: SupportVectorMachine's doneLearning() method should "
+          "LBJava WARNING: SupportVectorMachine's doneLearning() method should "
           + "be called before attempting to make predictions.");
       warningPrinted = true;
     }

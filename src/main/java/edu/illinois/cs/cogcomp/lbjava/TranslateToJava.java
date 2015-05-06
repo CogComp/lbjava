@@ -2009,7 +2009,7 @@ public class TranslateToJava extends Pass
 		body.append(", __example); }\n"
 				+ "    catch (Exception e)\n"
 				+ "    {\n"
-				+ "      System.err.println(\"LBJ ERROR: Fatal error while "
+				+ "      System.err.println(\"LBJava ERROR: Fatal error while "
 				+ "evaluating classifier ");
 		body.append(iiName);
 		body.append(": \" + e);\n"

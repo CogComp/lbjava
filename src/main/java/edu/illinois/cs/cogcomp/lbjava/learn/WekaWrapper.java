@@ -439,7 +439,7 @@ public class WekaWrapper extends Learner
     try { baseClassifier = weka.classifiers.Classifier.makeCopy(freshClassifier); }
     catch (Exception e) {
       System.err.println(
-          "LBJ ERROR: WekaWrapper.forget: Can't copy classifier:");
+          "LBJava ERROR: WekaWrapper.forget: Can't copy classifier:");
       e.printStackTrace();
       System.exit(1);
     }

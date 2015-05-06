@@ -162,7 +162,7 @@ public class ILPInference extends Inference
 
       if (scores == null || scores.length == 0) {
         System.err.println(
-            "LBJ ERROR: Classifier " + v.getClassifier()
+            "LBJava ERROR: Classifier " + v.getClassifier()
             + " did not return any scores.  ILP inference cannot be "
             + "performed.");
         System.exit(1);

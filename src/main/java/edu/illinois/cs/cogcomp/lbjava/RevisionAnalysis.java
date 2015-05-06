@@ -152,7 +152,7 @@ public class RevisionAnalysis extends Pass
 	 *
 	 * @param name The name of the classifier.
 	 * @param line The line number at which the classifier whose source we're
-	 *             reading is declared in its LBJ source file.
+	 *             reading is declared in its LBJava source file.
 	 * @return The second line from the classifier's generated code without the
 	 *         opening comment marker (//), or <code>null</code> if the
 	 *         generated code doesn't exist or the file doesn't appear to be
@@ -360,7 +360,7 @@ public class RevisionAnalysis extends Pass
 		}
 		catch (Exception e) {
 			System.err.println(
-					"LBJ ERROR: Can't instantiate string parser for LCE:");
+					"LBJava ERROR: Can't instantiate string parser for LCE:");
 			e.printStackTrace();
 			System.exit(1);
 		}
@@ -368,7 +368,7 @@ public class RevisionAnalysis extends Pass
 		AST ast = null;
 		try { ast = (AST) new parser(new Yylex(reader)).parse().value; }
 		catch (Exception e) {
-			System.err.println("LBJ ERROR: Can't parse LCE from string:");
+			System.err.println("LBJava ERROR: Can't parse LCE from string:");
 			e.printStackTrace();
 			System.exit(1);
 		}

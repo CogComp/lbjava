@@ -72,7 +72,7 @@ public class FirstOrderEqualityWithValue extends FirstOrderEquality
   public void setQuantificationVariables(Vector o) {
     if (replacer == null) {
       System.err.println(
-          "LBJ ERROR: Attempting to set quantification variable in "
+          "LBJava ERROR: Attempting to set quantification variable in "
           + "FirstOrderEqualityWithValue with no variable setter "
           + "implementation provided.");
       System.exit(1);

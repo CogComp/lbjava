@@ -64,7 +64,7 @@ abstract public class EqualityArgumentReplacer extends ArgumentReplacer
    **/
   public String getLeftValue() {
     throw new UnsupportedOperationException(
-        "LBJ ERROR: getLeftValue() not supported.");
+        "LBJava ERROR: getLeftValue() not supported.");
   }
 
 
@@ -75,7 +75,7 @@ abstract public class EqualityArgumentReplacer extends ArgumentReplacer
    **/
   public String getRightValue() {
     throw new UnsupportedOperationException(
-        "LBJ ERROR: getRightValue() not supported.");
+        "LBJava ERROR: getRightValue() not supported.");
   }
 
 
@@ -86,7 +86,7 @@ abstract public class EqualityArgumentReplacer extends ArgumentReplacer
    **/
   public Object getLeftObject() {
     throw new UnsupportedOperationException(
-        "LBJ ERROR: getLeftObject() not supported.");
+        "LBJava ERROR: getLeftObject() not supported.");
   }
 
 
@@ -97,7 +97,7 @@ abstract public class EqualityArgumentReplacer extends ArgumentReplacer
    **/
   public Object getRightObject() {
     throw new UnsupportedOperationException(
-        "LBJ ERROR: getRightObject() not supported.");
+        "LBJava ERROR: getRightObject() not supported.");
   }
 }
 

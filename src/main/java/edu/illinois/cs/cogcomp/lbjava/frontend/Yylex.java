@@ -1,17 +1,18 @@
+/// --- scanner.jlex ------------------------------------------ vim:syntax=lex
+/// Author: Nick Rizzolo
+/// Description:
+///   JLex scanner specification for LBJava.  Currently, the LBJ2 language
+///   supports C and C++ style comments that may be nested, identifiers
+///   containing alpha-numeric characters and underscores and beginning with
+///   either an alphabetic character or an underscore, and a minimum of
+///   operators and keywords.
+///
+/// Modified by Christos Christodoulopoulos to be used inside Maven
+/// --------------------------------------------------------------------------
 package edu.illinois.cs.cogcomp.lbjava.frontend;
 import java_cup.runtime.Symbol;
 
-/** // --- scanner.jlex ------------------------------------------ vim:syntax=lex
- * /// Author: Nick Rizzolo
- * /// Description:
- * ///   JLex scanner specification for LBJava.  Currently, the LBJava language
- * ///   supports C and C++ style comments that may be nested, identifiers
- * ///   containing alpha-numeric characters and underscores and beginning with
- * ///   either an alphabetic character or an underscore, and a minimum of
- * ///   operators and keywords.
- * ///
- * /// Modified by Christos Christodoulopoulos to be used inside Maven
- * -------------------------------------------------------------------------- */
+
 public class Yylex implements java_cup.runtime.Scanner {
 	private final int YY_BUFFER_SIZE = 512;
 	private final int YY_F = -1;

@@ -169,7 +169,7 @@ public class NaiveBayes extends Learner
   public void setLabeler(Classifier l) {
     if (!l.getOutputType().equals("discrete")) {
       System.err.println(
-          "LBJ WARNING: NaiveBayes will only work with a label classifier "
+          "LBJava WARNING: NaiveBayes will only work with a label classifier "
           + "that returns discrete.");
       System.err.println(
           "             The given label classifier, " + l.getClass().getName()
