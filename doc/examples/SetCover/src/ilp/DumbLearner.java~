@@ -1,9 +1,9 @@
 package ilp;
 
 import java.io.PrintStream;
-import LBJ2.classify.DiscretePrimitiveStringFeature;
-import LBJ2.classify.FeatureVector;
-import LBJ2.classify.ScoreSet;
+import edu.illinois.cs.cogcomp.lbjava.classify.DiscretePrimitiveStringFeature;
+import edu.illinois.cs.cogcomp.lbjava.classify.FeatureVector;
+import edu.illinois.cs.cogcomp.lbjava.classify.ScoreSet;
 import LBJ2.learn.Learner;
 
 public abstract class DumbLearner extends Learner
