@@ -4,7 +4,7 @@ import edu.illinois.cs.cogcomp.lbjava.Pass;
 
 
 /**
-  * Represents a type defined by a <code>class</code>.  Note that in LBJ2's
+  * Represents a type defined by a <code>class</code>.  Note that in LBJava's
   * parser, the nonterminal <code>referenceType</code> refers to both types
   * defined by <code>class</code>es and array types, but this class represents
   * only the former.

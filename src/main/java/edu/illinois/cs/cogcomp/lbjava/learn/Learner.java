@@ -60,7 +60,7 @@ public abstract class Learner extends Classifier
 
 
   /**
-    * This constructor is used by the LBJ2 compiler; it should never be called
+    * This constructor is used by the LBJava compiler; it should never be called
     * by a programmer.
    **/
   protected Learner() { }

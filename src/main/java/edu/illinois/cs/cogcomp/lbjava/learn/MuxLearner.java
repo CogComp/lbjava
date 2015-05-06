@@ -71,7 +71,7 @@ public class MuxLearner extends Learner
   protected Feature defaultFeature;
 
 
-  /** For the LBJ compiler; not for use by the LBJ user. */
+  /** For the LBJava compiler; not for use by the LBJava user. */
   public MuxLearner() { }
 
   /**
@@ -101,7 +101,7 @@ public class MuxLearner extends Learner
    **/
   public MuxLearner(Parameters p) { this("", p); }
 
-  /** For the LBJ compiler; not for use by the LBJ user. */
+  /** For the LBJava compiler; not for use by the LBJava user. */
   public MuxLearner(String n) { super(n); }
 
   /**

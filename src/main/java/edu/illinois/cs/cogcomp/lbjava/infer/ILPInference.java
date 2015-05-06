@@ -12,7 +12,7 @@ import edu.illinois.cs.cogcomp.lbjava.learn.Learner;
 
 /**
   * This class employs an {@link ILPSolver} to solve a constrained inference
-  * problem.  When constructing an instance of this class in an LBJ source
+  * problem.  When constructing an instance of this class in an LBJava source
   * file, use one of the constructors that does <i>not</i> specify a head
   * object.  The generated code will fill in the head object automatically.
   * The other constructor parameters are used to specify the ILP algorithm and

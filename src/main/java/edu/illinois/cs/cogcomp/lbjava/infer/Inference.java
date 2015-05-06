@@ -79,7 +79,7 @@ public abstract class Inference
     * function while satisfying the constraints.  When implementing this
     * method in a derived class <code>Foo</code>, it may be assumed that the
     * <code>constraint</code> member field has already been filled in
-    * appropriately, since the LBJ compiler will generate a class extending
+    * appropriately, since the LBJava compiler will generate a class extending
     * <code>Foo</code> whose constructor does so.
    **/
   abstract protected void infer() throws Exception;
@@ -99,7 +99,7 @@ public abstract class Inference
   /**
     * Returns the normalization function associated with the given classifier
     * in this inference.  Derived classes that implement an inference
-    * algorithm for use in an LBJ source file are required to call this method
+    * algorithm for use in an LBJava source file are required to call this method
     * to normalize the scores produced by classifiers before making use of
     * those scores.  By default, this method returns the
     * <code>IdentityNormalizer</code>.

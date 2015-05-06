@@ -966,7 +966,7 @@ public class Lexicon implements Cloneable, Serializable
 
   /** <!-- class CountPolicy -->
     * Immutable type representing the feature counting policy of a lexicon.
-    * When LBJ's self imposed restriction to use Java 1.4 is lifted, this
+    * When LBJava's self imposed restriction to use Java 1.4 is lifted, this
     * class will be replaced by an <code>enum</code>.
     *
     * <p> The three feature counting policies are described below.

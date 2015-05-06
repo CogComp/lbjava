@@ -16,7 +16,7 @@ public class Log extends Normalizer
   protected Normalizer first;
 
 
-  /** This constructor provided for use by the LBJ compiler only. */
+  /** This constructor provided for use by the LBJava compiler only. */
   public Log() { }
 
   /**

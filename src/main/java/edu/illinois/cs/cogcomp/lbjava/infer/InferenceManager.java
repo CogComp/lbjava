@@ -7,7 +7,7 @@ import java.util.LinkedHashMap;
   * The inference manager is a cache of <code>Inference</code> objects
   * accessed via their names and head objects.  However, only one
   * <code>Inference</code> object is stored per <code>Inference</code> class.
-  * For example, if the LBJ source file contains the following two
+  * For example, if the LBJava source file contains the following two
   * <code>inference</code>s:
   *
   * <blockquote>

@@ -9,7 +9,7 @@ import edu.illinois.cs.cogcomp.lbjava.parse.Parser;
 
 
 /**
-  * Utility methods for retrieving various classes that are part of the LBJ
+  * Utility methods for retrieving various classes that are part of the LBJava
   * class hierarchy by name.
   *
   * @author Nick Rizzolo

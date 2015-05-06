@@ -24,7 +24,7 @@ public abstract class Feature implements Cloneable, Comparable, Serializable
     * this feature.
    **/
   protected String containingPackage;
-  /** The name of the LBJ classifier that produced this feature. */
+  /** The name of the LBJava classifier that produced this feature. */
   protected String generatingClassifier;
 
 

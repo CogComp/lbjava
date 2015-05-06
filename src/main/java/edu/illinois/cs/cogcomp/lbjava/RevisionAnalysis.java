@@ -35,7 +35,7 @@ import edu.illinois.cs.cogcomp.lbjava.io.HexStringInputStream;
 /**
  * To be run after <code>SemanticAnalysis</code>, this pass determines which
  * <code>CodeGenerator</code>s need to have their code generated and which
- * classifiers need to be trained based on the revisions made to the LBJ
+ * classifiers need to be trained based on the revisions made to the LBJava
  * source file.
  *
  * <p> A hard coded classifier, a constraint, or an inference named
@@ -207,8 +207,8 @@ public class RevisionAnalysis extends Pass
 	/**
 	 * This method reads the comments at the top of the file containing the
 	 * code corresponding to the specified code generating node to determine if
-	 * the LBJ source describing that code generator has been modified since
-	 * the LBJ2 compiler was last executed.
+	 * the LBJava source describing that code generator has been modified since
+	 * the LBJava compiler was last executed.
 	 *
 	 * @param node     The code generating node.
 	 * @param convert  Whether or not the code is converted to hexadecimal

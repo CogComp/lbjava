@@ -11,7 +11,7 @@ public abstract class Type extends ASTNode
 {
   /**
     * This method takes a Java <code>Class</code> object and generates an
-    * LBJ2 <code>Type</code> that represents the same type.
+    * LBJava <code>Type</code> that represents the same type.
     *
     * @param c  The <code>Class</code> to "translate".
     * @return The <code>Type</code> object that represents the same type as
@@ -21,7 +21,7 @@ public abstract class Type extends ASTNode
 
 
   /**
-    * This method takes a Java type encoding and generates an LBJ2
+    * This method takes a Java type encoding and generates an LBJava
     * <code>Type</code> that represents the same type.
     *
     * @param encoding The encoding to decode.

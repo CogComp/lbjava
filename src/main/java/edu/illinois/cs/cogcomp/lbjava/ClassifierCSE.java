@@ -27,7 +27,7 @@ import edu.illinois.cs.cogcomp.lbjava.IR.LearningClassifierExpression;
 public class ClassifierCSE extends Pass
 {
   /**
-    * Maps each classifier expression to the cannonical name that will
+    * Maps each classifier expression to the canonical name that will
     * represent it.
    **/
   private HashMap expressionToName;

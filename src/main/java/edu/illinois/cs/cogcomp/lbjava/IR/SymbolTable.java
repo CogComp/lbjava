@@ -32,7 +32,7 @@ public class SymbolTable
 	/**
 	 * Given the name of a class, which may or may not be fully qualified, this
 	 * method returns the absolute path to the file with the same name and the
-	 * given extension.  This method was written for use by the LBJ compiler
+	 * given extension.  This method was written for use by the LBJava compiler
 	 * and its generated code.  The user should not need to call it.
 	 *
 	 * @param name       The name of the class.

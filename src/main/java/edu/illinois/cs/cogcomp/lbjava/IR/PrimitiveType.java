@@ -4,7 +4,7 @@ import edu.illinois.cs.cogcomp.lbjava.Pass;
 
 
 /**
-  * Represents a primitive type, as in a declaration.  In LBJ2, the legal
+  * Represents a primitive type, as in a declaration.  In LBJava, the legal
   * primitive types are boolean, char, byte, short, int, long, float, and
   * double.
   *

@@ -2,7 +2,7 @@ package edu.illinois.cs.cogcomp.lbjava.IR;
 
 
 /**
-  * Abstract class from which statements are derived.  LBJ2 currently has only
+  * Abstract class from which statements are derived.  LBJava currently has only
   * one type of statement: the assignment statement.
   *
   * @author Nick Rizzolo

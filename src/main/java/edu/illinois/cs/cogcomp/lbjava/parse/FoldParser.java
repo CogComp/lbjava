@@ -273,8 +273,9 @@ public class FoldParser implements Parser
 
   /**
     * Immutable type representing the way in which examples are partitioned
-    * into folds.  When LBJ's self imposed restriction to use Java 1.4 is
-    * lifted, this class will be replaced by an <code>enum</code>.
+    * into folds.
+    *
+    * TODO: When LBJava's self imposed restriction to use Java 1.4 is lifted, this class will be replaced by an <code>enum</code>.
     *
     * <p> The four implemented splitting strategies are described below.  Note
     * that in all cases except "Manual", the size of the folds are as equal as

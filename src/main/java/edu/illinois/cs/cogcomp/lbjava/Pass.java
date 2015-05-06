@@ -94,7 +94,7 @@ import edu.illinois.cs.cogcomp.lbjava.IR.WhileStatement;
 
 
 /**
-  * Abstract class from which all of LBJ2's analysis and optimization passes
+  * Abstract class from which all of LBJava's analysis and optimization passes
   * are derived.
   *
   * @author Nick Rizzolo
@@ -102,7 +102,7 @@ import edu.illinois.cs.cogcomp.lbjava.IR.WhileStatement;
 public abstract class Pass
 {
   /**
-    * This flag gets set if an error occurs that should cause the LBJ2
+    * This flag gets set if an error occurs that should cause the LBJava
     * compiler to stop executing after this pass finishes.
    **/
   public static boolean fatalError = false;

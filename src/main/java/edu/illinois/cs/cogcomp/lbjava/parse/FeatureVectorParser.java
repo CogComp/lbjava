@@ -22,7 +22,7 @@ import edu.illinois.cs.cogcomp.lbjava.classify.FeatureVector;
   * string representation of every example to <code>STDOUT</code>.
   *
   * @author Nick Rizzolo
-  * @deprecated As of LBJ 2.3.0, the functionality of this class has been
+  * @deprecated As of LBJava 2.3.0, the functionality of this class has been
   *             superceded by {@link ArrayFileParser}.
  **/
 public class FeatureVectorParser implements Parser

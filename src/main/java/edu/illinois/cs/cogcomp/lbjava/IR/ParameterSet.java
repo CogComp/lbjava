@@ -16,7 +16,7 @@ import edu.illinois.cs.cogcomp.lbjava.Pass;
   * of a start value, end value, and increment factor, which
   * can then be converted into the explicit list of possible values.
   *
-  * <p>The LBJ syntax for defining the parameter set is to declare
+  * <p>The LBJava syntax for defining the parameter set is to declare
   * the possible values inside of double curly braces, either as
   * an explicit list or as a range. The following two examples
   * are equivalent:
