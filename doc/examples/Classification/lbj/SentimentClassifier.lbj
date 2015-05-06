@@ -1,0 +1,33 @@
+package edu.illinois.cs.cogcomp.tutorial;
+
+import java.util.List;
+
+/** Simply produces "bag of words" features. */
+discrete% WordFeatures(Document d) <- {
+    List words = d.getWords();
+    for (int i = 0; i < words.size(); i++)
+	sense words.get(i);
+}
+
+
+discrete SentimentLabel(Document d) <- { return d.getLabel(); }
+
+/** A learned text classifier; its definition comes from data. */
+discrete SentimentClassifier(Document d) <-
+learn SentimentLabel
+  using WordFeatures
+  from new SentimentDataReader("data/sentiment/books", true)
+  5 rounds
+
+  with SparseNetworkLearner {
+  SparseAveragedPerceptron.Parameters p =
+       new SparseAveragedPerceptron.Parameters();
+     p.learningRate = 0.05;
+     p.thickness = 5;
+     baseLTU = new SparseAveragedPerceptron(p);
+  }
+  testFrom new SentimentDataReader("data/sentiment/books", false)
+ 
+  progressOutput 2000
+end
+

@@ -1,0 +1,4 @@
+run 
+./scripts/compileLBJ lbj/SpamClassifier.lbj
+
+if you want to run training again, remove the edu directory under lbjsrc.

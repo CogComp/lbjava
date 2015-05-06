@@ -1,0 +1,45 @@
+package edu.illinois.cs.cogcomp.tutorial;
+
+import java.util.List;
+
+/** Simply produces "character" features. */
+discrete% CharacterFeatures(String line) <- {
+	String[] tokens = line.split(" ");
+    for (int i = 1; i < tokens.length; i++) {
+		for (int j = 0; j < tokens[i].length(); j++) {
+			sense tokens[i].charAt(j);
+		}
+	}
+}
+
+discrete% IdealFeatures(String line) <- {
+	String[] tokens = line.split(" ");
+	sense tokens[1].charAt(1);
+}
+
+discrete{"positive", "negative"} BadgeLabel(String line) <- {
+	String[] tokens = line.split(" ");
+	if (tokens[0].equals("+")) {
+		return "positive";
+	} else {
+		return "negative";
+	} 
+}
+
+/** A learned badge classifier; its definition comes from data. */
+discrete BadgeClassifier(String line) <-
+learn BadgeLabel
+  using IdealFeatures
+  from new BadgeDataReader("data/badges/badges.train")
+  5 rounds
+
+  with SparseAveragedPerceptron {
+    learningRate = 0.1 ;
+    thickness = 3.5;
+  }
+
+  testFrom new BadgeDataReader("data/badges/badges.test")
+ 
+  progressOutput 2000
+end
+

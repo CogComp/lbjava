@@ -1,0 +1,38 @@
+This tarball contains the LBJ implementation of the solution to a set cover
+problem.  The particular problem comes from the following web page, in which
+the problem is formulated as an Integer Linear Program.  In LBJ, we'll write
+the constraints in First Order Logic, and they'll be translated into the same
+linear inequalities shown on the web page:
+
+http://mat.gsia.cmu.edu/orclass/integer/node8.html
+
+Packing List:
+SetCoverILP/Makefile
+SetCoverILP/SetCover.lbj
+SetCoverILP/README
+SetCoverILP/example.txt
+SetCoverILP/src/ilp/City.java
+SetCoverILP/src/ilp/ContainsStation.java
+SetCoverILP/src/ilp/Neighborhood.java
+SetCoverILP/src/ilp/SetCoverSolver.java
+SetCoverILP/src/ilp/DumbLearner.java
+
+Classes City and Neighborhood are used as the internal representation of our
+problem's data.  An instance of class City will become the "head" object of an
+inference problem, which means that it contains all the data needed to
+represent that inference problem.  Instances of class Neighborhood are the
+ones we need to classify.
+
+The DumbLearner and ContainsStation classes are hand written classes that
+implement an unconstrained learner.  Normally, we would use LBJ to learn such
+a classifier, but there was nothing to learn in this case.  The SetCover.lbj
+code then creates a new classifier called containsStationConstrained that
+operates similarly to ContainsStation except that it respects the constraints.
+
+SetCoverSolver is a program that takes raw data representing a City as input
+and produces the constrained predictions.
+
+The Makefile can be used both to compile the program and to run it on the
+provided simple example problem in example.txt.  Just type 'make' to compile
+and then 'make check' to run the program.
+

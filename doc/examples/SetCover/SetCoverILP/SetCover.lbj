@@ -1,0 +1,18 @@
+package ilp;
+
+constraint noEmptyNeighborhoods(City c) {
+  forall (Neighborhood n in c.getNeighborhoods())
+    ContainsStation(n) :: true
+    \/ (exists (Neighborhood n2 in n.getNeighbors())
+          ContainsStation(n2) :: true);
+}
+
+inference SetCover head City c {
+  Neighborhood n  { return n.getParentCity(); }
+  subjectto { @noEmptyNeighborhoods(c); } 
+  with new ILPInference(new GLPKHook())
+}
+
+discrete{false, true} containsStationConstrained(Neighborhood n) <-
+  SetCover(ContainsStation)
+
