@@ -139,7 +139,7 @@ public class TranslateToJava extends Pass
 	 * computed value should be stored.  This variable is only used when
 	 * {@link #constraintMode} is unset.
 	 **/
-	private static final String constraintResult = "LBJ2$constraint$result$";
+	private static final String constraintResult = "LBJava$constraint$result$";
 
 
 	/** Used for collecting the string representation of a method body. */

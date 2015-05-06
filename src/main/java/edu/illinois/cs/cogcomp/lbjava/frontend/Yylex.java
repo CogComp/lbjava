@@ -1,7 +1,7 @@
 /// --- scanner.jlex ------------------------------------------ vim:syntax=lex
 /// Author: Nick Rizzolo
 /// Description:
-///   JLex scanner specification for LBJava.  Currently, the LBJ2 language
+///   JLex scanner specification for LBJava.  Currently, the LBJava language
 ///   supports C and C++ style comments that may be nested, identifiers
 ///   containing alpha-numeric characters and underscores and beginning with
 ///   either an alphabetic character or an underscore, and a minimum of

@@ -249,7 +249,7 @@ public class Main
 
   /**
     * The main compiler driver.  This method parses command line options and
-    * then calls all of LBJ2's components.
+    * then calls all of LBJava's components.
     *
     * @param args           The user's command line arguments are found here.
     * @exception Exception  An exception is thrown when any error occurs.
@@ -453,9 +453,9 @@ public class Main
     }
 
     AST ast = null;
-    parser LBJ2parser = new parser(scanner);
-    if (parserDebug) ast = (AST) LBJ2parser.debug_parse().value;
-    else ast = (AST) LBJ2parser.parse().value;
+    parser LBJavaparser = new parser(scanner);
+    if (parserDebug) ast = (AST) LBJavaparser.debug_parse().value;
+    else ast = (AST) LBJavaparser.parse().value;
 
     if (ast == null)
       throw new InternalError("Parser returned null abstract syntax tree.");

@@ -25,7 +25,7 @@ public class FeatureVectorReturner extends Classifier
 
     try { result = (FeatureVector) o; }
     catch (ClassCastException e) {
-      System.err.println("LBJ2 ERROR: FeatureVectorReturner received a '"
+      System.err.println("LBJava ERROR: FeatureVectorReturner received a '"
                          + o.getClass().getName() + "' as input.");
       System.exit(1);
     }
