@@ -7,8 +7,12 @@ Author: Hao Wu, Parisa Kordjamshidi, Daniel Khashabi
 
 LINUX
 ====== 
-run: 
-./scripts/compileLBJ lbj/SpamClassifier.lbj
+run the following script for separate classifiers:  
+
+./scripts/compileLBJ lbj/LALModel.lbj
+
+To get a joint classifier run the following command: 
+./scripts/compileLBJ lbj/ER_JointAll.lbj
 
 if you want to run training again, remove the edu directory under lbjsrc.
 
