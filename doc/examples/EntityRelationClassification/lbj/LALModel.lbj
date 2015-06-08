@@ -98,3 +98,29 @@ learn workLabel
     testFrom new Conll04_RelationReaderNew("data/conll04_test.corp", "Pair")
     progressOutput 200
 end
+
+
+constraint PersonWorkFor (ConllRelation  t)
+{
+    work_forClassifier(t)::"Work_For" => PersonClassifier(Conll04_RelationReaderNew.PersonCandidate(t))::"Peop";
+}
+
+constraint OrganizationWorkFor (ConllRelation t)
+{
+	work_forClassifier(t)::"Work_For" => OrganizationClassifier(Conll04_RelationReaderNew.OrgCandidate(t))::"Org";
+}
+
+inference JointER head ConllRelation t {
+    ConllRelation t  { return t; }
+    ConllRawToken e  { return e.getRelation(); }
+    // normalizedby new Softmax()
+    subjectto { @PersonWorkFor(t) /\ @OrganizationWorkFor(t); }
+    with new ILPInference(new GurobiHook())
+}
+
+discrete RelArgsClassifier(ConllRelation r) <-
+    JointER(work_forClassifier)
+discrete Arg_pClassifier(ConllRawToken t) <-
+    JointER(PersonClassifier)
+discrete ArgOClassifier (ConllRawToken t) <-
+    JointER(OrganizationClassifier)

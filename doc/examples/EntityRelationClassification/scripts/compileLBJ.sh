@@ -5,7 +5,6 @@ then
     echo "Usage: compileLBJ <lbj file>"
 fi
 
-
 FILE=$*
 JAVA=java
 JAVAC=javac
@@ -23,4 +22,3 @@ CP=$BIN:$LBJBIN:lib/*:lib/liblinear.jar:lib/LBJava-1.0.3.jar
 echo $CP
 
 $JAVA $SWITCHES -cp $CP edu.illinois.cs.cogcomp.lbjava.Main -d $LBJBIN -gsp $GSP -sourcepath $SRC $FILE
-

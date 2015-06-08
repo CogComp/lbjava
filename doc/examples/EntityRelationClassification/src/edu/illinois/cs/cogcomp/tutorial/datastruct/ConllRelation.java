@@ -3,7 +3,7 @@ package edu.illinois.cs.cogcomp.tutorial.datastruct;
 public class ConllRelation {
 	public int wordId1, wordId2;
 	public int sentId;
-	public ConllRawSentence s=new ConllRawSentence(sentId);
+	public ConllRawSentence s = new ConllRawSentence(sentId);
 	public String relType;
 	public ConllRawToken e1;
 	public ConllRawToken e2;
@@ -18,7 +18,7 @@ public class ConllRelation {
 				"wordId1=" + wordId1 +
 				", wordId2=" + wordId2 +
 				", sentId=" + sentId +
-				", s=" + s +
+				//", s=" + s + // D: this throws exception and I couldn't figure out why. I am commenting it out.
 				", relType='" + relType + '\'' +
 				", e1=" + e1 +
 				", e2=" + e2 +
