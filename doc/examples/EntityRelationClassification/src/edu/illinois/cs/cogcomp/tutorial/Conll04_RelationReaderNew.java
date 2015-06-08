@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
+import edu.illinois.cs.cogcomp.lbjava.infer.GurobiHook;
 
 /**
  * Created by haowu on 2/9/15.
@@ -229,6 +230,13 @@ public class Conll04_RelationReaderNew implements Parser {
     public static void main(String[] args) throws Exception {
         System.out.println("Start reading tokens ... ");
         Conll04_RelationReaderNew cr = new Conll04_RelationReaderNew("data/conll04.corp", "Token");
-        cr.printData();
+//        Conll04_RelationReaderNew cr = new Conll04_RelationReaderNew("data/conll04_test.corp", "Token");
+//        cr.printData();
+
+        ConllRawToken tok = (ConllRawToken) cr.next();
+        while( tok != null ) {
+            System.out.println(tok);
+            tok = (ConllRawToken) cr.next();
+        }
     }
 }

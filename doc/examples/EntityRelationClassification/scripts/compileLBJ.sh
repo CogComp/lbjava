@@ -5,11 +5,9 @@ then
     echo "Usage: compileLBJ <lbj file>"
 fi
 
+
 FILE=$*
-
-
 JAVA=java
-
 JAVAC=javac
 
 JAVA="nice "$JAVA
@@ -20,7 +18,7 @@ LBJBIN=bin
 SRC=src
 GSP=lbjsrc
 
-CP=$BIN:$LBJBIN:lib/*:lib/liblinear.jar
+CP=$BIN:$LBJBIN:lib/*:lib/liblinear.jar:lib/LBJava-1.0.3.jar
 
 echo $CP
 

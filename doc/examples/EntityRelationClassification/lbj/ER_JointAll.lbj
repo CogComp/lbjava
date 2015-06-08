@@ -1,9 +1,17 @@
 import java.util.List;
 import edu.illinois.cs.cogcomp.core.io.LineIO;
+import edu.illinois.cs.cogcomp.tutorial.datastruct.ConllRelation;
+import edu.illinois.cs.cogcomp.tutorial.datastruct.ConllRawToken;
+import edu.illinois.cs.cogcomp.lbjava.infer.GurobiHook;
+
+import edu.illinois.cs.cogcomp.tutorial.PersonClassifier;
+import edu.illinois.cs.cogcomp.tutorial.OrganizationClassifier;
+import edu.illinois.cs.cogcomp.tutorial.work_forClassifier;
+
 
 constraint PersonWorkFor (ConllRelation  t)
 {
-	work_forClassifier(t):: "Work_For" => PersonClassifier(Conll04_RelationReaderNew.PersonCandidate(t)) :: "Peop";
+    work_forClassifier(t):: "Work_For" => PersonClassifier(Conll04_RelationReaderNew.PersonCandidate(t)) :: "Peop";
 }
 
 constraint OrganizationWorkFor (ConllRelation t)
@@ -11,19 +19,17 @@ constraint OrganizationWorkFor (ConllRelation t)
 	work_forClassifier(t):: "Work_For" => OrganizationClassifier(Conll04_RelationReaderNew.OrgCandidate(t))::"Org";
 }
 
-
 inference JointER head ConllRelation t {
-  ConllRelation t  { return t; }
-  ConllRawToken e {return e.getRelation();}
- // normalizedby new Softmax()
-  subjectto { @PersonWorkFor(t) /\ @OrganizationWorkFor(t); }
-  with new ILPInference(new GurobiHook())
+    ConllRelation t  { return t; }
+    ConllRawToken e  { return e.getRelation(); }
+    // normalizedby new Softmax()
+    subjectto { @PersonWorkFor(t) /\ @OrganizationWorkFor(t); }
+    with new ILPInference(new GurobiHook())
 }
 
-
 discrete RelArgsClassifier(ConllRelation r) <-
-   JointER(work_forClassifier)
+    JointER(work_forClassifier)
 discrete Arg_pClassifier(ConllRawToken t) <-
-   JointER(PersonClassifier)
+    JointER(PersonClassifier)
 discrete ArgOClassifier (ConllRawToken t) <-
-   JointER(OrganizationClassifier)
+    JointER(OrganizationClassifier)
