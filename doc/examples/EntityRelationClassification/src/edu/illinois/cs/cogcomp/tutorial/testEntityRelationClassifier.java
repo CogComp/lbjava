@@ -60,13 +60,13 @@ public class testEntityRelationClassifier {
 
         Conll04_RelationReaderNew cr = new Conll04_RelationReaderNew("data/conll04.corp", "Pair");
         System.out.println("Starting to classify the instances ... ");
-        ConllRelation tok = (ConllRelation) cr.next();
-        while( tok != null ) {
-            System.out.println(tok);
-            tok = (ConllRelation) cr.next();
-            System.out.println(relArgClassifier.discreteValue(tok));
-            System.out.println(argpClassifier.discreteValue(tok));
-            System.out.println(argpClassifier.discreteValue(tok));
+        ConllRelation pair = (ConllRelation) cr.next();
+        while( pair != null ) {
+            System.out.println(pair);
+            pair = (ConllRelation) cr.next();
+            System.out.println(relArgClassifier.discreteValue(pair));
+//            System.out.println(argpClassifier.discreteValue(tok));
+//            System.out.println(argpClassifier.discreteValue(tok));
         }
     }
 
