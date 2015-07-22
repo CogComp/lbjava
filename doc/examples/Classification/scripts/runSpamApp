@@ -1,0 +1,1 @@
+java -cp bin/:lib/* edu.illinois.cs.cogcomp.tutorial.SpamClassifierApplication

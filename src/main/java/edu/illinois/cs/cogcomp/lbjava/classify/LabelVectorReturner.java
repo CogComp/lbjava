@@ -26,7 +26,7 @@ public class LabelVectorReturner extends Classifier
 
     try { vector = (FeatureVector) o; }
     catch (ClassCastException e) {
-      System.err.println("LBJ2 ERROR: LabelVectorReturner received a '"
+      System.err.println("LBJava ERROR: LabelVectorReturner received a '"
                          + o.getClass().getName() + "' as input.");
       System.exit(1);
     }

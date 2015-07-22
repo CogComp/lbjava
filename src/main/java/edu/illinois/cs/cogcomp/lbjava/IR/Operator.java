@@ -4,9 +4,9 @@ import edu.illinois.cs.cogcomp.lbjava.Pass;
 
 
 /**
-  * LBJ supports every Java operator.  This class stores information about
+  * LBJava supports every Java operator.  This class stores information about
   * those operators, such as their symbols and precedences, as well as
-  * information about LBJ's new operators.  The static constant fields defined
+  * information about LBJava's new operators.  The static constant fields defined
   * in this class serve as indeces into its static array fields.
   *
   * <p>
@@ -264,7 +264,7 @@ public class Operator extends ASTNode
 
   /**
     * Writes a string representation of this <code>ASTNode</code> to the
-    * specified buffer.  The representation written is parsable by the LBJ2
+    * specified buffer.  The representation written is parsable by the LBJava
     * compiler, but not very readable.
     *
     * @param buffer The buffer to write to.

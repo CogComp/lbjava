@@ -19,7 +19,7 @@ import edu.illinois.cs.cogcomp.lbjava.IR.Name;
 
 /**
   * To be run after <code>SemanticAnalysis</code>, this pass compiles the list
-  * of files created by the LBJ2 compiler and removes them.
+  * of files created by the LBJava compiler and removes them.
   *
   * @see    edu.illinois.cs.cogcomp.lbjava.SemanticAnalysis
   * @author Nick Rizzolo

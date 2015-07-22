@@ -447,7 +447,7 @@ public class BatchTrainer
         }
         catch (Exception e) {
           System.err.println(
-              "LBJ ERROR: BatchTrainer.preExtract: Can't create temporary "
+              "LBJava ERROR: BatchTrainer.preExtract: Can't create temporary "
               + "file: " + e);
           System.exit(1);
         }
@@ -469,7 +469,7 @@ public class BatchTrainer
       }
       catch (Exception e) {
         System.err.println(
-            "LBJ ERROR: BatchTrainer.preExtract: Can't convert file name '"
+            "LBJava ERROR: BatchTrainer.preExtract: Can't convert file name '"
             + fTempFile + "' to URL: " + e);
         System.exit(1);
       }
@@ -547,7 +547,7 @@ public class BatchTrainer
         out.close();
       }
       catch (Exception e) {
-        System.err.println("LBJ ERROR: Can't copy example file:");
+        System.err.println("LBJava ERROR: Can't copy example file:");
         e.printStackTrace();
         System.exit(1);
       }
@@ -672,11 +672,11 @@ public class BatchTrainer
     if (!policy.isNone()
         && lexicon.getCountPolicy() == Lexicon.CountPolicy.none)
       throw new IllegalArgumentException(
-          "LBJ ERROR: BatchTrainer.pruneDataset: Can't prune with policy '"
+          "LBJava ERROR: BatchTrainer.pruneDataset: Can't prune with policy '"
           + policy + "' if features haven't been counted.");
     if (!(parser instanceof ArrayFileParser))
       throw new IllegalArgumentException(
-          "LBJ ERROR: BatchTrainer.pruneDataset can't be called unless "
+          "LBJava ERROR: BatchTrainer.pruneDataset can't be called unless "
           + "feature pre-extraction has already been performed.");
     ArrayFileParser afp = (ArrayFileParser) parser;
     afp.setIncludePruned(true);
@@ -704,7 +704,7 @@ public class BatchTrainer
         }
         catch (Exception e) {
           System.err.println(
-              "LBJ ERROR: BatchTrainer.preExtract: Can't create temporary "
+              "LBJava ERROR: BatchTrainer.preExtract: Can't create temporary "
               + "file: " + e);
           System.exit(1);
         }
@@ -726,7 +726,7 @@ public class BatchTrainer
       }
       catch (Exception e) {
         System.err.println(
-            "LBJ ERROR: BatchTrainer.preExtract: Can't convert file name '"
+            "LBJava ERROR: BatchTrainer.preExtract: Can't convert file name '"
             + fTempFile + "' to URL: " + e);
         System.exit(1);
       }
@@ -813,7 +813,7 @@ public class BatchTrainer
         out.close();
       }
       catch (Exception e) {
-        System.err.println("LBJ ERROR: Can't copy example file:");
+        System.err.println("LBJava ERROR: Can't copy example file:");
         e.printStackTrace();
         System.exit(1);
       }
@@ -976,7 +976,7 @@ public class BatchTrainer
                                     boolean statusMessages) {
     if (!(k > 1 || splitPolicy == FoldParser.SplitPolicy.manual))
       throw new IllegalArgumentException(
-          "LBJ ERROR: BatchTrainer.crossValidation: if the data splitting "
+          "LBJava ERROR: BatchTrainer.crossValidation: if the data splitting "
           + "policy is not 'Manual', the number of folds must be greater "
           + "than 1.");
     if (splitPolicy == FoldParser.SplitPolicy.manual) k = -1;

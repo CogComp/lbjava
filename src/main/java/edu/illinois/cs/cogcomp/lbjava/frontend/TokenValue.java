@@ -2,7 +2,7 @@ package edu.illinois.cs.cogcomp.lbjava.frontend;
 
 
 /**
-  * Objects of this class are returned by LBJ2's scanner to its parser.  It
+  * Objects of this class are returned by LBJava's scanner to its parser.  It
   * simply holds some information about the token and provides easy access to
   * a few primitive parsing routines.
   *

@@ -43,7 +43,7 @@ import edu.illinois.cs.cogcomp.lbjava.Pass;
   *     <code>toString()</code> methods recursively through the AST and
   *     concatenating them all together.)  The <code>String</code> produced
   *     will not be very readable (e.g., it won't contain any new lines), but
-  *     it will be compilable by the LBJ compiler.
+  *     it will be compilable by the LBJava compiler.
   * </ul>
   *
   * Most <code>ASTNode</code>s will also contain more than one constructor.
@@ -141,7 +141,7 @@ public abstract class ASTNode
 
   /**
     * Writes a string representation of this <code>ASTNode</code> to the
-    * specified buffer.  The representation written is parsable by the LBJ2
+    * specified buffer.  The representation written is parsable by the LBJava
     * compiler, but not very readable.
     *
     * @param buffer The buffer to write to.

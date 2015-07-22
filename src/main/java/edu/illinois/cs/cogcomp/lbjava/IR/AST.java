@@ -4,7 +4,7 @@ import edu.illinois.cs.cogcomp.lbjava.Pass;
 
 
 /**
-  * The root node of LBJ2's AST.  The parser will create only one of these and
+  * The root node of LBJava's AST.  The parser will create only one of these and
   * return it as the ultimate result of parsing.  It currently contains a
   * single (optional) <code>PackageDeclaration</code>, a <code>List</code> of
   * <code>ImportDeclaration</code>s (also optional), the global
@@ -17,7 +17,7 @@ import edu.illinois.cs.cogcomp.lbjava.Pass;
   * the generated classes.  The <code>ImportDeclaration</code>s work similarly
   * to <code>import</code> declarations in regular Java code: they allow the
   * user to name classes in other packages without using their full package
-  * names.  The list of <code>Declaration</code>s comprises the LBJ2 program.
+  * names.  The list of <code>Declaration</code>s comprises the LBJava program.
   * The global <code>SymbolTable</code> simply associates variable names with
   * their type information in the program.
   *
@@ -41,7 +41,7 @@ public class AST extends ASTNode
   public ImportList imports;
   /**
     * (&not;&oslash;) The list of classifier, constraint, and inference
-    * declarations representing the LBJ2 program.
+    * declarations representing the LBJava program.
    **/
   public DeclarationList declarations;
 
@@ -156,7 +156,7 @@ public class AST extends ASTNode
 
   /**
     * Writes a string representation of this <code>ASTNode</code> to the
-    * specified buffer.  The representation written is parsable by the LBJ2
+    * specified buffer.  The representation written is parsable by the LBJava
     * compiler, but not very readable.
     *
     * @param buffer The buffer to write to.

@@ -63,7 +63,7 @@ public class LearningClassifierExpression extends ClassifierExpression
  /** The revision status of the LCE's learning node. */
  public Integer learningStatus;
  /**
-   * This flag is set <code>true</code> iff the changes to the learner's LBJ
+   * This flag is set <code>true</code> iff the changes to the learner's LBJava
    * specification require its Java translation to be regenerated and nothing
    * more.
   **/
@@ -662,7 +662,7 @@ public class LearningClassifierExpression extends ClassifierExpression
 
  /**
    * Writes a string representation of this <code>ASTNode</code> to the
-   * specified buffer.  The representation written is parsable by the LBJ2
+   * specified buffer.  The representation written is parsable by the LBJava
    * compiler, but not very readable.
    *
    * @param buffer The buffer to write to.

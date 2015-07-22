@@ -123,7 +123,7 @@ public class SparseMIRA extends Learner
     if (getClass().getName().indexOf("SparseMIRA") != -1
         && !l.getOutputType().equals("discrete")) {
       System.err.println(
-          "LBJ WARNING: SparseMIRA will only work with a label classifier "
+          "LBJava WARNING: SparseMIRA will only work with a label classifier "
           + "that returns discrete.");
       System.err.println(
           "             The given label classifier, " + l.getClass().getName()

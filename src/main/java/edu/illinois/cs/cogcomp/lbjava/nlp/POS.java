@@ -147,7 +147,7 @@ public class POS implements Serializable
   public static POS fromToken(String s) {
     POS result = (POS) fromTokens.get(s);
     assert result != null
-         : "LBJ ASSERTION FAILED: Unrecognized POS tag: '" + s + "'";
+         : "LBJava ASSERTION FAILED: Unrecognized POS tag: '" + s + "'";
     return result;
   }
 

@@ -194,7 +194,7 @@ public class Lexicon implements Cloneable, Serializable
   public void setEncoding(String e) {
     if (encodingSet && (encoding == null ? e != null : !encoding.equals(e))) {
       System.err.println(
-          "LBJ ERROR: Once established, the encoding of a lexicon cannot be "
+          "LBJava ERROR: Once established, the encoding of a lexicon cannot be "
           + "changed.");
       new Exception().printStackTrace();
       System.exit(1);
@@ -260,7 +260,7 @@ public class Lexicon implements Cloneable, Serializable
   public void perClassToGlobalCounts() {
     if (perClassFeatureCounts == null)
       throw new IllegalArgumentException(
-          "LBJ ERROR: Lexicon.perClassToGlobalCounts: Cannot be called if "
+          "LBJava ERROR: Lexicon.perClassToGlobalCounts: Cannot be called if "
           + "there are not per-class counts.");
 
     int rows = perClassFeatureCounts.size(), columns = 0;
@@ -336,12 +336,12 @@ public class Lexicon implements Cloneable, Serializable
     if (label < 0) {
       if (training && perClassFeatureCounts != null)
         throw new IllegalArgumentException(
-            "LBJ ERROR: Lexicon.lookup: Must supply a label when training "
+            "LBJava ERROR: Lexicon.lookup: Must supply a label when training "
             + "with per class feature counts.");
     }
     else if (!training || perClassFeatureCounts == null)
       throw new IllegalArgumentException(
-          "LBJ ERROR: Lexicon.lookup: A label has been supplied when not "
+          "LBJava ERROR: Lexicon.lookup: A label has been supplied when not "
           + "training with per class feature counts.");
 
     lazyMapCreation();
@@ -501,7 +501,7 @@ public class Lexicon implements Cloneable, Serializable
 
     if (featureCounts == null && perClassFeatureCounts == null)
       throw new IllegalArgumentException(
-          "LBJ ERROR: Lexicon.isPruned: pruning policy wasn't 'None', but "
+          "LBJava ERROR: Lexicon.isPruned: pruning policy wasn't 'None', but "
           + "there are no counts.");
 
     if (featureCounts != null)  // if global counting
@@ -548,7 +548,7 @@ public class Lexicon implements Cloneable, Serializable
 
     if (featureCounts == null && perClassFeatureCounts == null)
       throw new UnsupportedOperationException(
-          "LBJ ERROR: Lexicon.prune: Can't prune if there's no feature "
+          "LBJava ERROR: Lexicon.prune: Can't prune if there's no feature "
           + "counts.");
 
     // Set thresholds in the policy.
@@ -572,7 +572,7 @@ public class Lexicon implements Cloneable, Serializable
     // threshold must already be established in that case.
     else if (!policy.isAbsolute())
       throw new UnsupportedOperationException(
-          "LBJ ERROR: Lexicon.prune: Pruning policy '" + policy
+          "LBJava ERROR: Lexicon.prune: Pruning policy '" + policy
           + "' is not supported.");
 
     // Swap features around, remembering how it was done in swapMap.
@@ -966,7 +966,7 @@ public class Lexicon implements Cloneable, Serializable
 
   /** <!-- class CountPolicy -->
     * Immutable type representing the feature counting policy of a lexicon.
-    * When LBJ's self imposed restriction to use Java 1.4 is lifted, this
+    * When LBJava's self imposed restriction to use Java 1.4 is lifted, this
     * class will be replaced by an <code>enum</code>.
     *
     * <p> The three feature counting policies are described below.
@@ -1118,7 +1118,7 @@ public class Lexicon implements Cloneable, Serializable
     public void setThresholds(int[] t) {
       if (index != PERCENTAGE)
         throw new UnsupportedOperationException(
-            "LBJ ERROR: Lexicon.PruningPolicy.setThresholds should not be "
+            "LBJava ERROR: Lexicon.PruningPolicy.setThresholds should not be "
             + "called unless the policy is 'Percentage'.");
       thresholds = (int[]) t.clone();
     }
@@ -1136,7 +1136,7 @@ public class Lexicon implements Cloneable, Serializable
     public int getThreshold(int i) {
       if (index == NONE)
         throw new UnsupportedOperationException(
-            "LBJ ERROR: Lexicon.PruningPolicy.getThreshold should never be "
+            "LBJava ERROR: Lexicon.PruningPolicy.getThreshold should never be "
             + "called if the pruning policy is 'None'.");
       if (index == ABSOLUTE) return thresholds[0];
       return thresholds[i];
@@ -1147,7 +1147,7 @@ public class Lexicon implements Cloneable, Serializable
     public double getPercentage() {
       if (index != PERCENTAGE)
         throw new UnsupportedOperationException(
-            "LBJ ERROR: PruningPolicy: Can't get percentage when pruning "
+            "LBJava ERROR: PruningPolicy: Can't get percentage when pruning "
             + "policy isn't 'Percentage'.");
       return percentage;
     }

@@ -4,7 +4,7 @@ import edu.illinois.cs.cogcomp.lbjava.nlp.Word;
 
 
 /**
-  * Simple extension of the {@link edu.illinois.cs.cogcomp.lbjava.nlp.Word} class from LBJ's NLP
+  * Simple extension of the {@link edu.illinois.cs.cogcomp.lbjava.nlp.Word} class from LBJava's NLP
   * library.  Two extra fields are provided to store the token's type.  First,
   * {@link #type} is intended to store the type of the token <i>as computed by
   * some classifier</i>.  Second, {@link #label} is intended for use only when

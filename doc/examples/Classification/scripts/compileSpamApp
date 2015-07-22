@@ -1,0 +1,1 @@
+javac -cp bin:lib/* src/edu/illinois/cs/cogcomp/tutorial/SpamClassifierApplication.java -d bin/

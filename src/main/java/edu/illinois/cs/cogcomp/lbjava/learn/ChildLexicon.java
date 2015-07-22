@@ -87,7 +87,7 @@ public class ChildLexicon extends Lexicon
       if (f != null && parents.get(i) < 0) {
         Feature pf = p.lookupKey(p.lookup(f));
         if (pf == null) {
-          System.err.println("LBJ ERROR: Can't find feature " + f
+          System.err.println("LBJava ERROR: Can't find feature " + f
                              + " in parent lexicon.");
           new Exception().printStackTrace();
           System.exit(1);
@@ -123,7 +123,7 @@ public class ChildLexicon extends Lexicon
       }
       else {
         System.err.println(
-            "LBJ ERROR: Marking feature as removable for the second time: "
+            "LBJava ERROR: Marking feature as removable for the second time: "
             + f);
         new Exception().printStackTrace();
         System.exit(1);
@@ -147,7 +147,7 @@ public class ChildLexicon extends Lexicon
 
     if (count == 0) {
       System.err.println(
-          "LBJ ERROR: Parent count incorrect for feature " + f);
+          "LBJava ERROR: Parent count incorrect for feature " + f);
       new Exception().printStackTrace();
       System.exit(1);
     }

@@ -16,7 +16,7 @@ import edu.illinois.cs.cogcomp.lbjava.Pass;
   * of a start value, end value, and increment factor, which
   * can then be converted into the explicit list of possible values.
   *
-  * <p>The LBJ syntax for defining the parameter set is to declare
+  * <p>The LBJava syntax for defining the parameter set is to declare
   * the possible values inside of double curly braces, either as
   * an explicit list or as a range. The following two examples
   * are equivalent:
@@ -311,7 +311,7 @@ public class ParameterSet extends Expression
 
   /**
     * Writes a string representation of this <code>ASTNode</code> to the
-    * specified buffer.  The representation written is parsable by the LBJ2
+    * specified buffer.  The representation written is parsable by the LBJava
     * compiler, but not very readable.
     *
     * @param buffer The buffer to write to.

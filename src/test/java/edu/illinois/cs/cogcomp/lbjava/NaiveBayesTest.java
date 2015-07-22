@@ -14,7 +14,7 @@ public class NaiveBayesTest {
 
 	@Test
 	public void test() throws Exception {
-		//Make sure the lbj dir is clean
+		//Make sure the lbjava dir is clean
 		File lbjDir = new File(getClass().getResource("/lbj/.").getPath());
 		File[] dirFiles = lbjDir.listFiles(new FilenameFilter() {
 			

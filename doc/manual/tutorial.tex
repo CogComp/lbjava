@@ -1,13 +1,13 @@
 
 \chapter{Tutorial: 20 Newsgroups}
 
-We begin our discussion of the LBJ language with a tutorial that illustrates
+We begin our discussion of the LBJava language with a tutorial that illustrates
 its most common usage.  This tutorial is intended for a first time user of the
 language.  It introduces the syntax for both single feature and feature
 generating hard-coded classifiers, as well as the syntax for declaring a
 learner.  Next, it shows how the learner (or any other classifier) declared in
-the LBJ source code can be imported and used in the Java application.
-Finally, it discusses how to use the LBJ compiler on the command line to fully
+the LBJava source code can be imported and used in the Java application.
+Finally, it discusses how to use the LBJava compiler on the command line to fully
 compile our learning based program.  Throughout the tutorial, we'll be using
 the famous 20 Newsgroups
 corpus\footnote{http://people.csail.mit.edu/jrennie/20Newsgroups} as our
@@ -22,9 +22,9 @@ destination for a new post.  It is plausible that these classifications could
 be made as a function of the words that appear in them.  For example, the word
 ``motor'' is likely to appear more often in {\tt rec.autos} or {\tt
 rec.motorcycles} than in {\tt alt.atheism}.  However, we do not want to
-manually invent these associations one at a time, so we turn to LBJ.
+manually invent these associations one at a time, so we turn to LBJava.
 
-To use LBJ, we first need to decide on an object oriented internal
+To use LBJava, we first need to decide on an object oriented internal
 representation.  In this case, it makes sense to define a class named {\tt
 Post} that stores the contents of a newsgroup post.  Figure \ref{fig:post}
 shows a skeleton for such a class.  There, we see that space has been
@@ -35,7 +35,7 @@ for the lines in the body, and the other for the words in each line.
 
 Finally, we have a field called {\tt newsgroup}.  It may seem counterintuitive
 to include a field to store this information since it is exactly the
-classification we aim to compute.  LBJ's supervised learning algorithms will
+classification we aim to compute.  LBJava's supervised learning algorithms will
 need this information, however, since it labels the example object.
 Furthermore, at test time, our newsgroup client application may fill this
 field with the newsgroup in which the post was encountered or in which the
@@ -56,20 +56,20 @@ that point.
 \end{figure}
 
 We'll also need to implement a parser that knows how to create {\tt Post}
-objects when given the raw data in a file or files.  In LBJ, a parser is any
-class that implements the {\tt LBJ2.parse.Parser} interface.  This is a simple
+objects when given the raw data in a file or files.  In LBJava, a parser is any
+class that implements the {\tt lbjava.parse.Parser} interface.  This is a simple
 interface that requires only three methods be defined.  First, the {\tt
 next()} method takes no arguments and returns a single example {\tt Object}
-(of any type in general, but in this case, it will be a {\tt Post}).  The LBJ
+(of any type in general, but in this case, it will be a {\tt Post}).  The LBJava
 compiler will call this method repeatedly to retrieve training example objects
 until it returns {\tt null}.  Next, the {\tt reset()} method rewinds the
 parser back to the beginning of the raw data input it has been reading.
 Finally, the {\tt close()} method closes any streams the parser may have open
 and frees any other system resources it may be using.
 
-The LBJ library comes with several parsers that read plain text.  While it
+The LBJava library comes with several parsers that read plain text.  While it
 does not include a parser for newsgroup posts, we can still make use of {\tt
-LBJ2.parse.LineByLine}, which will at least take care of the boilerplate code
+lbjava.parse.LineByLine}, which will at least take care of the boilerplate code
 necessary to read text out of a file.  This abstract class also provides
 implementations of the {\tt reset()} and {\tt close()} methods.  The {\tt
 NewsgroupParser} class in Figure \ref{fig:newsParser} simply extends it to
@@ -82,7 +82,7 @@ of a {\tt Post} object.
 
 \begin{figure}[t]
 \begin{code}
-1. \>{\color{Purple} import} LBJ2.parse.LineByLine; \\
+1. \>{\color{Purple} import} lbjava.parse.LineByLine; \\
 2. \>\\
 3. \>{\color{ForestGreen} public class} NewsgroupParser
          {\color{ForestGreen} extends} LineByLine \{ \\
@@ -105,13 +105,13 @@ returns them one at a time via the {\tt next()} method.}
 \end{figure}
 
 With {\tt Post} and {\tt NewsgroupParser} ready to go, we can now define in
-the LBJ source code a hard-coded classifier that identifies which words appear
+the LBJava source code a hard-coded classifier that identifies which words appear
 in each post and a learning classifier that categorizes each post based on
 those words.
 
 \section{Classifier Declarations}
 
-Given the internal representation developed in the previous section, the LBJ
+Given the internal representation developed in the previous section, the LBJava
 code in Figure \ref{fig:lbj20news} can be used to train a learned newsgroup
 classifier.  It involves a single feature extraction classifier named {\tt
 BagOfWords}, a label classifier named {\tt NewsgroupLabel} to provide labels
@@ -122,12 +122,12 @@ the {\tt CLASSPATH}.  To see the code in action, download the source
 distribution\footnote{{\tt
 http://cogcomp.cs.illinois.edu/software/20news.tgz}} from our website -- it
 includes the data and all the classes mentioned above -- and run {\tt
-./train.sh} (assuming that LBJ is already on your {\tt CLASSPATH}).  We'll now
+./train.sh} (assuming that LBJava is already on your {\tt CLASSPATH}).  We'll now
 take a closer look at how it works.
 
 \begin{figure}[t]
 \begin{code}
-1. \>{\color{Purple} import} LBJ2.nlp.seg.Token;\\
+1. \>{\color{Purple} import} lbjava.nlp.seg.Token;\\
 2. \>\\
 3. \>{\color{ForestGreen} discrete}\% BagOfWords(Post post) <- \{\\
 4. \>\>{\color{YellowOrange} for} ({\color{ForestGreen} int} i =
@@ -167,12 +167,12 @@ take a closer look at how it works.
 
 \subsection{Hard-coded classifiers}
 
-An LBJ source file is a list of declarations.  The simplest in Figure
+An LBJava source file is a list of declarations.  The simplest in Figure
 \ref{fig:lbj20news} is contained entirely on line 13.  It consists of the
 classifier's \emph{signature} and a hard-coded \emph{classifier expression}
 separated by a left arrow indicating assignment.  In the classifier's
 signature, we see its return type (a single discrete feature) as well as its
-input type (an object of type {\tt Post}).  All LBJ classifiers take a single
+input type (an object of type {\tt Post}).  All LBJava classifiers take a single
 object (of any type) as input.  It is up to the programmer to ensure that all
 information pertinent to the classifiers is accessible from that object.  The
 return type, however, is not quite so restrictive.  Returned features may be
@@ -237,7 +237,7 @@ The argument to the {\tt using} clause is a single classifier expression.  As
 we can see from this example code, the name of a classifier qualifies.  The
 only restriction is that this classifier expression must have an input type
 that allows it to take instances of {\tt NewsgroupClassifier}'s input type.
-LBJ also provides a comma operator for constructing a feature generator that
+LBJava also provides a comma operator for constructing a feature generator that
 simply returns all the features returned by the classifiers on either side of
 the comma.  This way, we can include as many features as we want simply by
 listing classifiers separated by commas.
@@ -248,7 +248,7 @@ listing classifiers separated by commas.
 %
 The {\tt from} clause supplies a data source by instantiating a parser.  The
 objects returned by this parser's {\tt next()} method must be instances of
-{\tt NewsgroupClassifier}'s input type.  LBJ can then extract features via the
+{\tt NewsgroupClassifier}'s input type.  LBJava can then extract features via the
 using clause and train with the learning algorithm.  This clause also gives
 the programmer the opportunity to iterate over the training data if he so
 desires.  The optional {\tt rounds} clause is part of the {\tt from} clause,
@@ -257,7 +257,7 @@ and it specifies how many times to iterate.
 \item[{\tt with}]\hfill\\
 %
 The argument to the \path{with} clause names a learning algorithm (any class
-extending \path{LBJ2.learn.Learner} accessible on the \path{CLASSPATH}) and
+extending \path{lbjava.learn.Learner} accessible on the \path{CLASSPATH}) and
 allows the programmer to set its parameters.  For example, \path{learningRate}
 (line 22) and \path{thickness} (line 23) are parameters of the
 \path{SparseAveragedPerceptron} learning algorithm, while \path{baseLTU} (line
@@ -265,21 +265,21 @@ allows the programmer to set its parameters.  For example, \path{learningRate}
 
 \end{description}
 
-From these elements, the LBJ compiler generates Java source code that performs
+From these elements, the LBJava compiler generates Java source code that performs
 feature extraction, applies that code on the example objects to create
 training examples, and trains our learner with them.  The resulting learner
 is, in essence, a Java method that takes an example object as input and
 returns the predicted newsgroup in a string as output.  Note that the code
 does not specify the possible newsgroup names or any other particulars about
-the content of our example objects.  The only reason that this LBJ code
+the content of our example objects.  The only reason that this LBJava code
 results in a newsgroup classifier is because we give it training data that
 induces one.  If we want a spam detector instead, we need only change data
-sources; the LBJ code need not change.\footnote{Of course, we may want to
+sources; the LBJava code need not change.\footnote{Of course, we may want to
 change the names of our classifiers in that case for clarity's sake.}
 
 %\section{Importing an External Classifier} <- maybe this goes with the above.
 
 \section{Using {\tt NewsgroupClassifier} in a Java Program}
 
-\section{Compiling Our Learning Based Program with LBJ}
+\section{Compiling Our Learning Based Program with LBJava}
 

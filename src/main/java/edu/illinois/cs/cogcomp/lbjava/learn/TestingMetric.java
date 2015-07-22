@@ -6,7 +6,7 @@ import edu.illinois.cs.cogcomp.lbjava.parse.Parser;
 
 /**
   * <code>TestingMetric</code> is an interface through which the user may
-  * implement their own testing method for use by LBJ's internal cross
+  * implement their own testing method for use by LBJava's internal cross
   * validation algorithm.
   *
   * @author Dan Muriello

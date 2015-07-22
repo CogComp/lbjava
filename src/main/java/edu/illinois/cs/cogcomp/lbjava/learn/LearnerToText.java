@@ -23,7 +23,7 @@ import edu.illinois.cs.cogcomp.lbjava.util.ClassUtils;
   * <h4>Input</h4>
   * The <code>&lt;learner&gt;</code> parameter must be a fully qualified class
   * name (e.g. <code>myPackage.myName</code>) referring to a class that
-  * extends {@link Learner}.  Every learning classifier specified in an LBJ
+  * extends {@link Learner}.  Every learning classifier specified in an LBJava
   * source code satisfies this requirement.
   *
   * <h4>Output</h4>

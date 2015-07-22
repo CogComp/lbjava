@@ -20,7 +20,7 @@ import edu.illinois.cs.cogcomp.lbjava.util.ExceptionlessOutputStream;
 
 
 /**
-  * Translates LBJ's internal problem representation into that which can
+  * Translates LBJava's internal problem representation into that which can
   * be handled by WEKA learning algorithms.  This translation involves storing
   * all examples in memory so they can be passed to WEKA at one time.
   *
@@ -439,7 +439,7 @@ public class WekaWrapper extends Learner
     try { baseClassifier = weka.classifiers.Classifier.makeCopy(freshClassifier); }
     catch (Exception e) {
       System.err.println(
-          "LBJ ERROR: WekaWrapper.forget: Can't copy classifier:");
+          "LBJava ERROR: WekaWrapper.forget: Can't copy classifier:");
       e.printStackTrace();
       System.exit(1);
     }

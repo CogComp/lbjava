@@ -257,7 +257,7 @@ public class Train extends Pass
 				if (!Main.concurrentTraining) {
 					try { thread.join(); }
 					catch (InterruptedException e) {
-						System.err.println("LBJ ERROR: Training of " + thread.getName()
+						System.err.println("LBJava ERROR: Training of " + thread.getName()
 								+ " has been interrupted.");
 						fatalError = true;
 					}
@@ -295,7 +295,7 @@ public class Train extends Pass
 		for (int i = 0; i < threads.length; ++i) {
 			try { threads[i].join(); }
 			catch (InterruptedException e) {
-				System.err.println("LBJ ERROR: Training of " + threads[i].getName()
+				System.err.println("LBJava ERROR: Training of " + threads[i].getName()
 						+ " has been interrupted.");
 				fatalError = true;
 			}
@@ -530,7 +530,7 @@ public class Train extends Pass
 
 			if (c == declaredClasses.length) {
 				System.err.println(
-						"LBJ ERROR: Expected to find a single member class inside "
+						"LBJava ERROR: Expected to find a single member class inside "
 								+ getName() + " named 'Parameters'.");
 				for (int i = 0; i < declaredClasses.length; ++i)
 					System.err.println(i + ": " + declaredClasses[i].getName());
@@ -553,7 +553,7 @@ public class Train extends Pass
 				try { noArg = parametersClass.getConstructor(new Class[0]); }
 				catch (Exception e) {
 					System.err.println(
-							"LBJ ERROR: Can't find a no-argument constructor for "
+							"LBJava ERROR: Can't find a no-argument constructor for "
 									+ getName() + ".Parameters.");
 					System.exit(1);
 				}
@@ -562,7 +562,7 @@ public class Train extends Pass
 				try { p = (Learner.Parameters) noArg.newInstance(new Object[0]); }
 				catch (Exception e) {
 					System.err.println(
-							"LBJ ERROR: Can't instantiate " + getName() + ".Parameters:");
+							"LBJava ERROR: Can't instantiate " + getName() + ".Parameters:");
 					e.printStackTrace();
 					System.exit(1);
 				}
@@ -578,21 +578,21 @@ public class Train extends Pass
 							learnerClass.getDeclaredMethod("getInstance", new Class[0]);
 				}
 				catch (Exception e) {
-					System.err.println("LBJ ERROR: Could not access method '"
+					System.err.println("LBJava ERROR: Could not access method '"
 							+ fullyQualified + ".getInstance()':");
 					System.exit(1);
 				}
 
 				try { l = (Learner) getInstance.invoke(null, null); }
 				catch (Exception e) {
-					System.err.println("LBJ ERROR: Could not get unique instance of '"
+					System.err.println("LBJava ERROR: Could not get unique instance of '"
 							+ fullyQualified + "': " + e);
 					e.getCause().printStackTrace();
 					System.exit(1);
 				}
 
 				if (l == null) {
-					System.err.println("LBJ ERROR: Could not get unique instance of '"
+					System.err.println("LBJava ERROR: Could not get unique instance of '"
 							+ fullyQualified + "'.");
 					System.exit(1);
 				}
@@ -828,7 +828,7 @@ public class Train extends Pass
 			try { c = parametersClass.getConstructor(paramTypes); }
 			catch (Exception e) {
 				System.err.println(
-						"LBJ ERROR: Can't find a parameter tuning constructor for "
+						"LBJava ERROR: Can't find a parameter tuning constructor for "
 								+ getName() + ".Parameters.");
 				e.printStackTrace();
 				System.exit(1);
@@ -844,7 +844,7 @@ public class Train extends Pass
 				try { result[i++] = (Learner.Parameters) c.newInstance(a); }
 				catch (Exception e) {
 					System.err.println(
-							"LBJ ERROR: Can't instantiate " + getName() + ".Parameters:");
+							"LBJava ERROR: Can't instantiate " + getName() + ".Parameters:");
 					e.printStackTrace();
 					System.exit(1);
 				}
@@ -950,7 +950,7 @@ public class Train extends Pass
 						}
 						catch (Exception e) {
 							System.err.println(
-									"LBJ ERROR: Exception while training " + getName() + ":");
+									"LBJava ERROR: Exception while training " + getName() + ":");
 							e.printStackTrace();
 							fatalError = true;
 							return;

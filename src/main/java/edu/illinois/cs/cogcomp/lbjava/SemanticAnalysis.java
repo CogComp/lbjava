@@ -539,7 +539,7 @@ import edu.illinois.cs.cogcomp.lbjava.parse.Parser;
  *   <tr valign=top>
  *     <td align=right>B39</td>
  *     <td>
- *       LBJ must be properly <code>configure</code>d to use the selected
+ *       LBJava must be properly <code>configure</code>d to use the selected
  *       inference algorithm.
  *     </td>
  *   </tr>

@@ -18,14 +18,14 @@ import edu.illinois.cs.cogcomp.lbjava.frontend.sym;
 
 
 /**
-  * LBJ2's command line interface.  Passing a source file to this class will
-  * invoke LBJ2's frontend and optimization passes, resulting in the execution
+  * LBJava's command line interface.  Passing a source file to this class will
+  * invoke LBJava's frontend and optimization passes, resulting in the execution
   * of the source file's code including creation of java files that implement
   * the source file's semantics. <p>
   *
-  * <font size=+2><b>LBJ</b></font> stands for
+  * <font size=+2><b>LBJava</b></font> stands for
   * <font size=+1><b>L</b></font>earning <font size=+1><b>B</b></font>ased
-  * <font size=+1><b>J</b></font>ava.  LBJ2 is a language for building systems
+  * <font size=+1><b>J</b></font>ava.  LBJava is a language for building systems
   * that learn. <p>
   *
   * <dl>
@@ -39,7 +39,7 @@ import edu.illinois.cs.cogcomp.lbjava.frontend.sym;
   *           <tr>
   *             <td valign=top><code>-c</code></td>
   *             <td>
-  *               Compile only: This option tells LBJ2 to translate the given
+  *               Compile only: This option tells LBJava to translate the given
   *               source to Java, but not to compile the generated Java
   *               sources or do any training.
   *             </td>
@@ -112,11 +112,11 @@ import edu.illinois.cs.cogcomp.lbjava.frontend.sym;
   *               <code>-gsp &lt;directory&gt;</code>
   *             </td>
   *             <td>
-  *               LBJ will potentially generate many Java source files.  Use
-  *               this option to have LBJ write them to the specified
+  *               LBJava will potentially generate many Java source files.  Use
+  *               this option to have LBJava write them to the specified
   *               directory instead of the current directory.
   *               <code>&lt;directory&gt;</code> must already exist.  Note
-  *               that LBJ will also compile these files which can result in
+  *               that LBJava will also compile these files which can result in
   *               even more class files than there were sources.  Those class
   *               files will also be written in <code>&lt;directory&gt;</code>
   *               unless the <code>-d</code> command line parameter is
@@ -126,7 +126,7 @@ import edu.illinois.cs.cogcomp.lbjava.frontend.sym;
   *           <tr>
   *             <td valign=top><code>-sourcepath &lt;path&gt;</code></td>
   *             <td>
-  *               If the LBJ source depends on classes whose source files
+  *               If the LBJava source depends on classes whose source files
   *               cannot be found on the user's classpath, specify the
   *               directories where they can be found using this parameter.
   *               It works just like <code>javac</code>'s
@@ -208,9 +208,9 @@ public class Main
   public static boolean warningsDisabled = false;
   /** This flag is set if symbol printing is enabled on the command line. */
   public static boolean printSymbols = false;
-  /** The relative path to the LBJ source file. */
+  /** The relative path to the LBJava source file. */
   public static String sourceDirectory;
-  /** The name of the LBJ2 source file as specified on the command line. */
+  /** The name of the LBJava source file as specified on the command line. */
   public static String sourceFilename;
   /** The source file's name without the <code>.lbj</code> extension. */
   public static String sourceFileBase;
@@ -249,7 +249,7 @@ public class Main
 
   /**
     * The main compiler driver.  This method parses command line options and
-    * then calls all of LBJ2's components.
+    * then calls all of LBJava's components.
     *
     * @param args           The user's command line arguments are found here.
     * @exception Exception  An exception is thrown when any error occurs.
@@ -453,9 +453,9 @@ public class Main
     }
 
     AST ast = null;
-    parser LBJ2parser = new parser(scanner);
-    if (parserDebug) ast = (AST) LBJ2parser.debug_parse().value;
-    else ast = (AST) LBJ2parser.parse().value;
+    parser LBJavaparser = new parser(scanner);
+    if (parserDebug) ast = (AST) LBJavaparser.debug_parse().value;
+    else ast = (AST) LBJavaparser.parse().value;
 
     if (ast == null)
       throw new InternalError("Parser returned null abstract syntax tree.");

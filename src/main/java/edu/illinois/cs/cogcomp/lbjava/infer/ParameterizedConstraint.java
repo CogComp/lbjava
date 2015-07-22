@@ -8,7 +8,7 @@ import edu.illinois.cs.cogcomp.lbjava.classify.FeatureVector;
 
 
 /**
-  * This class represents an LBJ constraint as it appears in a source file.
+  * This class represents an LBJava constraint as it appears in a source file.
   * When given its input object, an object of this class generates objects of
   * type <code>FirstOrderConstraint</code>.
   * <code>ParameterizedConstraint</code>s are also Boolean

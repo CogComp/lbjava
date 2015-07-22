@@ -32,7 +32,7 @@ import edu.illinois.cs.cogcomp.lbjava.util.TableFormat;
   * </blockquote>
   *
   * <p> <b>Options:</b> The <code>-t &lt;n&gt;</code> option is similar to the
-  * LBJ compiler's command line option of the same name.  When
+  * LBJava compiler's command line option of the same name.  When
   * <code>&lt;n&gt;</code> is greater than 0, a time stamp is printed to
   * <code>STDOUT</code> after every <code>&lt;n&gt;</code> examples are
   * processed.
@@ -50,12 +50,12 @@ import edu.illinois.cs.cogcomp.lbjava.util.TableFormat;
   *
   * <p> <b>Output:</b> First some timing information is presented.  The first
   * time reported is the time taken to load the specified classifier's Java
-  * class into memory.  This reflects the time taken for LBJ to load the
+  * class into memory.  This reflects the time taken for LBJava to load the
   * classifier's internal representation <b>if</b> the classifier does
   * <b>not</b> make use of the <code>cachedin</code> keyword.  Next, the time
   * taken to evaluate the first example is reported.  It isn't particularly
   * informative unless the classifier <b>does</b> make use of the
-  * <code>cachedin</code> keyword.  In this case, it reflects the time LBJ
+  * <code>cachedin</code> keyword.  In this case, it reflects the time LBJava
   * takes to load the classifier's internal representation better than the
   * first time reported.  Finally, the average time taken to execute the
   * classifier's <code>discreteValue(Object)</code> method is reported.

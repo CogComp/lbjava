@@ -1,28 +1,28 @@
 
-\chapter{The LBJ Language} \label{chapter:language}
+\chapter{The LBJava Language} \label{chapter:language}
 
 Now that we have defined the building blocks of classifier computation, we
-next describe LBJ's syntax and semantics for programming with these building
+next describe LBJava's syntax and semantics for programming with these building
 blocks. \\
 
-Like a Java source file, an LBJ source file begins with an optional package
+Like a Java source file, an LBJava source file begins with an optional package
 declaration and an optional list of import declarations.  Next follow the
 definitions of classifiers, constraints, and inferences.  Each will be
-translated by the LBJ compiler into a Java class of the same name.  If the
+translated by the LBJava compiler into a Java class of the same name.  If the
 package declaration is present, those Java classes will all become members of
-that package.  Import declarations perform the same function in an LBJ source
+that package.  Import declarations perform the same function in an LBJava source
 file as in a Java source file.
 
 \section{Classifiers}
 
-In LBJ, a classifier can be defined with Java code or composed from the
+In LBJava, a classifier can be defined with Java code or composed from the
 definitions of other classifiers using special operators.  As such, the syntax
 of classifier specification allows the programmer to treat classifiers as
 expressions and assign them to names.  This section defines the syntax of
 classifier specification more precisely, including the syntax of classifiers
-learned from data.  It also details the behavior of the LBJ compiler when
+learned from data.  It also details the behavior of the LBJava compiler when
 classifiers are specified in terms of training data and when changes are made
-to an LBJ source file.
+to an LBJava source file.
 
 \subsection{Classifier Declarations} \label{section:declarations}
 Classifier declarations are used to name classifier expressions (discussed in
@@ -75,9 +75,9 @@ until necessary (i.e., until an object is encountered whose cache location is
 not filled in).  See Section \ref{subsection:LCE} for more information about
 learning classifiers. \\
 
-Semantically, every named classifier is a static method.  In an LBJ source
+Semantically, every named classifier is a static method.  In an LBJava source
 file, references to classifiers are manipulated and passed to other syntactic
-constructs, similarly to a functional programming language.  The LBJ compiler
+constructs, similarly to a functional programming language.  The LBJava compiler
 implements this behavior by storing a classifier's definition in a static
 method of a Java class of the same name and providing access to that method
 through objects of that class.  As we will see, learning classifiers are
@@ -114,7 +114,7 @@ immediately visible through every object of the classifier's class. \\
 \end{figure}
 
 Figure \ref{figure:classifierDeclarations} gives several examples of
-classifier declarations.  These examples illustrate some key principles LBJ.
+classifier declarations.  These examples illustrate some key principles LBJava.
 First, the features produced by a classifier are either discrete or real.  If
 a feature is discrete, the set of allowable values may optionally be
 specified, contained in curly braces.  Any literal values including {\tt
@@ -230,7 +230,7 @@ before it is used).  If the named classifier has an external declaration it
 must either be fully qualified (e.g., {\tt myPackage.myClassifier}) or it must
 be imported by an import declaration at the top of the source file.  The class
 file or Java source file containing the implementation of an imported
-classifier must exist prior to running the LBJ compiler on the source file
+classifier must exist prior to running the LBJava compiler on the source file
 that imports it.
 
 \subsubsection{Method Bodies}
@@ -244,7 +244,7 @@ converted to a {\tt String}.  Each method body takes its argument and feature
 return type from the header of the classifier declaration it is contained in
 (except when in the presence of a classifier cast expression, discussed in
 Section \ref{subsection:castExpressions}).  For more information on method
-bodies in LBJ, see Section \ref{section:methodBodies}.
+bodies in LBJava, see Section \ref{section:methodBodies}.
 
 \subsubsection{Classifier Cast Expressions} \label{subsection:castExpressions}
 When the programmer wishes for a classifier sub-expression on the right hand
@@ -269,7 +269,7 @@ expression is employed to achieve the desired affect.
 \noindent
 Of course, we can see that the hard-coded classifier defined on the fly in
 this example returns a discrete ({\tt boolean}) value.  Without the cast in
-front of this method body, the LBJ compiler would have assumed it to have a
+front of this method body, the LBJava compiler would have assumed it to have a
 real valued feature return type, and an error would have been produced. \\
 
 When a classifier cast expression is applied to a classifier expression that
@@ -344,7 +344,7 @@ representing the combination of every pairing of features from the two
 argument classifiers.
 
 \subsubsection{Composite Generators}
-``Composite generator'' is LBJ terminology for a comma separated list of
+``Composite generator'' is LBJava terminology for a comma separated list of
 classifier expressions.  When classifier expressions are listed separated by
 commas, the result is a feature generator that simply returns all the features
 returned by each classifier in the list.
@@ -383,21 +383,21 @@ Learning classifier expressions have the following syntax: \\
 The first classifier expression represents a classifier that will provide
 label features for a supervised learning algorithm.  It need not appear when
 the learning algorithm is unsupervised.\footnote{Keep in mind, however, that
-LBJ's library currently lacks unsupervised learning algorithm
+LBJava's library currently lacks unsupervised learning algorithm
 implementations.}  The classifier expression in the {\tt using} clause does
 all the feature extraction on each object, during both training and
 evaluation.  It will often be a composite generator. \\
 
 The instance creation expression in the {\tt from} clause should create an
-object of a class that implements the {\tt LBJ2.parser.Parser} interface in
+object of a class that implements the {\tt lbjava.parser.Parser} interface in
 the library (see Section \ref{subsection:parser}).  This clause is optional.
-If it appears, the LBJ compiler will automatically perform training on the
+If it appears, the LBJava compiler will automatically perform training on the
 learner represented by this learning classifier expression at compile-time.
 Whether it appears or not, the programmer may continue training the learner
-on-line in the application via methods defined in {\tt LBJ2.learn.Learner} in
+on-line in the application via methods defined in {\tt lbjava.learn.Learner} in
 the library (see Section \ref{subsection:learner}). \\
 
-When the {\tt from} clause appears, the LBJ compiler retrieves objects from
+When the {\tt from} clause appears, the LBJava compiler retrieves objects from
 the specified parser until it finally returns {\tt null}.  One at a time, the
 feature extraction classifier is applied to each object, and the results are
 sent to the learning algorithm for processing.  However, many learning
@@ -408,7 +408,7 @@ the number of passes over the training data to be performed by the classifier
 during training.  \\
 
 The instance creation expression in the {\tt with} clause should create an
-object of a class derived from the {\tt LBJ2.learn.Learner} class in the
+object of a class derived from the {\tt lbjava.learn.Learner} class in the
 library.  This clause is also optional.  If it appears, the generated Java
 class implementing this learning classifier will be derived from the class
 named in the {\tt with} clause.  Otherwise, the default learner for the
@@ -424,7 +424,7 @@ method which restricts the prediction to one of the labels in the specified
 collection.  In the application, it's easy enough to call this method in place
 of {\tt discreteValue(Object)} (discussed in Section
 \ref{subsection:classifier}), but when this classifier is invoked elsewhere in
-an LBJ source file, it translates to an invocation of {\tt
+an LBJava source file, it translates to an invocation of {\tt
 discreteValue(Object)}.  The {\tt evaluate} clause (e.g., {\tt evaluate
 valueOf(o, MyClass.getCollection())}) changes the behavior of {\tt
 discreteValue(Object)} (or {\tt realValue(Object)} as appropriate) so that it
@@ -436,10 +436,10 @@ The {\tt cval} clause enables LBJ's built-in $K$-fold cross validation system.
 $K$-fold cross validation is a statistical technique for assessing the
 performance of a learned classifier by partitioning the user's set of training
 data into $K$ subsets such that a single subset is held aside for testing
-while the others are used for training. LBJ automates this process in order to
+while the others are used for training. LBJava automates this process in order to
 alleviate the need for the user to perform his own testing methodologies. The
 optional {\tt split-strategy} argument to the {\tt cval} clause can be used to
-specify the method with which LBJ will split the data set into subsets
+specify the method with which LBJava will split the data set into subsets
 (folds). If the {\tt split-strategy} argument is not provided, the default
 value taken is {\tt sequential}. The user may choose from the following four
 split strategies:
@@ -467,7 +467,7 @@ split strategies:
 
 \item {\tt manual} -
   The user may write their parser so that it returns the unique instance of
-  the {\tt LBJ2.parse.FoldSeparator} class (see the {\tt separator} field)
+  the {\tt lbjava.parse.FoldSeparator} class (see the {\tt separator} field)
   wherever a fold boundary is desired.  Each time this object appears, it
   represents a partition between two folds.  Thus, if the $k$-fold cross
   validation is desired, it should appear $k-1$ times.  The integer provided
@@ -479,8 +479,8 @@ The {\tt testingMetric} and {\tt alpha} clauses are sub-clauses of {\tt cval},
 and, consequently, have no effect when the {\tt cval} clause is not present.  The
 {\tt testingMetric} clause gives the user the opportunity to provide a custom
 testing methodology. The object provided to the {\tt testingMetric} clause
-must implement the {\tt LBJ2.learn.TestingMetric} interface.  If this clause
-is not provided, then it will default to the {\tt LBJ2.learn.Accuracy} metric,
+must implement the {\tt lbjava.learn.TestingMetric} interface.  If this clause
+is not provided, then it will default to the {\tt lbjava.learn.Accuracy} metric,
 which simply returns the ratio of correct predictions made by the classifier
 on the testing fold to the total number of examples contained within said
 fold.\\
@@ -488,8 +488,8 @@ fold.\\
 LBJ's cross validation system provides a confidence interval according to the
 measurements made by the testing function. With the {\tt alpha} clause, the
 user may define the width of this confidence interval. The double-precision
-argument provided to the {\tt alpha} clause causes LBJ to calculate a
-$(1-a)\%$ confidence interval. For example, ``{\tt alpha .07}" causes LBJ to
+argument provided to the {\tt alpha} clause causes LBJava to calculate a
+$(1-a)\%$ confidence interval. For example, ``{\tt alpha .07}" causes LBJava to
 print a $93\%$ confidence interval, according to the testing measurements
 made. If this clause is not provided, the default value taken is .05, resulting 
 in a 95\% confidence interval.\\
@@ -518,7 +518,7 @@ takes precedence. If no value is provided, then the default value taken is 0,
 causing progress messages to be given only at the beginning and end of each 
 training pass.  \\
 
-When the LBJ compiler finally processes a learning classifier expression, it
+When the LBJava compiler finally processes a learning classifier expression, it
 generates not only a Java source file implementing the classifier, but also a
 file containing the results of the computations done during training.  This
 file will have the same name as the classifier but with a {\tt .lc} extension
@@ -532,7 +532,7 @@ on the appearance of certain command line parameters discussed in Section
 Inference is the process through which classifiers constrained in terms of
 each other reconcile their outputs.  More information on the specification of
 constraints and inference procedures can be found in Sections
-\ref{section:constraints} and \ref{section:inference} respectively.  In LBJ,
+\ref{section:constraints} and \ref{section:inference} respectively.  In LBJava,
 the application of an inference to a learning classifier participating in that
 inference results in a new classifier whose output respects the inference's
 constraints.  Inferences are applied to learning classifiers via the inference
@@ -561,7 +561,7 @@ described in Section \ref{subsection:senseStatement}. \\
 When a classifier's only purpose is to provide information to a {\tt Learner}
 (see Section \ref{subsection:learner}), the {\tt Feature} data type (see
 Section \ref{subsection:feature}) is the most appropriate mode of
-communication.  However, in any LBJ source file, the programmer will
+communication.  However, in any LBJava source file, the programmer will
 inevitably design one or more classifiers intended to provide information
 within the programmer's own code, either in the application or in other
 classifier method bodies.  In these situations, the features' values (and not
@@ -658,12 +658,12 @@ describe a different context with a single {\tt sense} statement.
 \end{itemize}
 
 \subsubsection{Syntax Limitations}
-When the exact computation is known, LBJ intends to allow the programmer to
+When the exact computation is known, LBJava intends to allow the programmer to
 explicitly define a classifier using arbitrary Java.  However, the current
-version of LBJ suffers from one major limitation.  All J2SE 1.4.2 statement
+version of LBJava suffers from one major limitation.  All J2SE 1.4.2 statement
 and expression syntax is accepted, excluding class and interface definitions.
 In particular, this means that anonymous classes currently cannot be defined
-or instantiated inside an LBJ method body.
+or instantiated inside an LBJava method body.
 
 \section{Constraints} \label{section:constraints}
 
@@ -685,17 +685,17 @@ beyond the scope of this user's manual.  See\\ \cite{PunyakanokRoYi08} for
 more details. \\
 
 This section covers the syntax and semantics of constraint declarations and
-statements.  However, simply declaring an LBJ constraint has no effect on the
+statements.  However, simply declaring an LBJava constraint has no effect on the
 classifiers involved.  Section \ref{section:inference} introduces the syntax
-and semantics of LBJ inference procedures, which can then be invoked (as
+and semantics of LBJava inference procedures, which can then be invoked (as
 described in Section \ref{subsubsection:inferenceInvocations}) to produce new
 classifiers that respect the constraints.
 
 \subsection{Constraint Statements} \label{subsection:constraintStatements}
 
-LBJ constraints are written as arbitrary first order Boolean logic expressions
+LBJava constraints are written as arbitrary first order Boolean logic expressions
 in terms of learning classifiers and the objects in a Java application.  The
-LBJ constraint statement syntax is parameterized by Java expressions, so that
+LBJava constraint statement syntax is parameterized by Java expressions, so that
 general constraints may be expressed in terms of the objects of an internal
 representation whose exact shape is not known until run-time.  The usual
 operators and quantifiers are provided, as well as the {\tt atleast} and {\tt
@@ -721,15 +721,15 @@ forms:
       particular, if {\tt MyConstraint} is already declared in {\tt
       SomeOtherPackage}, it may be invoked with {\tt
       @SomeOtherPackage.MyConstraint(object)}.
-\item The negation of an LBJ constraint \hspace{.05cm}
+\item The negation of an LBJava constraint \hspace{.05cm}
       {\tt !\emph{constraint}}
-\item The conjunction of two LBJ constraints \hspace{.05cm}
+\item The conjunction of two LBJava constraints \hspace{.05cm}
       {\tt\emph{constraint} \verb|/\| \emph{constraint}}
-\item The disjunction of two LBJ constraints \hspace{.05cm}
+\item The disjunction of two LBJava constraints \hspace{.05cm}
       {\tt\emph{constraint} \verb|\/| \emph{constraint}}
 \item An implication \hspace{.05cm}
       {\tt\emph{constraint} => \emph{constraint}}
-\item The equivalence of two LBJ constraints \hspace{.05cm}
+\item The equivalence of two LBJava constraints \hspace{.05cm}
       {\tt\emph{constraint} <=> \emph{constraint}}
 \item A universal quantifier \hspace{.05cm}
       {\tt forall (\emph{type name} in \emph{Java-expression})
@@ -780,9 +780,9 @@ invocations are not treated as inference variables.
 
 \subsection{Constraint Declarations} \label{subsection:constraintDeclarations}
 
-An LBJ constraint declaration declares a Java method whose purpose is to
+An LBJava constraint declaration declares a Java method whose purpose is to
 locate the objects involved in the inference and generate the constraints.
-Syntactically, an LBJ constraint declaration starts with a header indicating
+Syntactically, an LBJava constraint declaration starts with a header indicating
 the name of the constraint and the type of object it takes as input, similar
 to a method declaration with a single parameter: \\
 
@@ -812,13 +812,13 @@ classifiers as if they had been declared: \\
 \noindent
 Thus, a constraint may be invoked as if it were a Java method (i.e., without
 the {\tt @} symbol described in Section \ref{subsection:constraintStatements})
-anywhere in an LBJ source file, just like a classifier.  Such an invocation
+anywhere in an LBJava source file, just like a classifier.  Such an invocation
 will evaluate the constraint in place, rather than constructing its first
 order representation.
 
 \section{Inference} \label{section:inference}
 
-The syntax of an LBJ inference has the following form: \\
+The syntax of an LBJava inference has the following form: \\
 
 \vspace{-.25cm}
 {\tt inference \emph{name} head \emph{type name}}
@@ -869,7 +869,7 @@ Sentence} and one of the classifiers involved in the inference takes {\tt
 Word}s as input. \\
 
 Second, the body specifies how the scores produced by each learning classifier
-should be normalized.  The LBJ library contains a set of normalizing functions
+should be normalized.  The LBJava library contains a set of normalizing functions
 that may be named here.  It is not strictly necessary to use normalization
 methods, but doing so ensures that the scores computed for each possible
 prediction may be treated as a probability distribution by the inference
@@ -924,11 +924,11 @@ expression (see Section \ref{subsection:LCE}).
 
 \section{``Makefile'' Behavior}
 
-An LBJ source file also functions as a makefile in the following sense.
+An LBJava source file also functions as a makefile in the following sense.
 First, code will only be generated for a classifier definition when it is
 determined that a change has been made\footnote{When the file(s) containing
 the translated code for a given classifier do not exist, this is, of course,
-also interpreted as a change having been made.} in the LBJ source for that
+also interpreted as a change having been made.} in the LBJava source for that
 classifier since the last time the compiler was executed.  Second, a learning
 classifier will only be trained if it is determined that the changes made
 affect the results of learning.  More precisely, any classifier whose
@@ -937,16 +937,16 @@ classifier that makes use of an affected classifier is also affected.  This
 includes method bodies that invoke affected classifiers and conjunctions and
 learning classifiers involving at least one affected classifier.  A learning
 classifier will be trained if and only if a change has been made to its own
-source code or it is affected.  Thus, when an LBJ source contains many
+source code or it is affected.  Thus, when an LBJava source contains many
 learning classifiers and a change is made, time will not be wasted re-training
 those that are unaffected. \\
 
-In addition, the LBJ compiler will automatically compile any Java source files
+In addition, the LBJava compiler will automatically compile any Java source files
 that it depends on, so long as the locations of those source files are
 indicated with the appropriate command line parameters (see Section
-\ref{section:commandLine}).  For example, if the classifiers in an LBJ source
+\ref{section:commandLine}).  For example, if the classifiers in an LBJava source
 file are defined to take classes from the programmer's internal representation
-as input, the LBJ compiler will automatically compile the Java source files
+as input, the LBJava compiler will automatically compile the Java source files
 containing those class' implementations if their class files don't already
 exist or are out of date.
 

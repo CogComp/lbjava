@@ -141,7 +141,7 @@ public class SparseNetworkLearner extends Learner
   public void setParameters(Parameters p) {
     if (!p.baseLTU.getOutputType().equals("discrete")) {
       System.err.println(
-          "LBJ WARNING: SparseNetworkLearner will only work with a "
+          "LBJava WARNING: SparseNetworkLearner will only work with a "
           + "LinearThresholdUnit that returns discrete.");
       System.err.println(
           "             The given LTU, " + p.baseLTU.getClass().getName()
@@ -188,7 +188,7 @@ public class SparseNetworkLearner extends Learner
     if (getClass().getName().contains("SparseNetworkLearner")
         && !l.getOutputType().equals("discrete")) {
       System.err.println(
-          "LBJ WARNING: SparseNetworkLearner will only work with a "
+          "LBJava WARNING: SparseNetworkLearner will only work with a "
           + "label classifier that returns discrete.");
       System.err.println(
           "             The given label classifier, " + l.getClass().getName()

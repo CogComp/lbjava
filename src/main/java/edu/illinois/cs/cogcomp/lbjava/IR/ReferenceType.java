@@ -4,7 +4,7 @@ import edu.illinois.cs.cogcomp.lbjava.Pass;
 
 
 /**
-  * Represents a type defined by a <code>class</code>.  Note that in LBJ2's
+  * Represents a type defined by a <code>class</code>.  Note that in LBJava's
   * parser, the nonterminal <code>referenceType</code> refers to both types
   * defined by <code>class</code>es and array types, but this class represents
   * only the former.
@@ -110,7 +110,7 @@ public class ReferenceType extends Type
 
   /**
     * Writes a string representation of this <code>ASTNode</code> to the
-    * specified buffer.  The representation written is parsable by the LBJ2
+    * specified buffer.  The representation written is parsable by the LBJava
     * compiler, but not very readable.
     *
     * @param buffer The buffer to write to.

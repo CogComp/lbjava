@@ -60,7 +60,7 @@ public abstract class Learner extends Classifier
 
 
   /**
-    * This constructor is used by the LBJ2 compiler; it should never be called
+    * This constructor is used by the LBJava compiler; it should never be called
     * by a programmer.
    **/
   protected Learner() { }
@@ -245,7 +245,7 @@ public abstract class Learner extends Classifier
     if (policy == Lexicon.CountPolicy.perClass
         && !getOutputType().equals("discrete"))
       throw new IllegalArgumentException(
-          "LBJ ERROR: Learner.countFeatures: Can't do 'per class' feature "
+          "LBJava ERROR: Learner.countFeatures: Can't do 'per class' feature "
           + "counting unless the learner is discrete.");
     demandLexicon();
     lexicon.countFeatures(policy);
@@ -921,7 +921,7 @@ public abstract class Learner extends Classifier
   public void saveModel() {
     if (lcFilePath == null) {
       System.err.println(
-          "LBJ ERROR: saveModel() called without a cached location");
+          "LBJava ERROR: saveModel() called without a cached location");
       new Exception().printStackTrace();
       System.exit(1);
     }
@@ -941,7 +941,7 @@ public abstract class Learner extends Classifier
   public void saveLexicon() {
     if (lexFilePath == null) {
       System.err.println(
-          "LBJ ERROR: saveLexicon() called without a cached location");
+          "LBJava ERROR: saveLexicon() called without a cached location");
       new Exception().printStackTrace();
       System.exit(1);
     }
@@ -1465,11 +1465,11 @@ public abstract class Learner extends Classifier
       Class c = getClass();
       if (Learner.class.equals(c))
         throw new UnsupportedOperationException(
-            "LBJ ERROR: Learner.Parameters.setParameters should never be "
+            "LBJava ERROR: Learner.Parameters.setParameters should never be "
             + "called.");
       else
         throw new UnsupportedOperationException(
-            "LBJ ERROR: " + c.getName() + ".Parameters.setParameters has not "
+            "LBJava ERROR: " + c.getName() + ".Parameters.setParameters has not "
             + "been implemented.");
     }
 

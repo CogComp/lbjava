@@ -15,7 +15,7 @@ import edu.illinois.cs.cogcomp.lbjava.parse.LinkedVector;
   * speech and the corresponding spelling and between a closing parenthesis
   * and an opening parenthesis.
   *
-  * @deprecated As of LBJ release 2.0.4, the functionality of this class has
+  * @deprecated As of LBJava release 2.0.4, the functionality of this class has
   *             been superceded by the {@link edu.illinois.cs.cogcomp.lbjava.parse.ChildrenFromVectors}
   *             parser used in conjunction with {@link POSBracketToVector}.
   * @author     Nick Rizzolo

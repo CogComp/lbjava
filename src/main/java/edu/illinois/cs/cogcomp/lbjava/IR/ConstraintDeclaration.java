@@ -7,7 +7,7 @@ import edu.illinois.cs.cogcomp.lbjava.frontend.TokenValue;
 
 /**
   * Represents the declaration of a constraint.  Constraints declared in an
-  * LBJ source file are mainly used to constrain inferences, but they may also
+  * LBJava source file are mainly used to constrain inferences, but they may also
   * be used exactly as if they were a classifier with return type
   * <code>discrete{false, true}</code>.
   *
@@ -126,7 +126,7 @@ public class ConstraintDeclaration extends Declaration
 
   /**
     * Writes a string representation of this <code>ASTNode</code> to the
-    * specified buffer.  The representation written is parsable by the LBJ2
+    * specified buffer.  The representation written is parsable by the LBJava
     * compiler, but not very readable.
     *
     * @param buffer The buffer to write to.

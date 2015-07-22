@@ -67,7 +67,7 @@ public class QuantifiedConstraintInvocation extends FirstOrderConstraint
   public void setQuantificationVariables(Vector o) {
     if (replacer == null) {
       System.err.println(
-          "LBJ ERROR: Attempting to set quantification variable with no "
+          "LBJava ERROR: Attempting to set quantification variable with no "
           + "variable setter implementation provided.");
       System.exit(1);
     }

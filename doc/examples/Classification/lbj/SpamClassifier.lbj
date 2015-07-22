@@ -1,0 +1,36 @@
+package edu.illinois.cs.cogcomp.tutorial;
+
+import java.util.List;
+
+/** Simply produces "bag of words" features. */
+discrete% WordFeatures(Document d) <- {
+    List words = d.getWords();
+    for (int i = 0; i < words.size(); i++)
+	sense words.get(i);
+}
+
+discrete% BigramFeatures(Document d) <- {
+    List words = d.getWords();
+    for (int i = 0; i < words.size() - 1; i++)
+        sense words.get(i)+"-"+words.get(i+1);
+}
+
+discrete{"spam", "ham"} SpamLabel(Document d) <- { return d.getLabel(); }
+
+/** A learned text classifier; its definition comes from data. */
+discrete SpamClassifier(Document d) <-
+learn SpamLabel
+  using WordFeatures, BigramFeatures
+  from new DocumentReader("data/spam/train")
+  50 rounds
+
+  with SparseAveragedPerceptron {
+    learningRate = 0.1 ;
+    thickness = 3.5;
+  }
+
+  testFrom new DocumentReader("data/spam/test")
+ 
+  progressOutput 2000
+end
+

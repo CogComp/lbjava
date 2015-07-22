@@ -6,7 +6,7 @@ import edu.illinois.cs.cogcomp.lbjava.Pass;
 
 
 /**
-  * This class represents the atom of the LBJ constraint expression: the
+  * This class represents the atom of the LBJava constraint expression: the
   * (in)equality comparison.  The application of a learning classifier to an
   * example object is here compared to either another learning classifier
   * application or to an arbitrary Java expression evaluating to a
@@ -129,7 +129,7 @@ public class ConstraintEqualityExpression extends ConstraintExpression
 
   /**
     * Writes a string representation of this <code>ASTNode</code> to the
-    * specified buffer.  The representation written is parsable by the LBJ2
+    * specified buffer.  The representation written is parsable by the LBJava
     * compiler, but not very readable.
     *
     * @param buffer The buffer to write to.
