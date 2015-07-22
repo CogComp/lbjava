@@ -185,7 +185,7 @@ public class SparseNetworkLearner extends Learner
     * @param l  A labeling classifier.
    **/
   public void setLabeler(Classifier l) {
-    if (getClass().getName().indexOf("SparseNetworkLearner") != -1
+    if (getClass().getName().contains("SparseNetworkLearner")
         && !l.getOutputType().equals("discrete")) {
       System.err.println(
           "LBJ WARNING: SparseNetworkLearner will only work with a "
@@ -211,6 +211,16 @@ public class SparseNetworkLearner extends Learner
 
     for (int i = 0; i < N; ++i)
       ((LinearThresholdUnit) network.get(i)).setExtractor(e);
+  }
+
+  /**
+   * Create a {@link LinearThresholdUnit} and add it to the network
+   * @param label The label associated with the LTU
+   */
+  public void setNetworkLabel(int label) {
+    LinearThresholdUnit ltu = (LinearThresholdUnit) baseLTU.clone();
+    ltu.initialize(numExamples, numFeatures);
+    network.set(label, ltu);
   }
 
 
@@ -346,7 +356,7 @@ public class SparseNetworkLearner extends Learner
           int key = labelLexicon.lookup(f);
           LinearThresholdUnit ltu = (LinearThresholdUnit) network.get(key);
           if (ltu != null)
-            result.put(label.toString(),
+            result.put(label,
                        ltu.score(exampleFeatures, exampleValues)
                        - ltu.getThreshold());
         }
@@ -396,7 +406,7 @@ public class SparseNetworkLearner extends Learner
         if (ltu == null || !labelLexicon.lookupKey(i).valueEquals(label))
           continue;
         double score = ltu.score(exampleFeatures, exampleValues);
-        result.put(label.toString(), score);
+        result.put(label, score);
         break;
       }
     }
