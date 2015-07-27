@@ -16,14 +16,14 @@ public interface Parser
     *
     * @return The next object parsed from the input data.
    **/
-  public Object next();
+  Object next();
 
 
   /** Sets this parser back to the beginning of the raw data. */
-  public void reset();
+  void reset();
 
 
   /** Frees any resources this parser may be holding. */
-  public void close();
+  void close();
 }
 
