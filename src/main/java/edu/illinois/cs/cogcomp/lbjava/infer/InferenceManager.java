@@ -39,6 +39,16 @@ public class InferenceManager
     cache.put(i.getClass().getName(), i);
   }
 
+  /**
+    * Adds the given <code>Inference</code> object to the cache, indexed by an
+    * arbitrary name (NB: Don't use unless you know what you're doing).
+    *
+    * @param name The (arbitrary) name of the inference object.
+    * @param i    The inference object.
+   **/
+  public static void put(String name, Inference i) {
+    cache.put(name, i);
+  }
 
   /**
     * Retrieves the <code>Inference</code> object whose fully qualified name

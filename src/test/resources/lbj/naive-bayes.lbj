@@ -4,6 +4,8 @@ import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
 
+import edu.illinois.cs.cogcomp.lbjava.VectorParser;
+
 discrete{false, true} Label(Vector v) <- { return ((Double) v.get(0)).doubleValue() > 0.5; }
 
 discrete% Features(Vector v) <-

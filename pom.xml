@@ -5,13 +5,14 @@
 	<groupId>edu.illinois.cs.cogcomp</groupId>
 	<name>Learning Based Java</name>
 	<url>http://cogcomp.cs.illinois.edu/page/software_view/LBJ</url>
-	<version>1.1.0</version>
+	<version>1.1.1</version>
 
 	<description>Learning Based Java</description>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
+
 	<repositories>
 		<repository>
 			<id>CogcompSoftware</id>
@@ -19,6 +20,7 @@
 			<url>http://cogcomp.cs.illinois.edu/m2repo/</url>
 		</repository>
 	</repositories>
+
 	<dependencies>
 		<dependency>
 			<groupId>gurobi</groupId>
@@ -43,13 +45,30 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
+    <reporting>
+        <excludeDefaults>true</excludeDefaults>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.10.3</version>
+            </plugin>
+        </plugins>
+    </reporting>
+
 	<distributionManagement>
 		<repository>
 			<id>CogcompSoftware</id>
 			<name>CogcompSoftware</name>
 			<url>scp://bilbo.cs.illinois.edu:/mounts/bilbo/disks/0/www/cogcomp/html/m2repo</url>
 		</repository>
+        <site>
+            <id>CogcompSoftwareDoc</id>
+            <url>scp://bilbo.cs.illinois.edu:/mounts/bilbo/disks/0/www/cogcomp/html/software/doc/${project.artifactId}</url>
+        </site>
 	</distributionManagement>
+
 	<build>
 		<extensions>
 			<extension>
@@ -163,64 +182,5 @@
 				</executions>
 			</plugin>
 		</plugins>
-		<pluginManagement>
-			<plugins>
-				<!-- Using this to bypass a known 'feature' of m2e that disables execution 
-					of random plugins during the lifecycle of the Eclipse project. See: http://wiki.eclipse.org/M2E_plugin_execution_not_covered 
-					This plugin's configuration is used to store Eclipse m2e settings only. It 
-					has no influence on the Maven build itself. -->
-				<plugin>
-					<groupId>org.eclipse.m2e</groupId>
-					<artifactId>lifecycle-mapping</artifactId>
-					<version>1.0.0</version>
-					<configuration>
-						<lifecycleMappingMetadata>
-							<pluginExecutions>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>net.sourceforge.maven-jlex</groupId>
-										<artifactId>maven-jlex-plugin</artifactId>
-										<versionRange>[1.0,)</versionRange>
-										<goals>
-											<goal>generate</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<execute />
-									</action>
-								</pluginExecution>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>org.codehaus.mojo</groupId>
-										<artifactId>exec-maven-plugin</artifactId>
-										<versionRange>[1.3,)</versionRange>
-										<goals>
-											<goal>exec</goal>
-											<goal>java</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<execute />
-									</action>
-								</pluginExecution>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>org.apache.maven.plugins</groupId>
-										<artifactId>maven-dependency-plugin</artifactId>
-										<versionRange>[2.8,)</versionRange>
-										<goals>
-											<goal>copy-dependencies</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<ignore />
-									</action>
-								</pluginExecution>
-							</pluginExecutions>
-						</lifecycleMappingMetadata>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
 	</build>
 </project>
