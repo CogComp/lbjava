@@ -1,4 +1,7 @@
-package ilp;
+package edu.illinois.cs.cogcomp.lbjava.examples.setCover;
+
+import edu.illinois.cs.cogcomp.lbjava.examples.setCover.City;
+import edu.illinois.cs.cogcomp.lbjava.examples.setCover.Neighborhood;
 
 constraint noEmptyNeighborhoods(City c) {
   forall (Neighborhood n in c.getNeighborhoods())

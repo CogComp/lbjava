@@ -46,8 +46,9 @@
                 <version>2.1</version>
                 <configuration>
                     <lbjavaInputFileList>
-                        <param>src/main/lbj/entityRelations.lbj</param>
-                        <param>src/main/lbj/setCover.lbj</param>
+                        <param>src/main/lbj/EntityRelations.lbj</param>
+                        <param>src/main/lbj/SetCover.lbj</param>
+                        <param>src/main/lbj/SpamClassifier.lbj</param>
                     </lbjavaInputFileList>
                 </configuration>
             </plugin>

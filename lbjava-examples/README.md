@@ -15,7 +15,7 @@ To generate outputs for lbj run:
 mvn lbj:generate
 ```
 
-and ten you can compile the code: 
+and then you can compile the code: 
 ```
 mvn compile
 ``
