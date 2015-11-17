@@ -46,7 +46,7 @@
                 <version>2.1</version>
                 <configuration>
                     <lbjavaInputFileList>
-                        <param>src/main/lbj/EntityRelation.lbj</param>
+                        <param>src/main/lbj/BadgesClassifier.lbj</param>
                     </lbjavaInputFileList>
                 </configuration>
             </plugin>
