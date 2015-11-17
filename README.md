@@ -8,3 +8,7 @@
 - [LBJava examples](lbjava-examples/README.md) 
 - [LBJava maven plugin](lbjava-mvn-plugin/README.md)
 
+
+## EXTERNAL LINKS 
+[Here](http://cogcomp.cs.illinois.edu/page/software_view/LBJ) is the homepage of LBJ.  
+If you have any questions visit [here](http://cogcomp.cs.illinois.edu/).  
