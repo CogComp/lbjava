@@ -8,7 +8,7 @@ the LBJava programming philosophy.  For those experienced with ML and programmin
 with learning algorithms, the biggest differences from a more typical ML
 programming philosophy are:
 
- - The word ``classifier'' does not imply learning.  Na\"ive Bayes, SVM,
+ - The word "classifier" does not imply learning.  Naive Bayes, SVM,
 Perceptron, etc. are *not* classifiers; they are learning algorithms.
 
  - Classifiers (learned and otherwise) should work directly with (internal
@@ -36,13 +36,13 @@ se.)  In the case of real features, the name of the feature alone identifies
 the corresponding parameter.  In the case of discrete features, the
 corresponding parameter is identified by the name and value
 together. (Note again that a decision tree learning algorithm would
-not need to ``split up'' the values of a discrete feature so that they
+not need to "split up'' the values of a discrete feature so that they
 represent separate features in this way.  It would simply use a single
 branching point with many branches.  Anyway, it's a mute point, since LBJava does
 not currenlty provide any decision tree learning algorithm implementations.)
 The only exception to this rule is when a discrete feature is known to allow
 only two different values.  Such a feature is equivalent to a real feature
-that can take only the values $0$ and $1$; in particular, its name alone
+that can take only the values `0` and `1`; in particular, its name alone
 identifies the corresponding learned parameter.
 
 ### Classifier
