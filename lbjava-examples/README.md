@@ -1,24 +1,10 @@
-This a sample classification project based on Learning Based Java (LBJava). 
-Author: Hao Wu, Parisa Kordjamshidi, Daniel Khashabi 
+# LBJava examples 
 
+Here are a couple of sample classification projects which are using LBJava.
 
-
-#### HOW TO RUN #### 
-
-LINUX
-====== 
-run the following script for separate classifiers:
-./scripts/compileLBJ lbj/LALModel.lbj
-This lbj file contains a set of independent classifiers for name-entity types and relations.
-
-To get a joint classifier run the following command: 
-./scripts/compileLBJ lbj/ER_JointAll.lbj
-This file contains a joint inference model, for applying constraints between labels of
-entity-classifiers and relation classifiers.
-
-Note: if you want to run training again, first remove the content under lbjsrc directory.
-rm -r lbjsrc/*
-
-#### EXTERNAL LINKS 
-The homepage of LBJ:  http://cogcomp.cs.illinois.edu/page/software_view/LBJ 
-If you have any questions visit http://cogcomp.cs.illinois.edu/ 
+1. [Entity Relations Classification](src/main/java/edu/illinois/cs/cogcomp/lbjava/examples/entityRelation/README.md)
+2. [Set Cover Problem](src/main/java/edu/illinois/cs/cogcomp/lbjava/examples/setCover/README.md)
+3. [Badges Classification](src/main/java/edu/illinois/cs/cogcomp/lbjava/examples/badges/README.md)
+4. [Newsgroup Classification](src/main/java/edu/illinois/cs/cogcomp/lbjava/examples/newsgroup/README.md)
+5. [Spam Classification](src/main/java/edu/illinois/cs/cogcomp/lbjava/examples/spam/README.md)
+6. [Sentiment Classification](src/main/java/edu/illinois/cs/cogcomp/lbjava/examples/sentiment/README.md)
