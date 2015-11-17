@@ -48,8 +48,8 @@
                     <lbjavaInputFileList>
                         <param>src/main/lbj/EntityRelations.lbj</param>
                         <param>src/main/lbj/SetCover.lbj</param>
-                        <param>src/main/lbj/SpamClassifier.lbj</param>
                         <param>src/main/lbj/BadgeClassifier.lbj</param>
+                        <param>src/main/lbj/SpamClassifier.lbj</param>
                         <param>src/main/lbj/NewsGroupClassifier.lbj</param>
                         <param>src/main/lbj/SentimentClassifier.lbj</param>
                     </lbjavaInputFileList>

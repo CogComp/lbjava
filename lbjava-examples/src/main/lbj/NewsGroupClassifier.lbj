@@ -1,4 +1,7 @@
-package edu.illinois.cs.cogcomp.tutorial;
+package edu.illinois.cs.cogcomp.lbjava.examples.newsgroup;
+
+import edu.illinois.cs.cogcomp.lbjava.examples.Document;
+import edu.illinois.cs.cogcomp.lbjava.examples.DocumentReader;
 
 import java.util.List;
 
@@ -7,6 +10,12 @@ discrete% WordFeatures(Document d) <- {
     List words = d.getWords();
     for (int i = 0; i < words.size(); i++)
 	sense words.get(i);
+}
+
+discrete% BigramFeatures(Document d) <- {
+    List words = d.getWords();
+    for (int i = 0; i < words.size() - 1; i++)
+        sense words.get(i)+"-"+words.get(i+1);
 }
 
 discrete NewsGroupLabel(Document d) <- { return d.getLabel(); }

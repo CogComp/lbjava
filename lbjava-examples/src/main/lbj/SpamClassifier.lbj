@@ -1,8 +1,7 @@
 package edu.illinois.cs.cogcomp.lbjava.examples.spam;
 
-package edu.illinois.cs.cogcomp.lbjava.examples.Document;
-package edu.illinois.cs.cogcomp.lbjava.examples.DocumentReader;
-
+import edu.illinois.cs.cogcomp.lbjava.examples.Document;
+import edu.illinois.cs.cogcomp.lbjava.examples.DocumentReader;
 
 import java.util.List;
 
