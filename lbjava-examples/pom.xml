@@ -48,6 +48,8 @@
                     <lbjavaInputFileList>
                         <param>src/main/lbj/BadgesClassifier.lbj</param>
                         <param>src/main/lbj/SpamClassifier.lbj</param>
+                        <param>src/main/lbj/SentimentClassifier.lbj</param>
+                        <param>src/main/lbj/NewsGroupClassifier.lbj</param>
                     </lbjavaInputFileList>
                 </configuration>
             </plugin>
