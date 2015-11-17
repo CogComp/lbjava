@@ -47,6 +47,7 @@
                 <configuration>
                     <lbjavaInputFileList>
                         <param>src/main/lbj/BadgesClassifier.lbj</param>
+                        <param>src/main/lbj/SpamClassifier.lbj</param>
                     </lbjavaInputFileList>
                 </configuration>
             </plugin>
