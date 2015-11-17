@@ -131,25 +131,25 @@ If you want to include the plugin execution during the mvn compile phase you can
 the plugin definition as follows:
 
 ```xml
-    <plugin>
-        <groupId>edu.illinois.cs.cogcomp</groupId>
-        <artifactId>lbjava-maven-plugin</artifactId>
-        <version>1.2</version>
-        <configuration>
-            <lbjavaInputFileList>
-                <param>lbjava/MyClassifier.lbj</param>
-            </lbjavaInputFileList>
-        </configuration>
-        <executions>
-            <execution>
-                <phase>compile</phase>
-                <goals>
-                    <goal>clean</goal>
-                    <goal>compile</goal>
-                </goals>
-            </execution>
-        </executions>
-    </plugin>
+<plugin>
+    <groupId>edu.illinois.cs.cogcomp</groupId>
+    <artifactId>lbjava-maven-plugin</artifactId>
+    <version>1.2</version>
+    <configuration>
+        <lbjavaInputFileList>
+            <param>lbjava/MyClassifier.lbj</param>
+        </lbjavaInputFileList>
+    </configuration>
+    <executions>
+        <execution>
+            <phase>compile</phase>
+            <goals>
+                <goal>clean</goal>
+                <goal>compile</goal>
+            </goals>
+        </execution>
+    </executions>
+</plugin>
 ```
 
 ### <a name="project-setup"></a>Project setup
@@ -204,38 +204,40 @@ This should work in eclipse with no extra hassle.
 In the latest incarnation of m2e (Maven for Eclipse) you need to explicitly define
 that the plugin should be allowed to execute. To do this add the following:
 
-    <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.eclipse.m2e</groupId>
-                    <artifactId>lifecycle-mapping</artifactId>
-                    <version>1.0.0</version>
-                    <configuration>
-                        <lifecycleMappingMetadata>
-                            <pluginExecutions>
-                                <pluginExecution>
-                                    <pluginExecutionFilter>
-                                        <groupId>edu.illinois.cs.cogcomp</groupId>
-                                        <artifactId>lbjava-maven-plugin</artifactId>
-                                        <versionRange>[2.0,)</versionRange>
-                                        <goals>
-                                            <goal>clean</goal>
-                                            <goal>compile</goal>
-                                            <goal>generate</goal>
-                                        </goals>
-                                    </pluginExecutionFilter>
-                                    <action>
-                                        <execute />
-                                    </action>
-                                </pluginExecution>
-                            </pluginExecutions>
-                        </lifecycleMappingMetadata>
-                    </configuration>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-    </build>
+```xml
+<build>
+    <pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.eclipse.m2e</groupId>
+                <artifactId>lifecycle-mapping</artifactId>
+                <version>1.0.0</version>
+                <configuration>
+                    <lifecycleMappingMetadata>
+                        <pluginExecutions>
+                            <pluginExecution>
+                                <pluginExecutionFilter>
+                                    <groupId>edu.illinois.cs.cogcomp</groupId>
+                                    <artifactId>lbjava-maven-plugin</artifactId>
+                                    <versionRange>[2.0,)</versionRange>
+                                    <goals>
+                                        <goal>clean</goal>
+                                        <goal>compile</goal>
+                                        <goal>generate</goal>
+                                    </goals>
+                                </pluginExecutionFilter>
+                                <action>
+                                    <execute />
+                                </action>
+                            </pluginExecution>
+                        </pluginExecutions>
+                    </lifecycleMappingMetadata>
+                </configuration>
+            </plugin>
+        </plugins>
+    </pluginManagement>
+</build>
+```
     
 
 ## Credits 

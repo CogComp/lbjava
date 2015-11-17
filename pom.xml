@@ -12,6 +12,7 @@
     <modules>
         <module>lbjava</module>
         <module>lbjava-examples</module>
+        <module>lbjava-mvn-plugin</module>
     </modules>
 
     <properties>
