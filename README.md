@@ -4,7 +4,7 @@
 
 [![Build Status](http://128.174.241.91:8080/job/lbjava/badge/icon)](http://128.174.241.91:8080/job/lbjava/)
 
-- [Learning Based Java (LBJava)](lbjava/README.md) 
+- [LBJava core](lbjava/README.md) 
 - [LBJava examples](lbjava-examples/README.md) 
 - [LBJava maven plugin](lbjava-mvn-plugin/README.md)
 

@@ -18,7 +18,7 @@ mvn lbj:generate
 and then you can compile the code: 
 ```
 mvn compile
-``
+```
 
 In order to remove the output of lbjava from previous run: 
 ```
