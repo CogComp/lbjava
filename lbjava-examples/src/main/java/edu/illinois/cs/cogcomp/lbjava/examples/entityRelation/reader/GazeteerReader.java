@@ -1,8 +1,6 @@
-package edu.illinois.cs.cogcomp.tutorial.reader;
+package edu.illinois.cs.cogcomp.lbjava.examples.entityRelation.reader;
 
-//import edu.illinois.cs.cogcomp.example.er_task.datastruct.ConllRawToken;
-
-import edu.illinois.cs.cogcomp.tutorial.datastruct.ConllRawToken;
+import edu.illinois.cs.cogcomp.lbjava.examples.entityRelation.datastruct.ConllRawToken;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

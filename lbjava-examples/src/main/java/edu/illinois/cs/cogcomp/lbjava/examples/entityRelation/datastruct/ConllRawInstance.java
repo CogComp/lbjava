@@ -1,4 +1,4 @@
-package edu.illinois.cs.cogcomp.tutorial.datastruct;
+package edu.illinois.cs.cogcomp.lbjava.examples.entityRelation.datastruct;
 
 public class ConllRawInstance {
 	public int sentId,wordId;

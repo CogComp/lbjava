@@ -1,15 +1,14 @@
-package edu.illinois.cs.cogcomp.tutorial;
+package edu.illinois.cs.cogcomp.lbjava.examples.entityRelation;
 
 import edu.illinois.cs.cogcomp.core.io.LineIO;
 import edu.illinois.cs.cogcomp.lbjava.parse.Parser;
-import edu.illinois.cs.cogcomp.tutorial.datastruct.ConllRawSentence;
-import edu.illinois.cs.cogcomp.tutorial.datastruct.ConllRawToken;
-import edu.illinois.cs.cogcomp.tutorial.datastruct.ConllRelation;
+import edu.illinois.cs.cogcomp.lbjava.examples.entityRelation.datastruct.ConllRawSentence;
+import edu.illinois.cs.cogcomp.lbjava.examples.entityRelation.datastruct.ConllRawToken;
+import edu.illinois.cs.cogcomp.lbjava.examples.entityRelation.datastruct.ConllRelation;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
-import edu.illinois.cs.cogcomp.lbjava.infer.GurobiHook;
 
 /**
  * Created by haowu on 2/9/15.

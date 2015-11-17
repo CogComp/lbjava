@@ -1,4 +1,4 @@
-package edu.illinois.cs.cogcomp.tutorial.datastruct;
+package edu.illinois.cs.cogcomp.lbjava.examples.entityRelation.datastruct;
 
 public class ConllRelation {
 	public int wordId1, wordId2;

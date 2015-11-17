@@ -1,4 +1,4 @@
-package edu.illinois.cs.cogcomp.tutorial.datastruct;
+package edu.illinois.cs.cogcomp.lbjava.examples.entityRelation.datastruct;
 
 import java.util.ArrayList;
 import java.util.Arrays;

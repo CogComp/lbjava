@@ -1,10 +1,10 @@
-package edu.illinois.cs.cogcomp.tutorial;
+package edu.illinois.cs.cogcomp.lbjava.examples.entityRelation;
 
 import java.util.List;
 import edu.illinois.cs.cogcomp.core.io.LineIO;
-import edu.illinois.cs.cogcomp.tutorial.datastruct.ConllRawToken;
-import edu.illinois.cs.cogcomp.tutorial.datastruct.ConllRelation;
-import edu.illinois.cs.cogcomp.tutorial.Conll04_RelationReaderNew;
+import edu.illinois.cs.cogcomp.lbjava.examples.entityRelation.datastruct.ConllRawToken;
+import edu.illinois.cs.cogcomp.lbjava.examples.entityRelation.datastruct.ConllRelation;
+import edu.illinois.cs.cogcomp.lbjava.examples.entityRelation.Conll04_RelationReaderNew;
 
 discrete% EntityFeatures(ConllRawToken t) <- {
     sense t.POS;

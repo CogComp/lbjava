@@ -1,12 +1,9 @@
-package edu.illinois.cs.cogcomp.tutorial.features;
+package edu.illinois.cs.cogcomp.lbjava.examples.entityRelation.features;
 
-//import edu.illinois.cs.cogcomp.example.er_task.datastruct.ConllRawSentence;
-//import edu.illinois.cs.cogcomp.example.er_task.datastruct.ConllRawToken;
-//import edu.illinois.cs.cogcomp.example.er_task.datastruct.ConllRelation;
-import edu.illinois.cs.cogcomp.tutorial.datastruct.ConllRawSentence;
-import edu.illinois.cs.cogcomp.tutorial.datastruct.ConllRawToken;
-import edu.illinois.cs.cogcomp.tutorial.datastruct.ConllRelation;
-import edu.illinois.cs.cogcomp.tutorial.reader.GazeteerReader;
+import edu.illinois.cs.cogcomp.lbjava.examples.entityRelation.datastruct.ConllRawSentence;
+import edu.illinois.cs.cogcomp.lbjava.examples.entityRelation.datastruct.ConllRawToken;
+import edu.illinois.cs.cogcomp.lbjava.examples.entityRelation.datastruct.ConllRelation;
+import edu.illinois.cs.cogcomp.lbjava.examples.entityRelation.reader.GazeteerReader;
 
 import java.util.HashMap;
 import java.util.Vector;
