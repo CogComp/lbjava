@@ -46,12 +46,12 @@
                 <version>2.1</version>
                 <configuration>
                     <lbjavaInputFileList>
-                        <param>src/main/lbj/EntityRelations.lbj</param>
-                        <param>src/main/lbj/SetCover.lbj</param>
-                        <param>src/main/lbj/BadgeClassifier.lbj</param>
-                        <param>src/main/lbj/SpamClassifier.lbj</param>
-                        <param>src/main/lbj/NewsGroupClassifier.lbj</param>
-                        <param>src/main/lbj/SentimentClassifier.lbj</param>
+                        <param>${project.basedir}/src/main/lbj/EntityRelations.lbj</param>
+                        <param>${project.basedir}/src/main/lbj/SetCover.lbj</param>
+                        <param>${project.basedir}/src/main/lbj/BadgeClassifier.lbj</param>
+                        <param>${project.basedir}/src/main/lbj/SpamClassifier.lbj</param>
+                        <param>${project.basedir}/src/main/lbj/NewsGroupClassifier.lbj</param>
+                        <param>${project.basedir}/src/main/lbj/SentimentClassifier.lbj</param>
                     </lbjavaInputFileList>
                 </configuration>
             </plugin>
