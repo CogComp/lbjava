@@ -1,11 +1,4 @@
 # lbjava-maven-plugin
-Stephen Mayhew
- - swm.mayhew@gmail.com
- - Nov 22, 2013 (v1.0)
-
-Christos Christodoulopoulos
- - christod@illinois.edu
- - Mar 20, 2015 (v2.0)
 
 ## Contents:
    - [Overview](#overview)
@@ -163,13 +156,12 @@ the plugin definition as follows:
     </plugin>
 
 
-
 ### <a name="project-setup"></a>Project setup
 
 This plugin assumes you have set up your project in the normal maven style. That is, something like
 the following:
 
-<pre>
+```
 .
 ├── pom.xml
 ├── README.txt
@@ -192,14 +184,15 @@ the following:
                 └── cs
                     └── cogcomp
                         └── [generated class files]
-</pre>
-
+```
 
 ### <a name="how"></a>How it works
 
 The way it works is simple: under the hood, the plugin calls 
 
-    java ... edu.illinois.cs.cogcomp.lbjava.Main ...
+```
+java ... edu.illinois.cs.cogcomp.lbjava.Main ...
+```
 
 with parameters defined in the pom.xml (see [POM file](#pom) section).
 
@@ -247,3 +240,8 @@ that the plugin should be allowed to execute. To do this add the following:
             </plugins>
         </pluginManagement>
     </build>
+    
+
+## Credits 
+ - [Stephen Mayhew](swm.mayhew@gmail.com): Nov 22, 2013 (v1.0)  
+ - [Christos Christodoulopoulos](christod@illinois.edu): Mar 20, 2015 (v2.0)
