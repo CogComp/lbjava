@@ -1,6 +1,5 @@
 # Learning Based Java (LBJava)
 
-************************************************************  
 This project was started by Nicholas Rizzolo (rizzolo@gmail.com).
 It was ported to Maven as LBJava (v.1.0) by Christos Christodoulopoulos (christod@illinois.edu)
 
@@ -13,7 +12,6 @@ page for this software and press 'Download'. The next screen displays the licens
 
 * Part 1: Description
 * Part 2: How to compile the software.
-
 
 ### Part 1: Description
 
