@@ -13,14 +13,9 @@
 ### <a name="overview"></a>Overview
 
 The purpose of this project is to make it easier to work with LBJava and Maven. This is a plugin written for Maven.
-
 To use this, you need to modify your pom.xml file to depend on this plugin (see [POM file](#pom) section).
-
 You may also need to modify your project layout to be Maven compatible (see [Project setup](#project-setup)).
-
 Instructions for usage are in the [Usage](#usage) section.
-
-
 
 ### <a name="pom"></a>POM file
 
@@ -135,6 +130,7 @@ or `lbjava:compile-only`) you need to run `lbjava:clean` before compiling again.
 If you want to include the plugin execution during the mvn compile phase you can change 
 the plugin definition as follows:
 
+```xml
     <plugin>
         <groupId>edu.illinois.cs.cogcomp</groupId>
         <artifactId>lbjava-maven-plugin</artifactId>
@@ -154,7 +150,7 @@ the plugin definition as follows:
             </execution>
         </executions>
     </plugin>
-
+```
 
 ### <a name="project-setup"></a>Project setup
 
