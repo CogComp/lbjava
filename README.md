@@ -8,4 +8,3 @@
 - [LBJava examples](lbjava-examples/README.md) 
 - [LBJava maven plugin](lbjava-mvn-plugin/README.md)
 
-
