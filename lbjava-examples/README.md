@@ -24,4 +24,3 @@ In order to remove the output of lbjava from previous run:
 ```
 mvn lbjava:clean
 ```
-

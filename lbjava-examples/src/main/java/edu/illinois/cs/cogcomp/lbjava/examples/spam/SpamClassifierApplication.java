@@ -1,5 +1,7 @@
 package edu.illinois.cs.cogcomp.lbjava.examples.spam;
 
+import edu.illinois.cs.cogcomp.lbjava.examples.Document;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
