@@ -82,7 +82,7 @@ expects as input.
   classifiers. It’s convenient, for instance, when testing the performance of a learned classifier
   against an oracle classifier.
   
-  `double test(Classifier, Classifier, Object[])`:
+ - `double test(Classifier, Classifier, Object[])`:
   This static method returns the fraction of objects in the third argument that produced the
   same classifications from the two argument `Classifiers`.
   
