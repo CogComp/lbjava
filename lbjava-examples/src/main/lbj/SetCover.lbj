@@ -2,6 +2,8 @@ package edu.illinois.cs.cogcomp.lbjava.examples.setCover;
 
 import edu.illinois.cs.cogcomp.lbjava.examples.setCover.City;
 import edu.illinois.cs.cogcomp.lbjava.examples.setCover.Neighborhood;
+import edu.illinois.cs.cogcomp.lbjava.examples.setCover.ContainsStation;
+
 import edu.illinois.cs.cogcomp.lbjava.infer.GurobiHook;
 
 constraint noEmptyNeighborhoods(City c) {

@@ -32,8 +32,8 @@
         </dependency>
         <dependency>
             <groupId>edu.illinois.cs.cogcomp</groupId>
-            <artifactId>coreUtilities</artifactId>
-            <version>0.2.8</version>
+            <artifactId>illinois-core-utilities</artifactId>
+            <version>3.0.2</version>
         </dependency>
     </dependencies>
 
@@ -42,16 +42,29 @@
             <plugin>
                 <groupId>edu.illinois.cs.cogcomp</groupId>
                 <artifactId>lbjava-maven-plugin</artifactId>
-                <version>2.1</version>
+                <version>1.2.0</version>
                 <configuration>
                     <lbjavaInputFileList>
-                        <param>src/main/lbj/BadgesClassifier.lbj</param>
-                        <param>src/main/lbj/SpamClassifier.lbj</param>
-                        <param>src/main/lbj/SentimentClassifier.lbj</param>
-                        <param>src/main/lbj/NewsGroupClassifier.lbj</param>
-                        <param>src/main/lbj/SetCover.lbj</param>
+                        <param>${project.basedir}/src/main/lbj/BadgesClassifier.lbj</param>
+                        <param>${project.basedir}/src/main/lbj/SpamClassifier.lbj</param>
+                        <param>${project.basedir}/src/main/lbj/SentimentClassifier.lbj</param>
+                        <param>${project.basedir}/src/main/lbj/NewsGroupClassifier.lbj</param>
+                        <param>${project.basedir}/src/main/lbj/SetCover.lbj</param>
+                        <param>${project.basedir}/src/main/lbj/EntityRelation.lbj</param>
                     </lbjavaInputFileList>
+                    <gspFlag>${project.basedir}/src/main/java</gspFlag>
+                    <dFlag>${project.basedir}/target/classes</dFlag>
                 </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>clean</goal>
+                            <goal>generate</goal>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
