@@ -112,7 +112,7 @@ java LBJ2.Main [options] <source file>
 ```
 where `[options]` is zero or more of the following:
 
-| `Option`        | Description | 
+| `options`        | Description | 
 | :------------: |:-------------| 
 | `-c`  | Compile only: This option tells LBJ2 to translate the given source to Java, but not to compile the generated Java sources or do any training. |
 | `-d <dir>` |  `Any class files generated during compilation will be written in the specified directory, just like javac’s -d command line parameter.| 
