@@ -109,6 +109,7 @@ expects as input.
   The double value of a feature returned by a `real[]` classifier as well as its integer index
   into the array are stored in objects of this class.
   
+
 ### 5.1.3 `LBJ2.classify.FeatureVector`
 `FeatureVector` is a linked-list-style container which stores features that function as labels separately
 from other features. It contains methods for iterating through the features and labels and
