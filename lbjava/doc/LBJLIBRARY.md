@@ -1,4 +1,4 @@
-# The LBJ Library 
+# 5. The LBJ Library 
 
 The LBJ programming framework is supported by a library of interfaces, learning algorithms,
 and implementations of the building blocks described in Chapter 4. This chapter gives a general
@@ -13,7 +13,7 @@ language processing internal representations and parsing routines. In the future
 expand this library, adding more varieties of learners and domain specific parsers and internal
 representations.
 
-## `LBJ2.classify`
+## 5.1 `LBJ2.classify`
 
 The most important class in LBJ’s library is `LBJ2.classify.Classifier`. This abstract class
 is the interface through which the application accesses the classifiers defined in the LBJ source
@@ -143,7 +143,7 @@ This simple class derived from Classifier is used to convert a multi-value discr
 into a Boolean classifier that returns true if and only if the multi-valued classifier evaluated
 to a particular value. ValueComparer is used internally by SparseNetworkLearner (see Section
 5.2.6).
-### 5.1.7 `Vector Returners`
+### 5.1.7 Vector Returners
 The classes LBJ2.classify.FeatureVectorReturner and
 LBJ2.classify.LabelVectorReturner are used internally by the LBJ compiler to help implement
 the training procedure when the programmer specifies multiple training rounds (see Section
