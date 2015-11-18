@@ -1,4 +1,4 @@
-# Introduction
+#1 Introduction
 
 Learning Based Java is a modeling language for the rapid development of
 software systems with one or more learned functions, designed for use with the
@@ -8,7 +8,7 @@ programmer's application.  With LBJava, the details of feature extraction,
 learning, model evaluation, and inference are all abstracted away from the
 programmer, leaving him to reason more directly about his application.
 
-## Motivation
+##1.1 Motivation
 
 Many software systems are in need of functions that are simple to describe but
 that no one knows how to implement.  Recently, more and more designers of such
@@ -32,7 +32,7 @@ applied in the wild, the independent predictions made by each function are
 reconciled according to user specified constraints.  This approach has been
 applied successfully to complicated domains such as Semantic Role Labeling.
 
-## LBJava
+##1.2 LBJava
 
 Learning Based Java (LBJava) is a modeling language that expedites the
 development of learning based programs, designed for use with the JavaTM
