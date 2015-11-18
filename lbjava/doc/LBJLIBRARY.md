@@ -492,3 +492,72 @@ to two other `LinkedChildren`, the “previous” one and the “next” one. It
 to its parent, which is a `LinkedVector`. Constructors that set up all these links are also provided,
 simplifying the implementation of the parser.
 
+### 5.4.6 `LBJ2.parse.LinkedVector`
+A `LinkedVector` contains any number of `LinkedChildren` and provides random access to them
+in addition to the serial access provided by their links. It also provides methods for insertion
+and removal of new children. A `LinkedVector` is itself also a `LinkedChild`, so that hierarchies
+are easy to construct when sub-classing these two classes.
+
+## 5.5 `LBJ2.nlp`
+The programmer of Natural Language Processing (NLP) applications may find the internal representations
+and parsing algorithms implemented in this package useful. There are representations
+of words, sentences, and documents, as well as parsers of some common file formats and algorithms
+for word and sentence segmentation.
+
+### 5.5.1 Internal Representations
+These classes may be used to represent the elements of a natural language document.
+
+ - `LBJ2.nlp.Word`:
+ This simple representation of a word extends the `LinkedChild` class (see Section 5.4.5) and
+ has space for its spelling and part of speech tag.
+ - `LBJ2.nlp.Sentence`:
+ Objects of the `Sentence` class store only the full text of the sentence in a single `String`.
+ However, a method is provided to heuristically split that text into Word objects contained
+ in a `LinkedVector`.
+ - `LBJ2.nlp.NLDocument`:
+ Extended from `LinkedVector`, this class has a constructor that takes the full text of a
+ document as input. Using the methods in `Sentence` and `SentenceSplitter`, it creates a
+ hierarchical representation of a natural language document in which `Words` are contained in
+ `LinkedVectors` representing sentences which are contained in this `LinkedVector`.
+ - `LBJ2.nlp.POS`:
+ This class may be used to represent a part of speech, but it used more frequently to simply
+ retrieve information about the various parts of speech made standard by the Penn Treebank
+ project (Marcus, Santorini, & Marcinkiewicz , 1994).
+
+### 5.5.2 `Parsers`
+The classes listed in this section are all derived from class `LineByLine` (see Section 5.4.2). They
+all contain (at least) a constructor that takes a single `String` representing the name of a file as
+input. The objects they return are retrieved through the overridden `next()` method. 
+(If the constructor taking a `String[]` as an argument is used, newline characters are inserted into the returned
+sentences to indicate transitions from one element of the array to the next.)
+
+ - `LBJ2.nlp.SentenceSplitter`:
+ Use this `Parser` to separate sentences out from plain text. The class provides two constructors,
+ one for splitting sentences out of a plain text file, and the other for splitting sentences
+ out of plain text already stored in memory in a `String[]`. The user can then retrieve
+ `Sentences` one at a time with the `next()` method, or all at once with the `splitAll()`
+ method. The returned `Sentence`s’ start and end fields represent offsets into the text they
+ were extracted from. Every character in between those two offsets inclusive, including extra
+ spaces, newlines, etc., is included in the `Sentence` as it appeared in the paragraph.6
+ - `LBJ2.nlp.WordSplitter`:
+ This parser takes the plain, unannotated `Sentence`s (see Section 5.5.1) returned by another
+ parser (e.g., `SentenceSplitter`) and splits them into `Word` objects. Entire sentences now
+ represented as `LinkedVectors` (see Section 5.4.6) are then returned one at a time by calls
+ to the `next()` method. 
+ - `LBJ2.nlp.ColumnFormat`:
+ This parser returns a `String[]` representing the rows of a file in column format. The input
+ file is assumed to contain fields of non-whitespace characters separated by any amount of
+ whitespace, one line of which is commonly used to represent a word in a corpus. This parser
+ breaks a given line into one `String` per field, omitting all of the whitespace. A common
+ usage of this class will be in extending it to create a new `Parser` that calls `super.next()`
+ and creates a more interesting internal representation with the results.
+ - `LBJ2.nlp.POSBracketToVector`:
+ Use this parser to return `LinkedVector` objects representing sentences given file names of
+ POS bracket form files to parse. These files are expected to have one sentence per line,
+ and the format of each line is as follows:
+```
+ (pos1 spelling1) (pos2 spelling2) ... (posn spellingn)
+```
+ It is also expected that there will be exactly one space between a part of speech and the
+ corresponding spelling and between a closing parenthesis and an opening parenthesis.
+ 
