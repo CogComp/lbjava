@@ -26,13 +26,13 @@ discrete {"Peop","nPeop"} personLabel(ConllRawToken t) <- {
 discrete PersonClassifier(ConllRawToken t) <-
 learn personLabel
     using EntityFeatures
-    from new Conll04_RelationReaderNew("data/conll04_train.corp", "Token")
+    from new Conll04_RelationReaderNew("data/enitityRelations/conll04_train.corp", "Token")
     50 rounds
     with SparsePerceptron {
         learningRate = 0.1 ;
         thickness = 3.5;
     }
-    testFrom new Conll04_RelationReaderNew("data/conll04_test.corp", "Token")
+    testFrom new Conll04_RelationReaderNew("data/enitityRelations/conll04_test.corp", "Token")
     progressOutput 200
 end
 
@@ -47,14 +47,14 @@ discrete {"Loc","nLoc"} locLabel(ConllRawToken t) <- {
 discrete LocClassifier(ConllRawToken t) <-
 learn locLabel
     using EntityFeatures
-    from new Conll04_RelationReaderNew("data/conll04_train.corp", "Token")
+    from new Conll04_RelationReaderNew("data/enitityRelations/conll04_train.corp", "Token")
     50 rounds
     with SparsePerceptron {
         learningRate = 0.1 ;
         thickness = 3.5;
     }
 
-    testFrom new Conll04_RelationReaderNew("data/conll04_test.corp","Token")
+    testFrom new Conll04_RelationReaderNew("data/enitityRelations/conll04_test.corp","Token")
     progressOutput 200
 end
 
@@ -68,14 +68,14 @@ discrete {"Org","nOrg"} orgLabel(ConllRawToken t) <- {
 discrete OrganizationClassifier(ConllRawToken t) <-
 learn orgLabel
     using EntityFeatures
-    from new Conll04_RelationReaderNew("data/conll04_train.corp", "Token")
+    from new Conll04_RelationReaderNew("data/enitityRelations/conll04_train.corp", "Token")
     50 rounds
 
     with SparsePerceptron {
         learningRate = 0.1 ;
         thickness = 3.5;
     }
-    testFrom new Conll04_RelationReaderNew("data/conll04_test.corp", "Token")
+    testFrom new Conll04_RelationReaderNew("data/enitityRelations/conll04_test.corp", "Token")
     progressOutput 200
 end
 
@@ -89,14 +89,14 @@ discrete {"Work_For","nWork_For"} workLabel(ConllRelation t) <- {
 discrete work_forClassifier(ConllRelation t) <- 
 learn workLabel
     using RelationFeatures
-    from new Conll04_RelationReaderNew("data/conll04_train.corp", "Pair")
+    from new Conll04_RelationReaderNew("data/enitityRelations/conll04_train.corp", "Pair")
     50 rounds
 
     with SparsePerceptron {
         learningRate = 0.1 ;
         thickness = 3.5;
     }
-    testFrom new Conll04_RelationReaderNew("data/conll04_test.corp", "Pair")
+    testFrom new Conll04_RelationReaderNew("data/enitityRelations/conll04_test.corp", "Pair")
     progressOutput 200
 end
 
