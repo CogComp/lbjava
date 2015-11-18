@@ -155,7 +155,7 @@ programmers working with large datasets. Both increase the amount of memory that
 willing to utilize while running. The first is `-Xmx<size>` which sets the maximum Java heap size.
 It should be set as high as possible, but not so high that it causes page-faults for the JVM or
 for some other application on the same computer. This value must be a multiple of `1024` greater
-than 2MB and can be specified in kilobytes (`K`, `k`)`, megabytes (`M`, `m`), or gigabytes (`G`, `g`).
+than 2MB and can be specified in kilobytes (`K`, `k`), megabytes (`M`, `m`), or gigabytes (`G`, `g`).
 The second is `-XX:MaxPermSize=<size>` which sets the maximum size of the permanent generation. 
 This is a special area of the heap which stores, among other things, canonical representations
 for the `String`s in a Java application. Since a learned classifier can contain many `String`s, it
