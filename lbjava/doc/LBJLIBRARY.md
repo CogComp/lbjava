@@ -528,8 +528,6 @@ These classes may be used to represent the elements of a natural language docume
 The classes listed in this section are all derived from class `LineByLine` (see Section 5.4.2). They
 all contain (at least) a constructor that takes a single `String` representing the name of a file as
 input. The objects they return are retrieved through the overridden `next()` method. 
-(If the constructor taking a `String[]` as an argument is used, newline characters are inserted into the returned
-sentences to indicate transitions from one element of the array to the next.)
 
  - `LBJ2.nlp.SentenceSplitter`:
  Use this `Parser` to separate sentences out from plain text. The class provides two constructors,
@@ -538,7 +536,9 @@ sentences to indicate transitions from one element of the array to the next.)
  `Sentences` one at a time with the `next()` method, or all at once with the `splitAll()`
  method. The returned `Sentence`s’ start and end fields represent offsets into the text they
  were extracted from. Every character in between those two offsets inclusive, including extra
- spaces, newlines, etc., is included in the `Sentence` as it appeared in the paragraph.6
+ spaces, newlines, etc., is included in the `Sentence` as it appeared in the paragraph.
+(If the constructor taking a `String[]` as an argument is used, newline characters are inserted into the returned
+sentences to indicate transitions from one element of the array to the next.)
  - `LBJ2.nlp.WordSplitter`:
  This parser takes the plain, unannotated `Sentence`s (see Section 5.5.1) returned by another
  parser (e.g., `SentenceSplitter`) and splits them into `Word` objects. Entire sentences now
