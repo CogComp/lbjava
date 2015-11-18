@@ -25,23 +25,9 @@ One other class that may be of broad interest is the `LBJ2.classify.TestDiscrete
 classifier on a labeled test set. The other classes in this package are designed mainly for internal
 use by LBJ’s compiler and can be safely ignored by the casual user. More advanced users who
 writes their own learners or inference algorithms in the application, for instance, will need to
-become familiar with them.
-
-## `LBJ2.classify.Classifier`
-
-The most important class in LBJ’s library is `LBJ2.classify.Classifier`. This abstract class
-is the interface through which the application accesses the classifiers defined in the LBJ source
-file. However, the programmer should, in general, only have need to become familiar with a few
-of the methods defined there.
-
-One other class that may be of broad interest is the `LBJ2.classify.TestDiscrete` class
-(discussed in Section 5.1.8), which can automate the performance evaluation of a discrete learning
-classifier on a labeled test set. The other classes in this package are designed mainly for internal
-use by LBJ’s compiler and can be safely ignored by the casual user. More advanced users who
-writes their own learners or inference algorithms in the application, for instance, will need to
 become familiar with them. 
 
-## `LBJ2.classify.Classifier`
+## 5.1.1 `LBJ2.classify.Classifier`
 
 Every classifier declaration in an LBJ source file is translated by the compiler into a Java class
 that extends this class. When the programmer wants to call a classifier in the application, 
