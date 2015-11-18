@@ -3,6 +3,8 @@
  */
 package edu.illinois.cs.cogcomp.lbjava.examples.newsgroup;
 
+import edu.illinois.cs.cogcomp.lbjava.examples.Document;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -21,7 +23,7 @@ public class ClassifyText {
 		}
 
 		// This is the black box text classifier
-		TextClassifier classifier = new TextClassifier();
+		NewsGroupClassifier classifier = new NewsGroupClassifier();
 
 		Document document = new Document(new File(args[0]));
 
