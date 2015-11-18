@@ -1,4 +1,4 @@
-# The LBJ Language 
+# 4 The LBJ Language 
 Now that we have defined the building blocks of classifier computation, we next describe LBJ’s
 syntax and semantics for programming with these building blocks.
 
@@ -8,7 +8,7 @@ inferences. Each will be translated by the LBJ compiler into a Java class of the
 the package declaration is present, those Java classes will all become members of that package.
 Import declarations perform the same function in an LBJ source file as in a Java source file.
 
-##  Classifiers 
+## 4.1 Classifiers 
 
 In LBJ, a classifier can be defined with Java code or composed from the definitions of other
 classifiers using special operators. As such, the syntax of classifier specification allows the programmer
@@ -17,7 +17,7 @@ syntax of classifier specification more precisely, including the syntax of class
 data. It also details the behavior of the LBJ compiler when classifiers are specified in terms of
 training data and when changes are made to an LBJ source file. 
 
-###  Classifier Declarations 
+### 4.1.1 Classifier Declarations 
 
 Classifier declarations are used to name classifier expressions (discussed in Section 4.1.2). The
 syntax of a classifier declaration has the following form: 
@@ -155,7 +155,7 @@ extraction. The optional `from` clause designates a parser used to provide train
 learnMe at compile-time. Finally, the optional `with` clause designates a particular learner for
 `learnMe` to utilize.
 
-### Classifier Expressions 
+### 4.1.2 Classifier Expressions 
 
 As was alluded to above, the right hand side of a classifier declaration is actually a single classifier
 expression. A classifier expression is one of the following syntactic constructs:
@@ -170,7 +170,7 @@ expression. A classifier expression is one of the following syntactic constructs
 
 We have already explored examples of almost all of these. More precise definitions of each follow.
 
-### Classifier Names 
+### 4.1.2.1 Classifier Names 
 
 The name of a classifier defined either externally or in the same source file may appear wherever
 a classifier expression is expected. If the named classifier’s declaration is found in the same
@@ -181,7 +181,7 @@ at the top of the source file. The class file or Java source file containing the
 of an imported classifier must exist prior to running the LBJ compiler on the source file that
 imports it. 
 
-### Method Bodies 
+### 4.1.2.2 Method Bodies 
 
 A method body is a list of Java statements enclosed in curly braces explicitly implementing a
 classifier. When the classifier implemented by the method body returns a single feature, the
@@ -192,7 +192,7 @@ body takes its argument and feature `return` type from the header of the classif
 is contained in (except when in the presence of a classifier cast expression, discussed in Section
 4.1.2.3). For more information on method bodies in LBJ, see Section 4.1.3.
 
-#### Classifier Cast Expressions 
+#### 4.1.2.3 Classifier Cast Expressions 
 
 When the programmer wishes for a classifier sub-expression on the right hand side of a classifier
 declaration to be implemented with a feature return type differing from that defined in the
@@ -216,7 +216,7 @@ When a classifier cast expression is applied to a classifier expression that con
 classifier expressions, the cast propagates down to those classifier expressions recursively as well.
 
 
-####  Conjunctions
+#### 4.1.2.4 Conjunctions
 
 A conjunction is written with the double ampersand operator (`&&`) in between two classifier
 expressions (see Figure 4.1 for an example). The conjunction of two classifiers results in a new
@@ -240,13 +240,13 @@ Finally, the conjunction of a feature generator with any other classifier will r
 generator producing features representing the combination of every pairing of features from the
 two argument classifiers.
 
-#### Composite Generators 
+#### 4.1.2.5 Composite Generators 
 
 “Composite generator” is LBJ terminology for a comma separated list of classifier expressions.
 When classifier expressions are listed separated by commas, the result is a feature generator that
 simply returns all the features returned by each classifier in the list.
 
-####  Learning Classifier Expressions 
+#### 4.1.2.6 Learning Classifier Expressions 
 
 Learning classifier expressions have the following syntax:
 
@@ -375,7 +375,7 @@ a `.lc` extension (“`lc`” stands for “learning classifier”). The directo
 the lexicon and example files mentioned earlier are written depends on the appearance of certain
 command line parameters discussed in Section 6.2.
 
-#### Inference Invocations 
+#### 4.1.2.7 Inference Invocations 
     
 Inference is the process through which classifiers constrained in terms of each other reconcile
 their outputs. More information on the specification of constraints and inference procedures can
@@ -392,7 +392,7 @@ that respects the constraints of the inference may be named as follows:
 discrete ChunkType(Chunk c) <- ChunkInference(LocalChunkType)
 ```
 
-### Method Bodies 
+### 4.1.3 Method Bodies 
     
 Depending on the feature `return` type, the programmer will have differing needs when designing
 a method body. If the feature `return` type is either `discrete` or `real`, then only the value of
@@ -408,7 +408,7 @@ intended to provide information within the programmer’s own code, either in th
 in other classifier method bodies. In these situations, the features’ values (and not their names)
 are the data of interest. Section 4.1.3.2 discusses a special semantics for classifier invocation.    
     
-#### The `sense` Statement    
+#### 4.1.3.1 The `sense` Statement    
 
  The `sense` statement is used to indicate that the name and/or value of a feature has been
  detected when computing an array of features or a feature generator. In these contexts, any
@@ -442,7 +442,7 @@ resulting value will be converted to a `String`.
  method body. In this case, the expression represents the feature’s name, and that feature is
  assumed to be Boolean with a value of `true`.
  
-#### Invoking Classifiers  
+#### 4.1.3.2 Invoking Classifiers  
  Under the right circumstances, any classifier may be invoked inside an LBJ method body just as
  if it were a method. The syntax of a classifier invocation is simply `name (object )`, where `object`
  is the object to be classified and `name` follows the same rules as when a classifier is named in
@@ -473,7 +473,7 @@ resulting value will be converted to a `String`.
  the colon are prepended to every feature’s name. Thus, an entire set of features can be
  translated to describe a different context with a single `sense` statement.
  
-#### Syntax Limitations 
+#### 4.1.3.3 Syntax Limitations 
  
  When the exact computation is known, LBJ intends to allow the programmer to explicitly
  define a classifier using arbitrary Java. However, the current version of LBJ suffers from one
@@ -481,7 +481,7 @@ resulting value will be converted to a `String`.
  and interface definitions. In particular, this means that anonymous classes currently cannot be
  defined or instantiated inside an LBJ method body. 
  
-## Constraints 
+## 4.2 Constraints 
 Many modern applications involve the repeated application of one or more learning classifiers in
 a coordinated decision making process. Often, the nature of this decision making process restricts
 the output of each learning classifier on a call by call basis to make all these outputs coherent
@@ -500,7 +500,7 @@ simply declaring an LBJ constraint has no effect on the classifiers involved. Se
 introduces the syntax and semantics of LBJ inference procedures, which can then be invoked (as
 described in Section 4.1.2.7) to produce new classifiers that respect the constraints.
 
-### Constraint Statements 
+### 4.2.1 Constraint Statements 
 
 LBJ constraints are written as arbitrary first order Boolean logic expressions in terms of learning
 classifiers and the objects in a Java application. The LBJ constraint statement syntax is
@@ -553,7 +553,7 @@ an argument to either type of predicate are constants in the inference procedure
 in particular, expressions that include a learning classifier invocation as a subexpression. These
 learning classifier invocations are not treated as inference variables.
 
-### Constraint Declarations 
+### 4.2.2 Constraint Declarations 
 
 An LBJ constraint declaration declares a Java method whose purpose is to locate the objects
 involved in the inference and generate the constraints. Syntactically, an LBJ constraint declaration
@@ -583,7 +583,7 @@ Thus, a constraint may be invoked as if it were a Java method (i.e., without the
 in Section 4.2.1) anywhere in an LBJ source file, just like a classifier. Such an invocation
 will evaluate the constraint in place, rather than constructing its first order representation.
 
-## Inference 
+## 4.3 Inference 
 
 The syntax of an LBJ inference has the following form:
 
@@ -635,7 +635,6 @@ SomeLearner normalizedby Sigmoid;
 normalizedby Softmax;
 ```
 
-
 These normalizer clauses written in any order specify that the `SomeLearner` learning classifier
 should have its scores normalized with the `Sigmoid` normalization method and that all other
 learning classifiers involved in the inference should be normalized by `Softmax`.
@@ -661,7 +660,7 @@ The `subjectto` clause may also contain arbitrary Java, just like any other cons
 Finally, the `with` clause specifies which inference algorithm to use. It functions similarly to
 the `with` clause of a learning classifier expression (see Section 4.1.2.6).
 
-##  “Makefile” Behavior 
+## 4.4 “Makefile” Behavior 
 
 An LBJ source file also functions as a makefile in the following sense. First, code will only be
 generated for a classifier definition when it is determined that a change has been made5
