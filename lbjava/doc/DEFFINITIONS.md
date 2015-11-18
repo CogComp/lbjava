@@ -1,4 +1,4 @@
-# LBJava Definitions
+#2 LBJava Definitions
 
 The terms defined below are used throughout this manual. Their definitions
 have been carefully formulated to facilitate the design of a modeling language
