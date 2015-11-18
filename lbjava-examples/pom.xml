@@ -22,6 +22,10 @@
             <name>CogcompSoftware</name>
             <url>http://cogcomp.cs.illinois.edu/m2repo/</url>
         </pluginRepository>
+        <pluginRepository>
+            <id>central</id>
+            <url>file://${env.HOME}/.m2/repository</url>
+        </pluginRepository>
     </pluginRepositories>
 
     <dependencies>
