@@ -349,7 +349,7 @@ like this:
 ```java 
 new WekaWrapper(new weka.classifiers.bayes.NaiveBayes())
 ```
-** Restrictions ** 
+**Restrictions** 
  - It is crucial to note that WEKA learning algorithms do not learn online. Therefore,
  whenever the `learn` method of the `WekaWrapper` is called, no learning actually takes place.
  Rather, the input object is added to a collection of examples for the algorithm to learn
