@@ -367,3 +367,128 @@ new WekaWrapper(new weka.classifiers.bayes.NaiveBayes())
  - Feature pre-extraction must be enabled in order to use the `WekaWrapper` class. Feature preextraction
  is enabled by using the `preExtract` clause in the `LearningClassifierExpression`
  (discussed in 4.1.2.6).
+
+## `LBJ2.infer`
+The `LBJ2.infer` package contains many classes. The great majority of these classes form the
+internal representation of both propositional and first order constraint expressions and are used
+internally by LBJ’s inference infrastructure. Only the programmer who designs his own inference
+algorithm in terms of constraints needs to familiarize himself with these classes. Detailed
+descriptions of them are provided in the Javadoc.
+
+There are a few classes, however, that are of broader interest. First, the `Inference` class
+is an abstract class from which all inference algorithms implemented for LBJ are derived. It
+is described below along with the particular algorithms that have already been implemented.
+Finally, the `InferenceManager` class is used internally by the LBJ library when applications
+using inference are running.
+
+### 5.3.1 `LBJ2.infer.Inference`
+`Inference` is an abstract class from which all inference algorithms are derived. Executing an
+inference generally evaluates all the learning classifiers involved on the objects they have been
+applied to in the constraints, as well as picking new values for their predictions so that the
+constraints are satisfied. An object of this class keeps track of all the information necessary to
+perform inference in addition to the information produced by it. Once that inference has been
+performed, constrained classifiers access the results through this class’s interface to determine
+what their constrained predictions are. This is done through the `valueOf(LBJ2.learn.Learner, Object)` 
+method described below.
+
+ - `String valueOf(LBJ2.learn.Learner, Object)`:
+ The arguments to this method are objects representing a learning classifier and an object
+ involved in the inference. Calling this method causes the inference algorithm to run, if it
+ has not been run before. This method then returns the new prediction corresponding to
+ the given learner and object after constraints have been resolved.
+
+### 5.3.2 `LBJ2.infer.GLPK`
+This inference algorithm, which may be named in the `with` clause of the LBJ `inference` syntax,
+uses Integer Linear Programming (ILP) to maximize the expected number of correct predictions
+while respecting the constraints. Upon receiving the constraints represented as First Order Logic
+(FOL) formulas, this implementation first translates those formulas to a propositional representation.
+The resulting propositional expression is then translated to a set of linear inequalities by
+recursively translating subexpressions into sets of linear inequalities that bound newly created
+variables to take their place.
+
+The number of linear inequalities and extra variables generated is linear in the depth of
+the tree formed by the propositional representation of the constraints. This tree is not binary;
+instead, nodes representing operators that are associative and commutative such as conjunction
+and disjunction have multiple children and are not allowed to have children representing the same
+operator (i.e., when they do, they are collapsed into the parent node). So both the number of
+linear inequalities and the number of extra variables created will be relatively low. However, the
+performance of any ILP algorithm is very sensitive to both these numbers, since ILP is NP-hard.
+On a 3 Ghz machine, the programmer will still do well to keep both these numbers under 20,000
+for any given instance of the inference problem.
+
+The resulting ILP problem is then solved by the [GNU Linear Programming Kit (GLPK)](http://www.gnu.org/software/glpk/),
+a linear programming library written in C. This software must be downloaded and installed
+separately before installing LBJ, or the `GLPK` inference algorithm will be disabled. If LBJ has
+already been installed, it must be reconfigured and reinstalled (see Chapter 6.1) after installing
+GLPK.
+
+## 5.4 `LBJ2.parse`
+This package contains the very simple `Parser` interface, implementers of which are used in
+conjunction with learning classifier expressions in an LBJ source file when off-line training is
+desired (see Section 4.1.2.6). It also contains some general purpose internal representations
+which may be of interest to a programmer who has not yet written the internal representations
+or parsers for the application.
+
+### 5.4.1 `LBJ2.parse.Parser`
+The LBJ compiler is capable of automatically training a learning classifier given training data,
+so long as that training data comes in the form of objects ready to be passed to the learner’s
+learn(Object) method. Any class that implements the Parser interface can be utilized by the
+compiler to provide those training objects. This interface simply consists of a single method for
+returning another object:
+ 
+ - `Object next()`:
+ This is the only method that an implementing class needs to define. It returns the next
+ training `Object` until no more are available, at which point it returns `null`.
+
+### 5.4.2 `LBJ2.parse.LineByLine`
+This abstract class extends `Parser` but does not implement the `next()` method. It does, however,
+define a constructor that opens the file with the specified name and a readLine() method that
+fetches the next line of text from that file. Exceptions (as may result from not being able to
+open or read from the file) are automatically handled by printing an error message and exiting
+the application. 
+
+### 5.4.3 `LBJ2.parse.ChildrenFromVectors`
+This parser calls a user specified, `LinkedVector` (see Section 5.4.6) returning `Parser` internally
+and returns the `LinkedChildren` (see Section 5.4.5) of that vector one at a time through its
+`next()` method. One notable `LinkedVector` returning Parser is `LBJ2.nlp.WordSplitter` discussed
+in Section 5.5.2.
+
+### 5.4.4 `LBJ2.parse.FeatureVectorParser`
+This parser is used internally by the LBJ compiler (and may be used by the programmer as well)
+to continue training the learning classifier after the first round of training without incurring the
+cost of feature extraction. See Section 4.1.2.6 for more information on LBJ’s behavior when the
+programmer specifies multiple training rounds. That section describes how lexicon and example
+files are produced, and these files become the input to `FeatureVectorParser`.
+
+The objects produced by `FeatureVectorParser` will be `FeatureVectors`, which are not normally
+the input to any classifier, including the learning classifier we’d like to continue training.
+So, the programmer must first replace the learning classifier’s feature extractor with a
+FeatureVectorReturner and its labeler with a `LabelVectorReturner` (see Section 5.1.7) before
+calling `learn(Object)`. After the new training objects have been exhausted, the original feature
+extractor and labeler must be restored before finally calling `save()`.
+
+For example, if a learning classifier named `MyTagger` has been trained for multiple rounds by
+the LBJ compiler, the lexicon and example file will be created with the names `MyTagger.lex`
+and `MyTagger.ex` respectively. Then the following code in an application will continue training
+the classifier for an additional round:
+```java 
+MyTagger tagger = new MyTagger();
+Classifier extractor = tagger.getExtractor();
+tagger.setExtractor(new FeatureVectorReturner());
+Classifier labeler = tagger.getLabeler();
+tagger.setLabeler(new LabelVectorReturner());
+FeatureVectorParser parser = new FeatureVectorParser("MyTagger.ex", "MyTagger.lex");
+for (Object vector = parser.next(); vector != null; vector = parser.next())
+   tagger.learn(vector);
+tagger.setExtractor(extractor);
+tagger.setLabeler(labeler);
+tagger.save();
+```
+
+### 5.4.5 `LBJ2.parse.LinkedChild`
+Together with `LinkedVector` discussed next, these two classes form the basis for a simple, general
+purpose internal representation for raw data. `LinkedChild` is an abstract class containing pointers
+to two other `LinkedChildren`, the “previous” one and the “next” one. It may also store a pointer
+to its parent, which is a `LinkedVector`. Constructors that set up all these links are also provided,
+simplifying the implementation of the parser.
+
