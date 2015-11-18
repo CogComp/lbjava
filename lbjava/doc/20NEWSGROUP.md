@@ -136,7 +136,7 @@ learn NewsgroupLabel
 end
 ```
 
-## 3.2.1 Hard-coded classifiers
+### 3.2.1 Hard-coded classifiers
 
 An LBJava source file is a list of declarations.  The simplest in the LBJava 
 of the previous section, is contained entirely on line 13. It consists of the
