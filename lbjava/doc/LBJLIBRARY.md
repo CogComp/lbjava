@@ -89,12 +89,11 @@ expects as input.
   There are several other methods of this class described in the Javadoc documentation. They
   are omitted here since the programmer is not expected to need them.
   
-  ### 5.1.2 `LBJ2.classify.Feature`
-  
-  This abstract class is part of the representation of the value produced by a classifier. In particular,
-  the name of a feature, but not its value, is stored here. Classes derived from this class (described
-  below) provide storage for the value of the feature. This class exists mainly for internal use by
-  the LBJ compiler, and most programmers will not need to be familiar with it.
+### 5.1.2 `LBJ2.classify.Feature`
+This abstract class is part of the representation of the value produced by a classifier. In particular,
+the name of a feature, but not its value, is stored here. Classes derived from this class (described
+below) provide storage for the value of the feature. This class exists mainly for internal use by
+the LBJ compiler, and most programmers will not need to be familiar with it.
   
  - `LBJ2.classify.DiscreteFeature`:
   The value of a feature returned by a `discrete` classifier is stored as a String in objects
