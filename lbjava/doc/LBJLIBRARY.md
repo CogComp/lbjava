@@ -181,7 +181,7 @@ advanced users may be interested in perusing the Javadoc for descriptions of oth
  the learning classifier expression in the LBJ source file. Note that changes made via this
  method will not persist beyond the current execution of the application unless the `save()`
  method (discussed below) is invoked.
-- `void doneLearning()`:
+ - `void doneLearning()`:
  Some learning algorithms (usually primarily off-line learning algorithms) save part of their
  computation until after all training objects have been observed. This method informs the
  learning algorithm that it is time to perform that part of the computation. When compiletime
