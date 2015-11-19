@@ -26,9 +26,9 @@ generateLBJFiles() {
 }
 
 generateAllLBJFiles() {
-  declare -a files=("BadgesClassifier.lbj" "EntityRelation.lbj" "NewsGroupClassifier.lbj" "SentimentClassifier.lbj" "SetCover.lbj" "SpamClassifier.lbj")
+  # declare -a files=("BadgesClassifier.lbj" "EntityRelation.lbj" "NewsGroupClassifier.lbj" "SentimentClassifier.lbj" "SetCover.lbj" "SpamClassifier.lbj")
 
-  for i in "${files[@]}"
+  for i in "BadgesClassifier.lbj" "EntityRelation.lbj" "NewsGroupClassifier.lbj" "SentimentClassifier.lbj" "SetCover.lbj" "SpamClassifier.lbj"
   do
      echo "Generating output for $i"
      generateLBJFiles "src/main/lbj/"$i
