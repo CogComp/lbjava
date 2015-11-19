@@ -24,7 +24,7 @@ discrete{"spam", "ham"} SpamLabel(Document d) <- { return d.getLabel(); }
 discrete SpamClassifier(Document d) <-
 learn SpamLabel
   using WordFeatures, BigramFeatures
-  from new DocumentReader("data/spam/train")
+  from new DocumentReader("../data/spam/train")
   50 rounds
 
   with SparseAveragedPerceptron {

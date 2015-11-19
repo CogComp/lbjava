@@ -1,0 +1,7 @@
+This is the famous 20 Newsgroups dataset, maintained by Jason Rennie.
+
+http://people.csail.mit.edu/jrennie/20Newsgroups
+
+20news-18828.tar.gz - 20 Newsgroups; duplicates removed, only "From" and
+"Subject" headers (18828 documents)
+
