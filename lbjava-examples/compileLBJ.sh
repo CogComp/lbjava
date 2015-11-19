@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function generateLBJFiles() {
+function generateLBJFiles {
     if [ $# -eq 0 ];
     then
         echo "Usage: compileLBJ <lbj file>"
@@ -25,7 +25,7 @@ function generateLBJFiles() {
     $JAVA $SWITCHES -cp $CP edu.illinois.cs.cogcomp.lbjava.Main -d $LBJBIN -gsp $GSP -sourcepath $SRC $FILE
 }
 
-function generateAllLBJFiles() {
+function generateAllLBJFiles {
   declare -a files=("BadgesClassifier.lbj" "EntityRelation.lbj" "NewsGroupClassifier.lbj" "SentimentClassifier.lbj" "SetCover.lbj" "SpamClassifier.lbj")
 
   for i in "${files[@]}"
