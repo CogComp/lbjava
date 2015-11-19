@@ -5,6 +5,8 @@ import edu.illinois.cs.cogcomp.lbjava.examples.entityRelation.datastruct.*;
 import edu.illinois.cs.cogcomp.lbjava.examples.entityRelation.Conll04_RelationReaderNew;
 import edu.illinois.cs.cogcomp.lbjava.infer.GurobiHook;
 
+import edu.illinois.cs.cogcomp.lbjava.infer.GurobiHook;
+
 discrete% EntityFeatures(ConllRawToken t) <- {
     sense t.POS;
 }
