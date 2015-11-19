@@ -32,7 +32,7 @@ learn SpamLabel
     thickness = 3.5;
   }
 
-  testFrom new DocumentReader("data/spam/test")
+  testFrom new DocumentReader("../data/spam/test")
  
   progressOutput 2000
 end
