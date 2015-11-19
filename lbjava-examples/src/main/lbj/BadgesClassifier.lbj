@@ -2,8 +2,6 @@ package edu.illinois.cs.cogcomp.lbjava.examples.badges;
 
 import java.util.List;
 
-import edu.illinois.cs.cogcomp.lbjava.examples.badges.BadgeDataReader;
-
 /** Simply produces "character" features. */
 discrete% CharacterFeatures(String line) <- {
 	String[] tokens = line.split(" ");

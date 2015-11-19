@@ -19,7 +19,7 @@ discrete SentimentLabel(Document d) <- { return d.getLabel(); }
 discrete SentimentClassifier(Document d) <-
 learn SentimentLabel
   using WordFeatures
-  from new SentimentDataReader("data/sentiment/books", true)
+  from new SentimentDataReader("../data/sentiment/books", true)
   5 rounds
 
   with SparseNetworkLearner {
@@ -29,7 +29,7 @@ learn SentimentLabel
      p.thickness = 5;
      baseLTU = new SparseAveragedPerceptron(p);
   }
-  testFrom new SentimentDataReader("data/sentiment/books", false)
+  testFrom new SentimentDataReader("../data/sentiment/books", false)
  
   progressOutput 2000
 end
