@@ -4,7 +4,7 @@ jdk:
   - oraclejdk8
   - oraclejdk7
 
- script:
+script:
   - mvn -pl lbjava package
   - cd lbjava-examples; sh compileLBJ.sh; cd ..
   - mvn test
