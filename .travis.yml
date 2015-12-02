@@ -1,0 +1,10 @@
+language: java
+
+jdk:
+  - oraclejdk8
+  - oraclejdk7
+
+ script:
+  - mvn -pl lbjava package
+  - cd lbjava-examples; sh compileLBJ.sh; cd ..
+  - mvn test
