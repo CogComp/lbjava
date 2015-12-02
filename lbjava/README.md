@@ -40,6 +40,3 @@ running `mvn compile/install` since it is required for the java-source compilati
 This project was started by [Nicholas Rizzolo](rizzolo@gmail.com).
 It was ported to Maven as LBJava (v.1.0) by [Christos Christodoulopoulos](christod@illinois.edu)
 
-## Licensing
-To see the full license for this software, see [LICENSE](../doc/LICENSE) (in doc directory) or visit the download 
-page for this software and press 'Download'. The next screen displays the license. 
