@@ -5,3 +5,4 @@ install: echo "skip" # or anything that returns 0 status
 script:
   - mvn -pl lbjava package
   - cd lbjava-examples; sh compileLBJ.sh; cd ..
+  - mvn test 
