@@ -240,5 +240,5 @@ that the plugin should be allowed to execute. To do this add the following:
 ```
     
 ## Credits 
- - [Stephen Mayhew](swm.mayhew@gmail.com): Nov 22, 2013 (v1.0)  
- - [Christos Christodoulopoulos](christod@illinois.edu): Mar 20, 2015 (v2.0)
+ - [Stephen Mayhew](mailto:swm.mayhew@gmail.com): Nov 22, 2013 (v1.0)  
+ - [Christos Christodoulopoulos](mailto:christod@illinois.edu): Mar 20, 2015 (v2.0)
