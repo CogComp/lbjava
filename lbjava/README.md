@@ -37,6 +37,5 @@ NB: If you need to run `mvn clean` at any point, make sure to create `target/cla
 running `mvn compile/install` since it is required for the java-source compilation process.
 
 ## Credits 
-This project was started by [Nicholas Rizzolo](rizzolo@gmail.com).
-It was ported to Maven as LBJava (v.1.0) by [Christos Christodoulopoulos](christod@illinois.edu)
-
+This project was started by [Nicholas Rizzolo](mailto:rizzolo@gmail.com).
+It was ported to Maven as LBJava (v.1.0) by [Christos Christodoulopoulos](mailto:christod@illinois.edu). 
