@@ -152,6 +152,10 @@ public abstract class Learner extends Classifier
     return lexicon;
   }
 
+    /** Returns the feature lexicon in memory, rather than reading from disk */ 
+    public Lexicon getCurrentLexicon() { 
+	return lexicon; 
+    }
 
   /**
     * Sets the label lexicon.
@@ -717,7 +721,10 @@ public abstract class Learner extends Classifier
 
     return exampleArray;
   }
-
+  
+  public void setReadLexiconOnDemand(){ 
+     readLexiconOnDemand = true; 
+  }
 
   /**
     * If it hasn't been created already, this method will create the
