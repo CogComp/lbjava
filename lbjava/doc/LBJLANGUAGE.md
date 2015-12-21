@@ -319,7 +319,7 @@ subsets (folds). If the `split-strategy` argument is not provided, the default v
  on.
  i.e. `[ — 1 — | — 2 — | ... | — K — ]`
 
- - `kth` - The `kth` split strategy also attempts to partition the set of examples in to `K` equal`ly
+ - `kth` - The `kth` split strategy also attempts to partition the set of examples in to `K` equally
    sized subsets with a round-robin style assignement scheme. The `x`’th example encountered 
     is assigned to the `(x%K)`’th subset.
     i.e. `[ 1 2 3 4 ... K 1 2 3 4 ... K ... ]`
