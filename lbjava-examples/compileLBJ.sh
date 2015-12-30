@@ -18,7 +18,7 @@ generateLBJFiles() {
     SRC=src/main/java
     GSP=src/main/java
 
-    CP=$BIN:$LBJBIN:lib/*:lib/illinois-core-utilities-3.0.5.jar:lib/liblinear.jar:../lbjava/target/LBJava-1.2.0.jar
+    CP=$BIN:$LBJBIN:lib/*:lib/illinois-core-utilities-3.0.5.jar:lib/liblinear.jar:../lbjava/target/LBJava-1.2.1.jar
 
     echo $CP
 
