@@ -1020,27 +1020,60 @@ public abstract class Learner extends Classifier
     }
   }
 
-
   /**
     * Writes the learned function's internal representation in binary form.
     *
     * @param out  The output stream.
    **/
   public void write(ExceptionlessOutputStream out) {
-    out.writeString(getClass().getName());
-    out.writeString(containingPackage);
-    out.writeString(name);
-    out.writeString(encoding);
-    if (labeler == null) out.writeString(null);
-    else out.writeString(labeler.getClass().getName());
-    if (extractor == null) out.writeString(null);
-    else out.writeString(extractor.getClass().getName());
-    if (labelLexicon == null) out.writeInt(0);
-    else labelLexicon.write(out);
-    if (predictions == null) out.writeInt(0);
-    else predictions.write(out);
+    write(out, false, false);
   }
 
+  public void writeIgnoringLabelerAndExtractor(ExceptionlessOutputStream out) {
+    write(out, true, true);
+  }
+
+  public void write(ExceptionlessOutputStream out, boolean ignoreLabeler, boolean ignoreExtractor) {
+    out.writeString(getClass().getName());
+    System.out.println("writing = " + getClass().getName());
+    out.writeString(containingPackage);
+    System.out.println("writing = " + containingPackage);
+    out.writeString(name);
+    System.out.println("writing = " + name);
+    out.writeString(encoding);
+    System.out.println("writing = " + encoding);
+    if(!ignoreLabeler) {
+      if (labeler == null) {
+        out.writeString(null);
+        System.out.println("writing = null");
+      }
+      else {
+        out.writeString(labeler.getClass().getName());
+        System.out.println("writing = " + labeler.getClass().getName());
+      }
+    }
+    if(!ignoreExtractor) {
+      if (extractor == null) {
+        out.writeString(null);
+        System.out.println("writing = null");
+      }
+      else {
+        out.writeString(extractor.getClass().getName());
+        System.out.println("writing = " + extractor.getClass().getName());
+      }
+    }
+    if (labelLexicon == null) {
+      out.writeInt(0);
+      System.out.println("write 0");
+    }
+    else {
+      labelLexicon.write(out);
+      System.out.println("write lexicon");
+    }
+    if (predictions == null) out.writeInt(0);
+    else predictions.write(out);
+    System.out.println("predictions.size() = " + predictions.size());
+  }
 
   /**
     * Reads the learned function's binary internal represetation including
@@ -1245,6 +1278,9 @@ public abstract class Learner extends Classifier
     return readLearner(in, true);
   }
 
+  public static Learner readLearnerIgnoringLabelerExtractor(ExceptionlessInputStream in) {
+    return readLearnerIgnoringLabelerExtractor(in, true);
+  }
 
   /**
     * Reads the binary representation of any type of learner (including the
@@ -1276,6 +1312,22 @@ public abstract class Learner extends Classifier
     return result;
   }
 
+  public static Learner readLearnerIgnoringLabelerExtractor(ExceptionlessInputStream in,
+                                                            boolean whole) {
+    String name = in.readString();
+    if (name == null) return null;
+    Learner result = ClassUtils.getLearner(name);
+    result.unclone();
+    if (whole) result.readIgnoringLabelerExtractor(in);     // Overridden by decendents
+    else {
+      result.readLabelLexicon(in, true, true);  // Should not be overridden by decendents
+      Lexicon labelLexicon = result.getLabelLexicon();
+      result.forget();
+      result.setLabelLexicon(labelLexicon);
+    }
+    return result;
+  }
+
 
   /**
     * Reads the binary representation of a learner with this object's run-time
@@ -1286,6 +1338,7 @@ public abstract class Learner extends Classifier
    **/
   public void read(ExceptionlessInputStream in) { readLabelLexicon(in); }
 
+  public void readIgnoringLabelerExtractor(ExceptionlessInputStream in) { readLabelLexicon(in, true, true); }
 
   /**
     * Reads the initial portion of the model file, including the containing
@@ -1296,19 +1349,34 @@ public abstract class Learner extends Classifier
     * @param in The input stream.
    **/
   public void readLabelLexicon(ExceptionlessInputStream in) {
+    readLabelLexicon(in, false, false);
+  }
+
+  public void readLabelLexicon(ExceptionlessInputStream in, boolean ignoreLabeler, boolean ignoreExtractor) {
     containingPackage = in.readString().intern();
+    System.out.println("containingPackage = " + containingPackage );
     name = in.readString().intern();
+    System.out.println("name = " + name);
     encoding = in.readString();
+    System.out.println("encoding " + encoding);
     if (encoding != null) encoding = encoding.intern();
-    String s = in.readString();
-    labeler = s == null ? null : ClassUtils.getClassifier(s);
+    String s;
     s = in.readString();
-    extractor = s == null ? null : ClassUtils.getClassifier(s);
+    System.out.println("s = " + s);
+    if( !ignoreLabeler ) {
+      labeler = s == null ? null : ClassUtils.getClassifier(s);
+    }
+    else System.out.println("ignored ");
+    s = in.readString();
+    System.out.println("s = " + s);
+    if( !ignoreExtractor ) {
+      extractor = s == null ? null : ClassUtils.getClassifier(s);
+    }
+    else System.out.println("ignored ");
     labelLexicon = Lexicon.readLexicon(in);
     if (predictions == null) predictions = new FVector();
     predictions.read(in);
   }
-
 
   /**
     * Prepares this learner to read in its feature lexicon from the specified

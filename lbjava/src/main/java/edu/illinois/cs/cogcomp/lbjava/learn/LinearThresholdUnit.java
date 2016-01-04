@@ -709,6 +709,25 @@ public abstract class LinearThresholdUnit extends Learner
     weightVector = SparseWeightVector.readWeightVector(in);
   }
 
+  public void readIgnoringLabelerExtractor(ExceptionlessInputStream in) {
+    super.readIgnoringLabelerExtractor(in);
+
+    int N = in.readInt();
+    if (N == 0) allowableValues = null;
+    else {
+      allowableValues = new String[N];
+      for (int i = 0; i < N; ++i)
+        allowableValues[i] = in.readString();
+    }
+
+    initialWeight = in.readDouble();
+    threshold = in.readDouble();
+    learningRate = in.readDouble();
+    positiveThickness = in.readDouble();
+    negativeThickness = in.readDouble();
+    bias = in.readDouble();
+    weightVector = SparseWeightVector.readWeightVector(in);
+  }
 
   /** Returns a deep clone of this learning algorithm. */
   public Object clone() {

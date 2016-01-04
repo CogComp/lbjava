@@ -550,6 +550,7 @@ public abstract class Feature implements Cloneable, Comparable, Serializable
    **/
   public static Feature readFeature(ExceptionlessInputStream in) {
     String name = in.readString();
+    System.out.println("name = " +  name);
     if (name == null) return null;
     Class c = ClassUtils.getClass(name);
     Feature result = null;
