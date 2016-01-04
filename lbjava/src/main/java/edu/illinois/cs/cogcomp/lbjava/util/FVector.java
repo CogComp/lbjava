@@ -277,6 +277,7 @@ public class FVector implements Cloneable, java.io.Serializable
    **/
   public void read(ExceptionlessInputStream in) {
     size = in.readInt();
+    System.out.println("size = "+ size );
     if (size == 0) vector = new Feature[defaultCapacity];
     else {
       vector = new Feature[size];

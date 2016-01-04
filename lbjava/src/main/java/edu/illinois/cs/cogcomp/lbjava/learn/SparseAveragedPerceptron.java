@@ -62,7 +62,6 @@ public class SparseAveragedPerceptron extends SparsePerceptron
   /** Keeps the extra information necessary to compute the averaged bias. */
   protected double averagedBias;
 
-
   /**
     * The learning rate and threshold take default values, while the name of
     * the classifier gets the empty string.
@@ -202,6 +201,14 @@ public class SparseAveragedPerceptron extends SparsePerceptron
     setParameters(p);
   }
 
+
+  public AveragedWeightVector getWeightVetor() {
+    return awv;
+  }
+
+  public double getAveragedBias() {
+    return averagedBias;
+  }
 
   /**
     * Retrieves the parameters that are set in this learner.
@@ -380,6 +387,12 @@ public class SparseAveragedPerceptron extends SparsePerceptron
     averagedBias = in.readDouble();
   }
 
+
+  public void readIgnoringLabelerExtractor(ExceptionlessInputStream in) {
+    super.readIgnoringLabelerExtractor(in);
+    awv = (AveragedWeightVector) weightVector;
+    averagedBias = in.readDouble();
+  }
 
   /**
     * Simply a container for all of {@link SparseAveragedPerceptron}'s

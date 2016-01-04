@@ -684,6 +684,22 @@ public class SparseNetworkLearner extends Learner
       network.add(Learner.readLearner(in));
   }
 
+  public void readIgnoringLabelerExtractor(ExceptionlessInputStream in) {
+    super.readIgnoringLabelerExtractor(in);
+    baseLTU = (LinearThresholdUnit) Learner.readLearnerIgnoringLabelerExtractor(in, true);
+    System.out.println("baseLTU.containingPackage = " + baseLTU.containingPackage);
+    System.out.println("baseLTU.name = " + baseLTU.name);
+    System.out.println("baseLTU.allowableValues = " + baseLTU.allowableValues);
+    System.out.println("baseLTU.allowableValues = " + baseLTU.bias);
+    conjunctiveLabels = in.readBoolean();
+    System.out.println("conjunctiveLabels= " + conjunctiveLabels);
+    int N = in.readInt();
+    System.out.println("N = " + N);
+    network = new OVector(N);
+    for (int i = 0; i < N; ++i)
+      network.add(Learner.readLearnerIgnoringLabelerExtractor(in));
+    System.out.println("network.size() = " + network.size());
+  }
 
   /** Returns a deep clone of this learning algorithm. */
   public Object clone() {
@@ -708,6 +724,9 @@ public class SparseNetworkLearner extends Learner
     return clone;
   }
 
+  public OVector getNetwork() {
+    return network;
+  }
 
   /**
     * Simply a container for all of {@link SparseNetworkLearner}'s
