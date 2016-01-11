@@ -108,9 +108,8 @@ public class OJalgoHook implements ILPSolver {
 
     public int addBooleanVariable(double c) {
         numvars ++;
-        Variable var = Variable.makeBinary(Integer.toString(numvars));
+        Variable var = Variable.makeBinary(Integer.toString(numvars)).weight(c);
         model.addVariable(var);
-        objectiveFunction.set(var, c);
         return numvars-1;
     }
 
@@ -120,10 +119,10 @@ public class OJalgoHook implements ILPSolver {
         while (ind < c.length) {
             double coef = c[ind];
             numvars ++;
-            Variable var = Variable.make(Integer.toString(numvars));
+            Variable var = Variable.make(Integer.toString(numvars)).weight(coef);
             var.isInteger();
             model.addVariable(var);
-            objectiveFunction.set(var, coef);
+//            objectiveFunction.set(var, coef);
             varIndices[ind] = numvars-1;
             ind++;
         }
@@ -136,10 +135,10 @@ public class OJalgoHook implements ILPSolver {
         while (ind < c.length) {
             double coef = c[ind].score;
             numvars ++;
-            Variable var = Variable.make(Integer.toString(numvars));
+            Variable var = Variable.make(Integer.toString(numvars)).weight(coef);
             var.isInteger();
             model.addVariable(var);
-            objectiveFunction.set(var, coef);
+//            objectiveFunction.set(var, coef);
             varIndices[ind] = numvars -1;
             ind++;
         }
@@ -204,13 +203,7 @@ public class OJalgoHook implements ILPSolver {
     }
 
     public double objectiveValue() {
-        /** TODO(khashab2): the method `result.getValue();` doesn't return the right value. Make sure you're doing
-         *  the right thing.
-         */
-        double obj = 0;
-        for( Variable v : model.getVariables() )
-            obj += objectiveFunction.get(v).doubleValue() * v.getValue().doubleValue();
-        return obj;
+        return  result.getValue();
     }
 
     public void reset() {
@@ -233,6 +226,8 @@ public class OJalgoHook implements ILPSolver {
     }
 
     public void printModelInfo() {
+
         System.out.println(model.toString());
+        System.out.println("objective: " + result.getValue());
     }
 }

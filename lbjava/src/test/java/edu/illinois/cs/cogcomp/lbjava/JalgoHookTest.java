@@ -30,6 +30,8 @@ public class JalgoHookTest {
             e.printStackTrace();
         }
 
+        ojaHook.printModelInfo();
+
         assertTrue(ojaHook.objectiveValue() == -2.0);
         assertTrue(ojaHook.getBooleanValue(0));
         assertTrue(ojaHook.getBooleanValue(1));
@@ -134,9 +136,10 @@ public class JalgoHookTest {
         OJalgoHook ojaHook = new OJalgoHook();
         int[] varInds = new int[2];
 
+        double[] objCoefs = {1.5, 2.5};
         int i = 0;
         while (i< 2) {
-            int x = ojaHook.addBooleanVariable(1.5);
+            int x = ojaHook.addBooleanVariable(objCoefs[i]);
             varInds[i] = x;
             i++;
         }
@@ -155,7 +158,7 @@ public class JalgoHookTest {
 
         ojaHook.printModelInfo();
 
-        assertTrue(ojaHook.objectiveValue() == 3);
+        assertTrue(ojaHook.objectiveValue() == 4);
         assertTrue(ojaHook.getBooleanValue(0));
         assertTrue(ojaHook.getBooleanValue(1));
     }
@@ -165,9 +168,10 @@ public class JalgoHookTest {
         OJalgoHook ojaHook = new OJalgoHook();
         int[] varInds = new int[2];
 
+        double[] objCoefs = {1.5, 2.5};
         int i = 0;
         while (i< 2) {
-            int x = ojaHook.addBooleanVariable(1.5);
+            int x = ojaHook.addBooleanVariable(objCoefs[i]);
             varInds[i] = x;
             i++;
         }
@@ -186,7 +190,7 @@ public class JalgoHookTest {
 
         ojaHook.printModelInfo();
 
-        assertTrue(ojaHook.objectiveValue() == 1); // fails: should be 1
+        assertTrue(ojaHook.objectiveValue() == 1.5); // fails: should be 1
         assertTrue(ojaHook.getBooleanValue(0)); // fails; should be true
         assertTrue(!ojaHook.getBooleanValue(1)); // fails; should be false
     }
@@ -196,9 +200,10 @@ public class JalgoHookTest {
         OJalgoHook ojaHook = new OJalgoHook();
         int[] varInds = new int[2];
 
+        double[] objCoefs = {1.5, 2.5};
         int i = 0;
         while (i< 2) {
-            int x = ojaHook.addBooleanVariable(1.5);
+            int x = ojaHook.addBooleanVariable(objCoefs[i]);
             varInds[i] = x;
             i++;
         }
@@ -217,7 +222,7 @@ public class JalgoHookTest {
 
         ojaHook.printModelInfo();
 
-        assertTrue(ojaHook.objectiveValue() == 2); // fails
+        assertTrue(ojaHook.objectiveValue() == 2.5); // fails
         assertTrue(!ojaHook.getBooleanValue(0)); // fails
         assertTrue(ojaHook.getBooleanValue(1)); // fails
     }
