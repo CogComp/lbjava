@@ -63,9 +63,9 @@ public class JalgoHookTest {
 
         ojaHook.printModelInfo();
 
-        assertTrue(ojaHook.objectiveValue() == 0); // fails
-        assertTrue(!ojaHook.getBooleanValue(0)); // fails
-        assertTrue(!ojaHook.getBooleanValue(1)); // fails
+        assertTrue(ojaHook.objectiveValue() == 0); 
+        assertTrue(!ojaHook.getBooleanValue(0)); 
+        assertTrue(!ojaHook.getBooleanValue(1)); 
     }
 
 
@@ -95,9 +95,9 @@ public class JalgoHookTest {
 
         ojaHook.printModelInfo();
 
-        assertTrue(ojaHook.objectiveValue() == 3); // fails
-        assertTrue(ojaHook.getBooleanValue(0)); // fails
-        assertTrue(ojaHook.getBooleanValue(1)); // fails
+        assertTrue(ojaHook.objectiveValue() == 3); 
+        assertTrue(ojaHook.getBooleanValue(0)); 
+        assertTrue(ojaHook.getBooleanValue(1)); 
     }
 
     @Test
@@ -126,9 +126,9 @@ public class JalgoHookTest {
 
         ojaHook.printModelInfo();
 
-        assertTrue(ojaHook.objectiveValue() == 0); // fails
-        assertTrue(!ojaHook.getBooleanValue(0)); // fails
-        assertTrue(!ojaHook.getBooleanValue(1)); // fails
+        assertTrue(ojaHook.objectiveValue() == 0); 
+        assertTrue(!ojaHook.getBooleanValue(0)); 
+        assertTrue(!ojaHook.getBooleanValue(1)); 
     }
 
     @Test
@@ -190,9 +190,9 @@ public class JalgoHookTest {
 
         ojaHook.printModelInfo();
 
-        assertTrue(ojaHook.objectiveValue() == 1.5); // fails: should be 1
-        assertTrue(ojaHook.getBooleanValue(0)); // fails; should be true
-        assertTrue(!ojaHook.getBooleanValue(1)); // fails; should be false
+        assertTrue(ojaHook.objectiveValue() == 1.5);
+        assertTrue(ojaHook.getBooleanValue(0));
+        assertTrue(!ojaHook.getBooleanValue(1));
     }
 
     @Test
@@ -222,8 +222,8 @@ public class JalgoHookTest {
 
         ojaHook.printModelInfo();
 
-        assertTrue(ojaHook.objectiveValue() == 2.5); // fails
-        assertTrue(!ojaHook.getBooleanValue(0)); // fails
-        assertTrue(ojaHook.getBooleanValue(1)); // fails
+        assertTrue(ojaHook.objectiveValue() == 2.5); 
+        assertTrue(!ojaHook.getBooleanValue(0)); 
+        assertTrue(ojaHook.getBooleanValue(1)); 
     }
 }
