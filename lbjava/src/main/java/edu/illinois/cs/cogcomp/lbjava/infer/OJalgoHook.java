@@ -199,6 +199,8 @@ public class OJalgoHook implements ILPSolver {
     }
 
     public boolean isSolved() {
+        if( result == null )
+            return false; 
         return result.getState().isSuccess();
     }
 

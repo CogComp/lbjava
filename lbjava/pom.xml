@@ -3,7 +3,7 @@
 	<parent>
         <artifactId>lbjava-project</artifactId>
         <groupId>edu.illinois.cs.cogcomp</groupId>
-        <version>1.2.2</version>
+        <version>1.2.3</version>
     </parent>
 
 	<modelVersion>4.0.0</modelVersion>
@@ -50,7 +50,7 @@
 		<dependency>
 			<groupId>org.ojalgo</groupId>
 			<artifactId>ojalgo</artifactId>
-			<version>37.1</version>
+			<version>37.1.1</version>
 		</dependency>
 	</dependencies>
 
