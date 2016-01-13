@@ -828,6 +828,15 @@ public class Lexicon implements Cloneable, Serializable
     }
 
     if (lexiconChildren != null) lexiconChildren.setParent(this);
+
+    // Tom Redman
+    // This class is not thread-safe, and this patch does NOT fix it, it just circumvents
+    // the issue for the NER package. In effect, the lexicon will be inited as soon as the
+    // data is loaded, circumventing a race condition as multiple threads potentially attempt
+    // to initialize the lexicon hash table. Adding features to the lexicon in the lookup method
+    // is not thread safe, so any usages of this class that attempt that will eventially fail
+    // in massively parallel implementations.
+    lazyMapCreation(); // not so lazy at all.
   }
 
 
