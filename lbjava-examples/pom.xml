@@ -31,7 +31,7 @@
         <dependency>
             <groupId>edu.illinois.cs.cogcomp</groupId>
             <artifactId>illinois-core-utilities</artifactId>
-            <version>3.0.2</version>
+            <version>3.0.15</version>
         </dependency>
     </dependencies>
 
