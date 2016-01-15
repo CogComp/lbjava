@@ -10,7 +10,7 @@
 
 ## Compiling the whole package 
 Try the following steps: 
- - Build the lbjava core: `mvn -pl lbjava package`
+ - Build the lbjava core: `mvn -pl lbjava package -Djar.finalName=lbjavaCore`
  - Generate java files from lbjava definitions: `cd lbjava-examples; sh compileLBJ.sh; cd ..`
  - Test the whole project: `mvn test`
  
