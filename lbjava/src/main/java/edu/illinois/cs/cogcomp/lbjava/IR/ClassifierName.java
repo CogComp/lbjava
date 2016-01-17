@@ -1,6 +1,9 @@
 package edu.illinois.cs.cogcomp.lbjava.IR;
 
 import edu.illinois.cs.cogcomp.lbjava.Pass;
+import edu.illinois.cs.cogcomp.lbjava.SemanticAnalysis;
+import edu.illinois.cs.cogcomp.lbjava.TranslateToJava;
+import edu.illinois.cs.cogcomp.lbjava.classify.Classifier;
 
 
 /**
@@ -24,6 +27,11 @@ public class ClassifierName extends ClassifierExpression
    **/
   public Name referent;
 
+    /**
+     * Is used to distinguish {@link Classifier}s that are defined as fields.
+     * Used during {@link TranslateToJava}.
+     */
+    public boolean isField;
 
   /**
     * Full constructor.  Line and byte offset information is taken from the
