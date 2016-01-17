@@ -10,7 +10,7 @@ public class OJalgoHook implements ILPSolver {
 
     private int numvars = 0; // initially there are no variables in the model.
 
-    private int numConstraints = 0;  // intiial number of constraints
+    private int numConstraints = 0;  // intial number of constraints
 
     private ExpressionsBasedModel model = new ExpressionsBasedModel();
 
