@@ -394,7 +394,12 @@ public class TranslateToJava extends Pass
 			out.println("    setEncoding(" + lce.featureEncoding + ");");
 			if (lce.labeler != null)
 				out.println("    setLabeler(new " + lce.labeler.name + "());");
-			out.println("    setExtractor(new " + lce.extractor.name + "());");
+            if (isField(lce.extractor)) {
+                String fieldClass = AST.globalSymbolTable.classForName(lce.extractor.name).getSimpleName();
+                out.println("    setExtractor(" + fieldClass + "." + lce.extractor.name + ");");
+            }
+            else
+			    out.println("    setExtractor(new " + lce.extractor.name + "());");
 			out.println("    isClone = false;");
 			out.println("  }\n");
 		}
@@ -472,7 +477,12 @@ public class TranslateToJava extends Pass
 				+ AST.globalSymbolTable.getPackage() + "\";");
 		out.println(tabs + "name = \"" + lceName + "\";");
 		out.println(tabs + "setLabeler(new " + lce.labeler.name + "());");
-		out.println(tabs + "setExtractor(new " + lce.extractor.name + "());");
+        if (isField(lce.extractor)) {
+            String fieldClass = AST.globalSymbolTable.classForName(lce.extractor.name).getSimpleName();
+            out.println(tabs + "setExtractor(" + fieldClass + "." + lce.extractor.name + ");");
+        }
+        else
+            out.println(tabs + "setExtractor(new " + lce.extractor.name + "());");
 		tabs = "\t\t";
 		out.println(tabs + "}\n");
 		out.println(tabs + "isClone = false;");
@@ -794,6 +804,9 @@ public class TranslateToJava extends Pass
 		}
 	}
 
+    private static boolean isField(ClassifierExpression ce) {
+        return ce instanceof ClassifierName && ((ClassifierName) ce).isField;
+    }
 
 	/**
 	 * This method generates a string signature of the given method.  The
@@ -1830,11 +1843,17 @@ public class TranslateToJava extends Pass
 			for (ClassifierExpressionList.ClassifierExpressionListIterator I =
 					cg.components.listIterator();
 					I.hasNext(); ) {
-				String name = I.nextItem().name.toString();
+                ClassifierExpression ce = I.nextItem();
+                String name = ce.name.toString();
 				if (declared.add(name)) {
-					String nameNoDots = name.replace('.', '$');
-					out.println("  private static final " + name + " __" + nameNoDots
-							+ " = new " + name + "();");
+                    String nameNoDots = name.replace('.', '$');
+                    if (isField(ce)) {
+                        String fieldClass = AST.globalSymbolTable.classForName(ce.name).getSimpleName();
+                        out.println("  private static final " + fieldClass + " __" + nameNoDots + " = " + fieldClass + "." + name + ";");
+                    }
+                    else {
+                        out.println("  private static final " + name + " __" + nameNoDots + " = new " + name + "();");
+                    }
 				}
 			}
 		}
