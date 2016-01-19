@@ -47,6 +47,11 @@
 			<version>4.11</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.ojalgo</groupId>
+			<artifactId>ojalgo</artifactId>
+			<version>37.1.1</version>
+		</dependency>
 	</dependencies>
 
     <reporting>
