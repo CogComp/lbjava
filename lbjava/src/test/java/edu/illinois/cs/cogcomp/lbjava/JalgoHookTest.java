@@ -63,9 +63,9 @@ public class JalgoHookTest {
 
         ojaHook.printModelInfo();
 
-        assertTrue(ojaHook.objectiveValue() == 0); 
-        assertTrue(!ojaHook.getBooleanValue(0)); 
-        assertTrue(!ojaHook.getBooleanValue(1)); 
+        assertTrue(ojaHook.objectiveValue() == 0);
+        assertTrue(!ojaHook.getBooleanValue(0));
+        assertTrue(!ojaHook.getBooleanValue(1));
     }
 
 
@@ -95,9 +95,9 @@ public class JalgoHookTest {
 
         ojaHook.printModelInfo();
 
-        assertTrue(ojaHook.objectiveValue() == 3); 
-        assertTrue(ojaHook.getBooleanValue(0)); 
-        assertTrue(ojaHook.getBooleanValue(1)); 
+        assertTrue(ojaHook.objectiveValue() == 3);
+        assertTrue(ojaHook.getBooleanValue(0));
+        assertTrue(ojaHook.getBooleanValue(1));
     }
 
     @Test
@@ -126,9 +126,9 @@ public class JalgoHookTest {
 
         ojaHook.printModelInfo();
 
-        assertTrue(ojaHook.objectiveValue() == 0); 
-        assertTrue(!ojaHook.getBooleanValue(0)); 
-        assertTrue(!ojaHook.getBooleanValue(1)); 
+        assertTrue(ojaHook.objectiveValue() == 0);
+        assertTrue(!ojaHook.getBooleanValue(0));
+        assertTrue(!ojaHook.getBooleanValue(1));
     }
 
     @Test
@@ -222,8 +222,71 @@ public class JalgoHookTest {
 
         ojaHook.printModelInfo();
 
-        assertTrue(ojaHook.objectiveValue() == 2.5); 
-        assertTrue(!ojaHook.getBooleanValue(0)); 
-        assertTrue(ojaHook.getBooleanValue(1)); 
+        assertTrue(ojaHook.objectiveValue() == 2.5);
+        assertTrue(!ojaHook.getBooleanValue(0));
+        assertTrue(ojaHook.getBooleanValue(1));
     }
+
+    @Test
+    public void testProgram8() throws Exception {
+        OJalgoHook ojaHook = new OJalgoHook();
+        int[] varInds = new int[3];
+
+        double[] objCoefs = {-1, -1, -1};
+        int i = 0;
+        while (i< 3) {
+            int x = ojaHook.addBooleanVariable(objCoefs[i]);
+            varInds[i] = x;
+            i++;
+        }
+
+        double[] coefs = { 1, 1, 1};
+        ojaHook.addEqualityConstraint(varInds, coefs, 3);
+        ojaHook.setMaximize(true);
+
+        try {
+            ojaHook.solve();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        ojaHook.printModelInfo();
+
+        assertTrue(ojaHook.objectiveValue() == -3);
+        assertTrue(ojaHook.getBooleanValue(0));
+        assertTrue(ojaHook.getBooleanValue(1));
+        assertTrue(ojaHook.getBooleanValue(2));
+    }
+
+    @Test
+    public void testProgram9() throws Exception {
+        OJalgoHook ojaHook = new OJalgoHook();
+
+        double[] objCoefs = {0, -1};
+        ojaHook.addDiscreteVariable(objCoefs);
+        ojaHook.addDiscreteVariable(objCoefs);
+        ojaHook.addDiscreteVariable(objCoefs);
+
+        double[] coefs = { 1, 1, 1};
+        int[] varInds = {1, 3, 5};
+        ojaHook.addEqualityConstraint(varInds, coefs, 3);
+        ojaHook.setMaximize(true);
+
+        try {
+            ojaHook.solve();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        ojaHook.printModelInfo();
+
+        assertTrue(ojaHook.objectiveValue() == -3);
+        assertTrue(!ojaHook.getBooleanValue(0));
+        assertTrue(ojaHook.getBooleanValue(1));
+        assertTrue(!ojaHook.getBooleanValue(2));
+        assertTrue(ojaHook.getBooleanValue(3));
+        assertTrue(!ojaHook.getBooleanValue(4));
+        assertTrue(ojaHook.getBooleanValue(5));
+    }
+
 }

@@ -1,16 +1,19 @@
 package edu.illinois.cs.cogcomp.lbjava.infer;
 
 import edu.illinois.cs.cogcomp.lbjava.classify.Score;
+import edu.illinois.cs.cogcomp.lbjava.infer.ILPSolver;
 import org.ojalgo.optimisation.Expression;
 import org.ojalgo.optimisation.ExpressionsBasedModel;
 import org.ojalgo.optimisation.Optimisation;
 import org.ojalgo.optimisation.Variable;
 
+import java.util.Arrays;
+
 public class OJalgoHook implements ILPSolver {
 
     private int numvars = 0; // initially there are no variables in the model.
 
-    private int numConstraints = 0;  // intial number of constraints
+    private int numConstraints = 0;  // initial number of constraints
 
     private ExpressionsBasedModel model = new ExpressionsBasedModel();
 
@@ -22,6 +25,8 @@ public class OJalgoHook implements ILPSolver {
 
     // internal variable for result of optimization
     private Optimisation.Result result;
+
+    private boolean log = true;
 
     /**
      * Set bounds of variable in the specified position.
@@ -96,6 +101,8 @@ public class OJalgoHook implements ILPSolver {
     }
 
     public void setMaximize(boolean d) {
+        if(log)
+            System.out.println("OJalgoHook: setMaximize("+d + ")");
         if(d) {
             model.setMaximisation();
             minimize = false;
@@ -107,45 +114,67 @@ public class OJalgoHook implements ILPSolver {
     }
 
     public int addBooleanVariable(double c) {
+        if(log)
+            System.out.println("OJalgoHook: addBooleanVariable(c=" + c + ")");
+
         numvars ++;
         Variable var = Variable.makeBinary(Integer.toString(numvars)).weight(c);
         model.addVariable(var);
         return numvars-1;
     }
 
+    /**
+     * Adds a general, multi-valued discrete variable, which is implemented as
+     * a set of Boolean variables, one per value of the discrete variable, with
+     * exactly one of those variables set <code>true</code> at any given time.
+     * */
     public int[] addDiscreteVariable(double[] c) {
+        if(log) {
+            System.out.print("OJalgoHook: addDiscreteVariable(");
+            for (double w : c)
+                System.out.print(w + ", ");
+            System.out.println(")");
+        }
+
         int[] varIndices = new int[c.length];
         int ind = 0;
         while (ind < c.length) {
-            double coef = c[ind];
-            numvars ++;
-            Variable var = Variable.make(Integer.toString(numvars)).weight(coef);
-            var.isInteger();
-            model.addVariable(var);
-//            objectiveFunction.set(var, coef);
-            varIndices[ind] = numvars-1;
+            varIndices[ind] = addBooleanVariable(c[ind]);
             ind++;
         }
+
+        if(log) {
+            System.out.print("output indices = ");
+            for(int idx: varIndices)
+                System.out.print(idx + ", ");
+            System.out.println();
+        }
+
+        // make sure only one of them is true
+        double[] ones = new double[varIndices.length];
+        Arrays.fill(ones, 1);
+        System.out.println("ones size = " + ones.length);
+        System.out.println("varindices size = " + varIndices.length);
+        addEqualityConstraint(varIndices, ones, 1);
+
         return varIndices;
     }
 
     public int[] addDiscreteVariable(Score[] c) {
-        int[] varIndices = new int[c.length];
-        int ind = 0;
-        while (ind < c.length) {
-            double coef = c[ind].score;
-            numvars ++;
-            Variable var = Variable.make(Integer.toString(numvars)).weight(coef);
-            var.isInteger();
-            model.addVariable(var);
-//            objectiveFunction.set(var, coef);
-            varIndices[ind] = numvars -1;
-            ind++;
-        }
-        return varIndices;
+        double[] weights = new double[c.length];
+        for(int idx = 0; idx < c.length; idx++)
+            weights[idx] = c[idx].score;
+        return addDiscreteVariable(weights);
     }
 
     public void addEqualityConstraint(int[] i, double[] a, double b) {
+        if(log) {
+            System.out.print("OJalgoHook: addEqualityConstraint(");
+            for (int idx = 0; idx < i.length; idx++)
+                System.out.print("(i=" + i[idx] + ", a=" + a[idx] + ") ");
+            System.out.println("b= " + b + ")");
+        }
+
         numConstraints++;
         Expression constraint = model.addExpression("EqualityConstraint: " + Integer.toString(numConstraints));
         constraint.level(b);
@@ -157,6 +186,13 @@ public class OJalgoHook implements ILPSolver {
     }
 
     public void addGreaterThanConstraint(int[] i, double[] a, double b) {
+        if(log) {
+            System.out.print("OJalgoHook: addGreaterThanConstraint(");
+            for (int idx = 0; idx < i.length; idx++)
+                System.out.print("(i=" + i[idx] + ", a=" + a[idx] + ") ");
+            System.out.println("b= " + b + ")");
+        }
+
         numConstraints++;
         Expression constraint = model.addExpression("GreaterThanConstraint: " + Integer.toString(numConstraints));
         constraint.lower(b);
@@ -168,6 +204,13 @@ public class OJalgoHook implements ILPSolver {
     }
 
     public void addLessThanConstraint(int[] i, double[] a, double b) {
+        if(log) {
+            System.out.print("OJalgoHook: addLessThanConstraint(");
+            for (int idx = 0; idx < i.length; idx++)
+                System.out.print("(i=" + i[idx] + ", a=" + a[idx] + ") ");
+            System.out.println("b= " + b + ")");
+        }
+
         numConstraints++;
         Expression constraint = model.addExpression("LessThanConstraint: " + Integer.toString(numConstraints));
         constraint.upper(b);
@@ -180,6 +223,8 @@ public class OJalgoHook implements ILPSolver {
 
     // Note: oJalgo does not support pre-solving!
     public boolean solve() throws Exception {
+        if(log)
+            System.out.println("OJalgoHook: solve() ");
         if(minimize)
             result = model.minimise();
         else
@@ -194,31 +239,38 @@ public class OJalgoHook implements ILPSolver {
             System.out.println("Warning: the optimizatin is unbounded! ");
         if( result.getState() == Optimisation.State.APPROXIMATE )
             System.out.println("Warning: the optimizatin is approximate! ");
-
         return result.getState().isSuccess();
     }
 
     public boolean isSolved() {
-        if( result == null )
-            return false; 
-        return result.getState().isSuccess();
+        if(log)
+            System.out.println("OJalgoHook: isSolved() ");
+        return result != null && result.getState().isSuccess();
     }
 
     public boolean getBooleanValue(int index) {
+        if(log)
+            System.out.println("OJalgoHook: getBooleanValue(" + index + ") ");
         if( result.get(index).intValue() != 1 && result.get(index).intValue() != 0 )
             System.out.println("Warning! The value of the binary variable is not 0/1! ");
         return (result.get(index).intValue() == 1);
     }
 
     public double objectiveValue() {
-        return  result.getValue();
+        if(log)
+            System.out.println("OJalgoHook: objectiveValue()");
+        return result.getValue();
     }
 
     public void reset() {
+        if(log)
+            System.out.println("OJalgoHook: reset()");
         // no implementation
     }
 
     public void write(StringBuffer buffer) {
+        if(log)
+            System.out.println("OJalgoHook: write()");
         // no implementation
     }
 
@@ -234,7 +286,6 @@ public class OJalgoHook implements ILPSolver {
     }
 
     public void printModelInfo() {
-
         System.out.println(model.toString());
         System.out.println("objective: " + result.getValue());
     }
