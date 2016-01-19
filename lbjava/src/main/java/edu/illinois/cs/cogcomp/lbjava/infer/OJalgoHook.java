@@ -26,7 +26,7 @@ public class OJalgoHook implements ILPSolver {
     // internal variable for result of optimization
     private Optimisation.Result result;
 
-    private boolean log = true;
+    private boolean log = false;
 
     /**
      * Set bounds of variable in the specified position.
