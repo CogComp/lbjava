@@ -11,14 +11,16 @@ import java.util.Arrays;
 
 public class OJalgoHook implements ILPSolver {
 
-    private int numvars = 0; // initially there are no variables in the model.
+    // initially there are no variables in the model.
+    private int numvars = 0; 
 
-    private int numConstraints = 0;  // initial number of constraints
+    // initial number of constraints
+    private int numConstraints = 0;  
 
     private ExpressionsBasedModel model = new ExpressionsBasedModel();
 
     private String nameOfObjectiveExpression = "objective";
-    private Expression objectiveFunction =  model.getObjectiveExpression();  //model.addExpression(nameOfObjectiveExpression);
+    private Expression objectiveFunction =  model.getObjectiveExpression();  
 
     // Internal flag for keeping optimization state
     private boolean minimize = true;
@@ -153,8 +155,10 @@ public class OJalgoHook implements ILPSolver {
         // make sure only one of them is true
         double[] ones = new double[varIndices.length];
         Arrays.fill(ones, 1);
-        System.out.println("ones size = " + ones.length);
-        System.out.println("varindices size = " + varIndices.length);
+        if(log) {
+            System.out.println("ones size = " + ones.length);
+            System.out.println("varindices size = " + varIndices.length);
+        }
         addEqualityConstraint(varIndices, ones, 1);
 
         return varIndices;
