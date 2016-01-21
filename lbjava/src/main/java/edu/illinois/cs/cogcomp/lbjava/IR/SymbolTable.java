@@ -1,6 +1,7 @@
 package edu.illinois.cs.cogcomp.lbjava.IR;
 
 import java.io.File;
+import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -162,7 +163,14 @@ public class SymbolTable
 	 *         no type information could be found.
 	 **/
 	public Type get(ClassifierName name) {
-		return get(name.referent.toString());
+        String nameStr = name.referent.toString();
+        Type classifierType = get(nameStr);
+        try {
+            Class<?> className = classForName(name);
+            name.isField = className != null && className.getField(nameStr) != null;
+        }
+        catch (NoSuchFieldException e) {}
+        return classifierType;
 	}
 
 
@@ -322,6 +330,14 @@ public class SymbolTable
 			if (s.endsWith(".*")) prefixes.add(s.substring(0, s.length() - 1));
 			else if (s.endsWith("." + name.name[0]))
 				prefixes.add(s.substring(0, s.length() - name.name[0].length()));
+
+            // Try to see if this is static field in one of the imported classes
+            try {
+                Class<?> importedClass = Class.forName(s);
+                Field field = importedClass.getField(name.toString());
+                if (field != null) result = importedClass;
+            }
+            catch (Exception e) { }
 		}
 
 		for (Iterator<String> I = prefixes.iterator(); I.hasNext() && result == null; ) {
@@ -363,7 +379,17 @@ public class SymbolTable
 				catch (Exception e) { }
 				catch (NoClassDefFoundError e) { }
 			}
-		}
+
+            // Try to see if this is static field in one of the imported classes (prefixes)
+            if (prefix.isEmpty()) continue;
+            try {
+                Class<?> importedClass = Class.forName(prefix.substring(0, prefix.length()-1));
+                Field field = importedClass.getField(name.toString());
+                if (field != null) result = importedClass;
+            }
+            catch (Exception e) { }
+
+        }
 
 		return result;
 	}
