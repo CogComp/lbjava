@@ -10,11 +10,12 @@ leaving him to reason more directly about his application.
 # Tutorial 
 Visit each link for its content 
  1. [Introduction](doc/INTRO.md) 
- 2. [Basics and definitions](doc/DEFFINITIONS.md)
+ 2. [Basics and definitions](doc/DEFINITIONS.md)
  3. [A working example: classifiying newsgroup documents into topics](doc/20NEWSGROUP.md)
  4. [Syntax of LBJava](doc/LBJLANGUAGE.md)
  5. [LBJava library](doc/LBJLIBRARY.md)
  6. [Installation and Commandline options](doc/INSTALLATION.md)
+ 7. [A working example: regression](doc/REGRESSION.md)
  
 **Note**
 
