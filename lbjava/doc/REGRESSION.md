@@ -9,8 +9,8 @@ Let's name a class as `MyData` and use it for internal representation.
 In terms of internal data structure, from the data set examples, there are two fields: feature vector and label, while the label being real or continuous type. Intuitively, feature vector and label are declared as the following:
 
 ```java
-	private List<Double> features;
-    private double label;
+private List<Double> features;
+private double label;
 ```
 
 The class `MyData` is the representation for a single example from the data set. However, the data set consists many examples. Let's name a class as `MyDataReader` for the internal data structure for the data set.
@@ -18,30 +18,29 @@ The class `MyData` is the representation for a single example from the data set.
 For data structure, `lines` denotes all lines of examples in the data set. `currentLineNumber` keeps track which line that we are reading now.
 
 ```java
-    private final List<String> lines;
-    private int currentLineNumber;
+private final List<String> lines;
+private int currentLineNumber;
 ```
 
 The constructor of `MyDataReader` reads each line from the data set file and store them into internal data structure `lines`.
 
 ```java
-    public MyDataReader(String filePath) {
-        this.lines = new ArrayList<>();
-        this.currentLineNumber = 0;
+public MyDataReader(String filePath) {
+    this.lines = new ArrayList<>();
+    this.currentLineNumber = 0;
 
-        Reader reader;
-        try {
-            reader = new FileReader(filePath);
-            BufferedReader bufferedReader = new BufferedReader(reader);
-            String eachLine;
-            while ((eachLine = bufferedReader.readLine()) != null) {
-                lines.add(eachLine);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+    Reader reader;
+    try {
+        reader = new FileReader(filePath);
+        BufferedReader bufferedReader = new BufferedReader(reader);
+        String eachLine;
+        while ((eachLine = bufferedReader.readLine()) != null) {
+            lines.add(eachLine);
         }
+    } catch (IOException e) {
+        e.printStackTrace();
     }
-
+}
 ```
 
 `MyDataReader` is inherited from `Parser`. Method `next()` is overrided in `MyDataReader` serving as a next iterator.
@@ -49,21 +48,151 @@ The constructor of `MyDataReader` reads each line from the data set file and sto
 The function body is shown below:
 
 ```java
-    public Object next() {
-        if (currentLineNumber < lines.size()) {
-            MyData ret = new MyData(lines.get(currentLineNumber));
-            this.currentLineNumber ++;
-            return ret;
-        }
-        return null;
+public Object next() {
+    if (currentLineNumber < lines.size()) {
+        MyData ret = new MyData(lines.get(currentLineNumber));
+        this.currentLineNumber ++;
+        return ret;
     }
-
+    return null;
+}
 ```
 
 
 
 ##7.2 Classifier Declarations
 
-##7.3 Using `RegressionClassifier` in a Java Program
+Declaring the classifier need to use [Section 4 LBJava Language](LBJLANGUAGE.md).
+
+####7.2.1 Feature
+
+The features are declared as following:
+
+```java
+import java.util.List;
+
+real[] MyFeatures(MyData d) <- {
+    for (int i = 0; i < d.getFeatures().size(); i++) {
+        sense d.getFeatures().get(i);
+    }
+}
+
+```
+
+In particular, type `real[]` is referring the fact that the literal values of features are being used, rather than the index.
+
+For example, if the example looks like this:
+
+```
+10 20 30 -1
+```
+
+If type `real[]` is used, the features become `10 20 10` to classifier. However, if `real%` is used, the features become `0 1 2`, which are the indices.
+
+Please refer to [Section 4.1.2.4 Conjunctions](LBJLANGUAGE.md) for details on types.
+
+####7.2.2 Label
+
+The label is declared as following:
+
+```java
+real MyLabel(MyData d) <- {
+    return d.getLabel();
+}
+```
+####7.2.3 Classifier
+
+In this example, we are using Stochastic Gradient Descent as the classifier example, as it is a `real` type classifier in LBJava.
+
+The declaration is the following:
+
+```
+real SGDClassifier(MyData d) <-
+    learn MyLabel
+    using MyFeatures
+
+    with SGD {}
+
+end
+```
+
+##7.3 Using `SGDClassifier` in a Java Program
+
+###7.3.1 Generate `SGDClassifier`
+
+To compile your LBJava file and execute the LBJava code, run the following:
+
+```
+    mvn lbjava:compile
+```
+
+This will compile all Java files pertinent to the _.lbj_ file, then generate Java
+files from the _.lbj_ file. These generated Java files are put in a location which is
+determined by two things: the `gspFlag` parameter, and the package at the top of the _.lbj_ file.
+
+For example, if `gspFlag` is _src/main/java_ (the default), and the package is "my.package" then the
+generated Java files are put in _./src/main/java/my/package/_.
+   
+The model files (*.lc, *.lex) are put in the directory determined by the `dFlag` parameter.
+By default, this is _target/classes_.
+
+If you only want generate the Java translations of the LBJava code but not execute it, you can run:
+
+```
+    mvn lbjava:generate
+```
+Then to compile all classes run:
+
+```
+    mvn compile
+```
+If you want to remove the Java files generated by running "mvn lbj:compile", then run the following:
+
+```
+    mvn lbjava:clean
+```
+
+To remove _target/classes_, you run:
+
+```
+mvn clean
+```
+
+**Note**: If the generated Java files already exist (from a previous run of `lbjava:compile`
+or `lbjava:compile-only`) you need to run `lbjava:clean` before compiling again.
+
+**Acknowledgement** to Christos Christodoulopoulos.
+
+###7.3.1 Use `SGDClassifier` programmatically
+
+Once `SGDClassifier` is generated from the previous step, you may invoke it programmatically.
+
+Here is the sample code to use it:
+
+```java
+MyDataReader train = new MyDataReader("data/train.txt");
+
+// training
+Learner learner = new SGDClassifier();
+BatchTrainer trainer = new BatchTrainer(learner, train);
+trainer.train(1000);
+
+```
+
+First read training data set into `MyDataReader` and create a `SGDClassifier`.
+Pass `SGDClassifier` to `BatchTrainer` and invoke method `train` for number of times.
 
 ##7.4 Testing a Real Classifier
+
+Here is the sample code to use `TestReal` class:
+
+```java
+MyDataReader test = new MyDataReader("data/test.txt");
+Classifier oracle = new MyLabel();
+TestReal.testReal(learner,oracle,test);
+```
+
+First read testing data set into `MyDataReader` and create a oracle `Classifier` using the labels.
+Method `testReal` is a static method in `TestReal` class. Thus passing both `SGDClassifier` and the oracle `Classifier` into `testReal`.
+
+`TestReal` class output Root Mean Square error for reference.
