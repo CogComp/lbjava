@@ -31,10 +31,10 @@ import static org.junit.Assert.assertTrue;
  */
 public class MainTest {
 
-    private String generateLBJavaScript(String learnerName, String extractor) {
+    private String generateLBJavaScript(String learnerName, String extractor, String featImport) {
         return "import java.util.Vector;\n" +
                 "import edu.illinois.cs.cogcomp.lbjava.VectorParser;\n" +
-                "import edu.illinois.cs.cogcomp.lbjava.PredefinedFeature;\n" +
+                featImport + "\n" +
                 "import edu.illinois.cs.cogcomp.lbjava.PredefinedLabel;\n" +
                 "\n" +
                 "discrete "+learnerName+"(Vector v) <-\n" +
@@ -63,7 +63,8 @@ public class MainTest {
 
     @Test
     public void testOneFeature() throws Exception {
-        String input = generateLBJavaScript("OneFeatLearner", "testFeature1");
+        String input = generateLBJavaScript("OneFeatLearner", "testFeature1",
+                "import edu.illinois.cs.cogcomp.lbjava.features.PredefinedFeature;");
         Yylex scanner = new Yylex(new ByteArrayInputStream(input.getBytes()));
         AST ast = (AST) new parser(scanner).parse().value;
 
@@ -90,7 +91,8 @@ public class MainTest {
 
     @Test
     public void testTwoFeatures() throws Exception {
-        String input = generateLBJavaScript("TwoFeatLearner", "testFeature1, testFeature2");
+        String input = generateLBJavaScript("TwoFeatLearner", "testFeature1, testFeature2",
+                "import edu.illinois.cs.cogcomp.lbjava.features.PredefinedFeature;");
         Yylex scanner = new Yylex(new ByteArrayInputStream(input.getBytes()));
         AST ast = (AST) new parser(scanner).parse().value;
 
@@ -111,6 +113,34 @@ public class MainTest {
         ClassifierName component1 = (ClassifierName) components.iterator().next();
         assertTrue(component1.isField);
         assertEquals("PredefinedFeature", AST.globalSymbolTable.classForName(component1.getName()).getSimpleName());
+
+        new RevisionAnalysis(ast).run(ast);
+        new ClassifierCSE(ast).run(ast);
+        new TranslateToJava(ast).run(ast);
+        new Train(ast, 0).run(ast);
+    }
+
+    @Test
+    public void testPackageFeature() throws Exception {
+        String input = generateLBJavaScript("PackageFeatLearner", "testFeature1",
+                "import edu.illinois.cs.cogcomp.lbjava.features.*;");
+        Yylex scanner = new Yylex(new ByteArrayInputStream(input.getBytes()));
+        AST ast = (AST) new parser(scanner).parse().value;
+
+        Main.runSemanticAnalysis(ast);
+
+        assertEquals(3, SemanticAnalysis.dependorGraph.size());
+        assertEquals(1, ast.declarations.size());
+
+        ASTNode[] astNodes = ast.declarations.iterator().next().iterator().children;
+        assertEquals(3, astNodes.length);
+        assertTrue(astNodes[0] instanceof ClassifierReturnType);
+        assertEquals("discrete", astNodes[0].toString());
+        assertTrue(astNodes[2] instanceof LearningClassifierExpression);
+        LearningClassifierExpression lce = (LearningClassifierExpression) astNodes[2];
+        assertEquals("testFeature1", lce.extractor.getName());
+        assertTrue(((ClassifierName) lce.extractor).isField);
+        assertEquals("PredefinedFeature", AST.globalSymbolTable.classForName(lce.extractor.getName()).getSimpleName());
 
         new RevisionAnalysis(ast).run(ast);
         new ClassifierCSE(ast).run(ast);
