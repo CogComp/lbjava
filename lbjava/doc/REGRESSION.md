@@ -195,4 +195,4 @@ TestReal.testReal(learner,oracle,test);
 First read testing data set into `MyDataReader` and create a oracle `Classifier` using the labels.
 Method `testReal` is a static method in `TestReal` class. Thus passing both `SGDClassifier` and the oracle `Classifier` into `testReal`.
 
-`TestReal` class output Root Mean Square error for reference.
+`TestReal` class outputs Root Mean Square error for reference.
