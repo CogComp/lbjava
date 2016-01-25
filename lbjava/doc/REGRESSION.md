@@ -86,6 +86,7 @@ For example, if the example looks like this:
 ```
 10 20 30 -1
 ```
+where `10 20 30` are features and `-1` is the label.
 
 If type `real[]` is used, the features become `10 20 10` to classifier. However, if `real%` is used, the features become `0 1 2`, which are the indices.
 
@@ -102,7 +103,7 @@ real MyLabel(MyData d) <- {
 ```
 ####7.2.3 Classifier
 
-In this example, we are using Stochastic Gradient Descent as the classifier example, as it is a `real` type classifier in LBJava.
+In this example, we are using Stochastic Gradient Descent as the classifier example, as it is a classifier with `real` type as output in LBJava.
 
 The declaration is the following:
 
