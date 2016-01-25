@@ -103,7 +103,7 @@ real MyLabel(MyData d) <- {
 ```
 ####7.2.3 Classifier
 
-In this example, we are using Stochastic Gradient Descent as the classifier example, as it is a classifier with `real` type as output in LBJava.
+Since we are using a classifier with real output type, we need to choose a training method compatible this output type. In this example we use Stochastic Gradient Descent. (visit [Training Algorithms](ALGORITHMS.md) for complete list of training algorithms with the expected output types.)
 
 The declaration is the following:
 

@@ -16,6 +16,7 @@ Visit each link for its content
  5. [LBJava library](doc/LBJLIBRARY.md)
  6. [Installation and Commandline options](doc/INSTALLATION.md)
  7. [A working example: regression](doc/REGRESSION.md)
+ 8. [Learning Algorithms](doc/ALGORITHMS.md)
  
 **Note**
 
