@@ -229,20 +229,24 @@ public class OJalgoHook implements ILPSolver {
     public boolean solve() throws Exception {
         if(log)
             System.out.println("OJalgoHook: solve() ");
+            
         if(minimize)
             result = model.minimise();
         else
             result = model.maximise();
-        if( result.getState() == Optimisation.State.OPTIMAL )
-            System.out.println("Good news!: the optimizatin solution is optimal! ");
-        if( result.getState() == Optimisation.State.DISTINCT )
-            System.out.println("Good news!: the optimizatin solution is unique! ");
-        if( result.getState() == Optimisation.State.INFEASIBLE )
-            System.out.println("Warning: the optimizatin is infeasible! ");
-        if( result.getState() == Optimisation.State.UNBOUNDED )
-            System.out.println("Warning: the optimizatin is unbounded! ");
-        if( result.getState() == Optimisation.State.APPROXIMATE )
-            System.out.println("Warning: the optimizatin is approximate! ");
+            
+        if(log) {
+            if( result.getState() == Optimisation.State.OPTIMAL )
+                System.out.println("Good news!: the optimizatin solution is optimal! ");
+            if( result.getState() == Optimisation.State.DISTINCT )
+                System.out.println("Good news!: the optimizatin solution is unique! ");
+            if( result.getState() == Optimisation.State.INFEASIBLE )
+                System.out.println("Warning: the optimizatin is infeasible! ");
+            if( result.getState() == Optimisation.State.UNBOUNDED )
+                System.out.println("Warning: the optimizatin is unbounded! ");
+            if( result.getState() == Optimisation.State.APPROXIMATE )
+                System.out.println("Warning: the optimizatin is approximate! ");
+        }
         return result.getState().isSuccess();
     }
 
