@@ -189,10 +189,10 @@ Here is the sample code to use `TestReal` class:
 ```java
 MyDataReader test = new MyDataReader("data/test.txt");
 Classifier oracle = new MyLabel();
-TestReal.testReal(learner,oracle,test);
+TestReal.testReal(learner, oracle, test, true);
 ```
 
 First read testing data set into `MyDataReader` and create a oracle `Classifier` using the labels.
-Method `testReal` is a static method in `TestReal` class. Thus passing both `SGDClassifier` and the oracle `Classifier` into `testReal`.
+Its method `testReal` is a static method in `TestReal` class. Thus passing `SGDClassifier`, the oracle `Classifier`, the testing data set `test` and a debug boolean flag into `testReal` as arguments.
 
 `TestReal` class outputs Root Mean Square error for reference.
