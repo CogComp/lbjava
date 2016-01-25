@@ -22,12 +22,12 @@ return values that respect the constraints.
 
 ### Feature
 A feature is a data type which has both a name and a value.  There are two
-types of features in LBJava; discrete and real.  The name of the feature in
+types of features in LBJava: **discrete** and **real**.  The name of the feature in
 either case is always a `String`.  A discrete feature has a value of type
 `String` assumed to come from some finite set of unordered values
 associated with the feature's name (although it is not necessary to know what
 values that set contains ahead of time).  A real feature has a value of type
-`double.
+`double`.
 
 Most learning algorithms use features to index the parameters whose values are
 determined during training. (An exception to this rule would be a
@@ -69,7 +69,8 @@ from other classifiers using LBJava's classifier operators, or it may be learned
 from data as a function of the features produced by other classifiers with a
 special syntax discussed later.
 
-###  A learner or learning classifier is a classifier capable of changing its
+### Learner / Learning Classifier
+A learner or learning classifier is a classifier capable of changing its
 implementation with experience.  The methods used for effecting that change
 are commonly referred to as the *learning algorithm*.  In general, the
 programmer is encouraged to simply call on a learning algorithm implemented in
