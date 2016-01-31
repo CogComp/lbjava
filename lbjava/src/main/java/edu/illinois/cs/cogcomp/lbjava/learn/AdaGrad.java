@@ -284,6 +284,7 @@ public class AdaGrad extends Learner{
         for(int i = 0; i < exampleFeatures.length; i++) {
             weightDotProductX += weightVector[i] * exampleValues[i];
         }
+        weightDotProductX += weightVector[weightVector.length-1];
         return weightDotProductX;
     }
 
