@@ -3,7 +3,7 @@
     <parent>
         <artifactId>lbjava-project</artifactId>
         <groupId>edu.illinois.cs.cogcomp</groupId>
-        <version>1.2.7</version>
+        <version>1.2.8</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -21,12 +21,12 @@
         <dependency>
             <groupId>edu.illinois.cs.cogcomp</groupId>
             <artifactId>LBJava</artifactId>
-            <version>1.2.7</version>
+            <version>1.2.8</version>
         </dependency>
         <dependency>
             <groupId>edu.illinois.cs.cogcomp</groupId>
             <artifactId>lbjava-maven-plugin</artifactId>
-            <version>1.2.7</version>
+            <version>1.2.8</version>
         </dependency>
         <dependency>
             <groupId>edu.illinois.cs.cogcomp</groupId>
@@ -40,7 +40,7 @@
             <plugin>
                 <groupId>edu.illinois.cs.cogcomp</groupId>
                 <artifactId>lbjava-maven-plugin</artifactId>
-                <version>1.2.7</version>
+                <version>1.2.8</version>
                 <configuration>
                     <lbjavaInputFileList>
                         <param>${project.basedir}/src/main/lbj/BadgesClassifier.lbj</param>
