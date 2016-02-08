@@ -1,7 +1,6 @@
 package edu.illinois.cs.cogcomp.lbjava.infer;
 
 import edu.illinois.cs.cogcomp.lbjava.classify.Score;
-import edu.illinois.cs.cogcomp.lbjava.infer.ILPSolver;
 import org.ojalgo.optimisation.Expression;
 import org.ojalgo.optimisation.ExpressionsBasedModel;
 import org.ojalgo.optimisation.Optimisation;
@@ -9,6 +8,10 @@ import org.ojalgo.optimisation.Variable;
 
 import java.util.Arrays;
 
+/**
+ * A hook for the oj! Algorithms (ojAlgo), an Open Source Java code to do mathematics, linear algebra and optimisation.
+ * For further information, see <a href="http://ojalgo.org/">http://ojalgo.org/</a>
+ */
 public class OJalgoHook implements ILPSolver {
 
     // initially there are no variables in the model.
@@ -237,15 +240,15 @@ public class OJalgoHook implements ILPSolver {
             
         if(log) {
             if( result.getState() == Optimisation.State.OPTIMAL )
-                System.out.println("Good news!: the optimizatin solution is optimal! ");
+                System.out.println("Good news!: the optimization solution is optimal! ");
             if( result.getState() == Optimisation.State.DISTINCT )
-                System.out.println("Good news!: the optimizatin solution is unique! ");
+                System.out.println("Good news!: the optimization solution is unique! ");
             if( result.getState() == Optimisation.State.INFEASIBLE )
-                System.out.println("Warning: the optimizatin is infeasible! ");
+                System.out.println("Warning: the optimization is infeasible! ");
             if( result.getState() == Optimisation.State.UNBOUNDED )
-                System.out.println("Warning: the optimizatin is unbounded! ");
+                System.out.println("Warning: the optimization is unbounded! ");
             if( result.getState() == Optimisation.State.APPROXIMATE )
-                System.out.println("Warning: the optimizatin is approximate! ");
+                System.out.println("Warning: the optimization is approximate! ");
         }
         return result.getState().isSuccess();
     }
