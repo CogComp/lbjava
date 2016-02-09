@@ -1,29 +1,29 @@
-import edu.illinois.cs.cogcomp.lbjava.classify.Classifier;
+package edu.illinois.cs.cogcomp.lbjava.classify;
+
 import edu.illinois.cs.cogcomp.lbjava.parse.Parser;
 
 /**
- * This class is a program that can evaluate any <code>Classifier</code>
- * against an oracle <code>Classifier</code> on the objects returned from
- * a <code>Parser</code>.
+ * This class is a program that can evaluate any {@link Classifier}
+ * against an oracle {@link Classifier} on the objects returned from
+ * a {@link Parser}.
  *
- * In particular, this class is for <code>real</code> type, i.e. regression.
- * For <code>discrete</code>type, refer class <code>TestDiscrete</code> in
- * <code>edu.illinois.cs.cogcomp.lbjava.classify.TestDiscrete</code>.
+ * In particular, this class is for {@code real} type, i.e. regression.
+ * For {@code discrete} type, refer class {@link TestDiscrete}.
  *
  * @author Yiming Jiang
  */
 public class TestReal {
 
     /**
-     * Tests the given <code>real</code> classifier against the given oracle
-     * using the given <code>parser</code> to provide the <code>real</code> labeled testing data.
+     * Tests the given {@code real} classifier against the given oracle
+     * using the given {@link Parser} to provide the {@code real} labeled testing data.
      *
      * This method uses root-mean-square error as the evaluation criteria.
      *
      * @param classifier The classifier to be tested
      * @param oracle The classifier to test against
      * @param parser The parser supplying the labeled example objects
-     * @param output Whether or not to produce output on <code>stdout</code>
+     * @param output Whether or not to produce output on {@code stdout}
      */
     public static void testReal(Classifier classifier,
                                 Classifier oracle,
