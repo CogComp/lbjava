@@ -17,6 +17,8 @@ To use this, you need to modify your pom.xml file to depend on this plugin (see 
 You may also need to modify your project layout to be Maven compatible (see [Project setup](#project-setup)).
 Instructions for usage are in the [Usage](#usage) section.
 
+**Note:** Make sure to change the pom.xml parameter `LBJAVA-VERSION` to the latest version of LBJava.
+
 ### <a name="pom"></a>POM file
 
 Put the following into your pom.xml:
@@ -28,7 +30,7 @@ Put the following into your pom.xml:
            <plugin>
              <groupId>edu.illinois.cs.cogcomp</groupId>
              <artifactId>lbjava-maven-plugin</artifactId>
-             <version>2.0</version>
+             <version>LBJAVA-VERSION</version>
              <configuration>
                <dFlag>lbjava/class/output/</dFlag>
                <gspFlag>path/to/intended/lbjavasrc/output</gspFlag>
@@ -82,7 +84,7 @@ Here's an example without the optional parameters. This is as simple as it gets,
            <plugin>
              <groupId>edu.illinois.cs.cogcomp</groupId>
              <artifactId>lbjava-maven-plugin</artifactId>
-             <version>2.0</version>
+             <version>LBJAVA-VERSION</version>
              <configuration>
                <lbjavaInputFileList>
                  <param>lbjava/MyClassifier.lbj</param>
@@ -134,7 +136,7 @@ the plugin definition as follows:
 <plugin>
     <groupId>edu.illinois.cs.cogcomp</groupId>
     <artifactId>lbjava-maven-plugin</artifactId>
-    <version>1.2</version>
+    <version>LBJAVA-VERSION</version>
     <configuration>
         <lbjavaInputFileList>
             <param>lbjava/MyClassifier.lbj</param>
@@ -219,7 +221,7 @@ that the plugin should be allowed to execute. To do this add the following:
                                 <pluginExecutionFilter>
                                     <groupId>edu.illinois.cs.cogcomp</groupId>
                                     <artifactId>lbjava-maven-plugin</artifactId>
-                                    <versionRange>[2.0,)</versionRange>
+                                    <versionRange>LBJAVA-VERSION</versionRange>
                                     <goals>
                                         <goal>clean</goal>
                                         <goal>compile</goal>
@@ -241,4 +243,4 @@ that the plugin should be allowed to execute. To do this add the following:
     
 ## Credits 
  - [Stephen Mayhew](mailto:swm.mayhew@gmail.com): Nov 22, 2013 (v1.0)  
- - [Christos Christodoulopoulos](mailto:christod@illinois.edu): Mar 20, 2015 (v2.0)
+ - [Christos Christodoulopoulos](mailto:christod@illinois.edu): Mar 20, 2015 (v1.2)
