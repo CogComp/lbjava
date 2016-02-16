@@ -383,7 +383,27 @@ public class SymbolTable
             // Try to see if this is static field in one of the imported classes (prefixes)
             if (prefix.isEmpty()) continue;
             try {
-                Class<?> importedClass = Class.forName(prefix.substring(0, prefix.length()-1));
+                String prefixPath = prefix.replace('.', File.separatorChar);
+                String[] paths = Main.sourcePath.split("\\" + File.pathSeparator);
+
+                Class<?> importedClass = null;
+                try {
+                    importedClass = Class.forName(prefix.substring(0, prefix.length() - 1));
+                } catch (ClassNotFoundException e) {
+                    for (String path : paths) {
+                        if (!new File(path).isDirectory()) continue;
+                        File dir = new File(path + File.separator + prefixPath);
+                        if (!dir.isDirectory()) continue;
+                        for (String nFile : dir.list()) {
+                            String className = (prefix + nFile).replace(".class", "");
+                            importedClass = Class.forName(className);
+                            if (importedClass.getField(name.toString()) != null)
+                                result = importedClass;
+                        }
+                    }
+
+                }
+                if (importedClass == null) continue;
                 Field field = importedClass.getField(name.toString());
                 if (field != null) result = importedClass;
             }

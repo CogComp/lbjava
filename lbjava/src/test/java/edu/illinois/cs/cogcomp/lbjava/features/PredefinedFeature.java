@@ -1,4 +1,4 @@
-package edu.illinois.cs.cogcomp.lbjava;
+package edu.illinois.cs.cogcomp.lbjava.features;
 
 import edu.illinois.cs.cogcomp.lbjava.classify.Classifier;
 import edu.illinois.cs.cogcomp.lbjava.classify.DiscretePrimitiveStringFeature;
