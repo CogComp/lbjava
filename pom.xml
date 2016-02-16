@@ -97,7 +97,11 @@
                     <excludes>
                         <exclude>**/data/*.*</exclude>
                         <exclude>**/*.txt</exclude>
-                        <exclude>**/README.md</exclude>
+                        <exclude>**/*.groovy</exclude>
+                        <exclude>**/*.sh</exclude>
+                        <exclude>**/*.lbj</exclude>
+                        <exclude>**/*.xml</exclude>
+                        <exclude>**/*.md</exclude>
                         <exclude>src/test/resources/**</exclude>
                         <exclude>src/main/resources/**</exclude>
                     </excludes>
