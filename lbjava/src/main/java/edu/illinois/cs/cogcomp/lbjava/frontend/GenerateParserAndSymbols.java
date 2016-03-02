@@ -72,7 +72,19 @@ public class GenerateParserAndSymbols {
 			
 			BufferedWriter out = new BufferedWriter(new OutputStreamWriter(
 					new FileOutputStream(symNamesFile)));
-			String output = "package " + 
+
+            // Add the licence header
+            String licence = "/**\n";
+            in = new BufferedReader(new InputStreamReader(
+                    new FileInputStream(sourcePath + "resources/license-header.txt")));
+            while ((line = in.readLine()) != null) {
+                if (line.isEmpty()) licence += " *\n";
+                else licence += " * " + line + "\n";
+            }
+            in.close();
+            licence += " */\n";
+
+			String output = licence + "package " +
 					packageName.replaceAll("/", ".").substring(0, packageName.length() - 1) + ";\n\n" +
 					"public class SymbolNames {\n"+
 					"\tpublic static String nameTable[] = {\n"+
