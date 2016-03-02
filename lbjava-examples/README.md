@@ -12,7 +12,7 @@ Here are a couple of sample classification projects which are using LBJava.
 ## How to run 
 To generate outputs for lbj run: 
 ```
-mvn lbj:generate
+mvn lbjava:generate
 ```
 
 and then you can compile the code: 
