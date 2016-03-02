@@ -10,17 +10,19 @@ Here are a couple of sample classification projects which are using LBJava.
 6. [Sentiment Classification](src/main/java/edu/illinois/cs/cogcomp/lbjava/examples/sentiment/README.md)
 
 ## How to run 
-To generate outputs for lbj run: 
+
+Run all examples:
+
 ```
-mvn lbj:generate
+sh compileLBJ.sh all
 ```
 
-and then you can compile the code: 
+Run each individual example:
+
 ```
-mvn compile
+sh compileLBJ.sh example_name
 ```
 
-In order to remove the output of lbjava from previous run: 
-```
-mvn lbjava:clean
-```
+Available example names are: `badges`, `entity`, `newsgroup`, `sentiment`, `setcover`, `spam`.
+
+
