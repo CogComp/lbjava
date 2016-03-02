@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# generate each .lbj file
 generateLBJFiles() {
     if [ $# -eq 0 ];
     then
@@ -22,9 +23,11 @@ generateLBJFiles() {
 
     echo $CP
 
+    $JAVA $SWITCHES -cp $CP edu.illinois.cs.cogcomp.lbjava.Main -d $LBJBIN -gsp $GSP -x -sourcepath $SRC $FILE
     $JAVA $SWITCHES -cp $CP edu.illinois.cs.cogcomp.lbjava.Main -d $LBJBIN -gsp $GSP -sourcepath $SRC $FILE
 }
 
+# generate all .lbj files
 generateAllLBJFiles() {
   # declare -a files=("BadgesClassifier.lbj" "EntityRelation.lbj" "NewsGroupClassifier.lbj" "SentimentClassifier.lbj" "SetCover.lbj" "SpamClassifier.lbj")
 
@@ -36,4 +39,39 @@ generateAllLBJFiles() {
 }
 
 # running starts here
-generateAllLBJFiles
+if [ $# -eq 0 ]; then
+	echo "Error: One argument is needed."
+	exit
+fi
+
+if [ $# -gt 1 ]; then
+	echo "Error: Too many arguments."
+	exit
+fi
+
+case $1 in
+	"all")
+		echo "===== Generating output for all =====\n";
+		generateAllLBJFiles
+		exit;;
+	"badges")
+		file_name="BadgesClassifier.lbj";;
+	"entity")
+		file_name="EntityRelation.lbj";;
+	"newsgroup")
+		file_name="NewsGroupClassifier.lbj";;
+	"sentiment")
+		file_name="SentimentClassifier.lbj";;
+	"setcover")
+		file_name="SetCover.lbj";;
+	"spam")
+		file_name="SpamClassifier.lbj";;
+	"regression")
+		file_name="RegressionClassifier.lbj";;
+	*)
+		echo "Invalid argument: "$1
+		exit;;
+esac
+
+echo "===== Generating output for $1 =====\n"
+generateLBJFiles "src/main/lbj/"$file_name
