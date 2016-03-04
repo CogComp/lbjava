@@ -144,7 +144,7 @@ the plugin definition as follows:
     </configuration>
     <executions>
         <execution>
-            <phase>compile</phase>
+            <phase>generate-sources</phase>
             <goals>
                 <goal>clean</goal>
                 <goal>compile</goal>
