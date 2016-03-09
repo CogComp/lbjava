@@ -7,7 +7,7 @@ import edu.illinois.cs.cogcomp.lbjava.learn.Learner;
 import edu.illinois.cs.cogcomp.lbjava.learn.StochasticGradientDescent;
 
 /**
- * This is the main function to programatically invoke the <code>SGDClassifier</code>
+ * This is the main function to programmatically invoke the <code>SGDClassifier</code>
  *
  * @author Yiming Jiang
  */
@@ -16,7 +16,7 @@ public class SGDMain {
         /* read the training data set */
         MyDataReader train = new MyDataReader(System.getProperty("user.dir")+"/data/regression/train.txt");
 
-        /* programatically create SGDClassifier and set the learning rate */
+        /* programmatically create SGDClassifier and set the learning rate */
         StochasticGradientDescent learner = new SGDClassifier();
         StochasticGradientDescent.Parameters p = new StochasticGradientDescent.Parameters();
         p.learningRate = Math.pow(10, -11);
