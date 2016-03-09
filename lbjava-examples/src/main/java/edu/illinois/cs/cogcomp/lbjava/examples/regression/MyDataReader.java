@@ -6,11 +6,28 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Data Parser
+ *
+ * It reads through a file and parse each example as <code>MyData</code>
+ *
+ * Note: assuming each line consists of features and label for each example,
+ *       please see <code>MyData</code> for more information on the format
+ *
+ * @author Yiming Jiang
+ */
 public class MyDataReader implements Parser {
 
+    /* a list holding all lines in the file */
     private final List<String> lines;
+
+    /* keep track of where we are */
     private int currentLineNumber;
 
+    /**
+     * Constructor
+     * @param filePath the path to the file
+     */
     public MyDataReader(String filePath) {
         this.lines = new ArrayList<>();
         this.currentLineNumber = 0;
@@ -28,6 +45,11 @@ public class MyDataReader implements Parser {
         }
     }
 
+    /**
+     * Iterator method
+     * @return the next example in <code>MyData</code>
+     */
+    @Override
     public Object next() {
         if (currentLineNumber < lines.size()) {
             MyData ret = new MyData(lines.get(currentLineNumber));
@@ -37,9 +59,14 @@ public class MyDataReader implements Parser {
         return null;
     }
 
+    @Override
     public void close() {
     }
 
+    /**
+     * Reset the line number tracker
+     */
+    @Override
     public void reset() {
         this.currentLineNumber = 0;
     }
