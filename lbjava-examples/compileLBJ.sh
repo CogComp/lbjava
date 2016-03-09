@@ -15,7 +15,7 @@ generateLBJFiles() {
     SWITCHES="-ea -XX:MaxPermSize=1g -Xmx8g"
 
     BIN=target
-    LBJBIN=target
+    LBJBIN=target/classes
     SRC=src/main/java
     GSP=src/main/java
 
