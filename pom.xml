@@ -104,6 +104,9 @@
                         <exclude>**/*.md</exclude>
                         <exclude>src/test/resources/**</exclude>
                         <exclude>src/main/resources/**</exclude>
+                        <exclude>src/main/java/edu/illinois/cs/cogcomp/lbjava/frontend/sym.java</exclude>
+                        <exclude>src/main/java/edu/illinois/cs/cogcomp/lbjava/frontend/parser.java</exclude>
+                        <exclude>../lbjava-examples/**</exclude>
                     </excludes>
                 </configuration>
                 <executions>

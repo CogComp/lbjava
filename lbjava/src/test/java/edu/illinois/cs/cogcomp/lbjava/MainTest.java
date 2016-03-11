@@ -165,7 +165,7 @@ public class MainTest {
         File[] dirFiles = lbjDir.listFiles(new FilenameFilter() {
 
             public boolean accept(File dir, String name) {
-                return !name.endsWith(".lbj");
+                return !name.endsWith(".lbj") && !name.startsWith(".nfs");
             }
         });
         for (File file: dirFiles) assert file.delete() : "Could not delete file " + file;
