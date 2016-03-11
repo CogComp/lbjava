@@ -19,12 +19,13 @@ generateLBJFiles() {
     SRC=src/main/java
     GSP=src/main/java
 
+    if [ ! -d $LBJBIN ]; then mkdir -p $LBJBIN; fi
     CP=$BIN:$LBJBIN:lib/*:lib/illinois-core-utilities-3.0.15.jar:lib/liblinear.jar:../lbjava/target/lbjavaCore.jar
 
     echo $CP
 
-    $JAVA $SWITCHES -cp $CP edu.illinois.cs.cogcomp.lbjava.Main -d $LBJBIN -gsp $GSP -x -sourcepath $SRC $FILE
-    $JAVA $SWITCHES -cp $CP edu.illinois.cs.cogcomp.lbjava.Main -d $LBJBIN -gsp $GSP -sourcepath $SRC $FILE
+    $JAVA $SWITCHES -cp $CP edu.illinois.cs.cogcomp.lbjava.Main -x -d $LBJBIN -gsp $GSP -sourcepath $SRC $FILE
+    $JAVA $SWITCHES -cp $CP edu.illinois.cs.cogcomp.lbjava.Main -c -d $LBJBIN -gsp $GSP -sourcepath $SRC $FILE
 }
 
 # generate all .lbj files
@@ -51,7 +52,7 @@ fi
 
 case $1 in
 	"all")
-		echo "===== Generating output for all =====\n";
+		echo "===== Generating output for all =====";
 		generateAllLBJFiles
 		exit;;
 	"badges")
