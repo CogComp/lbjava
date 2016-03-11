@@ -95,7 +95,7 @@
                 <configuration>
                     <header>lbjava/src/main/resources/license-header.txt</header>
                     <excludes>
-                        <exclude>**/data/*.*</exclude>
+                        <exclude>data/**</exclude>
                         <exclude>**/*.txt</exclude>
                         <exclude>**/*.groovy</exclude>
                         <exclude>**/*.sh</exclude>
@@ -104,9 +104,9 @@
                         <exclude>**/*.md</exclude>
                         <exclude>src/test/resources/**</exclude>
                         <exclude>src/main/resources/**</exclude>
+                        <exclude>src/main/java/edu/illinois/cs/cogcomp/lbjava/examples/**</exclude>
                         <exclude>src/main/java/edu/illinois/cs/cogcomp/lbjava/frontend/sym.java</exclude>
                         <exclude>src/main/java/edu/illinois/cs/cogcomp/lbjava/frontend/parser.java</exclude>
-                        <exclude>../lbjava-examples/**</exclude>
                     </excludes>
                 </configuration>
                 <executions>
