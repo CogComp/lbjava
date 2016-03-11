@@ -60,3 +60,6 @@ lbjava-examples/src/main/java/edu/illinois/cs/cogcomp/lbjava/examples/sentiment/
 lbjava-examples/src/main/java/edu/illinois/cs/cogcomp/lbjava/examples/sentiment/SentimentClassifier.test.ex
 lbjava-examples/src/main/java/edu/illinois/cs/cogcomp/lbjava/examples/spam/SpamClassifier.ex
 lbjava-examples/src/main/java/edu/illinois/cs/cogcomp/lbjava/examples/spam/SpamClassifier.test.ex
+lbjava-examples/src/main/java/edu/illinois/cs/cogcomp/lbjava/examples/regression/MyFeatures.java
+lbjava-examples/src/main/java/edu/illinois/cs/cogcomp/lbjava/examples/regression/MyLabel.java
+lbjava-examples/src/main/java/edu/illinois/cs/cogcomp/lbjava/examples/regression/SGDClassifier.java
