@@ -115,13 +115,15 @@ public class Clean extends Pass
     if (directory.length() == 0) directory = System.getProperty("user.dir");
     else directory = directory.substring(0, directory.length() - 1);
 
-    String[] toAdd =
-      new File(directory).list(
-        new FilenameFilter() {
-          public boolean accept(File directory, String n) {
-            return n.startsWith(prefix);
-          }
-        });
+    String[] toAdd = new String[0];
+    if (new File(directory).exists()) {
+      toAdd = new File(directory).list(
+          new FilenameFilter() {
+            public boolean accept(File directory, String n) {
+              return n.startsWith(prefix);
+            }
+          });
+    }
 
     for (int i = 0; i < toAdd.length; ++i)
       toAdd[i] = directory + File.separator + toAdd[i];
@@ -131,13 +133,14 @@ public class Clean extends Pass
     if (directory.length() == 0) directory = System.getProperty("user.dir");
     else directory = directory.substring(0, directory.length() - 1);
 
-    toAdd =
-      new File(directory).list(
-        new FilenameFilter() {
-          public boolean accept(File directory, String n) {
-            return n.startsWith(prefix);
-          }
-        });
+    if (new File(directory).exists()) {
+      toAdd = new File(directory).list(
+              new FilenameFilter() {
+                public boolean accept(File directory, String n) {
+                  return n.startsWith(prefix);
+                }
+              });
+    }
 
     for (int i = 0; i < toAdd.length; ++i)
       toAdd[i] = directory + File.separator + toAdd[i];
