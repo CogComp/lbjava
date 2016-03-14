@@ -49,13 +49,14 @@
                         <param>${project.basedir}/src/main/lbj/EntityRelation.lbj</param>
                         <param>${project.basedir}/src/main/lbj/NewsGroupClassifier.lbj</param>
                         <param>${project.basedir}/src/main/lbj/SpamClassifier.lbj</param>
+                        <param>${project.basedir}/src/main/lbj/RegressionClassifier.lbj</param>
                     </lbjavaInputFileList>
                     <gspFlag>${project.basedir}/src/main/java</gspFlag>
                     <dFlag>${project.basedir}/target/classes</dFlag>
                 </configuration>
                 <executions>
                     <execution>
-                        <phase>compile</phase>
+                        <phase>generate-sources</phase>
                         <goals>
                             <goal>clean</goal>
                             <goal>generate</goal>

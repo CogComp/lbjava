@@ -37,13 +37,13 @@ public class CleanMojo extends AbstractMojo {
 	/**
 	 * This is maven default (src/main/java) if not specified.
 	 */
-	@Parameter(defaultValue = "src/main/java")
+	@Parameter(defaultValue = "${project.basedir}/src/main/java")
 	private String gspFlag;
 
 	/**
 	 * This is maven default (src/main/java) if not specified.
 	 */
-	@Parameter(defaultValue = "src/main/java")
+	@Parameter(defaultValue = "${project.basedir}/src/main/java")
 	private String sourcepathFlag;
 
 	/**
