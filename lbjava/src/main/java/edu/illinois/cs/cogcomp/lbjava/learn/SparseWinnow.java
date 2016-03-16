@@ -274,6 +274,7 @@ public class SparseWinnow extends LinearThresholdUnit
   public void setParameters(Parameters p) {
     super.setParameters(p);
     beta = p.beta;
+    bias = p.bias;
   }
 
 
@@ -287,6 +288,7 @@ public class SparseWinnow extends LinearThresholdUnit
     Parameters p =
       new Parameters((LinearThresholdUnit.Parameters) super.getParameters());
     p.beta = beta;
+    p.bias = bias;
     return p;
   }
 
@@ -381,7 +383,8 @@ public class SparseWinnow extends LinearThresholdUnit
                      double base) {
     weightVector.scaledMultiply(exampleFeatures, exampleValues, base,
                                 initialWeight);
-    bias *= base;
+    // do not update bias
+    // bias *= base;
   }
 
 
@@ -445,6 +448,11 @@ public class SparseWinnow extends LinearThresholdUnit
      **/
     public double beta;
 
+    /**
+     * The theta or bias: y(wT dot x + theta) < margin
+     */
+    public double bias;
+
 
     /** Sets all the default values. */
     public Parameters() {
@@ -469,6 +477,7 @@ public class SparseWinnow extends LinearThresholdUnit
     public Parameters(Parameters p) {
       super(p);
       beta = p.beta;
+      bias = p.bias;
     }
 
 
