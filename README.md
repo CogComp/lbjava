@@ -9,16 +9,13 @@
 ## Compiling the whole package 
 Try the following steps: 
 
- - Build the lbjava core: `mvn -pl lbjava package -Djar.finalName=lbjavaCore`
+ - Build the LBJava core: `mvn -pl lbjava package -Djar.finalName=lbjavaCore`
  - Generate java files from lbjava definitions: `cd lbjava-examples; sh compileLBJ.sh <arg>`. See more details [here](lbjava-examples/README.md).
  - Test the whole project: `mvn test`
  
 ## External Links 
-[Here](http://cogcomp.cs.illinois.edu/page/software_view/LBJ) is the homepage of LBJ.  
-If you have any questions visit [here](http://cogcomp.cs.illinois.edu/).  
-
+[Here](http://cogcomp.cs.illinois.edu/page/software_view/LBJava) is LBJava's homepage.  
 
 ## Licensing
 To see the full license for this software, see [LICENSE](LICENSE) or visit the download 
-page for this software and press 'Download'. The next screen displays the license. 
-
+page for this software and press "Download". The next screen displays the license. 
