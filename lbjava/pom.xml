@@ -52,6 +52,11 @@
 			<artifactId>ojalgo</artifactId>
 			<version>37.1.1</version>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-math3</artifactId>
+			<version>3.6</version>
+		</dependency>
 	</dependencies>
 
     <reporting>
