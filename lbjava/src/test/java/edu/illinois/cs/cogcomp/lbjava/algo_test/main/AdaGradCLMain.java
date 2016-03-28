@@ -17,6 +17,8 @@ import edu.illinois.cs.cogcomp.lbjava.algo_test.classifiers.AdaGradCLClassifier;
 import edu.illinois.cs.cogcomp.lbjava.classify.Classifier;
 import edu.illinois.cs.cogcomp.lbjava.classify.TestDiscrete;
 import edu.illinois.cs.cogcomp.lbjava.learn.BatchTrainer;
+import edu.illinois.cs.cogcomp.lbjava.util.DebugUtils;
+import jdk.nashorn.internal.runtime.Debug;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -37,10 +39,7 @@ public class AdaGradCLMain {
         BatchTrainer adgclTrainer = new BatchTrainer(adgcl, trainingSet);
         adgclTrainer.train(10);
 
-        ByteArrayOutputStream sout = new ByteArrayOutputStream();
-        PrintStream out = new PrintStream(sout);
-        adgcl.write(out);
-        System.out.println(sout.toString());
+        DebugUtils.printWeightVector(adgcl);
 
         AlgoParser testingSet = new AlgoParser(dataSet, false);
         Classifier oracle = new AlgoDiscreteLabel();
