@@ -75,8 +75,7 @@ public abstract class LinearThresholdUnit extends Learner
   /** Default value for {@link #learningRate}. */
   public static final double defaultLearningRate = 0.1;
   /** Default for {@link #weightVector}. */
-  public static final SparseWeightVector defaultWeightVector =
-    new SparseWeightVector();
+  public static final SparseWeightVector defaultWeightVector = new SparseWeightVector();
 
   /**
     * The rate at which weights are updated; default
@@ -111,8 +110,6 @@ public abstract class LinearThresholdUnit extends Learner
   protected double negativeThickness;
   /** The label producing classifier's allowable values. */
   protected String[] allowableValues;
-
-
 
   /**
     * Default constructor.  The learning rate and threshold take default
@@ -251,7 +248,6 @@ public abstract class LinearThresholdUnit extends Learner
     setParameters(p);
   }
 
-
   /**
     * Initializing constructor.  Sets all member variables to their associated
     * settings in the {@link LinearThresholdUnit.Parameters} object.
@@ -273,6 +269,11 @@ public abstract class LinearThresholdUnit extends Learner
     setParameters(p);
   }
 
+  public SparseWeightVector getWeightVector() { return weightVector; }
+
+  public double getBias() { return bias; }
+
+  public String[] getAllowableValues() { return allowableValues; }
 
   /**
     * Sets the values of parameters that control the behavior of this learning
@@ -289,7 +290,6 @@ public abstract class LinearThresholdUnit extends Learner
     positiveThickness = p.thickness + p.positiveThickness;
     negativeThickness = p.thickness + p.negativeThickness;
   }
-
 
   /**
     * Retrieves the parameters that are set in this learner.

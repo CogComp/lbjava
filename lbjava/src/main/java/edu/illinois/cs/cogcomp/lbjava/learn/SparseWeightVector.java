@@ -46,7 +46,6 @@ public class SparseWeightVector implements Cloneable, Serializable
 	/** The weights in the vector indexed by their {@link Lexicon} key. */
 	protected DVector weights;
 
-
 	/** Simply instantiates {@link #weights}. */
 	public SparseWeightVector() { this(new DVector(defaultCapacity)); }
 
@@ -63,7 +62,6 @@ public class SparseWeightVector implements Cloneable, Serializable
 	 * @param w  A vector of weights.
 	 **/
 	public SparseWeightVector(DVector w) { weights = w; }
-
 
 	/**
 	 * Returns the weight of the given feature.

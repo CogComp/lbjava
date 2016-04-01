@@ -23,7 +23,6 @@ import edu.illinois.cs.cogcomp.lbjava.util.ExceptionlessInputStream;
 import edu.illinois.cs.cogcomp.lbjava.util.ExceptionlessOutputStream;
 import edu.illinois.cs.cogcomp.lbjava.util.OVector;
 
-
 /**
   * A <code>SparseNetworkLearner</code> uses multiple
   * {@link LinearThresholdUnit}s to make a multi-class classification.
@@ -50,34 +49,33 @@ import edu.illinois.cs.cogcomp.lbjava.util.OVector;
  **/
 public class SparseNetworkLearner extends Learner
 {
-  /**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 
 /** Default for {@link #baseLTU}. */
-  public static final LinearThresholdUnit defaultBaseLTU =
-    new SparseAveragedPerceptron();
-
+  public static final LinearThresholdUnit defaultBaseLTU = new SparseAveragedPerceptron();
 
   /**
     * The underlying algorithm used to learn each class separately as a binary
     * classifier; default {@link #defaultBaseLTU}.
    **/
   protected LinearThresholdUnit baseLTU;
+
   /**
     * A collection of the linear threshold units used to learn each label,
     * indexed by the label.
    **/
   protected OVector network;
+
   /** The total number of examples in the training data, or 0 if unknown. */
   protected int numExamples;
+
   /**
     * The total number of distinct features in the training data, or 0 if
     * unknown.
    **/
   protected int numFeatures;
+
   /** Whether or not this learner's labeler produces conjunctive features. */
   protected boolean conjunctiveLabels;
 
@@ -141,6 +139,13 @@ public class SparseNetworkLearner extends Learner
     network = new OVector();
   }
 
+  public int getNumExamples() { return numExamples; }
+
+  public int getNumFeatures() { return numFeatures; }
+
+  public LinearThresholdUnit getBaseLTU() { return baseLTU; }
+
+  public OVector getNetwork() { return network; }
 
   /**
     * Sets the values of parameters that control the behavior of this learning
@@ -654,6 +659,7 @@ public class SparseNetworkLearner extends Learner
     }
 
     out.println("End of SparseNetworkLearner");
+    out.close();
   }
 
 
@@ -674,6 +680,7 @@ public class SparseNetworkLearner extends Learner
       if (ltu == null) out.writeString(null);
       else ltu.write(out);
     }
+    out.close();
   }
 
 
@@ -728,10 +735,8 @@ public class SparseNetworkLearner extends Learner
    **/
   public static class Parameters extends Learner.Parameters
   {
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
+
 	/**
       * The underlying algorithm used to learn each class separately as a
       * binary classifier; default

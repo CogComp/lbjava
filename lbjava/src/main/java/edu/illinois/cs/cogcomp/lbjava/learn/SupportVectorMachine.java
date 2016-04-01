@@ -330,6 +330,11 @@ public class SupportVectorMachine extends Learner
     setParameters(p);
   }
 
+  public double[] getWeights() {
+    return weights;
+  }
+
+  public int getNumClasses() { return numClasses; }
 
   /**
     * Sets the values of parameters that control the behavior of this learning
