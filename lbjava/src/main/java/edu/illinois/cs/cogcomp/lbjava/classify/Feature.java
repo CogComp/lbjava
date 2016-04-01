@@ -369,13 +369,9 @@ public abstract class Feature implements Cloneable, Comparable, Serializable
              && f.containingPackage != containingPackage)
          : "Features \"" + f + "\" and \"" + this
            + " have equivalent package strings in different objects.";
-    assert !(f.generatingClassifier.equals(generatingClassifier)
-             && f.generatingClassifier != generatingClassifier)
-         : "Features \"" + f + "\" and \"" + this
-           + " have equivalent classifier name strings in different objects.";
 
     return f.containingPackage == containingPackage
-           && f.generatingClassifier == generatingClassifier;
+           && f.generatingClassifier.equals(generatingClassifier);
   }
 
 
