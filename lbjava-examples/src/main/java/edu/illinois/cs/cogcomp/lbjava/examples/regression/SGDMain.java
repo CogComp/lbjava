@@ -41,6 +41,6 @@ public class SGDMain {
 
         /* test the testing data set against gold */
         Classifier oracle = new MyLabel();
-        TestReal.testReal(learner, oracle, test, true);
+        TestReal.testReal(new TestReal(), learner, oracle, test, true, 10);
     }
 }
