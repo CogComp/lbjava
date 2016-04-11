@@ -9,6 +9,18 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>LBJavaExamples</artifactId>
 
+    <properties>
+        <lbjava.mavenplugin.configuration>
+            ${project.basedir}/src/main/lbj/BadgesClassifier.lbj,
+            ${project.basedir}/src/main/lbj/SentimentClassifier.lbj,
+            ${project.basedir}/src/main/lbj/SetCover.lbj,
+            ${project.basedir}/src/main/lbj/EntityRelation.lbj,
+            ${project.basedir}/src/main/lbj/NewsGroupClassifier.lbj,
+            ${project.basedir}/src/main/lbj/SpamClassifier.lbj,
+            ${project.basedir}/src/main/lbj/RegressionClassifier.lbj
+        </lbjava.mavenplugin.configuration>
+    </properties>
+
     <repositories>
         <repository>
             <id>CogcompSoftware</id>
@@ -42,15 +54,7 @@
                 <artifactId>lbjava-maven-plugin</artifactId>
                 <version>1.2.16</version>
                 <configuration>
-                    <lbjavaInputFileList>
-                        <param>${project.basedir}/src/main/lbj/BadgesClassifier.lbj</param>
-                        <param>${project.basedir}/src/main/lbj/SentimentClassifier.lbj</param>
-                        <param>${project.basedir}/src/main/lbj/SetCover.lbj</param>
-                        <param>${project.basedir}/src/main/lbj/EntityRelation.lbj</param>
-                        <param>${project.basedir}/src/main/lbj/NewsGroupClassifier.lbj</param>
-                        <param>${project.basedir}/src/main/lbj/SpamClassifier.lbj</param>
-                        <param>${project.basedir}/src/main/lbj/RegressionClassifier.lbj</param>
-                    </lbjavaInputFileList>
+                    <lbjavaInputFileList>${lbjava.mavenplugin.configuration}</lbjavaInputFileList>
                     <gspFlag>${project.basedir}/src/main/java</gspFlag>
                     <dFlag>${project.basedir}/target/classes</dFlag>
                 </configuration>
@@ -66,5 +70,50 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>badges</id>
+            <properties>
+                <lbjava.mavenplugin.configuration>${project.basedir}/src/main/lbj/BadgesClassifier.lbj</lbjava.mavenplugin.configuration>
+            </properties>
+        </profile>
+        <profile>
+            <id>entity</id>
+            <properties>
+                <lbjava.mavenplugin.configuration>${project.basedir}/src/main/lbj/EntityRelation.lbj</lbjava.mavenplugin.configuration>
+            </properties>
+        </profile>
+        <profile>
+            <id>newsgroup</id>
+            <properties>
+                <lbjava.mavenplugin.configuration>${project.basedir}/src/main/lbj/NewsGroupClassifier.lbj</lbjava.mavenplugin.configuration>
+            </properties>
+        </profile>
+        <profile>
+            <id>sentiment</id>
+            <properties>
+                <lbjava.mavenplugin.configuration>${project.basedir}/src/main/lbj/SentimentClassifier.lbj</lbjava.mavenplugin.configuration>
+            </properties>
+        </profile>
+        <profile>
+            <id>setcover</id>
+            <properties>
+                <lbjava.mavenplugin.configuration>${project.basedir}/src/main/lbj/SetCover.lbj</lbjava.mavenplugin.configuration>
+            </properties>
+        </profile>
+        <profile>
+            <id>spam</id>
+            <properties>
+                <lbjava.mavenplugin.configuration>${project.basedir}/src/main/lbj/SpamClassifier.lbj</lbjava.mavenplugin.configuration>
+            </properties>
+        </profile>
+        <profile>
+            <id>regression</id>
+            <properties>
+                <lbjava.mavenplugin.configuration>${project.basedir}/src/main/lbj/RegressionClassifier.lbj</lbjava.mavenplugin.configuration>
+            </properties>
+        </profile>
+    </profiles>
 
 </project>

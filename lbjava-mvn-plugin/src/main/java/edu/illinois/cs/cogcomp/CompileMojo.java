@@ -70,6 +70,7 @@ public class CompileMojo extends AbstractMojo {
 		for (String lbjInputFile : lbjavaInputFileList) {
 			getLog().info("Calling Java edu.illinois.cs.cogcomp.lbjava.Main...");
 			try {
+				lbjInputFile = lbjInputFile.trim();
 				String[] args = new String[] { "java", "-cp", newpath, "edu.illinois.cs.cogcomp.lbjava.Main",
                         "-d", dFlag, "-gsp", gspFlag, "-sourcepath", sourcepathFlag, lbjInputFile };
 
