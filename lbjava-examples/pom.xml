@@ -10,6 +10,7 @@
     <artifactId>LBJavaExamples</artifactId>
 
     <properties>
+        <lbjava.mavenplugin.defaultgoal>generate</lbjava.mavenplugin.defaultgoal>
         <lbjava.mavenplugin.configuration>
             ${project.basedir}/src/main/lbj/BadgesClassifier.lbj,
             ${project.basedir}/src/main/lbj/SentimentClassifier.lbj,
@@ -50,6 +51,27 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.3</version>
+                <executions>
+                    <execution>
+                        <id>ensure-target-folder</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>mkdir</executable>
+                            <arguments>
+                                <argument>-p</argument>
+                                <argument>target/classes</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>edu.illinois.cs.cogcomp</groupId>
                 <artifactId>lbjava-maven-plugin</artifactId>
                 <version>1.2.16</version>
@@ -63,7 +85,7 @@
                         <phase>generate-sources</phase>
                         <goals>
                             <goal>clean</goal>
-                            <goal>generate</goal>
+                            <goal>${lbjava.mavenplugin.defaultgoal}</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -72,6 +94,13 @@
     </build>
 
     <profiles>
+        <profile>
+            <id>compile-examples</id>
+            <properties>
+                <lbjava.mavenplugin.defaultgoal>compile</lbjava.mavenplugin.defaultgoal>
+            </properties>
+        </profile>
+        <!--example specific profile definitions follow-->
         <profile>
             <id>badges</id>
             <properties>
