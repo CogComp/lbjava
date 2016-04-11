@@ -24,7 +24,7 @@ discrete NewsGroupLabel(Document d) <- { return d.getLabel(); }
 discrete NewsGroupClassifier(Document d) <-
 learn NewsGroupLabel
   using WordFeatures, BigramFeatures
-  from new DocumentReader("../data/20news/train")
+  from new DocumentReader("data/20news/train")
   5 rounds
 
   with SparseNetworkLearner {
@@ -34,7 +34,7 @@ learn NewsGroupLabel
      p.thickness = 5;
      baseLTU = new SparseAveragedPerceptron(p);
   }
-  testFrom new DocumentReader("../data/20news/test")
+  testFrom new DocumentReader("data/20news/test")
  
   progressOutput 2000
 end
