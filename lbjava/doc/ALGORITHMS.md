@@ -53,7 +53,7 @@ Here is a list of learning algorithm in LBJava.
 The code snippets below demonstrated how to use learning algorithms inside [`SparseNetworkLearner`](https://github.com/IllinoisCogComp/lbjava/blob/master/lbjava/src/main/java/edu/illinois/cs/cogcomp/lbjava/learn/SparseNetworkLearner.java) programmatically, and how to set parameters accordingly.
 
 #### Declarations in `.lbj` file, with only `SparseNetworkLearner`
-```
+```java
 discrete SparseNetworkClassifier(Post post) <-
     learn NewsgroupLabel
     using BagOfWords
@@ -64,7 +64,7 @@ end
 ```
 
 #### Declarations in `.lbj` file, with `SparseAveragedPerceptron` inside `SparseNetworkLearner`
-```
+```java
 discrete SAPClassifier(Post post) <-
     learn NewsgroupLabel
     using BagOfWords
@@ -81,7 +81,7 @@ end
 ```
 
 ### Programmatically use `SparseAveragedPerceptron` inside `SparseNetworkLearner`
-```
+```java
 SparseNetworkClassifier swn = new SparseNetworkClassifier();
 SparseNetworkLearner.Parameters snp = new SparseNetworkLearner.Parameters();
 SparseAveragedPerceptron sap = new SparseAveragedPerceptron();
