@@ -3,9 +3,8 @@ package edu.illinois.cs.cogcomp.lbjava.examples.entityRelation;
 import java.util.List;
 import edu.illinois.cs.cogcomp.lbjava.examples.entityRelation.datastruct.*;
 import edu.illinois.cs.cogcomp.lbjava.examples.entityRelation.Conll04_RelationReaderNew;
-import edu.illinois.cs.cogcomp.lbjava.infer.GurobiHook;
 
-import edu.illinois.cs.cogcomp.lbjava.infer.GurobiHook;
+import edu.illinois.cs.cogcomp.lbjava.infer.OJalgoHook;
 
 discrete% EntityFeatures(ConllRawToken t) <- {
     sense t.POS;
@@ -116,7 +115,7 @@ inference JointER head ConllRelation t {
     ConllRawToken e  { return e.getRelation(); }
     // normalizedby new Softmax()
     subjectto { @PersonWorkFor(t) /\ @OrganizationWorkFor(t); }
-    with new ILPInference(new GurobiHook())
+    with new ILPInference(new OJalgoHook())
 }
 
 discrete RelArgsClassifier(ConllRelation r) <-
