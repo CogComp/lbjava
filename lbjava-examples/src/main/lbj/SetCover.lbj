@@ -4,7 +4,7 @@ import edu.illinois.cs.cogcomp.lbjava.examples.setCover.City;
 import edu.illinois.cs.cogcomp.lbjava.examples.setCover.Neighborhood;
 import edu.illinois.cs.cogcomp.lbjava.examples.setCover.ContainsStation;
 
-import edu.illinois.cs.cogcomp.lbjava.infer.GurobiHook;
+import edu.illinois.cs.cogcomp.lbjava.infer.OJalgoHook;
 
 constraint noEmptyNeighborhoods(City c) {
   forall (Neighborhood n in c.getNeighborhoods())
@@ -16,7 +16,7 @@ constraint noEmptyNeighborhoods(City c) {
 inference SetCover head City c {
   Neighborhood n  { return n.getParentCity(); }
   subjectto { @noEmptyNeighborhoods(c); } 
-  with new ILPInference(new GurobiHook())
+  with new ILPInference(new OJalgoHook())
 }
 
 discrete{false, true} containsStationConstrained(Neighborhood n) <-

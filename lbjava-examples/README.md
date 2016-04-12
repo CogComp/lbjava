@@ -8,21 +8,34 @@ Here are a couple of sample classification projects which are using LBJava.
 4. [Newsgroup Classification](src/main/java/edu/illinois/cs/cogcomp/lbjava/examples/newsgroup/README.md)
 5. [Spam Classification](src/main/java/edu/illinois/cs/cogcomp/lbjava/examples/spam/README.md)
 6. [Sentiment Classification](src/main/java/edu/illinois/cs/cogcomp/lbjava/examples/sentiment/README.md)
+7. [Regression Classification](src/main/java/edu/illinois/cs/cogcomp/lbjava/examples/regression/README.md)
 
 ## How to run 
 
-Run all examples:
+From the root directory, run the appropriate commands:
+
+To generate *lbj* to *java* and compile examples:
 
 ```
-sh compileLBJ.sh all
+mvn compile
 ```
 
-Run each individual example:
+To compile and train all examples:
 
 ```
-sh compileLBJ.sh example_name
+mvn compile -P train-all-examples
 ```
 
-Available example names are: `badges`, `entity`, `newsgroup`, `sentiment`, `setcover`, `spam`.
+To compile individual examples:
+
+```
+mvn compile -P train-<example-name>
+```
+
+Available profile names are: `badges`, `entity`, `newsgroup`, `sentiment`, `setcover`, `spam`, `regression`.
+
+Example: ```mvn compile -P train-spam``` for the generating and training just the Spam classifier example.
+
+
 
 

@@ -9,6 +9,12 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>LBJavaExamples</artifactId>
 
+    <properties>
+        <lbjava.mavenplugin.defaultgoal>generate</lbjava.mavenplugin.defaultgoal>
+        <!--The compile list is populated during profile selection-->
+        <lbjava.mavenplugin.lbjCompileFile></lbjava.mavenplugin.lbjCompileFile>
+    </properties>
+
     <repositories>
         <repository>
             <id>CogcompSoftware</id>
@@ -38,32 +44,123 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.3</version>
+                <executions>
+                    <execution>
+                        <!--Ensuring that target/classes exists. lbjava generate/compile hangs otherwise-->
+                        <id>ensure-target-folder</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>mkdir</executable>
+                            <arguments>
+                                <argument>-p</argument>
+                                <argument>target/classes</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>edu.illinois.cs.cogcomp</groupId>
                 <artifactId>lbjava-maven-plugin</artifactId>
                 <version>1.2.16</version>
                 <configuration>
-                    <lbjavaInputFileList>
-                        <param>${project.basedir}/src/main/lbj/BadgesClassifier.lbj</param>
-                        <param>${project.basedir}/src/main/lbj/SentimentClassifier.lbj</param>
-                        <param>${project.basedir}/src/main/lbj/SetCover.lbj</param>
-                        <param>${project.basedir}/src/main/lbj/EntityRelation.lbj</param>
-                        <param>${project.basedir}/src/main/lbj/NewsGroupClassifier.lbj</param>
-                        <param>${project.basedir}/src/main/lbj/SpamClassifier.lbj</param>
-                    </lbjavaInputFileList>
                     <gspFlag>${project.basedir}/src/main/java</gspFlag>
                     <dFlag>${project.basedir}/target/classes</dFlag>
                 </configuration>
                 <executions>
                     <execution>
-                        <phase>compile</phase>
+                        <phase>generate-sources</phase>
                         <goals>
                             <goal>clean</goal>
-                            <goal>generate</goal>
+                            <goal>${lbjava.mavenplugin.defaultgoal}</goal>
                         </goals>
+                        <configuration>
+                            <lbjavaInputFileList>
+                                <param>${project.basedir}/src/main/lbj/BadgesClassifier.lbj</param>
+                                <param>${project.basedir}/src/main/lbj/SentimentClassifier.lbj</param>
+                                <param>${project.basedir}/src/main/lbj/SetCover.lbj</param>
+                                <param>${project.basedir}/src/main/lbj/EntityRelation.lbj</param>
+                                <param>${project.basedir}/src/main/lbj/NewsGroupClassifier.lbj</param>
+                                <param>${project.basedir}/src/main/lbj/SpamClassifier.lbj</param>
+                                <param>${project.basedir}/src/main/lbj/RegressionClassifier.lbj</param>
+                            </lbjavaInputFileList>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>optional-compile-step</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>clean</goal>
+                            <goal>compile</goal>
+                        </goals>
+                        <configuration>
+                            <lbjavaInputFileList>
+                                <param>${lbjava.mavenplugin.lbjCompileFile}</param>
+                            </lbjavaInputFileList>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>train-all-examples</id>
+            <properties>
+                <lbjava.mavenplugin.defaultgoal>compile</lbjava.mavenplugin.defaultgoal>
+                <lbjava.mavenplugin.lbjCompileFile></lbjava.mavenplugin.lbjCompileFile>
+            </properties>
+        </profile>
+        <!--example specific profile definitions follow-->
+        <profile>
+            <id>train-badges</id>
+            <properties>
+                <lbjava.mavenplugin.lbjCompileFile>${project.basedir}/src/main/lbj/BadgesClassifier.lbj</lbjava.mavenplugin.lbjCompileFile>
+            </properties>
+        </profile>
+        <profile>
+            <id>train-entity</id>
+            <properties>
+                <lbjava.mavenplugin.lbjCompileFile>${project.basedir}/src/main/lbj/EntityRelation.lbj</lbjava.mavenplugin.lbjCompileFile>
+            </properties>
+        </profile>
+        <profile>
+            <id>train-newsgroup</id>
+            <properties>
+                <lbjava.mavenplugin.lbjCompileFile>${project.basedir}/src/main/lbj/NewsGroupClassifier.lbj</lbjava.mavenplugin.lbjCompileFile>
+            </properties>
+        </profile>
+        <profile>
+            <id>train-sentiment</id>
+            <properties>
+                <lbjava.mavenplugin.lbjCompileFile>${project.basedir}/src/main/lbj/SentimentClassifier.lbj</lbjava.mavenplugin.lbjCompileFile>
+            </properties>
+        </profile>
+        <profile>
+            <id>train-setcover</id>
+            <properties>
+                <lbjava.mavenplugin.lbjCompileFile>${project.basedir}/src/main/lbj/SetCover.lbj</lbjava.mavenplugin.lbjCompileFile>
+            </properties>
+        </profile>
+        <profile>
+            <id>train-spam</id>
+            <properties>
+                <lbjava.mavenplugin.lbjCompileFile>${project.basedir}/src/main/lbj/SpamClassifier.lbj</lbjava.mavenplugin.lbjCompileFile>
+            </properties>
+        </profile>
+        <profile>
+            <id>train-regression</id>
+            <properties>
+                <lbjava.mavenplugin.lbjCompileFile>${project.basedir}/src/main/lbj/RegressionClassifier.lbj</lbjava.mavenplugin.lbjCompileFile>
+            </properties>
+        </profile>
+    </profiles>
 
 </project>

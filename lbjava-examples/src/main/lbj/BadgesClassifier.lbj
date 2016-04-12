@@ -30,7 +30,7 @@ discrete{"positive", "negative"} BadgeLabel(String line) <- {
 discrete BadgeClassifier(String line) <-
 learn BadgeLabel
   using IdealFeatures
-  from new BadgeDataReader("../data/badges/badges.train")
+  from new BadgeDataReader("data/badges/badges.train")
   5 rounds
 
   with SparseAveragedPerceptron {
@@ -38,7 +38,7 @@ learn BadgeLabel
     thickness = 3.5;
   }
 
-  testFrom new BadgeDataReader("../data/badges/badges.test")
+  testFrom new BadgeDataReader("data/badges/badges.test")
  
   progressOutput 2000
 end

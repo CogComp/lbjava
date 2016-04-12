@@ -6,12 +6,20 @@
 - [LBJava examples](lbjava-examples/README.md) 
 - [LBJava maven plugin](lbjava-mvn-plugin/README.md)
 
-## Compiling the whole package 
-Try the following steps: 
+## Compiling the whole package  
 
- - Build the LBJava core: `mvn -pl lbjava package -Djar.finalName=lbjavaCore`
- - Generate java files from lbjava definitions: `cd lbjava-examples; sh compileLBJ.sh <arg>`. See more details [here](lbjava-examples/README.md).
+From the root directory run the following command:
+
+ - Just compile all examples: `mvn compile`
+ - Compile and train all examples: `mvn compile -P train-all-examples`
+ See more details [here](lbjava-examples/README.md).
+
  - Test the whole project: `mvn test`
+
+## Compiling LBJava Core
+
+- `mvn compile -pl lbjava`
+
  
 ## External Links 
 [Here](http://cogcomp.cs.illinois.edu/page/software_view/LBJava) is LBJava's homepage.  

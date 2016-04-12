@@ -36,13 +36,13 @@ public class CompileMojo extends AbstractMojo {
 	/**
 	 * This is maven default (src/main/java) if not specified.
 	 */
-	@Parameter(defaultValue = "src/main/java")
+	@Parameter(defaultValue = "${project.basedir}/src/main/java")
 	private String gspFlag;
 
 	/**
 	 * This is maven default (src/main/java) if not specified.
 	 */
-	@Parameter(defaultValue = "src/main/java")
+	@Parameter(defaultValue = "${project.basedir}/src/main/java")
 	private String sourcepathFlag;
 
 	/**
@@ -68,7 +68,18 @@ public class CompileMojo extends AbstractMojo {
 		new File(gspFlag).mkdirs();
 
 		for (String lbjInputFile : lbjavaInputFileList) {
+			if (StringUtils.isEmpty(lbjInputFile)) {
+				// making the optional-compile-step parameter happy.
+				continue;
+			}
+
 			getLog().info("Calling Java edu.illinois.cs.cogcomp.lbjava.Main...");
+
+			if (StringUtils.isEmpty(lbjInputFile)) {
+				// making the optional-compile-parameter happy.
+				continue;
+			}
+
 			try {
 				String[] args = new String[] { "java", "-cp", newpath, "edu.illinois.cs.cogcomp.lbjava.Main",
                         "-d", dFlag, "-gsp", gspFlag, "-sourcepath", sourcepathFlag, lbjInputFile };
