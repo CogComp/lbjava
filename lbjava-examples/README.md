@@ -23,18 +23,18 @@ mvn compile
 To compile and train all examples:
 
 ```
-mvn compile -P generate-train-examples
+mvn compile -P train-all-examples
 ```
 
 To compile individual examples:
 
 ```
-mvn compile -P generate-train-examples,<example-profile>
+mvn compile -P train-<example-name>
 ```
 
 Available profile names are: `badges`, `entity`, `newsgroup`, `sentiment`, `setcover`, `spam`, `regression`.
 
-Example: ```mvn compile -P generate-train-examples,spam``` for the generating and training just the Spam classifier example.
+Example: ```mvn compile -P train-spam``` for the generating and training just the Spam classifier example.
 
 
 

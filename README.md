@@ -11,7 +11,7 @@
 From the root directory run the following command:
 
  - Just compile all examples: `mvn compile`
- - Compile and train all examples: `mvn compile -P generate-train-examples`
+ - Compile and train all examples: `mvn compile -P train-all-examples`
  See more details [here](lbjava-examples/README.md).
 
  - Test the whole project: `mvn test`

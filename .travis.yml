@@ -3,6 +3,6 @@ language: java
 install: echo "skip" # or anything that returns 0 status
 
 script:
-  - mvn compile -P generate-train-examples # Train Examples here as well.
+  - mvn compile -P train-all-examples # Train Examples here as well.
   - mvn test 
   
