@@ -68,9 +68,19 @@ public class CompileMojo extends AbstractMojo {
 		new File(gspFlag).mkdirs();
 
 		for (String lbjInputFile : lbjavaInputFileList) {
+			if (StringUtils.isEmpty(lbjInputFile)) {
+				// making the optional-compile-step parameter happy.
+				continue;
+			}
+
 			getLog().info("Calling Java edu.illinois.cs.cogcomp.lbjava.Main...");
+
+			if (StringUtils.isEmpty(lbjInputFile)) {
+				// making the optional-compile-parameter happy.
+				continue;
+			}
+
 			try {
-				lbjInputFile = lbjInputFile.trim();
 				String[] args = new String[] { "java", "-cp", newpath, "edu.illinois.cs.cogcomp.lbjava.Main",
                         "-d", dFlag, "-gsp", gspFlag, "-sourcepath", sourcepathFlag, lbjInputFile };
 

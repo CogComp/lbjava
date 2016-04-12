@@ -68,9 +68,13 @@ public class CleanMojo extends AbstractMojo {
 		List<String> fileList = Arrays.asList(lbjavaInputFileList);
 		Collections.reverse(fileList);
 		for (String lbjInputFile : fileList) {
+			if (StringUtils.isEmpty(lbjInputFile)) {
+				// making the optional-compile-step parameter happy.
+				continue;
+			}
+
 			getLog().info("Calling Java edu.illinois.cs.cogcomp.lbjava.Main with the -x flag (for cleaning)...");
 			try {
-				lbjInputFile = lbjInputFile.trim();
 				// The -x flag makes all the difference.
 				String[] args = new String[] { "java", "-cp", newpath, "edu.illinois.cs.cogcomp.lbjava.Main", "-x",
                         "-d", dFlag, "-gsp", gspFlag, "-sourcepath", sourcepathFlag, lbjInputFile };
