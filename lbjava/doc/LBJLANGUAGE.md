@@ -683,3 +683,55 @@ line parameters (see Section 6.2). For example, if the classifiers in an LBJ sou
 to take classes from the programmer’s internal representation as input, the LBJ compiler will
 automatically compile the Java source files containing those class’ implementations if their class
 files don’t already exist or are out of date.
+
+## 4.5 Parameter Tuning Syntax
+
+Parameter turning is essential in machine learning, as it allows the programmers to find the best parameters in the learning algorithms to perform to their maximum extent. LBJava has intuitive syntax to tune parameters easily. Please see the subsections below to learn more.
+
+### 4.5.1 Set of Parameters
+
+We want to try a set of predefined parameters.
+
+The syntax is:
+```
+{{value1, value2, value3}}
+```
+
+For example, we want the algorithm to try 5, 10, 20, 30, 40 iterations.
+
+The `lbj` code looks like:
+```
+{{5, 10, 20, 30, 40}} rounds
+```
+
+Another example, we want the algorithm to try different learning rates, such as 0.5, 0.1, 0.005.
+
+The `lbj` code looks like:
+```
+p.learningRate = {{0.5, 0.1, 0.005}};
+```
+
+### 4.5.2 Parameters in Steps
+
+We want to try a set of parameters, within a range, with steps.
+
+Let's denote the range from `start`, to `end`, with step size `step_size`.
+
+The syntax is:
+```
+{{step_size -> start : end}}
+```
+
+For example, we want to try thickness in `SparseAvergedPerceptron`, from 3 to 0.5, with step size 1.
+
+The `lbj` code looks like:
+```
+p.thinkness = {{ 1 -> 3 : 0.5}};
+```
+
+### 4.5.3 Cross Validation
+
+Cross validation is useful, and essential to avoid overfitting problem. For k-fold cross validation, the syntax is: 
+```
+cval k "random"
+```
