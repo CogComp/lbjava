@@ -9,7 +9,6 @@
    - [How it works](#how)
    - [Eclipse](#ecplise)
 
-
 ### <a name="overview"></a>Overview
 
 The purpose of this project is to make it easier to work with LBJava and Maven. This is a plugin written for Maven.
@@ -23,29 +22,31 @@ Instructions for usage are in the [Usage](#usage) section.
 
 Put the following into your pom.xml:
 
-      <build>
-         <plugins>
-           ...
-           
-           <plugin>
-             <groupId>edu.illinois.cs.cogcomp</groupId>
-             <artifactId>lbjava-maven-plugin</artifactId>
-             <version>LBJAVA-VERSION</version>
-             <configuration>
-               <dFlag>lbjava/class/output/</dFlag>
-               <gspFlag>path/to/intended/lbjavasrc/output</gspFlag>
-               <sourcepathFlag>path/to/src</sourcepathFlag>
-               <lbjavaInputFileList>
-                <param>path/to/lbjavafile.lbj</param>
-                <param>path/to/second/lbjavafile2.lbj</param>
-                <param>etc/etc.lbj</param>
-               </lbjavaInputFileList>
-             </configuration>
-           </plugin>
-           
-           ...
-         </plugins>
-      </build>
+```xml
+<build>
+ <plugins>
+   ...
+   
+   <plugin>
+     <groupId>edu.illinois.cs.cogcomp</groupId>
+     <artifactId>lbjava-maven-plugin</artifactId>
+     <version>LBJAVA-VERSION</version>
+     <configuration>
+       <dFlag>lbjava/class/output/</dFlag>
+       <gspFlag>path/to/intended/lbjavasrc/output</gspFlag>
+       <sourcepathFlag>path/to/src</sourcepathFlag>
+       <lbjavaInputFileList>
+        <param>path/to/lbjavafile.lbj</param>
+        <param>path/to/second/lbjavafile2.lbj</param>
+        <param>etc/etc.lbj</param>
+       </lbjavaInputFileList>
+     </configuration>
+   </plugin>
+   
+   ...
+ </plugins>
+</build>
+```
 
 
 Parameters are:
@@ -60,41 +61,45 @@ are simply the flags given to LBJava's Main class. These are documented in the L
 
 **NB**: In case you get a repository error you should add edu.illinois.cs.cogcomp as a plugin repository:
 
-    <pluginRepositories>
-        ...
+```xml 
+<pluginRepositories>
+    ...
 
-        <pluginRepository>
-            <id>CogcompSoftware</id>
-            <name>CogcompSoftware</name>
-            <url>http://cogcomp.cs.illinois.edu/m2repo/</url>
-        </pluginRepository>
+    <pluginRepository>
+        <id>CogcompSoftware</id>
+        <name>CogcompSoftware</name>
+        <url>http://cogcomp.cs.illinois.edu/m2repo/</url>
+    </pluginRepository>
 
-        ...
-    </pluginRepositories>
+    ...
+</pluginRepositories>
+```
 
 
 ### <a name="example-setup"></a>Example setup
 
 Here's an example without the optional parameters. This is as simple as it gets, folks.
 
-      <build>
-         <plugins>
-           ...
-           
-           <plugin>
-             <groupId>edu.illinois.cs.cogcomp</groupId>
-             <artifactId>lbjava-maven-plugin</artifactId>
-             <version>LBJAVA-VERSION</version>
-             <configuration>
-               <lbjavaInputFileList>
-                 <param>lbjava/MyClassifier.lbj</param>
-               </lbjavaInputFileList>
-             </configuration>
-           </plugin>
-           
-           ...
-         </plugins>
-      </build>
+```xml
+<build>
+ <plugins>
+   ...
+   
+   <plugin>
+     <groupId>edu.illinois.cs.cogcomp</groupId>
+     <artifactId>lbjava-maven-plugin</artifactId>
+     <version>LBJAVA-VERSION</version>
+     <configuration>
+       <lbjavaInputFileList>
+         <param>lbjava/MyClassifier.lbj</param>
+       </lbjavaInputFileList>
+     </configuration>
+   </plugin>
+   
+   ...
+ </plugins>
+</build>
+```
 
 
 

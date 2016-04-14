@@ -18,8 +18,41 @@ Visit each link for its content
  7. [A working example: regression](doc/REGRESSION.md)
  8. [Learning Algorithms](doc/ALGORITHMS.md)
  
-**Note**
+## Using it as a dependency  
+To include LBJava in your Maven project, add the following snippet with the
+   `#version` entry replaced with the version listed in this project's pom.xml file. 
+   Note that you also add to need the
+   `<repository>` element for the CogComp maven repository in the `<repositories>` element.
+    
+```xml 
+    <dependencies>
+         ...
+        <dependency>
+            <groupId>edu.illinois.cs.cogcomp</groupId>
+            <artifactId>LBJava</artifactId>
+            <version>#version#</version>
+        </dependency>
+        ...
+    </dependencies>
+    ...
+    <repositories>
+        <repository>
+            <id>CogcompSoftware</id>
+            <name>CogcompSoftware</name>
+            <url>http://cogcomp.cs.illinois.edu/m2repo/</url>
+        </repository>
+    </repositories>
+```
 
+## Compiling the code 
+To compile and package the LBJava code simply run:
+
+    mvn install
+
+NB: If you need to run `mvn clean` at any point, make sure to create `target/classes` directory before 
+running `mvn compile/install` since it is required for the java-source compilation process.
+
+## Using ILP inference 
 LBJava uses the Gurobi solver for inference and therefore the Gurobi library needs to be installed 
 prior to compilation. To download and install Gurobi visit [http://www.gurobi.com/](http://www.gurobi.com/)
 
@@ -29,14 +62,7 @@ Make sure to include Gurobi in your PATH and LD_LIBRARY variables
     export PATH="${PATH}:${GUROBI_HOME}/bin"
     export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${GUROBI_HOME}/lib"
 ```
-To compile and package the LBJava code simply run:
 
-    mvn install
-
-It will create the jar package in target/LBJava-1.0.jar as well as install it in your local Maven repo.
-
-NB: If you need to run `mvn clean` at any point, make sure to create `target/classes` directory before 
-running `mvn compile/install` since it is required for the java-source compilation process.
 
 ## Credits 
 This project was started by [Nicholas Rizzolo](mailto:rizzolo@gmail.com).
