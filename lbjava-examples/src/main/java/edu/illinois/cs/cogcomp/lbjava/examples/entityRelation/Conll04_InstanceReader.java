@@ -185,7 +185,7 @@ public class Conll04_InstanceReader implements Parser {
 		
 			ConllRawToken file = instances.get(currentInstanceId++);
 
-//			String[] split = file.getPath().split(File.separator);
+//			String[] split = file.getPath().split("\\" + File.separator);
 
 	//		String label = split[split.length - 2];
 
