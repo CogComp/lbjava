@@ -18,6 +18,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <googleEclipseFormatterStyle>${project.basedir}/../lbjava/src/main/resources/eclipse-java-google-style.xml</googleEclipseFormatterStyle>
     </properties>
 
     <repositories>
@@ -116,6 +117,18 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>net.revelc.code</groupId>
+                <artifactId>formatter-maven-plugin</artifactId>
+                <version>0.5.2</version>
+                <configuration>
+                    <configFile>${googleEclipseFormatterStyle}</configFile>
+                    <excludes>
+                        <exclude>lbjava/src/main/java/edu/illinois/cs/cogcomp/lbjava/frontend/parser.java</exclude>
+                        <exclude>lbjava/src/main/java/edu/illinois/cs/cogcomp/lbjava/frontend/sym.java</exclude>
+                    </excludes>
+                </configuration>
             </plugin>
         </plugins>
         <extensions>
