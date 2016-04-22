@@ -1,11 +1,8 @@
 /**
- * This software is released under the University of Illinois/Research and
- *  Academic Use License. See the LICENSE file in the root folder for details.
- * Copyright (c) 2016
+ * This software is released under the University of Illinois/Research and Academic Use License. See
+ * the LICENSE file in the root folder for details. Copyright (c) 2016
  *
- * Developed by:
- * The Cognitive Computations Group
- * University of Illinois at Urbana-Champaign
+ * Developed by: The Cognitive Computations Group University of Illinois at Urbana-Champaign
  * http://cogcomp.cs.illinois.edu/
  */
 /**
@@ -37,7 +34,7 @@ public class BadgeDataReader implements Parser {
 
     private int currentline;
     private BufferedReader br;
-    
+
     /**
      * 
      */
@@ -52,15 +49,14 @@ public class BadgeDataReader implements Parser {
             }
             br.close();
         } catch (Exception e) {
-            
+
         }
     }
-    
-    public void close() {
-    }
-    
+
+    public void close() {}
+
     public Object next() {
-        
+
         if (currentline == lines.size()) {
             return null;
         } else {
@@ -68,7 +64,7 @@ public class BadgeDataReader implements Parser {
             return lines.get(currentline - 1);
         }
     }
-    
+
     public void reset() {
         currentline = 0;
     }

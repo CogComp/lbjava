@@ -1,11 +1,8 @@
 /**
- * This software is released under the University of Illinois/Research and
- *  Academic Use License. See the LICENSE file in the root folder for details.
- * Copyright (c) 2016
+ * This software is released under the University of Illinois/Research and Academic Use License. See
+ * the LICENSE file in the root folder for details. Copyright (c) 2016
  *
- * Developed by:
- * The Cognitive Computations Group
- * University of Illinois at Urbana-Champaign
+ * Developed by: The Cognitive Computations Group University of Illinois at Urbana-Champaign
  * http://cogcomp.cs.illinois.edu/
  */
 package edu.illinois.cs.cogcomp.lbjava.examples.entityRelation;
@@ -21,8 +18,7 @@ import java.util.List;
 import java.util.Vector;
 
 /**
- * Created by haowu on 2/9/15.
- * Modified by kordjams and khashab2
+ * Created by haowu on 2/9/15. Modified by kordjams and khashab2
  */
 public class Conll04_RelationReaderNew implements Parser {
 
@@ -39,12 +35,14 @@ public class Conll04_RelationReaderNew implements Parser {
 
     /**
      * This constructor reads the CONLL data.
+     * 
      * @param fileLocation
-     * @param readerType: Characterizes whether the Next() functions runs on the "relations" or on the "entities".
-     *                  Possible values are "token" (for entity instances)
-     *                  and "pair" (for relation instances)
+     * @param readerType: Characterizes whether the Next() functions runs on the "relations" or on
+     *        the "entities". Possible values are "token" (for entity instances) and "pair" (for
+     *        relation instances)
      */
-    // TODO: add independent setter for "readerType", rather than reading the data multiple times in the LBJ file
+    // TODO: add independent setter for "readerType", rather than reading the data multiple times in
+    // the LBJ file
     public Conll04_RelationReaderNew(String fileLocation, String readerType) {
         boolean verbose = false;
         instances = new Vector<ConllRawToken>();
@@ -78,7 +76,7 @@ public class Conll04_RelationReaderNew implements Parser {
             line = lines.get(sentindex);
             sentindex++;
 
-            if( verbose )
+            if (verbose)
                 System.out.println(sentindex + " " + line);
             if (line.isEmpty()) {
                 sentEnd = true;
@@ -93,23 +91,25 @@ public class Conll04_RelationReaderNew implements Parser {
                 relation.wordId2 = Integer.parseInt(tokens[1]);
                 relation.relType = tokens[2];
                 relations.add(relation);
-                if( verbose )
-                    System.out.println("WORD1:"+relation.s.sentTokens.elementAt(relation.wordId1).phrase);
+                if (verbose)
+                    System.out.println("WORD1:"
+                            + relation.s.sentTokens.elementAt(relation.wordId1).phrase);
                 sent.addRelations(relation);
-				sentences.elementAt(sentences.size()-1).addRelations(relation);
+                sentences.elementAt(sentences.size() - 1).addRelations(relation);
                 if (!relationAll.contains(tokens[2])) {
                     relationAll.add(tokens[2]);
                 }
             } else {
-                if( verbose )
-                    System.out.println("tokens[1]="+tokens[1]+"done");
+                if (verbose)
+                    System.out.println("tokens[1]=" + tokens[1] + "done");
                 if (sentEnd) {
                     {
                         sentences.add(sent);
-                        if( verbose ) {
+                        if (verbose) {
                             if (currSentId < 700)
                                 System.out.println("sid:" + currSentId);
-                            else System.out.println("sid:" + (currSentId + 51));
+                            else
+                                System.out.println("sid:" + (currSentId + 51));
                             for (int ind = 0; ind < sent.sentTokens.size(); ind++)
                                 System.out.print(sent.sentTokens.get(ind).phrase + " ");
                             System.out.println();
@@ -145,9 +145,14 @@ public class Conll04_RelationReaderNew implements Parser {
 
         for (int counter = 0; counter < relations.size(); counter++) {
             int sindex = relations.elementAt(counter).sentId;
-            relations.elementAt(counter).s.sentTokens.addAll(0, sentences.elementAt(sindex).sentTokens);
-            relations.elementAt(counter).e1 = sentences.elementAt(sindex).sentTokens.elementAt(relations.elementAt(counter).wordId1);
-            relations.elementAt(counter).e2 = sentences.elementAt(sindex).sentTokens.elementAt(relations.elementAt(counter).wordId2);
+            relations.elementAt(counter).s.sentTokens.addAll(0,
+                    sentences.elementAt(sindex).sentTokens);
+            relations.elementAt(counter).e1 =
+                    sentences.elementAt(sindex).sentTokens
+                            .elementAt(relations.elementAt(counter).wordId1);
+            relations.elementAt(counter).e2 =
+                    sentences.elementAt(sindex).sentTokens
+                            .elementAt(relations.elementAt(counter).wordId2);
         }
     }
 
@@ -164,8 +169,12 @@ public class Conll04_RelationReaderNew implements Parser {
         System.out.println("printing total " + relations.size() + " relations");
         for (int i = 0; i < relations.size(); i++) {
             relations.elementAt(i).printRelation();
-            System.out.println("WORD1:" + relations.elementAt(i).s.sentTokens.elementAt(relations.elementAt(i).wordId1).phrase);
-            System.out.println("WORD2:" + relations.elementAt(i).s.sentTokens.elementAt(relations.elementAt(i).wordId2).phrase);
+            System.out
+                    .println("WORD1:"
+                            + relations.elementAt(i).s.sentTokens.elementAt(relations.elementAt(i).wordId1).phrase);
+            System.out
+                    .println("WORD2:"
+                            + relations.elementAt(i).s.sentTokens.elementAt(relations.elementAt(i).wordId2).phrase);
         }
     }
 
@@ -178,7 +187,7 @@ public class Conll04_RelationReaderNew implements Parser {
         if (type.equals("Token")) {
             if (currentTokenId < instances.size()) {
                 ConllRawToken file = instances.get(currentTokenId++);
-                return file;//Document(file, label);
+                return file;// Document(file, label);
             } else
                 return null;
         }
@@ -233,17 +242,19 @@ public class Conll04_RelationReaderNew implements Parser {
 
     /**
      * Testing the reader
+     * 
      * @param args
      * @throws Exception
      */
     public static void main(String[] args) throws Exception {
         System.out.println("Start reading tokens ... ");
         Conll04_RelationReaderNew cr = new Conll04_RelationReaderNew("data/conll04.corp", "Token");
-//        Conll04_RelationReaderNew cr = new Conll04_RelationReaderNew("data/conll04_test.corp", "Token");
-//        cr.printData();
+        // Conll04_RelationReaderNew cr = new Conll04_RelationReaderNew("data/conll04_test.corp",
+        // "Token");
+        // cr.printData();
 
         ConllRawToken tok = (ConllRawToken) cr.next();
-        while( tok != null ) {
+        while (tok != null) {
             System.out.println(tok);
             tok = (ConllRawToken) cr.next();
         }

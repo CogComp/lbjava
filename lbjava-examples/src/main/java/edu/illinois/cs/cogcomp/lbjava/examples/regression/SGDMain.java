@@ -1,11 +1,8 @@
 /**
- * This software is released under the University of Illinois/Research and
- *  Academic Use License. See the LICENSE file in the root folder for details.
- * Copyright (c) 2016
+ * This software is released under the University of Illinois/Research and Academic Use License. See
+ * the LICENSE file in the root folder for details. Copyright (c) 2016
  *
- * Developed by:
- * The Cognitive Computations Group
- * University of Illinois at Urbana-Champaign
+ * Developed by: The Cognitive Computations Group University of Illinois at Urbana-Champaign
  * http://cogcomp.cs.illinois.edu/
  */
 package edu.illinois.cs.cogcomp.lbjava.examples.regression;
@@ -24,7 +21,8 @@ import edu.illinois.cs.cogcomp.lbjava.learn.StochasticGradientDescent;
 public class SGDMain {
     public static void main(String[] args) {
         /* read the training data set */
-        MyDataReader train = new MyDataReader(System.getProperty("user.dir")+"/data/regression/train.txt");
+        MyDataReader train =
+                new MyDataReader(System.getProperty("user.dir") + "/data/regression/train.txt");
 
         /* programmatically create SGDClassifier and set the learning rate */
         StochasticGradientDescent learner = new SGDClassifier();
@@ -37,7 +35,8 @@ public class SGDMain {
         trainer.train(1000);
 
         /* read the testing data set */
-        MyDataReader test = new MyDataReader(System.getProperty("user.dir")+"/data/regression/test.txt");
+        MyDataReader test =
+                new MyDataReader(System.getProperty("user.dir") + "/data/regression/test.txt");
 
         /* test the testing data set against gold */
         Classifier oracle = new MyLabel();
