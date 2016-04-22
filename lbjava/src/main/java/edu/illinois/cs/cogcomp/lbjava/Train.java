@@ -43,7 +43,7 @@ import edu.illinois.cs.cogcomp.lbjava.parse.ArrayFileParser;
 import edu.illinois.cs.cogcomp.lbjava.parse.Parser;
 import edu.illinois.cs.cogcomp.lbjava.util.ClassUtils;
 
-import org.apache.commons.lang3.StringEscapeUtils;
+import edu.illinois.cs.cogcomp.lbjava.util.FileUtils;
 
 
 /**
@@ -1081,7 +1081,7 @@ public class Train extends Pass
 						out.println(
 								"  public static Parser getParser() { return new "
 										+ "edu.illinois.cs.cogcomp.lbjava.parse.ArrayFileParser(\""
-										+ StringEscapeUtils.escapeJava(new File(exFilePath).getAbsolutePath())
+										+ FileUtils.escapeFilePath(new File(exFilePath).getAbsolutePath())
 										+ "\"); }");
 					else
 						out.println("  public static Parser getParser() { return "
@@ -1093,7 +1093,7 @@ public class Train extends Pass
 						out.println(
 								"  public static Parser getTestParser() { return new "
 										+ "edu.illinois.cs.cogcomp.lbjava.parse.ArrayFileParser(\""
-										+ StringEscapeUtils.escapeJava(new File(testExFilePath).getAbsolutePath())
+										+ FileUtils.escapeFilePath(new File(testExFilePath).getAbsolutePath())
 										+ "\"); }");
 					else
 						out.println("  public static Parser getTestParser() { return "

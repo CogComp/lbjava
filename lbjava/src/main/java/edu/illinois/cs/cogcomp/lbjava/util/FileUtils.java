@@ -17,11 +17,36 @@ import java.io.File;
  *
  **/
 public class FileUtils {
-    public static String getPlatformIndependentFilePath(String configFilePath) {
+
+    /**
+     * Update FilePath separator for file paths read from pom.xml config.
+     * @param originalFilePath Path to a file in UNIX separator convention.s
+     * @return Platform Independent File Path
+     */
+    public static String getPlatformIndependentFilePath(String originalFilePath) {
         if (File.separatorChar == '/') {
-            return configFilePath;
+            return originalFilePath;
         }
 
-        return configFilePath.replace('/', File.separatorChar);
+        return originalFilePath.replace('/', File.separatorChar);
+    }
+
+
+    /**
+     * Escapes the forward slash in Windows. Currently used in the generate code where a model's location
+     * string is generated.
+     *
+     * CAVEAT: This function might break other escaped characters in the originalFilePath string.
+     * Use with care.
+     * @param originalFilePath Original File Path
+     * @return File Path with the forward slash escaped on Windows.
+     */
+    public static String escapeFilePath(String originalFilePath) {
+        if (File.separatorChar == '/') {
+            return originalFilePath;
+        }
+
+        // Only update this on Windows.
+        return originalFilePath.replace("\\", "\\\\");
     }
 }
