@@ -169,6 +169,11 @@ public class MainTest {
                 return !name.endsWith(".lbj") && !name.startsWith(".nfs");
             }
         });
-        for (File file: dirFiles) assert file.delete() : "Could not delete file " + file;
+
+        for (File file: dirFiles) {
+            if (!file.delete()) {
+                System.out.println("Could not delete file " + file);
+            }
+        }
     }
 }
