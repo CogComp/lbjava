@@ -1,11 +1,8 @@
 /**
- * This software is released under the University of Illinois/Research and
- *  Academic Use License. See the LICENSE file in the root folder for details.
- * Copyright (c) 2016
+ * This software is released under the University of Illinois/Research and Academic Use License. See
+ * the LICENSE file in the root folder for details. Copyright (c) 2016
  *
- * Developed by:
- * The Cognitive Computations Group
- * University of Illinois at Urbana-Champaign
+ * Developed by: The Cognitive Computations Group, University of Illinois at Urbana-Champaign
  * http://cogcomp.cs.illinois.edu/
  */
 package edu.illinois.cs.cogcomp.lbjava.features;
@@ -46,9 +43,12 @@ public class PredefinedFeature extends Classifier {
         FeatureVector featureVector = new FeatureVector();
         for (int i = 0; i < 100; ++i) {
             String id = "" + (i + 1);
-            if (instance.get(i + 1) == null) continue;
+            if (instance.get(i + 1) == null)
+                continue;
             String value = getFeature((Double) instance.get(i + 1));
-            Feature feature = new DiscretePrimitiveStringFeature("", "", id, value, valueIndexOf(value), (short) 0);
+            Feature feature =
+                    new DiscretePrimitiveStringFeature("", "", id, value, valueIndexOf(value),
+                            (short) 0);
             featureVector.addFeature(feature);
         }
 
