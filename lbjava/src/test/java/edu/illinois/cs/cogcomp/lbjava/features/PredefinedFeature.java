@@ -43,9 +43,12 @@ public class PredefinedFeature extends Classifier {
         FeatureVector featureVector = new FeatureVector();
         for (int i = 0; i < 100; ++i) {
             String id = "" + (i + 1);
-            if (instance.get(i + 1) == null) continue;
+            if (instance.get(i + 1) == null)
+                continue;
             String value = getFeature((Double) instance.get(i + 1));
-            Feature feature = new DiscretePrimitiveStringFeature("", "", id, value, valueIndexOf(value), (short) 0);
+            Feature feature =
+                    new DiscretePrimitiveStringFeature("", "", id, value, valueIndexOf(value),
+                            (short) 0);
             featureVector.addFeature(feature);
         }
 

@@ -1,11 +1,8 @@
 /**
- * This software is released under the University of Illinois/Research and
- *  Academic Use License. See the LICENSE file in the root folder for details.
- * Copyright (c) 2016
+ * This software is released under the University of Illinois/Research and Academic Use License. See
+ * the LICENSE file in the root folder for details. Copyright (c) 2016
  *
- * Developed by:
- * The Cognitive Computations Group
- * University of Illinois at Urbana-Champaign
+ * Developed by: The Cognitive Computations Group University of Illinois at Urbana-Champaign
  * http://cogcomp.cs.illinois.edu/
  */
 /**
@@ -25,20 +22,20 @@ import java.io.IOException;
  */
 public class ClassifyText {
 
-	public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException {
 
-		if (args.length != 1) {
-			System.out.println("Usage: ClassifyText file");
-			System.exit(-1);
-		}
+        if (args.length != 1) {
+            System.out.println("Usage: ClassifyText file");
+            System.exit(-1);
+        }
 
-		// This is the black box text classifier
-		NewsGroupClassifier classifier = new NewsGroupClassifier();
+        // This is the black box text classifier
+        NewsGroupClassifier classifier = new NewsGroupClassifier();
 
-		Document document = new Document(new File(args[0]));
+        Document document = new Document(new File(args[0]));
 
-		// Ask the classifier to label the document
-		String label = classifier.discreteValue(document);
-		System.out.println(label);
-	}
+        // Ask the classifier to label the document
+        String label = classifier.discreteValue(document);
+        System.out.println(label);
+    }
 }

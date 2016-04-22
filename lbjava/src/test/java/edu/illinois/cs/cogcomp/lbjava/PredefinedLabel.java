@@ -34,8 +34,8 @@ public class PredefinedLabel extends Classifier {
     @Override
     public Feature featureValue(Object o) {
         String value = discreteValue(o);
-        return new DiscretePrimitiveStringFeature("", "", "", value,
-                valueIndexOf(value), (short) allowableValues().length);
+        return new DiscretePrimitiveStringFeature("", "", "", value, valueIndexOf(value),
+                (short) allowableValues().length);
     }
 
     @Override

@@ -1,11 +1,8 @@
 /**
- * This software is released under the University of Illinois/Research and
- *  Academic Use License. See the LICENSE file in the root folder for details.
- * Copyright (c) 2016
+ * This software is released under the University of Illinois/Research and Academic Use License. See
+ * the LICENSE file in the root folder for details. Copyright (c) 2016
  *
- * Developed by:
- * The Cognitive Computations Group
- * University of Illinois at Urbana-Champaign
+ * Developed by: The Cognitive Computations Group University of Illinois at Urbana-Champaign
  * http://cogcomp.cs.illinois.edu/
  */
 package edu.illinois.cs.cogcomp.lbjava.examples.regression;
@@ -21,8 +18,8 @@ import java.util.List;
  *
  * It reads through a file and parse each example as <code>MyData</code>
  *
- * Note: assuming each line consists of features and label for each example,
- *       please see <code>MyData</code> for more information on the format
+ * Note: assuming each line consists of features and label for each example, please see
+ * <code>MyData</code> for more information on the format
  *
  * @author Yiming Jiang
  */
@@ -36,6 +33,7 @@ public class MyDataReader implements Parser {
 
     /**
      * Constructor
+     * 
      * @param filePath the path to the file
      */
     public MyDataReader(String filePath) {
@@ -57,21 +55,21 @@ public class MyDataReader implements Parser {
 
     /**
      * Iterator method
+     * 
      * @return the next example in <code>MyData</code>
      */
     @Override
     public Object next() {
         if (currentLineNumber < lines.size()) {
             MyData ret = new MyData(lines.get(currentLineNumber));
-            this.currentLineNumber ++;
+            this.currentLineNumber++;
             return ret;
         }
         return null;
     }
 
     @Override
-    public void close() {
-    }
+    public void close() {}
 
     /**
      * Reset the line number tracker

@@ -91,8 +91,9 @@ public class AdaGradTest {
         p.learningRateP = 1;
         learner.setParameters(p);
 
-        /* Example 1: features {1, 1}, label {+1}
-         *
+        /*
+         * Example 1: features {1, 1}, label {+1}
+         * 
          * Made a mistake - need to update weight vector
          */
         int[] exampleFeatures1 = {0, 1};
@@ -107,8 +108,9 @@ public class AdaGradTest {
 
         assertArrayEquals(exp_w1, w1, 0);
 
-        /* Example 2: features {1, 0}, label {-1}
-         *
+        /*
+         * Example 2: features {1, 0}, label {-1}
+         * 
          * Made a mistake - need to update weight vector
          */
 
@@ -124,8 +126,9 @@ public class AdaGradTest {
 
         assertArrayEquals(exp_w2, w2, 0.000001);
 
-        /* Example 3: features {0, 1}, label {1}
-         *
+        /*
+         * Example 3: features {0, 1}, label {1}
+         * 
          * No mistake - no update on weight vector
          */
 
@@ -145,29 +148,18 @@ public class AdaGradTest {
     /**
      * This is a simple test to test for overfitting
      *
-     * The <code>AdaGrad</code> is given with simple data set with 2 features and a label.
-     * Train the data set for 30 iterations and
-     * see if the algorithm can classify the same data set correctly.
+     * The <code>AdaGrad</code> is given with simple data set with 2 features and a label. Train the
+     * data set for 30 iterations and see if the algorithm can classify the same data set correctly.
      */
     @Test
     public void overfittingSimpleTest() {
         /**
-         * static data set;
-         * the first 2 numbers are 2 features and the last one is the label;
-         * this data set is linearly separable
+         * static data set; the first 2 numbers are 2 features and the last one is the label; this
+         * data set is linearly separable
          */
-        double [][] dataSet = new double[][]{
-                {-2, -4, 1},
-                {-2, 0, 1},
-                {0, 2, 1},
-                {-2, 2, 1},
-                {0, 4, 1},
-                {2, 2, -1},
-                {2, -2, -1},
-                {0, -4, -1},
-                {2, -4, -1},
-                {4, -2, -1}
-        };
+        double[][] dataSet =
+                new double[][] { {-2, -4, 1}, {-2, 0, 1}, {0, 2, 1}, {-2, 2, 1}, {0, 4, 1},
+                        {2, 2, -1}, {2, -2, -1}, {0, -4, -1}, {2, -4, -1}, {4, -2, -1}};
 
         int[] exampleFeatures = {0, 1};
         int[] exampleLabels = {0};
@@ -177,9 +169,9 @@ public class AdaGradTest {
 
         /* train <code>AdaGrad</code> for 30 iterations */
         for (int i = 0; i < 30; i++) {
-            exampleValues[0] = dataSet[i%10][0];
-            exampleValues[1] = dataSet[i%10][1];
-            labelValues[0] = dataSet[i%10][2];
+            exampleValues[0] = dataSet[i % 10][0];
+            exampleValues[1] = dataSet[i % 10][1];
+            labelValues[0] = dataSet[i % 10][2];
 
             learner.learn(exampleFeatures, exampleValues, exampleLabels, labelValues);
         }
@@ -193,7 +185,7 @@ public class AdaGradTest {
             double result = learner.realValue(exampleFeatures, exampleValues);
 
             if (result * dataSet[i][2] > 0) {
-                correctNumber ++;
+                correctNumber++;
             }
         }
         assertEquals(10, correctNumber);
@@ -202,14 +194,13 @@ public class AdaGradTest {
     /**
      * This is a complete test to test overfitting in <code>AdaGrad</code>
      *
-     * Data set consists of 10 examples, each with 2 features;
-     * Each feature value is randomly generated from range [0, 10];
+     * Data set consists of 10 examples, each with 2 features; Each feature value is randomly
+     * generated from range [0, 10];
      *
-     * A "correct" weight vector is randomly generated;
-     * Each value is from range [0, 10];
+     * A "correct" weight vector is randomly generated; Each value is from range [0, 10];
      *
-     * The hyperplane is set by taking the medium of w*x;
-     * Almost half of examples are labeled as +1; the rest are labeled -1;
+     * The hyperplane is set by taking the medium of w*x; Almost half of examples are labeled as +1;
+     * the rest are labeled -1;
      *
      * Thus, the data set is linearly separable, while being random
      *
@@ -228,12 +219,12 @@ public class AdaGradTest {
         /* give a seed to rand */
         Random rand = new Random(0);
 
-        /** create 10 examples, each with 2 features,
-         *  with values randomly generated from [0, 10]
+        /**
+         * create 10 examples, each with 2 features, with values randomly generated from [0, 10]
          */
         ArrayList<ArrayList<Double>> dataSet = new ArrayList<ArrayList<Double>>();
 
-        for(int i = 0; i < 10; i++) {
+        for (int i = 0; i < 10; i++) {
             ArrayList<Double> eachExample = new ArrayList<Double>();
             eachExample.add((double) randInt(rand, 0, 10));
             eachExample.add((double) randInt(rand, 0, 10));
@@ -260,8 +251,7 @@ public class AdaGradTest {
         for (int i = 0; i < 10; i++) {
             if (computeDotProduct(dataSet.get(i), weightVector) >= medium) {
                 dataSet.get(i).set(2, 1.0);
-            }
-            else {
+            } else {
                 dataSet.get(i).set(2, -1.0);
             }
         }
@@ -290,7 +280,7 @@ public class AdaGradTest {
             double result = learner.realValue(exampleFeatures, exampleValues);
 
             if (result * dataSet.get(i % 10).get(2) > 0) {
-                correctNumber ++;
+                correctNumber++;
             }
         }
 
@@ -300,13 +290,14 @@ public class AdaGradTest {
 
     /**
      * Compute the dot product of weight vector and feature vector
+     * 
      * @param x feature vector
      * @param w weight vector
      * @return dot product result
      */
     private double computeDotProduct(ArrayList<Double> x, ArrayList<Double> w) {
         double result = 0.0;
-        for (int i = 0; i < x.size()-1; i++) {
+        for (int i = 0; i < x.size() - 1; i++) {
             result += x.get(i) * w.get(i);
         }
         result += w.get(w.size() - 1);
@@ -314,17 +305,18 @@ public class AdaGradTest {
     }
 
     /**
-     * Returns a pseudo-random number between min and max, inclusive.
-     * The difference between min and max can be at most
-     * <code>Integer.MAX_VALUE - 1</code>.
+     * Returns a pseudo-random number between min and max, inclusive. The difference between min and
+     * max can be at most <code>Integer.MAX_VALUE - 1</code>.
      *
      * @param rand random instance
      * @param min minimim value
-     * @param max maximim value.  Must be greater than min.
+     * @param max maximim value. Must be greater than min.
      * @return integer between min and max, inclusive.
      * @see java.util.Random#nextInt(int)
      *
-     * Reference: http://stackoverflow.com/questions/20389890/generating-a-random-number-between-1-and-10-java
+     *      Reference:
+     *      http://stackoverflow.com/questions/20389890/generating-a-random-number-between
+     *      -1-and-10-java
      */
     private int randInt(Random rand, int min, int max) {
         return rand.nextInt((max - min) + 1) + min;
