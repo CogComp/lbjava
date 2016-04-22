@@ -1,11 +1,8 @@
 /**
- * This software is released under the University of Illinois/Research and
- *  Academic Use License. See the LICENSE file in the root folder for details.
- * Copyright (c) 2016
+ * This software is released under the University of Illinois/Research and Academic Use License. See
+ * the LICENSE file in the root folder for details. Copyright (c) 2016
  *
- * Developed by:
- * The Cognitive Computations Group
- * University of Illinois at Urbana-Champaign
+ * Developed by: The Cognitive Computations Group University of Illinois at Urbana-Champaign
  * http://cogcomp.cs.illinois.edu/
  */
 package edu.illinois.cs.cogcomp.lbjava.examples.entityRelation;
@@ -25,7 +22,7 @@ public class testEntityRelationClassifier {
         OrganizationClassifier orgClassifier = new OrganizationClassifier();
         Conll04_RelationReaderNew cr = new Conll04_RelationReaderNew("data/conll04.corp", "Token");
         ConllRawToken entity = (ConllRawToken) cr.next();
-        while( entity != null ) {
+        while (entity != null) {
             System.out.println(entity);
             System.out.println(orgClassifier.discreteValue(entity));
             entity = (ConllRawToken) cr.next();
@@ -35,7 +32,7 @@ public class testEntityRelationClassifier {
         PersonClassifier personClassifier = new PersonClassifier();
         cr = new Conll04_RelationReaderNew("data/conll04.corp", "Token");
         entity = (ConllRawToken) cr.next();
-        while( entity != null ) {
+        while (entity != null) {
             System.out.println(entity);
             System.out.println(personClassifier.discreteValue(entity));
             entity = (ConllRawToken) cr.next();
@@ -47,7 +44,7 @@ public class testEntityRelationClassifier {
 
         ConllRelation relation = (ConllRelation) cr.next();
         System.out.println(relation.toString());
-        while( relation != null ) {
+        while (relation != null) {
             System.out.println(relation);
             System.out.println(worksForRelationClassifier.discreteValue(relation));
             relation = (ConllRelation) cr.next();
@@ -67,17 +64,17 @@ public class testEntityRelationClassifier {
         Conll04_RelationReaderNew cr = new Conll04_RelationReaderNew("data/conll04.corp", "Pair");
         System.out.println("Starting to classify the instances ... ");
         ConllRelation pair = (ConllRelation) cr.next();
-        while( pair != null ) {
+        while (pair != null) {
             System.out.println(pair);
             pair = (ConllRelation) cr.next();
             System.out.println(relArgClassifier.discreteValue(pair));
-//            System.out.println(argpClassifier.discreteValue(tok));
-//            System.out.println(argpClassifier.discreteValue(tok));
+            // System.out.println(argpClassifier.discreteValue(tok));
+            // System.out.println(argpClassifier.discreteValue(tok));
         }
     }
 
     public static void main(String[] args) {
         independentClassifiers();
-        //jointClassifiers();
+        // jointClassifiers();
     }
 }
