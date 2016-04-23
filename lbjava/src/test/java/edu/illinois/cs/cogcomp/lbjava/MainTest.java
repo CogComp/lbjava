@@ -1,11 +1,8 @@
 /**
- * This software is released under the University of Illinois/Research and
- *  Academic Use License. See the LICENSE file in the root folder for details.
- * Copyright (c) 2016
+ * This software is released under the University of Illinois/Research and Academic Use License. See
+ * the LICENSE file in the root folder for details. Copyright (c) 2016
  *
- * Developed by:
- * The Cognitive Computations Group
- * University of Illinois at Urbana-Champaign
+ * Developed by: The Cognitive Computations Group, University of Illinois at Urbana-Champaign
  * http://cogcomp.cs.illinois.edu/
  */
 package edu.illinois.cs.cogcomp.lbjava;
@@ -32,10 +29,10 @@ import static org.junit.Assert.assertTrue;
 /**
  * Tests the main functions of LBJava:
  * <ul>
- *     <li>{@link SemanticAnalysis}</li>
- *     <li>{@link ClassifierCSE}</li>
- *     <li>{@link RevisionAnalysis}</li>
- *     <li>{@link TranslateToJava}</li>
+ * <li>{@link SemanticAnalysis}</li>
+ * <li>{@link ClassifierCSE}</li>
+ * <li>{@link RevisionAnalysis}</li>
+ * <li>{@link TranslateToJava}</li>
  * </ul>
  *
  * @author Christos Christodoulopoulos
@@ -43,26 +40,24 @@ import static org.junit.Assert.assertTrue;
 public class MainTest {
 
     private String generateLBJavaScript(String learnerName, String extractor, String featImport) {
-        return "import java.util.Vector;\n" +
-                "import edu.illinois.cs.cogcomp.lbjava.VectorParser;\n" +
-                featImport + "\n" +
-                "import edu.illinois.cs.cogcomp.lbjava.PredefinedLabel;\n" +
-                "\n" +
-                "discrete "+learnerName+"(Vector v) <-\n" +
-                "learn PredefinedLabel\n" +
-                "\tusing "+extractor+"\n" +
-                "\tfrom new VectorParser(\"target/test-classes/test1.train\")\n" +
-                "\twith new NaiveBayes()\n" +
-                "\ttestFrom new VectorParser(\"target/test-classes/test2.train\")\n" +
-                "end";
+        return "import java.util.Vector;\n"
+                + "import edu.illinois.cs.cogcomp.lbjava.VectorParser;\n" + featImport + "\n"
+                + "import edu.illinois.cs.cogcomp.lbjava.PredefinedLabel;\n" + "\n" + "discrete "
+                + learnerName + "(Vector v) <-\n" + "learn PredefinedLabel\n" + "\tusing "
+                + extractor + "\n"
+                + "\tfrom new VectorParser(\"target/test-classes/test1.train\")\n"
+                + "\twith new NaiveBayes()\n"
+                + "\ttestFrom new VectorParser(\"target/test-classes/test2.train\")\n" + "end";
     }
 
     @Before
     public void setUp() throws Exception {
         Main.fileNames = new HashSet<>();
-        Main.generatedSourceDirectory = FileUtils.getPlatformIndependentFilePath("target/test-classes/lbj");
+        Main.generatedSourceDirectory =
+                FileUtils.getPlatformIndependentFilePath("target/test-classes/lbj");
         Main.classDirectory = FileUtils.getPlatformIndependentFilePath("target/test-classes");
-        Main.classPackageDirectory = FileUtils.getPlatformIndependentFilePath("target/test-classes/lbj");
+        Main.classPackageDirectory =
+                FileUtils.getPlatformIndependentFilePath("target/test-classes/lbj");
         Main.sourceDirectory = FileUtils.getPlatformIndependentFilePath("target/test-classes/lbj");
 
         // The auto-generated code directory needs to be added to classpath
@@ -74,8 +69,9 @@ public class MainTest {
 
     @Test
     public void testOneFeature() throws Exception {
-        String input = generateLBJavaScript("OneFeatLearner", "testFeature1",
-                "import edu.illinois.cs.cogcomp.lbjava.features.PredefinedFeature;");
+        String input =
+                generateLBJavaScript("OneFeatLearner", "testFeature1",
+                        "import edu.illinois.cs.cogcomp.lbjava.features.PredefinedFeature;");
         Yylex scanner = new Yylex(new ByteArrayInputStream(input.getBytes()));
         AST ast = (AST) new parser(scanner).parse().value;
 
@@ -92,7 +88,8 @@ public class MainTest {
         LearningClassifierExpression lce = (LearningClassifierExpression) astNodes[2];
         assertEquals("testFeature1", lce.extractor.getName());
         assertTrue(((ClassifierName) lce.extractor).isField);
-        assertEquals("PredefinedFeature", AST.globalSymbolTable.classForName(lce.extractor.getName()).getSimpleName());
+        assertEquals("PredefinedFeature",
+                AST.globalSymbolTable.classForName(lce.extractor.getName()).getSimpleName());
 
         new RevisionAnalysis(ast).run(ast);
         new ClassifierCSE(ast).run(ast);
@@ -102,8 +99,9 @@ public class MainTest {
 
     @Test
     public void testTwoFeatures() throws Exception {
-        String input = generateLBJavaScript("TwoFeatLearner", "testFeature1, testFeature2",
-                "import edu.illinois.cs.cogcomp.lbjava.features.PredefinedFeature;");
+        String input =
+                generateLBJavaScript("TwoFeatLearner", "testFeature1, testFeature2",
+                        "import edu.illinois.cs.cogcomp.lbjava.features.PredefinedFeature;");
         Yylex scanner = new Yylex(new ByteArrayInputStream(input.getBytes()));
         AST ast = (AST) new parser(scanner).parse().value;
 
@@ -123,7 +121,8 @@ public class MainTest {
         assertEquals(2, components.size());
         ClassifierName component1 = (ClassifierName) components.iterator().next();
         assertTrue(component1.isField);
-        assertEquals("PredefinedFeature", AST.globalSymbolTable.classForName(component1.getName()).getSimpleName());
+        assertEquals("PredefinedFeature", AST.globalSymbolTable.classForName(component1.getName())
+                .getSimpleName());
 
         new RevisionAnalysis(ast).run(ast);
         new ClassifierCSE(ast).run(ast);
@@ -133,8 +132,9 @@ public class MainTest {
 
     @Test
     public void testPackageFeature() throws Exception {
-        String input = generateLBJavaScript("PackageFeatLearner", "testFeature1",
-                "import edu.illinois.cs.cogcomp.lbjava.features.*;");
+        String input =
+                generateLBJavaScript("PackageFeatLearner", "testFeature1",
+                        "import edu.illinois.cs.cogcomp.lbjava.features.*;");
         Yylex scanner = new Yylex(new ByteArrayInputStream(input.getBytes()));
         AST ast = (AST) new parser(scanner).parse().value;
 
@@ -151,7 +151,8 @@ public class MainTest {
         LearningClassifierExpression lce = (LearningClassifierExpression) astNodes[2];
         assertEquals("testFeature1", lce.extractor.getName());
         assertTrue(((ClassifierName) lce.extractor).isField);
-        assertEquals("PredefinedFeature", AST.globalSymbolTable.classForName(lce.extractor.getName()).getSimpleName());
+        assertEquals("PredefinedFeature",
+                AST.globalSymbolTable.classForName(lce.extractor.getName()).getSimpleName());
 
         new RevisionAnalysis(ast).run(ast);
         new ClassifierCSE(ast).run(ast);
@@ -161,7 +162,7 @@ public class MainTest {
 
     @After
     public void cleanup() {
-        //Make sure we don't leave our auto-generated files behind
+        // Make sure we don't leave our auto-generated files behind
         File lbjDir = new File(Main.generatedSourceDirectory);
         File[] dirFiles = lbjDir.listFiles(new FilenameFilter() {
 
@@ -170,7 +171,7 @@ public class MainTest {
             }
         });
 
-        for (File file: dirFiles) {
+        for (File file : dirFiles) {
             if (!file.delete()) {
                 System.out.println("Could not delete file " + file);
             }

@@ -1,11 +1,8 @@
 /**
- * This software is released under the University of Illinois/Research and
- *  Academic Use License. See the LICENSE file in the root folder for details.
- * Copyright (c) 2016
+ * This software is released under the University of Illinois/Research and Academic Use License. See
+ * the LICENSE file in the root folder for details. Copyright (c) 2016
  *
- * Developed by:
- * The Cognitive Computations Group
- * University of Illinois at Urbana-Champaign
+ * Developed by: The Cognitive Computations Group, University of Illinois at Urbana-Champaign
  * http://cogcomp.cs.illinois.edu/
  */
 package edu.illinois.cs.cogcomp;
@@ -28,74 +25,76 @@ import org.apache.maven.plugins.annotations.ResolutionScope;
 @Mojo(name = "compile", requiresDependencyResolution = ResolutionScope.COMPILE)
 public class CompileMojo extends AbstractMojo {
 
-	/**
-	 * This will be ${project.build.outputDirectory} if not specified.
-	 */
-	@Parameter(defaultValue = "${project.build.outputDirectory}")
-	private String dFlag;
+    /**
+     * This will be ${project.build.outputDirectory} if not specified.
+     */
+    @Parameter(defaultValue = "${project.build.outputDirectory}")
+    private String dFlag;
 
-	/**
-	 * This is maven default (src/main/java) if not specified.
-	 */
-	@Parameter(defaultValue = "${project.basedir}/src/main/java")
-	private String gspFlag;
+    /**
+     * This is maven default (src/main/java) if not specified.
+     */
+    @Parameter(defaultValue = "${project.basedir}/src/main/java")
+    private String gspFlag;
 
-	/**
-	 * This is maven default (src/main/java) if not specified.
-	 */
-	@Parameter(defaultValue = "${project.basedir}/src/main/java")
-	private String sourcepathFlag;
+    /**
+     * This is maven default (src/main/java) if not specified.
+     */
+    @Parameter(defaultValue = "${project.basedir}/src/main/java")
+    private String sourcepathFlag;
 
-	/**
-	 * The only required parameter.
-	 */
-	@Parameter(required = true)
-	private String[] lbjavaInputFileList;
+    /**
+     * The only required parameter.
+     */
+    @Parameter(required = true)
+    private String[] lbjavaInputFileList;
 
-	@Parameter(property = "project.compileClasspathElements", required = true, readonly = true)
-	private List<String> classpath;
+    @Parameter(property = "project.compileClasspathElements", required = true, readonly = true)
+    private List<String> classpath;
 
-	@Parameter(property = "project.build.outputDirectory", required = true, readonly = true)
-	private String outputdir;
+    @Parameter(property = "project.build.outputDirectory", required = true, readonly = true)
+    private String outputdir;
 
-	public void execute() throws MojoExecutionException {
-		dFlag = FileUtils.getPlatformIndependentFilePath(dFlag);
-		gspFlag = FileUtils.getPlatformIndependentFilePath(gspFlag);
-		sourcepathFlag = FileUtils.getPlatformIndependentFilePath(sourcepathFlag);
+    public void execute() throws MojoExecutionException {
+        dFlag = FileUtils.getPlatformIndependentFilePath(dFlag);
+        gspFlag = FileUtils.getPlatformIndependentFilePath(gspFlag);
+        sourcepathFlag = FileUtils.getPlatformIndependentFilePath(sourcepathFlag);
 
-		classpath.add(dFlag);
-		classpath.add(gspFlag);
+        classpath.add(dFlag);
+        classpath.add(gspFlag);
 
-		String newpath = StringUtils.join(classpath, File.pathSeparator);
+        String newpath = StringUtils.join(classpath, File.pathSeparator);
 
-		// If these directories don't exist, make them.
-		new File(dFlag).mkdirs();
-		new File(gspFlag).mkdirs();
+        // If these directories don't exist, make them.
+        new File(dFlag).mkdirs();
+        new File(gspFlag).mkdirs();
 
-		for (String lbjInputFile : lbjavaInputFileList) {
-			if (StringUtils.isEmpty(lbjInputFile)) {
-				// making the optional-compile-parameter happy.
-				continue;
-			}
+        for (String lbjInputFile : lbjavaInputFileList) {
+            if (StringUtils.isEmpty(lbjInputFile)) {
+                // making the optional-compile-parameter happy.
+                continue;
+            }
 
-			getLog().info("Calling Java edu.illinois.cs.cogcomp.lbjava.Main...");
+            getLog().info("Calling Java edu.illinois.cs.cogcomp.lbjava.Main...");
 
-			lbjInputFile = FileUtils.getPlatformIndependentFilePath(lbjInputFile);
+            lbjInputFile = FileUtils.getPlatformIndependentFilePath(lbjInputFile);
 
-			try {
-				String[] args = new String[] { "java", "-cp", newpath, "edu.illinois.cs.cogcomp.lbjava.Main",
-                        "-d", dFlag, "-gsp", gspFlag, "-sourcepath", sourcepathFlag, lbjInputFile };
+            try {
+                String[] args =
+                        new String[] {"java", "-cp", newpath,
+                                "edu.illinois.cs.cogcomp.lbjava.Main", "-d", dFlag, "-gsp",
+                                gspFlag, "-sourcepath", sourcepathFlag, lbjInputFile};
 
-				ProcessBuilder pr = new ProcessBuilder(args);
-				pr.inheritIO();
-				Process p = pr.start();
-				p.waitFor();
+                ProcessBuilder pr = new ProcessBuilder(args);
+                pr.inheritIO();
+                Process p = pr.start();
+                p.waitFor();
 
-			} catch (Exception e) {
-				e.printStackTrace();
-				System.out.println("Yeah, an error.");
-			}
-		}
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.out.println("Yeah, an error.");
+            }
+        }
 
-	}
+    }
 }
