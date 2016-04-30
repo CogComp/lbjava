@@ -154,6 +154,17 @@ public class SparseNetworkLearner extends Learner {
         return network;
     }
 
+    public boolean isUsingConjunctiveLabels() {
+        return conjunctiveLabels;
+    }
+
+    /**
+     * returns the i-th LTU; the type of this depends on the type of the baseLTU (see above).
+     */
+    public Object getLTU(int i) {
+        return network.get(i);
+    }
+
     /**
      * Sets the values of parameters that control the behavior of this learning algorithm.
      *
