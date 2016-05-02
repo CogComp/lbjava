@@ -40,6 +40,8 @@ import edu.illinois.cs.cogcomp.lbjava.parse.ArrayFileParser;
 import edu.illinois.cs.cogcomp.lbjava.parse.Parser;
 import edu.illinois.cs.cogcomp.lbjava.util.ClassUtils;
 
+import edu.illinois.cs.cogcomp.lbjava.util.FileUtils;
+
 
 /**
  * After code has been generated with {@link TranslateToJava}, this pass trains any classifiers for
@@ -1044,7 +1046,8 @@ public class Train extends Pass {
                     && new File(exFilePath).exists())
                 out.println("  public static Parser getParser() { return new "
                         + "edu.illinois.cs.cogcomp.lbjava.parse.ArrayFileParser(\""
-                        + new File(exFilePath).getAbsolutePath() + "\"); }");
+                        + FileUtils.escapeFilePath(new File(exFilePath).getAbsolutePath())
+                        + "\"); }");
             else
                 out.println("  public static Parser getParser() { return " + lce.parser + "; }");
 
@@ -1052,7 +1055,8 @@ public class Train extends Pass {
                     && new File(testExFilePath).exists())
                 out.println("  public static Parser getTestParser() { return new "
                         + "edu.illinois.cs.cogcomp.lbjava.parse.ArrayFileParser(\""
-                        + new File(testExFilePath).getAbsolutePath() + "\"); }");
+                        + FileUtils.escapeFilePath(new File(testExFilePath).getAbsolutePath())
+                        + "\"); }");
             else
                 out.println("  public static Parser getTestParser() { return " + lce.testParser
                         + "; }\n");

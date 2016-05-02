@@ -10,6 +10,7 @@ package edu.illinois.cs.cogcomp.lbjava;
 import edu.illinois.cs.cogcomp.lbjava.IR.*;
 import edu.illinois.cs.cogcomp.lbjava.frontend.Yylex;
 import edu.illinois.cs.cogcomp.lbjava.frontend.parser;
+import edu.illinois.cs.cogcomp.lbjava.util.FileUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -52,10 +53,12 @@ public class MainTest {
     @Before
     public void setUp() throws Exception {
         Main.fileNames = new HashSet<>();
-        Main.generatedSourceDirectory = "target/test-classes/lbj";
-        Main.classDirectory = "target/test-classes";
-        Main.classPackageDirectory = "target/test-classes/lbj";
-        Main.sourceDirectory = "target/test-classes/lbj";
+        Main.generatedSourceDirectory =
+                FileUtils.getPlatformIndependentFilePath("target/test-classes/lbj");
+        Main.classDirectory = FileUtils.getPlatformIndependentFilePath("target/test-classes");
+        Main.classPackageDirectory =
+                FileUtils.getPlatformIndependentFilePath("target/test-classes/lbj");
+        Main.sourceDirectory = FileUtils.getPlatformIndependentFilePath("target/test-classes/lbj");
 
         // The auto-generated code directory needs to be added to classpath
         URLClassLoader urlClassLoader = (URLClassLoader) ClassLoader.getSystemClassLoader();
@@ -167,7 +170,11 @@ public class MainTest {
                 return !name.endsWith(".lbj") && !name.startsWith(".nfs");
             }
         });
-        for (File file : dirFiles)
-            assert file.delete() : "Could not delete file " + file;
+
+        for (File file : dirFiles) {
+            if (!file.delete()) {
+                System.out.println("Could not delete file " + file);
+            }
+        }
     }
 }

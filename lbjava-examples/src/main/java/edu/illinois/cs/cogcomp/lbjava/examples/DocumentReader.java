@@ -62,8 +62,7 @@ public class DocumentReader implements Parser {
         if (currentFileId < files.size()) {
             File file = files.get(currentFileId++);
 
-            String[] split = file.getPath().split(File.separator);
-
+            String[] split = file.getPath().split("\\" + File.separator);
             String label = split[split.length - 2];
 
             try {

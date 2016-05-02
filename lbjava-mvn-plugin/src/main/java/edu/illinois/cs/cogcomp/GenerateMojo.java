@@ -7,6 +7,7 @@
  */
 package edu.illinois.cs.cogcomp;
 
+import edu.illinois.cs.cogcomp.lbjava.util.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -55,10 +56,14 @@ public class GenerateMojo extends AbstractMojo {
     private String outputdir;
 
     public void execute() throws MojoExecutionException {
+        dFlag = FileUtils.getPlatformIndependentFilePath(dFlag);
+        gspFlag = FileUtils.getPlatformIndependentFilePath(gspFlag);
+        sourcepathFlag = FileUtils.getPlatformIndependentFilePath(sourcepathFlag);
 
         classpath.add(dFlag);
         classpath.add(gspFlag);
-        String newpath = StringUtils.join(classpath, ":");
+
+        String newpath = StringUtils.join(classpath, File.pathSeparator);
 
         // If these directories don't exist, make them.
         new File(dFlag).mkdirs();
@@ -71,6 +76,9 @@ public class GenerateMojo extends AbstractMojo {
             }
 
             getLog().info("Calling Java edu.illinois.cs.cogcomp.lbjava.Main...");
+
+            lbjInputFile = FileUtils.getPlatformIndependentFilePath(lbjInputFile);
+
             try {
                 String[] args =
                         new String[] {"java", "-cp", newpath,

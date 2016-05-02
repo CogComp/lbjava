@@ -10,6 +10,7 @@ package edu.illinois.cs.cogcomp;
 import java.io.File;
 import java.util.List;
 
+import edu.illinois.cs.cogcomp.lbjava.util.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -55,10 +56,14 @@ public class CompileMojo extends AbstractMojo {
     private String outputdir;
 
     public void execute() throws MojoExecutionException {
+        dFlag = FileUtils.getPlatformIndependentFilePath(dFlag);
+        gspFlag = FileUtils.getPlatformIndependentFilePath(gspFlag);
+        sourcepathFlag = FileUtils.getPlatformIndependentFilePath(sourcepathFlag);
 
         classpath.add(dFlag);
         classpath.add(gspFlag);
-        String newpath = StringUtils.join(classpath, ":");
+
+        String newpath = StringUtils.join(classpath, File.pathSeparator);
 
         // If these directories don't exist, make them.
         new File(dFlag).mkdirs();
@@ -66,16 +71,13 @@ public class CompileMojo extends AbstractMojo {
 
         for (String lbjInputFile : lbjavaInputFileList) {
             if (StringUtils.isEmpty(lbjInputFile)) {
-                // making the optional-compile-step parameter happy.
+                // making the optional-compile-parameter happy.
                 continue;
             }
 
             getLog().info("Calling Java edu.illinois.cs.cogcomp.lbjava.Main...");
 
-            if (StringUtils.isEmpty(lbjInputFile)) {
-                // making the optional-compile-parameter happy.
-                continue;
-            }
+            lbjInputFile = FileUtils.getPlatformIndependentFilePath(lbjInputFile);
 
             try {
                 String[] args =

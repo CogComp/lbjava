@@ -102,6 +102,7 @@
                         <exclude>**/*.sh</exclude>
                         <exclude>**/*.lbj</exclude>
                         <exclude>**/*.xml</exclude>
+                        <exclude>**/*.yml</exclude>
                         <exclude>**/*.md</exclude>
                         <exclude>src/test/resources/**</exclude>
                         <exclude>src/main/resources/**</exclude>

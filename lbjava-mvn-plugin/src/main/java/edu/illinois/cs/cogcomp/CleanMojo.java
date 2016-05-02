@@ -7,10 +7,13 @@
  */
 package edu.illinois.cs.cogcomp;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import edu.illinois.cs.cogcomp.lbjava.util.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -56,10 +59,14 @@ public class CleanMojo extends AbstractMojo {
     private String outputdir;
 
     public void execute() throws MojoExecutionException {
+        dFlag = FileUtils.getPlatformIndependentFilePath(dFlag);
+        gspFlag = FileUtils.getPlatformIndependentFilePath(gspFlag);
+        sourcepathFlag = FileUtils.getPlatformIndependentFilePath(sourcepathFlag);
 
         classpath.add(dFlag);
         classpath.add(gspFlag);
-        String newpath = StringUtils.join(classpath, ":");
+
+        String newpath = StringUtils.join(classpath, File.pathSeparator);
 
         // We need to reverse the order we do the cleaning since there might be dependencies across
         // files
@@ -73,6 +80,9 @@ public class CleanMojo extends AbstractMojo {
 
             getLog().info(
                     "Calling Java edu.illinois.cs.cogcomp.lbjava.Main with the -x flag (for cleaning)...");
+
+            lbjInputFile = FileUtils.getPlatformIndependentFilePath(lbjInputFile);
+
             try {
                 // The -x flag makes all the difference.
                 String[] args =

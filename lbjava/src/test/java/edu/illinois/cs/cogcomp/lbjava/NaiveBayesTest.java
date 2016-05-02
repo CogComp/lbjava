@@ -43,8 +43,12 @@ public class NaiveBayesTest {
                 return !name.endsWith(".lbj");
             }
         });
-        for (File file : dirFiles)
-            assert file.delete() : "Could not delete file " + file;
+
+        for (File file : dirFiles) {
+            if (!file.delete()) {
+                System.out.println("Could not delete file " + file);
+            }
+        }
     }
 
     @SuppressWarnings({"unchecked", "rawtypes"})
