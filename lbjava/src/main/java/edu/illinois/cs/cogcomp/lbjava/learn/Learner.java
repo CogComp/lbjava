@@ -62,6 +62,11 @@ public abstract class Learner extends Classifier {
      **/
     protected boolean readLexiconOnDemand;
 
+    /** To use a different score function based on the loss, set this flag. */
+    protected boolean lossFlag = false;
+
+    /** The number of candidate examples when a global object is passed here. */
+    protected int candidates = 1;
 
     /**
      * This constructor is used by the LBJava compiler; it should never be called by a programmer.
@@ -114,6 +119,17 @@ public abstract class Learner extends Classifier {
      **/
     public void setParameters(Parameters p) {
         p.setParameters(this);
+    }
+
+    public void setLossFlag() {
+        lossFlag = true;
+    }
+    public void unsetLossFlag() {
+        lossFlag=false;
+    }
+
+    public void setCandidates(int a) {
+        candidates= a;
     }
 
     /** Retrieves the parameters that are set in this learner. */
@@ -801,9 +817,39 @@ public abstract class Learner extends Classifier {
      **/
     public ScoreSet scores(Object example) {
         Object[] exampleArray = getExampleArray(example, false);
-        return scores((int[]) exampleArray[0], (double[]) exampleArray[1]);
+        ScoreSet resultS = scores((int[])exampleArray[0], (double[])exampleArray[1]);
+        if (!lossFlag)
+            return resultS;
+        else
+            return scoresAugmented(example,resultS);
     }
 
+  /**
+   * Update the score of each binary variable (label) based on the gold value of each example for that variable.
+   * When using a {@code SparseNetworkLearner} to keep the model there is an LTU for each label.
+   * If the gold is same as a specific label then its binary value for that label is 1 and the score for that label
+   * will be {@code oldScore - lossOffset}; otherwise it will be 0 and the score will be {@code oldScore + lossOffset}.
+   *
+   * @param example The object to make decisions about.
+   * @param resultS The original scores (see {@link #scores(Object)}).
+   * @return The augmented set of scores.
+   */
+    public ScoreSet scoresAugmented(Object example, ScoreSet resultS) {
+        ScoreSet augmentedScores = new ScoreSet();
+        Lexicon lLexicon = getLabelLexicon();
+        String gold = getLabeler().discreteValue(example);
+        for (int i = 0; i < lLexicon.size(); i++) {
+            String candidate = lLexicon.lookupKey(i).getStringValue();
+            double originalScore = resultS.getScore(candidate).score;
+            double lossOffset = 1 / (double) (candidates);
+            if (candidate.equals(gold))
+                augmentedScores.put(candidate,  originalScore - lossOffset);
+            else
+                augmentedScores.put(candidate, originalScore + lossOffset);
+        }
+
+        return augmentedScores;
+    }
 
     /**
      * Produces a set of scores indicating the degree to which each possible discrete classification
