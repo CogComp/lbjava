@@ -1,11 +1,8 @@
 /**
- * This software is released under the University of Illinois/Research and
- *  Academic Use License. See the LICENSE file in the root folder for details.
- * Copyright (c) 2016
+ * This software is released under the University of Illinois/Research and Academic Use License. See
+ * the LICENSE file in the root folder for details. Copyright (c) 2016
  *
- * Developed by:
- * The Cognitive Computations Group
- * University of Illinois at Urbana-Champaign
+ * Developed by: The Cognitive Computations Group University of Illinois at Urbana-Champaign
  * http://cogcomp.cs.illinois.edu/
  */
 /**
@@ -27,64 +24,64 @@ import java.util.List;
  */
 public class Document {
 
-	private final String label;
-	private final List<String> words;
-	private String guid;
+    private final String label;
+    private final List<String> words;
+    private String guid;
 
-	/**
-	 * Create a new document
-	 * 
-	 * @throws IOException
-	 */
-	public Document(File file, String label) throws IOException {
-		this.label = label;
-		BufferedReader reader = new BufferedReader(new FileReader(file));
+    /**
+     * Create a new document
+     * 
+     * @throws IOException
+     */
+    public Document(File file, String label) throws IOException {
+        this.label = label;
+        BufferedReader reader = new BufferedReader(new FileReader(file));
 
-		words = new ArrayList<String>();
-		String line = null;
-		while ((line = reader.readLine()) != null) {
-			for (String word : line.split("\\s+"))
-				words.add(word.trim());
-		}
+        words = new ArrayList<String>();
+        String line = null;
+        while ((line = reader.readLine()) != null) {
+            for (String word : line.split("\\s+"))
+                words.add(word.trim());
+        }
 
-		reader.close();
-	}
+        reader.close();
+    }
 
-	public Document(File file) throws IOException {
-		this(file, "unknown");
-	}
+    public Document(File file) throws IOException {
+        this(file, "unknown");
+    }
 
-	public Document(List<String> words) {
+    public Document(List<String> words) {
 
-		this(words, "unknown");
-	}
+        this(words, "unknown");
+    }
 
-	public void setGUID(String guid) {
-		this.guid = guid;
-	}
-	
-	public String getGUID(){
-		return this.guid;
-	}
-	
+    public void setGUID(String guid) {
+        this.guid = guid;
+    }
 
-	public Document(List<String> words, String label) {
-		this.words = words;
-		this.label = label;
-	}
+    public String getGUID() {
+        return this.guid;
+    }
 
-	public String getLabel() {
-		return label;
-	}
 
-	public List<String> getWords() {
-		return Collections.unmodifiableList(words);
-	}
+    public Document(List<String> words, String label) {
+        this.words = words;
+        this.label = label;
+    }
 
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return label + ", " + words;
-	}
+    public String getLabel() {
+        return label;
+    }
+
+    public List<String> getWords() {
+        return Collections.unmodifiableList(words);
+    }
+
+    @Override
+    public String toString() {
+        // TODO Auto-generated method stub
+        return label + ", " + words;
+    }
 
 }

@@ -1,11 +1,8 @@
 /**
- * This software is released under the University of Illinois/Research and
- *  Academic Use License. See the LICENSE file in the root folder for details.
- * Copyright (c) 2016
+ * This software is released under the University of Illinois/Research and Academic Use License. See
+ * the LICENSE file in the root folder for details. Copyright (c) 2016
  *
- * Developed by:
- * The Cognitive Computations Group
- * University of Illinois at Urbana-Champaign
+ * Developed by: The Cognitive Computations Group, University of Illinois at Urbana-Champaign
  * http://cogcomp.cs.illinois.edu/
  */
 package edu.illinois.cs.cogcomp.lbjava.classify;
@@ -17,12 +14,12 @@ import java.io.PrintStream;
 import java.util.Date;
 
 /**
- * This class is a program that can evaluate any {@link Classifier}
- * against an oracle {@link Classifier} on the objects returned from
- * a {@link Parser}, with different statistical metrics.
+ * This class is a program that can evaluate any {@link Classifier} against an oracle
+ * {@link Classifier} on the objects returned from a {@link Parser}, with different statistical
+ * metrics.
  *
- * In particular, this class is for {@code real} type, i.e. regression.
- * For {@code discrete} type, refer class {@link TestDiscrete}.
+ * In particular, this class is for {@code real} type, i.e. regression. For {@code discrete} type,
+ * refer class {@link TestDiscrete}.
  *
  * @author Yiming Jiang
  */
@@ -35,14 +32,15 @@ public class TestReal {
     protected DescriptiveStatistics goldSubtractPredictionStats = new DescriptiveStatistics();
 
     // array of abs(y - y_hat)
-    protected DescriptiveStatistics goldSubtractPredictionAbsoluteStats = new DescriptiveStatistics();
+    protected DescriptiveStatistics goldSubtractPredictionAbsoluteStats =
+            new DescriptiveStatistics();
 
     // array of y
     protected DescriptiveStatistics goldStats = new DescriptiveStatistics();
 
     /**
-     * Tests the given {@code real} classifier against the given oracle
-     * using the given {@link Parser} to provide the {@code real} labeled testing data.
+     * Tests the given {@code real} classifier against the given oracle using the given
+     * {@link Parser} to provide the {@code real} labeled testing data.
      *
      * This method uses root-mean-square error as the evaluation criteria.
      *
@@ -53,12 +51,8 @@ public class TestReal {
      * @param output Whether or not to produce output on {@code stdout}.
      * @param outputGranularity The number of examples processed in between time stamp messages.
      */
-    public static void testReal(TestReal tester,
-                                Classifier classifier,
-                                Classifier oracle,
-                                Parser parser,
-                                boolean output,
-                                int outputGranularity) {
+    public static void testReal(TestReal tester, Classifier classifier, Classifier oracle,
+            Parser parser, boolean output, int outputGranularity) {
 
         int processed = 1;
         long totalTime = 0;
@@ -97,8 +91,7 @@ public class TestReal {
             }
 
             System.out.println(processed + " examples tested at " + new Date() + "\n");
-        }
-        else {
+        } else {
             if (output) {
                 runtime = Runtime.getRuntime();
                 System.out.println("Total memory before first example: " + runtime.totalMemory());
@@ -113,7 +106,8 @@ public class TestReal {
             totalTime += System.currentTimeMillis();
 
             if (output) {
-                System.out.println("First example processed in " + (totalTime / 1000.0) + " seconds.");
+                System.out.println("First example processed in " + (totalTime / 1000.0)
+                        + " seconds.");
                 System.out.println("Total memory after first example: " + runtime.totalMemory());
             }
 
@@ -133,25 +127,27 @@ public class TestReal {
         }
 
         if (output) {
-            System.out.println("Average evaluation time: " + (totalTime / (1000.0 * processed)) + " seconds\n");
+            System.out.println("Average evaluation time: " + (totalTime / (1000.0 * processed))
+                    + " seconds\n");
             tester.printPerformace(System.out, processed);
         }
     }
 
     /**
      * Update internal book keeping of each prediction and gold
+     * 
      * @param prediction prediction value
      * @param gold gold value
      */
     public void reportPrediction(double prediction, double gold) {
         // keep track of root mean squared error sum
-        sumOfSquareOfGoldSubtractPrediction += Math.pow((prediction-gold), 2);
+        sumOfSquareOfGoldSubtractPrediction += Math.pow((prediction - gold), 2);
 
         // add y-y_hat into list
-        goldSubtractPredictionStats.addValue(gold-prediction);
+        goldSubtractPredictionStats.addValue(gold - prediction);
 
         // add |y-y_hat| into list
-        goldSubtractPredictionAbsoluteStats.addValue(Math.abs(gold-prediction));
+        goldSubtractPredictionAbsoluteStats.addValue(Math.abs(gold - prediction));
 
         // add y into list
         goldStats.addValue(gold);
@@ -159,6 +155,7 @@ public class TestReal {
 
     /**
      * Write to PrintStream, with statistical information
+     * 
      * @param out printstream
      * @param processed number of testing examples
      */
@@ -175,6 +172,7 @@ public class TestReal {
 
     /**
      * Compute Root Mean Squared Error
+     * 
      * @param processed number of testing examples
      * @return RMSE
      */
@@ -184,6 +182,7 @@ public class TestReal {
 
     /**
      * Compute Mean Squared Error
+     * 
      * @param processed number of testing examples
      * @return MSE
      */
@@ -193,6 +192,7 @@ public class TestReal {
 
     /**
      * Compute Mean Absolute Error
+     * 
      * @param processed number of testing examples
      * @return MAE
      */
@@ -202,6 +202,7 @@ public class TestReal {
 
     /**
      * Compute Median Absolute Error
+     * 
      * @return MedAE
      */
     private double getMedianAbsoluteError() {
@@ -209,8 +210,8 @@ public class TestReal {
     }
 
     /**
-     * Compute Explained Variance
-     * The best possible score is 1.0, lower values are worse.
+     * Compute Explained Variance The best possible score is 1.0, lower values are worse.
+     * 
      * @return EV
      */
     private double getExplainedVariance() {
@@ -220,11 +221,11 @@ public class TestReal {
     }
 
     /**
-     * Compute R2 score, also called Coefficient of Determination
-     * Best possible score is 1.0 and it can be negative
-     *      (because the model can be arbitrarily worse).
-     * A constant model that always predicts the expected value of y,
-     *      disregarding the input features, would get a R^2 score of 0.0.
+     * Compute R2 score, also called Coefficient of Determination Best possible score is 1.0 and it
+     * can be negative (because the model can be arbitrarily worse). A constant model that always
+     * predicts the expected value of y, disregarding the input features, would get a R^2 score of
+     * 0.0.
+     * 
      * @return R2 score
      */
     private double getR2Score() {

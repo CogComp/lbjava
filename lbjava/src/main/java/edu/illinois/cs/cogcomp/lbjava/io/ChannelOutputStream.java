@@ -1,11 +1,8 @@
 /**
- * This software is released under the University of Illinois/Research and
- *  Academic Use License. See the LICENSE file in the root folder for details.
- * Copyright (c) 2016
+ * This software is released under the University of Illinois/Research and Academic Use License. See
+ * the LICENSE file in the root folder for details. Copyright (c) 2016
  *
- * Developed by:
- * The Cognitive Computations Group
- * University of Illinois at Urbana-Champaign
+ * Developed by: The Cognitive Computations Group, University of Illinois at Urbana-Champaign
  * http://cogcomp.cs.illinois.edu/
  */
 package edu.illinois.cs.cogcomp.lbjava.io;
@@ -17,108 +14,107 @@ import java.nio.channels.WritableByteChannel;
 
 
 /**
-  * This class implements an output stream that buffers output in a directly
-  * allocated <code>ByteBuffer</code> before writing it to a channel.
-  *
-  * @author Nick Rizzolo
+ * This class implements an output stream that buffers output in a directly allocated
+ * <code>ByteBuffer</code> before writing it to a channel.
+ *
+ * @author Nick Rizzolo
  **/
-public class ChannelOutputStream extends OutputStream
-{
-  /** The default capacity of {@link #buffer}. */
-  private static int defaultCapacity = 1 << 13;
+public class ChannelOutputStream extends OutputStream {
+    /** The default capacity of {@link #buffer}. */
+    private static int defaultCapacity = 1 << 13;
 
-  /** Holds data until it is written. */
-  protected ByteBuffer buffer;
-  /** The channel where the data will be written. */
-  protected WritableByteChannel channel;
-
-
-  /**
-    * Creates the stream from the channel where the data will be written.
-    *
-    * @param out  The channel where the data will be written.
-   **/
-  public ChannelOutputStream(WritableByteChannel out) {
-    this(out, defaultCapacity);
-  }
-
-  /**
-    * Creates the stream from the channel where the data will be written and a
-    * buffer size.
-    *
-    * @param out  The channel where the data will be written.
-    * @param size The buffer size.
-   **/
-  public ChannelOutputStream(WritableByteChannel out, int size) {
-    if (size < 0) size = 0;
-    buffer = ByteBuffer.allocateDirect(size);
-    channel = out;
-  }
+    /** Holds data until it is written. */
+    protected ByteBuffer buffer;
+    /** The channel where the data will be written. */
+    protected WritableByteChannel channel;
 
 
-  /**
-    * Writes the specified byte to this channel output stream.
-    *
-    * @param b  The byte to be written.
-    * @exception IOException  Possible while {@link #flush}ing.
-   **/
-  public synchronized void write(int b) throws IOException {
-    if (buffer.position() == buffer.capacity()) flush();
-    buffer.put((byte) b);
-  }
-
-
-  /**
-    * Writes <code>len</code> bytes from the specified byte array
-    * starting at offset <code>off</code> to this channel output stream.
-    *
-    * @param b    The data.
-    * @param off  The start offset in the data.
-    * @param len  The number of bytes to write.
-    * @exception IOException  Possible while {@link #flush}ing.
-   **/
-  public synchronized void write(byte[] b, int off, int len)
-      throws IOException {
-    int r = buffer.capacity() - buffer.position();
-    if (len > r) {
-      buffer.put(b, off, r);
-      flush();
-      off += r;
-      len -= r;
-      r = buffer.capacity();
+    /**
+     * Creates the stream from the channel where the data will be written.
+     *
+     * @param out The channel where the data will be written.
+     **/
+    public ChannelOutputStream(WritableByteChannel out) {
+        this(out, defaultCapacity);
     }
 
-    while (len > r) {
-      buffer.put(b, off, r);
-      flush();
-      off += r;
-      len -= r;
+    /**
+     * Creates the stream from the channel where the data will be written and a buffer size.
+     *
+     * @param out The channel where the data will be written.
+     * @param size The buffer size.
+     **/
+    public ChannelOutputStream(WritableByteChannel out, int size) {
+        if (size < 0)
+            size = 0;
+        buffer = ByteBuffer.allocateDirect(size);
+        channel = out;
     }
 
-    if (len > 0) buffer.put(b, off, len);
-  }
+
+    /**
+     * Writes the specified byte to this channel output stream.
+     *
+     * @param b The byte to be written.
+     * @exception IOException Possible while {@link #flush}ing.
+     **/
+    public synchronized void write(int b) throws IOException {
+        if (buffer.position() == buffer.capacity())
+            flush();
+        buffer.put((byte) b);
+    }
 
 
-  /**
-    * Forces any buffered output bytes to be written to {@link #channel}.
-    *
-    * @exception IOException  Possible while writing to {@link #channel}.
-   **/
-  public synchronized void flush() throws IOException {
-    buffer.flip();
-    channel.write(buffer);
-    buffer.clear();
-  }
+    /**
+     * Writes <code>len</code> bytes from the specified byte array starting at offset
+     * <code>off</code> to this channel output stream.
+     *
+     * @param b The data.
+     * @param off The start offset in the data.
+     * @param len The number of bytes to write.
+     * @exception IOException Possible while {@link #flush}ing.
+     **/
+    public synchronized void write(byte[] b, int off, int len) throws IOException {
+        int r = buffer.capacity() - buffer.position();
+        if (len > r) {
+            buffer.put(b, off, r);
+            flush();
+            off += r;
+            len -= r;
+            r = buffer.capacity();
+        }
+
+        while (len > r) {
+            buffer.put(b, off, r);
+            flush();
+            off += r;
+            len -= r;
+        }
+
+        if (len > 0)
+            buffer.put(b, off, len);
+    }
 
 
-  /**
-    * Flushes the {@link #buffer} and closes the {@link #channel}.
-    *
-    * @exception IOException  Possible while closing {@link #channel}.
-   **/
-  public void close() throws IOException {
-    flush();
-    channel.close();
-  }
+    /**
+     * Forces any buffered output bytes to be written to {@link #channel}.
+     *
+     * @exception IOException Possible while writing to {@link #channel}.
+     **/
+    public synchronized void flush() throws IOException {
+        buffer.flip();
+        channel.write(buffer);
+        buffer.clear();
+    }
+
+
+    /**
+     * Flushes the {@link #buffer} and closes the {@link #channel}.
+     *
+     * @exception IOException Possible while closing {@link #channel}.
+     **/
+    public void close() throws IOException {
+        flush();
+        channel.close();
+    }
 }
-
