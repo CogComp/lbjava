@@ -10,37 +10,23 @@
  */
 package edu.illinois.cs.cogcomp.lbjava.learn;
 
-import java.io.PrintStream;
-import java.util.Objects;
 import edu.illinois.cs.cogcomp.lbjava.classify.Feature;
 import edu.illinois.cs.cogcomp.lbjava.classify.FeatureVector;
-import edu.illinois.cs.cogcomp.lbjava.classify.RealPrimitiveStringFeature;
 import edu.illinois.cs.cogcomp.lbjava.classify.ScoreSet;
 import edu.illinois.cs.cogcomp.lbjava.util.ExceptionlessInputStream;
 import edu.illinois.cs.cogcomp.lbjava.util.ExceptionlessOutputStream;
-
+import java.io.PrintStream;
+import java.util.Objects;
 
 /**
- * Gradient descent is a batch learning algorithm for function approximation
- * in which the learner tries to follow the gradient of the error function to
- * the solution of minimal error.  This implementation is a stochastic
- * approximation to gradient descent in which the approximated function is
- * assumed to have linear form.
+ * Stochastic Gradient Descent learning algorithm for classification
  *
- * <p> This algorithm's user-configurable parameters are stored in member
- * fields of this class.  They may be set via either a constructor that names
- * each parameter explicitly or a constructor that takes an instance of
- * {@link edu.illinois.cs.cogcomp.lbjava.learn.StochasticGradientDescent.Parameters Parameters} as
- * input.  The documentation in each member field in this class indicates the
- * default value of the associated parameter when using the former type of
- * constructor.  The documentation of the associated member field in the
- * {@link edu.illinois.cs.cogcomp.lbjava.learn.StochasticGradientDescent.Parameters Parameters} class
- * indicates the default value of the parameter when using the latter type of
- * constructor.
+ * There are two user-configurable loss functions: hinge, least mean square.
+ * Default is least mean square, "lms".
  *
- * @author Nick Rizzolo
- **/
-public class StochasticGradientDescent extends Learner {
+ * @author Yiming Jiang
+ */
+public class StochasticGradientDescentCL extends LinearThresholdUnit {
     /** Default value for {@link #learningRate}. */
     public static final double defaultLearningRate = 0.1;
     /** Default for {@link #weightVector}. */
@@ -68,13 +54,13 @@ public class StochasticGradientDescent extends Learner {
     /**
      * Boolean flag for loss function
      */
-    private boolean isLMS;
+    protected boolean isLMS;
 
     /**
      * The learning rate takes the default value, while the name of the
      * classifier gets the empty string.
      **/
-    public StochasticGradientDescent() {
+    public StochasticGradientDescentCL() {
         this("");
     }
 
@@ -84,7 +70,7 @@ public class StochasticGradientDescent extends Learner {
      *
      * @param r  The desired learning rate value.
      **/
-    public StochasticGradientDescent(double r) {
+    public StochasticGradientDescentCL(double r) {
         this("", r);
     }
 
@@ -94,7 +80,7 @@ public class StochasticGradientDescent extends Learner {
      *
      * @param p  The settings of all parameters.
      **/
-    public StochasticGradientDescent(Parameters p) {
+    public StochasticGradientDescentCL(Parameters p) {
         this("", p);
     }
 
@@ -103,7 +89,7 @@ public class StochasticGradientDescent extends Learner {
      *
      * @param n  The name of the classifier.
      **/
-    public StochasticGradientDescent(String n) {
+    public StochasticGradientDescentCL(String n) {
         this(n, defaultLearningRate);
     }
 
@@ -114,7 +100,7 @@ public class StochasticGradientDescent extends Learner {
      * @param n  The name of the classifier.
      * @param r  The desired learning rate value.
      **/
-    public StochasticGradientDescent(String n, double r) {
+    public StochasticGradientDescentCL(String n, double r) {
         super(n);
         Parameters p = new Parameters();
         p.learningRate = r;
@@ -128,7 +114,7 @@ public class StochasticGradientDescent extends Learner {
      * @param n  The name of the classifier.
      * @param p  The settings of all parameters.
      **/
-    public StochasticGradientDescent(String n, Parameters p) {
+    public StochasticGradientDescentCL(String n, Parameters p) {
         super(n);
         setParameters(p);
     }
@@ -203,14 +189,16 @@ public class StochasticGradientDescent extends Learner {
         bias = 0;
     }
 
+    /** Inherited unused method from LTU class */
+    @Override
+    public void promote(int[] exampleFeatures, double[] exampleValues, double rate) {
 
-    /**
-     * Returns a string describing the output feature type of this classifier.
-     *
-     * @return <code>"real"</code>
-     **/
-    public String getOutputType() {
-        return "real";
+    }
+
+    /** Inherited unused method from LTU class */
+    @Override
+    public void demote(int[] exampleFeatures, double[] exampleValues, double rate) {
+
     }
 
 
@@ -227,9 +215,20 @@ public class StochasticGradientDescent extends Learner {
         assert exampleLabels.length == 1
                 : "Example must have a single label.";
 
-        double labelValue = labelValues[0];
+        double labelValue = 1;
+        if (exampleLabels[0] == 1) {
+            labelValue = 1;
+        }
+        else if (exampleLabels[0] == 0) {
+            labelValue = -1;
+        }
+
         double wtx = weightVector.dot(exampleFeatures, exampleValues) + bias;
 
+        learnUpdate(exampleFeatures, exampleValues, labelValue, wtx);
+    }
+
+    void learnUpdate(int[] exampleFeatures, double[] exampleValues, double labelValue, double wtx) {
         if (isLMS) {
             double multiplier = learningRate * (labelValue - wtx);
             weightVector.scaledAdd(exampleFeatures, exampleValues, multiplier);
@@ -266,9 +265,8 @@ public class StochasticGradientDescent extends Learner {
      * @return The classification of the example as a feature.
      **/
     public Feature featureValue(int[] f, double[] v) {
-        return
-                new RealPrimitiveStringFeature(containingPackage, name, "",
-                        realValue(f, v));
+        int index = score(f, v) >= 0 ? 1 : 0;
+        return predictions.get(index);
     }
 
 
@@ -279,7 +277,7 @@ public class StochasticGradientDescent extends Learner {
      * @param exampleValues    The example's array of feature values.
      * @return The computed real value.
      **/
-    public double realValue(int[] exampleFeatures, double[] exampleValues) {
+    public double score(int[] exampleFeatures, double[] exampleValues) {
         return weightVector.dot(exampleFeatures, exampleValues) + bias;
     }
 
@@ -341,12 +339,12 @@ public class StochasticGradientDescent extends Learner {
 
     /** Returns a deep clone of this learning algorithm. */
     public Object clone() {
-        StochasticGradientDescent clone = null;
+        StochasticGradientDescentCL clone = null;
 
         try {
-            clone = (StochasticGradientDescent) super.clone();
+            clone = (StochasticGradientDescentCL) super.clone();
         } catch (Exception e) {
-            System.err.println("Error cloning StochasticGradientDescent: " + e);
+            System.err.println("Error cloning StochasticGradientDescentCL: " + e);
             System.exit(1);
         }
 
@@ -415,7 +413,7 @@ public class StochasticGradientDescent extends Learner {
          * @param l  The learner whose parameters will be set.
          **/
         public void setParameters(Learner l) {
-            ((StochasticGradientDescent) l).setParameters(this);
+            ((StochasticGradientDescentCL) l).setParameters(this);
         }
 
 
@@ -426,7 +424,7 @@ public class StochasticGradientDescent extends Learner {
         public String nonDefaultString() {
             String result = super.nonDefaultString();
 
-            if (learningRate != StochasticGradientDescent.defaultLearningRate)
+            if (learningRate != StochasticGradientDescentCL.defaultLearningRate)
                 result += ", learningRate = " + learningRate;
 
             if (result.startsWith(", ")) result = result.substring(2);
