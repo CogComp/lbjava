@@ -124,12 +124,13 @@ public abstract class Learner extends Classifier {
     public void setLossFlag() {
         lossFlag = true;
     }
+
     public void unsetLossFlag() {
-        lossFlag=false;
+        lossFlag = false;
     }
 
     public void setCandidates(int a) {
-        candidates= a;
+        candidates = a;
     }
 
     /** Retrieves the parameters that are set in this learner. */
@@ -817,23 +818,24 @@ public abstract class Learner extends Classifier {
      **/
     public ScoreSet scores(Object example) {
         Object[] exampleArray = getExampleArray(example, false);
-        ScoreSet resultS = scores((int[])exampleArray[0], (double[])exampleArray[1]);
+        ScoreSet resultS = scores((int[]) exampleArray[0], (double[]) exampleArray[1]);
         if (!lossFlag)
             return resultS;
         else
-            return scoresAugmented(example,resultS);
+            return scoresAugmented(example, resultS);
     }
 
-  /**
-   * Update the score of each binary variable (label) based on the gold value of each example for that variable.
-   * When using a {@code SparseNetworkLearner} to keep the model there is an LTU for each label.
-   * If the gold is same as a specific label then its binary value for that label is 1 and the score for that label
-   * will be {@code oldScore - lossOffset}; otherwise it will be 0 and the score will be {@code oldScore + lossOffset}.
-   *
-   * @param example The object to make decisions about.
-   * @param resultS The original scores (see {@link #scores(Object)}).
-   * @return The augmented set of scores.
-   */
+    /**
+     * Update the score of each binary variable (label) based on the gold value of each example for
+     * that variable. When using a {@code SparseNetworkLearner} to keep the model there is an LTU
+     * for each label. If the gold is same as a specific label then its binary value for that label
+     * is 1 and the score for that label will be {@code oldScore - lossOffset}; otherwise it will be
+     * 0 and the score will be {@code oldScore + lossOffset}.
+     *
+     * @param example The object to make decisions about.
+     * @param resultS The original scores (see {@link #scores(Object)}).
+     * @return The augmented set of scores.
+     */
     public ScoreSet scoresAugmented(Object example, ScoreSet resultS) {
         ScoreSet augmentedScores = new ScoreSet();
         Lexicon lLexicon = getLabelLexicon();
@@ -843,7 +845,7 @@ public abstract class Learner extends Classifier {
             double originalScore = resultS.getScore(candidate).score;
             double lossOffset = 1 / (double) (candidates);
             if (candidate.equals(gold))
-                augmentedScores.put(candidate,  originalScore - lossOffset);
+                augmentedScores.put(candidate, originalScore - lossOffset);
             else
                 augmentedScores.put(candidate, originalScore + lossOffset);
         }
