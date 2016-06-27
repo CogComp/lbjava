@@ -1,0 +1,24 @@
+package edu.illinois.cs.cogcomp.lbjava.examples.setCover;
+
+import edu.illinois.cs.cogcomp.lbjava.examples.setCover.City;
+import edu.illinois.cs.cogcomp.lbjava.examples.setCover.Neighborhood;
+import edu.illinois.cs.cogcomp.lbjava.examples.setCover.ContainsStation;
+
+import edu.illinois.cs.cogcomp.lbjava.infer.OJalgoHook;
+
+constraint noEmptyNeighborhoods(City c) {
+  forall (Neighborhood n in c.getNeighborhoods())
+    ContainsStation(n) :: true
+    \/ (exists (Neighborhood n2 in n.getNeighbors())
+          ContainsStation(n2) :: true);
+}
+
+inference SetCover head City c {
+  Neighborhood n  { return n.getParentCity(); }
+  subjectto { @noEmptyNeighborhoods(c); } 
+  with new ILPInference(new OJalgoHook())
+}
+
+discrete{false, true} containsStationConstrained(Neighborhood n) <-
+  SetCover(ContainsStation)
+

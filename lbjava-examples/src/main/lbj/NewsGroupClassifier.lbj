@@ -1,0 +1,41 @@
+package edu.illinois.cs.cogcomp.lbjava.examples.newsgroup;
+
+import edu.illinois.cs.cogcomp.lbjava.examples.Document;
+import edu.illinois.cs.cogcomp.lbjava.examples.DocumentReader;
+
+import java.util.List;
+
+/** Simply produces "bag of words" features. */
+discrete% WordFeatures(Document d) <- {
+    List words = d.getWords();
+    for (int i = 0; i < words.size(); i++)
+	sense words.get(i);
+}
+
+discrete% BigramFeatures(Document d) <- {
+    List words = d.getWords();
+    for (int i = 0; i < words.size() - 1; i++)
+        sense words.get(i)+"-"+words.get(i+1);
+}
+
+discrete NewsGroupLabel(Document d) <- { return d.getLabel(); }
+
+/** A learned text classifier; its definition comes from data. */
+discrete NewsGroupClassifier(Document d) <-
+learn NewsGroupLabel
+  using WordFeatures, BigramFeatures
+  from new DocumentReader("data/20news/train")
+  5 rounds
+
+  with SparseNetworkLearner {
+  SparseAveragedPerceptron.Parameters p =
+       new SparseAveragedPerceptron.Parameters();
+     p.learningRate = 0.05;
+     p.thickness = 5;
+     baseLTU = new SparseAveragedPerceptron(p);
+  }
+  testFrom new DocumentReader("data/20news/test")
+ 
+  progressOutput 2000
+end
+

@@ -1,0 +1,24 @@
+package edu.illinois.cs.cogcomp.lbjava.examples.regression;
+
+import java.util.List;
+
+import edu.illinois.cs.cogcomp.lbjava.examples.regression.MyData;
+import edu.illinois.cs.cogcomp.lbjava.examples.regression.MyDataReader;
+
+real[] MyFeatures(MyData d) <- {
+    for (int i = 0; i < d.getFeatures().size(); i++) {
+        sense d.getFeatures().get(i);
+    }
+}
+
+real MyLabel(MyData d) <- {
+    return d.getLabel();
+}
+
+real SGDClassifier(MyData d) <-
+    learn MyLabel
+    using MyFeatures
+
+    with StochasticGradientDescent {}
+
+end

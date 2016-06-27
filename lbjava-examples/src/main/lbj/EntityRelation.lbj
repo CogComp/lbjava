@@ -1,0 +1,126 @@
+package edu.illinois.cs.cogcomp.lbjava.examples.entityRelation;
+
+import java.util.List;
+import edu.illinois.cs.cogcomp.lbjava.examples.entityRelation.datastruct.*;
+import edu.illinois.cs.cogcomp.lbjava.examples.entityRelation.Conll04_RelationReaderNew;
+
+import edu.illinois.cs.cogcomp.lbjava.infer.OJalgoHook;
+
+discrete% EntityFeatures(ConllRawToken t) <- {
+    sense t.POS;
+}
+
+discrete% RelationFeatures(ConllRelation t) <- {
+    sense ("WORD1:" + t.s.sentTokens.elementAt(t.wordId1).phrase);
+    sense ("WORD2:" + t.s.sentTokens.elementAt(t.wordId2).phrase);
+}
+
+discrete {"Peop","nPeop"} personLabel(ConllRawToken t) <- {
+    if (t.entType.equalsIgnoreCase("Peop"))
+	    return("Peop");
+    else
+	    return("nPeop");
+}
+
+discrete PersonClassifier(ConllRawToken t) <-
+learn personLabel
+    using EntityFeatures
+    from new Conll04_RelationReaderNew("data/enitityRelations/conll04_train.corp", "Token")
+    50 rounds
+    with SparsePerceptron {
+        learningRate = 0.1 ;
+        thickness = 3.5;
+    }
+    testFrom new Conll04_RelationReaderNew("data/enitityRelations/conll04_test.corp", "Token")
+    progressOutput 200
+end
+
+
+discrete {"Loc","nLoc"} locLabel(ConllRawToken t) <- {
+    if (t.entType.equalsIgnoreCase("Loc"))
+	    return("Loc");
+    else
+		return("nLoc");
+}
+
+discrete LocClassifier(ConllRawToken t) <-
+learn locLabel
+    using EntityFeatures
+    from new Conll04_RelationReaderNew("data/enitityRelations/conll04_train.corp", "Token")
+    50 rounds
+    with SparsePerceptron {
+        learningRate = 0.1 ;
+        thickness = 3.5;
+    }
+
+    testFrom new Conll04_RelationReaderNew("data/enitityRelations/conll04_test.corp","Token")
+    progressOutput 200
+end
+
+discrete {"Org","nOrg"} orgLabel(ConllRawToken t) <- {
+    if (t.entType.equalsIgnoreCase("Org"))
+	    return("Org");
+    else
+        return("nOrg");
+}
+
+discrete OrganizationClassifier(ConllRawToken t) <-
+learn orgLabel
+    using EntityFeatures
+    from new Conll04_RelationReaderNew("data/enitityRelations/conll04_train.corp", "Token")
+    50 rounds
+
+    with SparsePerceptron {
+        learningRate = 0.1 ;
+        thickness = 3.5;
+    }
+    testFrom new Conll04_RelationReaderNew("data/enitityRelations/conll04_test.corp", "Token")
+    progressOutput 200
+end
+
+discrete {"Work_For","nWork_For"} workLabel(ConllRelation t) <- {
+    if (t.relType.equalsIgnoreCase("Work_For"))
+	    return("Work_For");
+    else
+	    return("nWork_For");
+}
+
+discrete work_forClassifier(ConllRelation t) <- 
+learn workLabel
+    using RelationFeatures
+    from new Conll04_RelationReaderNew("data/enitityRelations/conll04_train.corp", "Pair")
+    50 rounds
+
+    with SparsePerceptron {
+        learningRate = 0.1 ;
+        thickness = 3.5;
+    }
+    testFrom new Conll04_RelationReaderNew("data/enitityRelations/conll04_test.corp", "Pair")
+    progressOutput 200
+end
+
+
+constraint PersonWorkFor (ConllRelation  t)
+{
+    work_forClassifier(t)::"Work_For" => PersonClassifier(Conll04_RelationReaderNew.PersonCandidate(t))::"Peop";
+}
+
+constraint OrganizationWorkFor (ConllRelation t)
+{
+	work_forClassifier(t)::"Work_For" => OrganizationClassifier(Conll04_RelationReaderNew.OrgCandidate(t))::"Org";
+}
+
+inference JointER head ConllRelation t {
+    ConllRelation t  { return t; }
+    ConllRawToken e  { return e.getRelation(); }
+    // normalizedby new Softmax()
+    subjectto { @PersonWorkFor(t) /\ @OrganizationWorkFor(t); }
+    with new ILPInference(new OJalgoHook())
+}
+
+discrete RelArgsClassifier(ConllRelation r) <-
+    JointER(work_forClassifier)
+discrete Arg_pClassifier(ConllRawToken t) <-
+    JointER(PersonClassifier)
+discrete ArgOClassifier (ConllRawToken t) <-
+    JointER(OrganizationClassifier)

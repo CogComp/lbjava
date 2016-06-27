@@ -1,0 +1,5 @@
+v2.0
+    Added a 'generate' mode (only translates LBJava->Java)
+    Switched to LBJava-1.0.3
+v1.1
+    Changed LBJ2 package names to lbjava.
