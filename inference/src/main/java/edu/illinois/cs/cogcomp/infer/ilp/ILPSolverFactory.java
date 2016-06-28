@@ -9,51 +9,46 @@ package edu.illinois.cs.cogcomp.infer.ilp;
 
 public class ILPSolverFactory {
 
-	private int beamSize = -1;
-	public final SolverType type;
+    private int beamSize = -1;
+    public final SolverType type;
 
-	public enum SolverType {
-		Beam,
-		Gurobi,
-		OJAlgo,
-		JLISCuttingPlaneGurobi
-	}
+    public enum SolverType {
+        Beam, Gurobi, OJAlgo, JLISCuttingPlaneGurobi
+    }
 
-	/**
-	 * Create ILP solvers that using one of XpresssMP, Gurobi, or Cutting plane
-	 * solvers
-	 *
-	 * @param type
-	 */
-	public ILPSolverFactory(SolverType type) {
-		this.type = type;
-		if (type == SolverType.Beam)
-			throw new RuntimeException(
-					"Unknown beam size. Use other constructor");
-	}
+    /**
+     * Create ILP solvers that using one of XpresssMP, Gurobi, or Cutting plane solvers
+     *
+     * @param type
+     */
+    public ILPSolverFactory(SolverType type) {
+        this.type = type;
+        if (type == SolverType.Beam)
+            throw new RuntimeException("Unknown beam size. Use other constructor");
+    }
 
-	/**
-	 * Create ILP solvers that perform beam search with a specified beam size
-	 *
-	 * @param size
-	 */
-	public ILPSolverFactory(int size) {
-		this.type = SolverType.Beam;
-		this.beamSize = size;
-	}
+    /**
+     * Create ILP solvers that perform beam search with a specified beam size
+     *
+     * @param size
+     */
+    public ILPSolverFactory(int size) {
+        this.type = SolverType.Beam;
+        this.beamSize = size;
+    }
 
-	public ILPSolver getSolver() {
-		switch (type) {
-			case Beam:
-				return new BeamSearch(beamSize);
-			case Gurobi:
-				return new GurobiHook();
-			case OJAlgo:
-				return new OJalgoHook();
-			case JLISCuttingPlaneGurobi:
-				return new JLISCuttingPlaneILPSolverGurobi(new GurobiHook());
-		}
+    public ILPSolver getSolver() {
+        switch (type) {
+            case Beam:
+                return new BeamSearch(beamSize);
+            case Gurobi:
+                return new GurobiHook();
+            case OJAlgo:
+                return new OJalgoHook();
+            case JLISCuttingPlaneGurobi:
+                return new JLISCuttingPlaneILPSolverGurobi(new GurobiHook());
+        }
 
-		throw new RuntimeException();
-	}
+        throw new RuntimeException();
+    }
 }

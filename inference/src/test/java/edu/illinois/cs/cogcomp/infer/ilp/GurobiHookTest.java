@@ -50,8 +50,7 @@ public class GurobiHookTest {
             assertEquals(0.0, y.get(GRB.DoubleAttr.X), 0.0);
             assertEquals(1.0, z.get(GRB.DoubleAttr.X), 0.0);
             assertEquals(-3.0, model.get(GRB.DoubleAttr.ObjVal), 0.0);
-        }
-        catch (UnsatisfiedLinkError e) {
+        } catch (UnsatisfiedLinkError e) {
             System.out.println("**** GUROBI LICENSE NOT FOUND! SKIPPING THE TEST **** ");
         }
     }

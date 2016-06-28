@@ -29,9 +29,9 @@ public class BeamSearchTest {
         int y = solver.addBooleanVariable(1);
         int z = solver.addBooleanVariable(2);
 
-        solver.addLessThanConstraint(new int[] { x, y, z }, new double[] { 1, 2, 3}, 4d);
+        solver.addLessThanConstraint(new int[] {x, y, z}, new double[] {1, 2, 3}, 4d);
 
-        solver.addGreaterThanConstraint(new int[] { x, y }, new double[]{1, 1 }, 1);
+        solver.addGreaterThanConstraint(new int[] {x, y}, new double[] {1, 1}, 1);
 
         solver.setMaximize(true);
 

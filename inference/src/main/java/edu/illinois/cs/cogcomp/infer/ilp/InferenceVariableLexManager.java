@@ -15,52 +15,52 @@ import java.util.concurrent.ConcurrentHashMap;
  * 
  */
 public class InferenceVariableLexManager {
-	private ConcurrentHashMap<String, Integer> variables;
+    private ConcurrentHashMap<String, Integer> variables;
 
-	public InferenceVariableLexManager() {
-		variables = new ConcurrentHashMap<String, Integer>();
-	}
+    public InferenceVariableLexManager() {
+        variables = new ConcurrentHashMap<String, Integer>();
+    }
 
-	public void addVariable(String identifier, int variableId) {
-		assert !variables.containsKey(identifier) : identifier + " found!";
+    public void addVariable(String identifier, int variableId) {
+        assert !variables.containsKey(identifier) : identifier + " found!";
 
-		variables.put(identifier, variableId);
-	}
+        variables.put(identifier, variableId);
+    }
 
-	public int getVariable(String identifier) {
-		if (variables.containsKey(identifier))
-			return variables.get(identifier);
-		else
-			return -1;
-	}
+    public int getVariable(String identifier) {
+        if (variables.containsKey(identifier))
+            return variables.get(identifier);
+        else
+            return -1;
+    }
 
-	/**
-	 * This is slow. Don't use this for anything except debugging
-	 * 
-	 * @param var
-	 * @return
-	 */
-	public String getVariableName(int var) {
+    /**
+     * This is slow. Don't use this for anything except debugging
+     * 
+     * @param var
+     * @return
+     */
+    public String getVariableName(int var) {
 
-		for (Entry<String, Integer> entry : variables.entrySet())
-			if (entry.getValue() == var)
-				return entry.getKey();
+        for (Entry<String, Integer> entry : variables.entrySet())
+            if (entry.getValue() == var)
+                return entry.getKey();
 
-		return null;
-	}
+        return null;
+    }
 
-	@Override
-	public String toString() {
-		StringBuffer sb = new StringBuffer();
+    @Override
+    public String toString() {
+        StringBuffer sb = new StringBuffer();
 
-		for (String s : variables.keySet()) {
-			sb.append("\t" + s + "\t" + variables.get(s) + "\n");
-		}
+        for (String s : variables.keySet()) {
+            sb.append("\t" + s + "\t" + variables.get(s) + "\n");
+        }
 
-		return sb.toString();
-	}
+        return sb.toString();
+    }
 
-	public int size() {
-		return variables.size();
-	}
+    public int size() {
+        return variables.size();
+    }
 }

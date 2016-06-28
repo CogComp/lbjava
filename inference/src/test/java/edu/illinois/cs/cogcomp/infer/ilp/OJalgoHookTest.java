@@ -18,13 +18,13 @@ public class OJalgoHookTest {
         int[] varInds = new int[2];
 
         int i = 0;
-        while (i< 2) {
+        while (i < 2) {
             int x = ojaHook.addBooleanVariable(-1.0);
             varInds[i] = x;
             i++;
         }
 
-        double[] coefs = { 1, 2 };
+        double[] coefs = {1, 2};
         ojaHook.addGreaterThanConstraint(varInds, coefs, -3);
         ojaHook.addLessThanConstraint(varInds, coefs, 4);
 
@@ -49,13 +49,13 @@ public class OJalgoHookTest {
         int[] varInds = new int[2];
 
         int i = 0;
-        while (i< 2) {
+        while (i < 2) {
             int x = ojaHook.addBooleanVariable(-1.0);
             varInds[i] = x;
             i++;
         }
 
-        double[] coefs = { 1, 2 };
+        double[] coefs = {1, 2};
         ojaHook.addGreaterThanConstraint(varInds, coefs, -3);
         ojaHook.addLessThanConstraint(varInds, coefs, 4);
 
@@ -81,13 +81,13 @@ public class OJalgoHookTest {
         int[] varInds = new int[2];
 
         int i = 0;
-        while (i< 2) {
+        while (i < 2) {
             int x = ojaHook.addBooleanVariable(1.5);
             varInds[i] = x;
             i++;
         }
 
-        double[] coefs = { 1, 2 };
+        double[] coefs = {1, 2};
         ojaHook.addGreaterThanConstraint(varInds, coefs, -3);
         ojaHook.addLessThanConstraint(varInds, coefs, 4);
 
@@ -112,13 +112,13 @@ public class OJalgoHookTest {
         int[] varInds = new int[2];
 
         int i = 0;
-        while (i< 2) {
+        while (i < 2) {
             int x = ojaHook.addBooleanVariable(1.5);
             varInds[i] = x;
             i++;
         }
 
-        double[] coefs = { 1, 2 };
+        double[] coefs = {1, 2};
         ojaHook.addGreaterThanConstraint(varInds, coefs, -3);
         ojaHook.addLessThanConstraint(varInds, coefs, 4);
 
@@ -144,13 +144,13 @@ public class OJalgoHookTest {
 
         double[] objCoefs = {1.5, 2.5};
         int i = 0;
-        while (i< 2) {
+        while (i < 2) {
             int x = ojaHook.addBooleanVariable(objCoefs[i]);
             varInds[i] = x;
             i++;
         }
 
-        double[] coefs = { 1, 2 };
+        double[] coefs = {1, 2};
         ojaHook.addGreaterThanConstraint(varInds, coefs, 1);
         ojaHook.addLessThanConstraint(varInds, coefs, 4);
 
@@ -176,13 +176,13 @@ public class OJalgoHookTest {
 
         double[] objCoefs = {1.5, 2.5};
         int i = 0;
-        while (i< 2) {
+        while (i < 2) {
             int x = ojaHook.addBooleanVariable(objCoefs[i]);
             varInds[i] = x;
             i++;
         }
 
-        double[] coefs = { 1, 2 };
+        double[] coefs = {1, 2};
         ojaHook.addGreaterThanConstraint(varInds, coefs, 1);
         ojaHook.addLessThanConstraint(varInds, coefs, 2);
 
@@ -208,13 +208,13 @@ public class OJalgoHookTest {
 
         double[] objCoefs = {1.5, 2.5};
         int i = 0;
-        while (i< 2) {
+        while (i < 2) {
             int x = ojaHook.addBooleanVariable(objCoefs[i]);
             varInds[i] = x;
             i++;
         }
 
-        double[] coefs = { 1, 2 };
+        double[] coefs = {1, 2};
         ojaHook.addGreaterThanConstraint(varInds, coefs, 1);
         ojaHook.addLessThanConstraint(varInds, coefs, 2);
 
@@ -240,13 +240,13 @@ public class OJalgoHookTest {
 
         double[] objCoefs = {-1, -1, -1};
         int i = 0;
-        while (i< 3) {
+        while (i < 3) {
             int x = ojaHook.addBooleanVariable(objCoefs[i]);
             varInds[i] = x;
             i++;
         }
 
-        double[] coefs = { 1, 1, 1};
+        double[] coefs = {1, 1, 1};
         ojaHook.addEqualityConstraint(varInds, coefs, 3);
         ojaHook.setMaximize(true);
 
@@ -273,7 +273,7 @@ public class OJalgoHookTest {
         ojaHook.addDiscreteVariable(objCoefs);
         ojaHook.addDiscreteVariable(objCoefs);
 
-        double[] coefs = { 1, 1, 1};
+        double[] coefs = {1, 1, 1};
         int[] varInds = {1, 3, 5};
         ojaHook.addEqualityConstraint(varInds, coefs, 3);
         ojaHook.setMaximize(true);
