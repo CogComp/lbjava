@@ -8,6 +8,8 @@
 package edu.illinois.cs.cogcomp.lbjava.infer;
 
 
+import edu.illinois.cs.cogcomp.infer.ilp.ILPSolver;
+
 /**
  * Exceptions of this type are thrown by the {@link ILPInference} class when the selected
  * {@link ILPSolver} did not successfully find the optimal solution to the inference problem.
