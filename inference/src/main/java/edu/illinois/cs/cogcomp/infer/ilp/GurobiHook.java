@@ -5,11 +5,10 @@
  * Developed by: The Cognitive Computations Group, University of Illinois at Urbana-Champaign
  * http://cogcomp.cs.illinois.edu/
  */
-package edu.illinois.cs.cogcomp.lbjava.infer;
+package edu.illinois.cs.cogcomp.infer.ilp;
 
-import edu.illinois.cs.cogcomp.lbjava.classify.Score;
-import edu.illinois.cs.cogcomp.lbjava.util.DVector;
-import edu.illinois.cs.cogcomp.lbjava.util.OVector;
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.DVector;
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.OVector;
 import gurobi.GRB;
 import gurobi.GRBConstr;
 import gurobi.GRBEnv;
@@ -18,9 +17,10 @@ import gurobi.GRBLinExpr;
 import gurobi.GRBModel;
 import gurobi.GRBSOS;
 import gurobi.GRBVar;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
-
 
 /**
  * This is an interface to the <a href="http://www.gurobi.com">Gurobi Optimizer</a>. Make sure the
@@ -30,13 +30,21 @@ import java.util.Arrays;
  * @author Nick Rizzolo
  **/
 public class GurobiHook implements ILPSolver {
+
+    private int timelimit = 200;
+
+    // when solving without presolve how long should we take before
+    // timeout
+    private int noPresolveTimelimit = -1;
+
+    private static final Logger logger = LoggerFactory.getLogger(GurobiHook.class);
+
     /** Prints an error message and exits the JVM. */
     protected static void handleException(GRBException e) {
         System.out.println("Gurobi error " + e.getErrorCode() + ": " + e.getMessage());
         e.printStackTrace();
         System.exit(-1);
     }
-
 
     /** The model to be optimized will be associated with this environment. */
     protected GRBEnv environment;
@@ -46,6 +54,10 @@ public class GurobiHook implements ILPSolver {
     protected OVector variables;
     /** Contains all of the Gurobi SOS objects created for the model. */
     protected OVector SOSes;
+    /** whether the optimization has been timed out */
+    private boolean isTimedOut;
+    /** whether the optimization has been unsatisfactory */
+    private boolean unsat;
     /**
      * Whether or not the <code>GRBModel.update()</code> method needs to be called before adding
      * more constraints.
@@ -54,10 +66,10 @@ public class GurobiHook implements ILPSolver {
     /** Whether or not the model has been solved. */
     protected boolean isSolved;
     /**
-     * Verbosity level. {@link ILPInference#VERBOSITY_NONE} produces no incidental output. If set to
-     * {@link ILPInference#VERBOSITY_LOW}, only variable and constraint counts are reported on
-     * <code>STDOUT</code>. If set to {@link ILPInference#VERBOSITY_HIGH}, a textual representation
-     * of the entire optimization problem is also generated on <code>STDOUT</code>.
+     * Verbosity level. {@link ILPSolver#VERBOSITY_NONE} produces no incidental output. If set to
+     * {@link ILPSolver#VERBOSITY_LOW}, only variable and constraint counts are reported on
+     * <code>STDOUT</code>. If set to {@link ILPSolver#VERBOSITY_HIGH}, a textual representation of
+     * the entire optimization problem is also generated on <code>STDOUT</code>.
      **/
     protected int verbosity;
     /**
@@ -67,10 +79,13 @@ public class GurobiHook implements ILPSolver {
      **/
     protected DVector objectiveCoefficients;
 
+    public void setTimeoutLimit(int limit) {
+        timelimit = limit;
+    }
 
     /** Create a new Gurobi hook with the default environment parameters. */
     public GurobiHook() {
-        this(ILPInference.VERBOSITY_NONE);
+        this(ILPSolver.VERBOSITY_NONE);
     }
 
     /**
@@ -81,7 +96,19 @@ public class GurobiHook implements ILPSolver {
     public GurobiHook(int v) {
         try {
             environment = new GRBEnv();
-            environment.set(GRB.IntParam.OutputFlag, 0);
+            environment.set(GRB.IntParam.OutputFlag, 0); // no output
+
+            // how many threads can we use?
+            //environment.set(GRB.IntParam.Threads,
+            //        Math.min(8, Runtime.getRuntime().availableProcessors()));
+
+            // dump big stuff to filespace
+            //environment.set(GRB.DoubleParam.NodefileStart, 0.5);
+
+            //environment.set(GRB.DoubleParam.MIPGap, 1e-10);
+
+            //environment.set(GRB.IntParam.Presolve, 0);
+
         } catch (GRBException e) {
             handleException(e);
         }
@@ -95,7 +122,7 @@ public class GurobiHook implements ILPSolver {
      * @param env An environment containing user-specified parameters.
      **/
     public GurobiHook(GRBEnv env) {
-        this(env, ILPInference.VERBOSITY_NONE);
+        this(env, ILPSolver.VERBOSITY_NONE);
     }
 
     /**
@@ -110,6 +137,14 @@ public class GurobiHook implements ILPSolver {
         reset();
     }
 
+
+    public boolean isTimedOut() {
+        return isTimedOut;
+    }
+
+    public boolean unsat() {
+        return unsat;
+    }
 
     /**
      * This method clears the all constraints and variables out of the ILP solver's problem
@@ -163,6 +198,32 @@ public class GurobiHook implements ILPSolver {
         return id;
     }
 
+    public int addIntegerVariable(double c) {
+        int id = variables.size();
+        try {
+            variables.add(model.addVar(-GRB.INFINITY, GRB.INFINITY, c, GRB.INTEGER, "x_" + id));
+        } catch (GRBException e) {
+            handleException(e);
+        }
+        // TODO: delete the line below once we get Gurobi 4.0
+        objectiveCoefficients.add(c);
+        needsUpdate = true;
+        return id;
+    }
+
+    public int addRealVariable(double c) {
+        int id = variables.size();
+        try {
+            variables.add(model.addVar(-GRB.INFINITY, GRB.INFINITY, c, GRB.CONTINUOUS, "x_" + id));
+        } catch (GRBException e) {
+            handleException(e);
+        }
+        // TODO: delete the line below once we get Gurobi 4.0
+        objectiveCoefficients.add(c);
+        needsUpdate = true;
+        return id;
+    }
+
 
     /**
      * Adds a general, multi-valued discrete variable, which is implemented as a set of Boolean
@@ -187,24 +248,6 @@ public class GurobiHook implements ILPSolver {
         }
         return result;
     }
-
-
-    /**
-     * Adds a general, multi-valued discrete variable, which is implemented as a set of Boolean
-     * variables, one per value of the discrete variable, with exactly one of those variables set
-     * <code>true</code> at any given time.
-     *
-     * @param c An array of {@link edu.illinois.cs.cogcomp.lbjava.classify.Score}s containing the
-     *        objective function coefficients for the new Boolean variables.
-     * @return The indexes of the newly created variables.
-     **/
-    public int[] addDiscreteVariable(Score[] c) {
-        double[] scores = new double[c.length];
-        for (int i = 0; i < c.length; ++i)
-            scores[i] = c[i].score;
-        return addDiscreteVariable(scores);
-    }
-
 
     /**
      * Adds a new constraint to the problem with the specified type. This method is called by all
@@ -288,18 +331,58 @@ public class GurobiHook implements ILPSolver {
     }
 
 
+    public void printSolution() throws GRBException {
+        GRBVar[] varsAll = model.getVars();
+        for (int i = 0; i < varsAll.length; i++) {
+            GRBVar var = varsAll[i];
+            System.out.println("x_" + i + "\t" + var.get(GRB.StringAttr.VarName) + "\t"
+                    + var.get(GRB.DoubleAttr.Obj) + "\t" + var.get(GRB.DoubleAttr.X));
+        }
+    }
+
     /**
      * Solves the ILP problem, saving the solution internally.
      *
      * @return <code>true</code> iff a solution was found successfully.
      **/
     public boolean solve() throws Exception {
-        if (verbosity > ILPInference.VERBOSITY_NONE) {
+        if (verbosity > ILPSolver.VERBOSITY_NONE) {
             System.out.println("  variables: " + model.get(GRB.IntAttr.NumVars));
             System.out.println("  constraints: " + model.get(GRB.IntAttr.NumConstrs));
         }
 
-        if (verbosity == ILPInference.VERBOSITY_HIGH) {
+        assert model.getVars().length > 0 : "Model has no variables!";
+
+        // here we first attempt to presolve (some models can be solved quicker
+        // directly than the time it takes to presolve them)
+
+        isTimedOut = false;
+        boolean more = false; // should we perform more solving?
+        long start = System.currentTimeMillis();
+        // XXX: if you always see your solve time > noPresolveTimelimit then you
+        // probably want to set noPresolveTimelimit to 0 as you are always
+        // getting into the second solving loop.
+        if (noPresolveTimelimit > 0) {
+            environment.set(GRB.IntParam.Presolve, 0);
+            environment.set(GRB.DoubleParam.TimeLimit, noPresolveTimelimit);
+            model.optimize();
+            more = model.get(GRB.IntAttr.Status) == GRB.TIME_LIMIT;
+        }
+
+        // we may have timed out because noPresolveTimelimit is usually small
+        // we can solve big hard models quicker with presolve
+        if (more) {
+            logger.debug("Trying presolve version of problem");
+            environment.set(GRB.IntParam.Presolve, -1); // auto presolve settings
+            environment.set(GRB.DoubleParam.TimeLimit, timelimit);
+            model.optimize();
+        }
+
+        long end = System.currentTimeMillis();
+        logger.debug("Gurobi took {} ms and reported {} s", (end - start),
+                model.get(GRB.DoubleAttr.Runtime));
+
+        if (verbosity == ILPSolver.VERBOSITY_HIGH) {
             StringBuffer buffer = new StringBuffer();
             write(buffer);
             System.out.print(buffer);
@@ -308,9 +391,37 @@ public class GurobiHook implements ILPSolver {
         model.optimize();
         int status = model.get(GRB.IntAttr.Status);
         isSolved = status == GRB.OPTIMAL || status == GRB.SUBOPTIMAL;
+
+        unsat = false;
+        if (!isSolved) {
+            int statusNotSolved = model.get(GRB.IntAttr.Status);
+            logger.info("Gurobi returned with status code: {}", statusNotSolved);
+
+            if (status == GRB.TIME_LIMIT) {
+                isTimedOut = true;
+            }
+
+            if (status == GRB.INFEASIBLE) {
+                logger.info("Infeasable constraint set!");
+                model.computeIIS();
+                model.write("gurobi.ilp");
+                model.write("gurobi.lp");
+                logger.info("ILP information written to gurobi.ilp. Full LP written to gurobi.lp");
+                unsat = true;
+            }
+        }
+
         return isSolved;
     }
 
+    public void printModelStatus() throws GRBException {
+        int status = model.get(GRB.IntAttr.Status);
+        System.out.println("Model status: " + status);
+
+        if (status == GRB.INFEASIBLE) {
+            System.out.println("INFEASIBLE");
+        }
+    }
 
     /**
      * Tests whether the problem represented by this <code>ILPSolver</code> instance has been solved
@@ -319,7 +430,6 @@ public class GurobiHook implements ILPSolver {
     public boolean isSolved() {
         return isSolved;
     }
-
 
     /**
      * When the problem has been solved, use this method to retrieve the value of any Boolean
@@ -339,6 +449,16 @@ public class GurobiHook implements ILPSolver {
             handleException(e);
         }
         return false;
+    }
+
+    @Override
+    public int getIntegerValue(int index) {
+        return 0;
+    }
+
+    @Override
+    public double getRealValue(int index) {
+        return 0;
     }
 
 

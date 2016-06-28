@@ -10,6 +10,7 @@
     <version>1.2.20</version>
 
     <modules>
+        <module>inference</module>
         <module>lbjava</module>
         <module>lbjava-mvn-plugin</module>
         <module>lbjava-examples</module>

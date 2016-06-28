@@ -11,11 +11,11 @@ import java.util.Arrays;
 
 import edu.illinois.cs.cogcomp.lbjava.classify.Score;
 import edu.illinois.cs.cogcomp.lbjava.parse.LineByLine;
-import edu.illinois.cs.cogcomp.lbjava.util.DVector;
-import edu.illinois.cs.cogcomp.lbjava.util.DVector2D;
-import edu.illinois.cs.cogcomp.lbjava.util.IVector;
-import edu.illinois.cs.cogcomp.lbjava.util.IVector2D;
-import edu.illinois.cs.cogcomp.lbjava.util.Sort;
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.DVector;
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.DVector2D;
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.IVector;
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.IVector2D;
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.Sort;
 
 
 /**

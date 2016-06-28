@@ -5,10 +5,7 @@
  * Developed by: The Cognitive Computations Group, University of Illinois at Urbana-Champaign
  * http://cogcomp.cs.illinois.edu/
  */
-package edu.illinois.cs.cogcomp.lbjava.infer;
-
-import edu.illinois.cs.cogcomp.lbjava.classify.Score;
-
+package edu.illinois.cs.cogcomp.infer.ilp;
 
 /**
  * Classes that implement this interface contain implementations of algorithms that solve Integer
@@ -17,6 +14,13 @@ import edu.illinois.cs.cogcomp.lbjava.classify.Score;
  * @author Nick Rizzolo
  **/
 public interface ILPSolver {
+    /** A possible setting for {@link #verbosity}. */
+    public static final int VERBOSITY_NONE = 0;
+    /** A possible setting for {@link #verbosity}. */
+    public static final int VERBOSITY_LOW = 1;
+    /** A possible setting for {@link #verbosity}. */
+    public static final int VERBOSITY_HIGH = 2;
+
     /**
      * Sets the direction of the objective function.
      *
@@ -34,6 +38,23 @@ public interface ILPSolver {
      **/
     public int addBooleanVariable(double c);
 
+    /**
+     * Adds a new Real variable with the specified coefficient in the objective function to the
+     * problem.
+     *
+     * @param c The objective function coefficient for the new Real variable.
+     * @return The indexes of the created variable.
+     **/
+    int addRealVariable(double c);
+
+    /**
+     * Adds a new Integer variable with the specified coefficient in the objective function to the
+     * problem.
+     *
+     * @param c The objective function coefficient for the new Integer variable.
+     * @return The indexes of the created variable.
+     **/
+    int addIntegerVariable(double c);
 
     /**
      * Adds a general, multi-valued discrete variable, which is implemented as a set of Boolean
@@ -44,19 +65,6 @@ public interface ILPSolver {
      * @return The indexes of the newly created variables.
      **/
     public int[] addDiscreteVariable(double[] c);
-
-
-    /**
-     * Adds a general, multi-valued discrete variable, which is implemented as a set of Boolean
-     * variables, one per value of the discrete variable, with exactly one of those variables set
-     * <code>true</code> at any given time.
-     *
-     * @param c An array of {@link Score}s containing the objective function coefficients for the
-     *        new Boolean variables.
-     * @return The indexes of the newly created variables.
-     **/
-    public int[] addDiscreteVariable(Score[] c);
-
 
     /**
      * Adds a new fixed constraint to the problem. The two array arguments must be the same length,
@@ -130,6 +138,24 @@ public interface ILPSolver {
      **/
     public boolean getBooleanValue(int index);
 
+    /**
+     * When the problem has been solved, use this method to retrieve the value of any Integer
+     * inference variable. The result of this method is undefined when the problem has not yet been
+     * solved.
+     *
+     * @param index The index of the variable whose value is requested.
+     * @return The value of the variable.
+     **/
+    int getIntegerValue(int index);
+
+    /**
+     * When the problem has been solved, use this method to retrieve the value of any Real inference
+     * variable. The result of this method is undefined when the problem has not yet been solved.
+     *
+     * @param index The index of the variable whose value is requested.
+     * @return The value of the variable.
+     **/
+    double getRealValue(int index);
 
     /**
      * When the problem has been solved, use this method to retrieve the value of the objective

@@ -5,14 +5,13 @@
  * Developed by: The Cognitive Computations Group, University of Illinois at Urbana-Champaign
  * http://cogcomp.cs.illinois.edu/
  */
-package edu.illinois.cs.cogcomp.lbjava;
+package edu.illinois.cs.cogcomp.infer.ilp;
 
-import edu.illinois.cs.cogcomp.lbjava.infer.OJalgoHook;
 import org.junit.Test;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
-public class JalgoHookTest {
+public class OJalgoHookTest {
     @Test
     public void testProgram1() throws Exception {
         OJalgoHook ojaHook = new OJalgoHook();

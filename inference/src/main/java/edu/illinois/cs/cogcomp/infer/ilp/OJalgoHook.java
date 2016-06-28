@@ -5,9 +5,8 @@
  * Developed by: The Cognitive Computations Group, University of Illinois at Urbana-Champaign
  * http://cogcomp.cs.illinois.edu/
  */
-package edu.illinois.cs.cogcomp.lbjava.infer;
+package edu.illinois.cs.cogcomp.infer.ilp;
 
-import edu.illinois.cs.cogcomp.lbjava.classify.Score;
 import org.ojalgo.optimisation.Expression;
 import org.ojalgo.optimisation.ExpressionsBasedModel;
 import org.ojalgo.optimisation.Optimisation;
@@ -135,6 +134,26 @@ public class OJalgoHook implements ILPSolver {
         return numvars - 1;
     }
 
+    public int addRealVariable(double c) {
+        if (log)
+            System.out.println("OJalgoHook: addRealVariable(c=" + c + ")");
+
+        numvars++;
+        Variable var = Variable.makeBinary(Integer.toString(numvars)).weight(c);
+        model.addVariable(var);
+        return numvars - 1;
+    }
+
+    public int addIntegerVariable(double c) {
+        if (log)
+            System.out.println("OJalgoHook: addIntegerVariable(c=" + c + ")");
+
+        numvars++;
+        Variable var = Variable.makeBinary(Integer.toString(numvars)).weight(c);
+        model.addVariable(var);
+        return numvars - 1;
+    }
+
     /**
      * Adds a general, multi-valued discrete variable, which is implemented as a set of Boolean
      * variables, one per value of the discrete variable, with exactly one of those variables set
@@ -172,13 +191,6 @@ public class OJalgoHook implements ILPSolver {
         addEqualityConstraint(varIndices, ones, 1);
 
         return varIndices;
-    }
-
-    public int[] addDiscreteVariable(Score[] c) {
-        double[] weights = new double[c.length];
-        for (int idx = 0; idx < c.length; idx++)
-            weights[idx] = c[idx].score;
-        return addDiscreteVariable(weights);
     }
 
     public void addEqualityConstraint(int[] i, double[] a, double b) {
@@ -275,6 +287,22 @@ public class OJalgoHook implements ILPSolver {
         if (result.get(index).intValue() != 1 && result.get(index).intValue() != 0)
             System.out.println("Warning! The value of the binary variable is not 0/1! ");
         return (result.get(index).intValue() == 1);
+    }
+
+    public double getRealValue(int index) {
+        if (log)
+            System.out.println("OJalgoHook: getRealValue(" + index + ") ");
+        if (result.get(index).intValue() != 1 && result.get(index).intValue() != 0)
+            System.out.println("Warning! The value of the binary variable is not 0/1! ");
+        return result.get(index).doubleValue();
+    }
+
+    public int getIntegerValue(int index) {
+        if (log)
+            System.out.println("OJalgoHook: getIntegerValue(" + index + ") ");
+        if (result.get(index).intValue() != 1 && result.get(index).intValue() != 0)
+            System.out.println("Warning! The value of the binary variable is not 0/1! ");
+        return result.get(index).intValue();
     }
 
     public double objectiveValue() {
