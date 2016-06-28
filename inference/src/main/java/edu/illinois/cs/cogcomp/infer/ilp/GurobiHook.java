@@ -54,6 +54,10 @@ public class GurobiHook implements ILPSolver {
     protected OVector variables;
     /** Contains all of the Gurobi SOS objects created for the model. */
     protected OVector SOSes;
+    /** whether the optimization has been timed out */
+    private boolean isTimedOut;
+    /** whether the optimization has been unsatisfactory */
+    private boolean unsat;
     /**
      * Whether or not the <code>GRBModel.update()</code> method needs to be called before adding
      * more constraints.
@@ -95,15 +99,15 @@ public class GurobiHook implements ILPSolver {
             environment.set(GRB.IntParam.OutputFlag, 0); // no output
 
             // how many threads can we use?
-            environment.set(GRB.IntParam.Threads,
-                    Math.min(8, Runtime.getRuntime().availableProcessors()));
+            //environment.set(GRB.IntParam.Threads,
+            //        Math.min(8, Runtime.getRuntime().availableProcessors()));
 
             // dump big stuff to filespace
-            environment.set(GRB.DoubleParam.NodefileStart, 0.5);
+            //environment.set(GRB.DoubleParam.NodefileStart, 0.5);
 
-            environment.set(GRB.DoubleParam.MIPGap, 1e-10);
+            //environment.set(GRB.DoubleParam.MIPGap, 1e-10);
 
-            environment.set(GRB.IntParam.Presolve, 0);
+            //environment.set(GRB.IntParam.Presolve, 0);
 
         } catch (GRBException e) {
             handleException(e);
@@ -133,6 +137,14 @@ public class GurobiHook implements ILPSolver {
         reset();
     }
 
+
+    public boolean isTimedOut() {
+        return isTimedOut;
+    }
+
+    public boolean unsat() {
+        return unsat;
+    }
 
     /**
      * This method clears the all constraints and variables out of the ILP solver's problem
@@ -344,6 +356,7 @@ public class GurobiHook implements ILPSolver {
         // here we first attempt to presolve (some models can be solved quicker
         // directly than the time it takes to presolve them)
 
+        isTimedOut = false;
         boolean more = false; // should we perform more solving?
         long start = System.currentTimeMillis();
         // XXX: if you always see your solve time > noPresolveTimelimit then you
@@ -378,6 +391,26 @@ public class GurobiHook implements ILPSolver {
         model.optimize();
         int status = model.get(GRB.IntAttr.Status);
         isSolved = status == GRB.OPTIMAL || status == GRB.SUBOPTIMAL;
+
+        unsat = false;
+        if (!isSolved) {
+            int statusNotSolved = model.get(GRB.IntAttr.Status);
+            logger.info("Gurobi returned with status code: {}", statusNotSolved);
+
+            if (status == GRB.TIME_LIMIT) {
+                isTimedOut = true;
+            }
+
+            if (status == GRB.INFEASIBLE) {
+                logger.info("Infeasable constraint set!");
+                model.computeIIS();
+                model.write("gurobi.ilp");
+                model.write("gurobi.lp");
+                logger.info("ILP information written to gurobi.ilp. Full LP written to gurobi.lp");
+                unsat = true;
+            }
+        }
+
         return isSolved;
     }
 
