@@ -15,6 +15,7 @@ import java.util.Iterator;
 import edu.illinois.cs.cogcomp.lbjava.classify.Score;
 import edu.illinois.cs.cogcomp.lbjava.classify.ScoreSet;
 import edu.illinois.cs.cogcomp.lbjava.learn.Learner;
+import edu.illinois.cs.cogcomp.infer.ilp.ILPSolver;
 
 
 /**
@@ -174,7 +175,11 @@ public class ILPInference extends Inference {
                 System.exit(1);
             }
 
-            int[] indexes = solver.addDiscreteVariable(scores);
+            // putting scores in a real-valued array
+            double[] weights = new double[scores.length];
+            for (int idx = 0; idx < scores.length; idx++)
+                weights[idx] = scores[idx].score;
+            int[] indexes = solver.addDiscreteVariable(weights);
 
             for (int j = 0; j < scores.length; ++j) {
                 indexMap.put(new PropositionalVariable(v.getClassifier(), v.getExample(),

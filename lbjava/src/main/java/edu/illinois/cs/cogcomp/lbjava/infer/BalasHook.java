@@ -7,9 +7,9 @@
  */
 package edu.illinois.cs.cogcomp.lbjava.infer;
 
-import edu.illinois.cs.cogcomp.lbjava.util.IVector;
-import edu.illinois.cs.cogcomp.lbjava.util.Sort;
-
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.IVector;
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.Sort;
+import edu.illinois.cs.cogcomp.infer.ilp.ILPSolver;
 
 /**
  * This {@link ILPSolver} implements Egon Balas' zero-one ILP solving algorithm. It is a branch and
@@ -188,6 +188,18 @@ public class BalasHook extends ZeroOneILPProblem implements ILPSolver {
     }
 
 
+    @Override
+    public int addRealVariable(double c) {
+        // not implemented
+        return 0;
+    }
+
+    @Override
+    public int addIntegerVariable(double c) {
+        // not implemented
+        return 0;
+    }
+
     /**
      * Adds a new fixed constraint to the problem. The two array arguments must be the same length,
      * as their elements correspond to each other. Variables whose coefficients are zero need not be
@@ -263,7 +275,7 @@ public class BalasHook extends ZeroOneILPProblem implements ILPSolver {
 
         for (int i = 0; i < variables; ++i) {
             double c = objectiveCoefficients.get(i);
-            if (Math.abs(c) < ZeroOneILPProblem.TOLERANCE)
+            if (Math.abs(c) < TOLERANCE)
                 objectiveCoefficients.set(i, 0);
             else {
                 if (maximize)
@@ -330,7 +342,7 @@ public class BalasHook extends ZeroOneILPProblem implements ILPSolver {
                 lhs += x[Av.get(i, j)] * Ac.get(i, j);
             result[i] = bounds.get(i) - lhs;
             final double rounded = Math.round(result[i]);
-            if (Math.abs(rounded - result[i]) < ZeroOneILPProblem.TOLERANCE)
+            if (Math.abs(rounded - result[i]) < TOLERANCE)
                 result[i] = rounded;
         }
 
@@ -448,7 +460,7 @@ public class BalasHook extends ZeroOneILPProblem implements ILPSolver {
                         final int j = eligible.get(k);
                         if (!cancelled[j]
                                 && z + objectiveCoefficients.get(j) >= objectiveValue
-                                        - ZeroOneILPProblem.TOLERANCE) {
+                                        - TOLERANCE) {
                             newlyIneligible.add(j);
                             cancelled[j] = true;
                             cancelledLocally.add(j);
@@ -472,9 +484,9 @@ public class BalasHook extends ZeroOneILPProblem implements ILPSolver {
                         }
                     }
 
-                    satisfiable = lhsNegative[i] - ZeroOneILPProblem.TOLERANCE <= slack[cIndex];
+                    satisfiable = lhsNegative[i] - TOLERANCE <= slack[cIndex];
                     if (satisfiable
-                            && Math.abs(slack[cIndex] - lhsNegative[i]) < ZeroOneILPProblem.TOLERANCE)
+                            && Math.abs(slack[cIndex] - lhsNegative[i]) < TOLERANCE)
                         atEquality.add(cIndex);
                 }
             }
@@ -501,7 +513,7 @@ public class BalasHook extends ZeroOneILPProblem implements ILPSolver {
         for (int j = 0; j < x.length; ++j)
             if (!cancelled[j]
                     && z + objectiveCoefficients.get(j) < objectiveValue
-                            - ZeroOneILPProblem.TOLERANCE) {
+                            - TOLERANCE) {
                 boolean good = false;
                 for (int i = 0; i < violatedSize && !good; ++i) {
                     final int cIndex = violated.get(i);
@@ -555,7 +567,7 @@ public class BalasHook extends ZeroOneILPProblem implements ILPSolver {
 
         final int FSize = F.size();
 
-        if (z < objectiveValue - ZeroOneILPProblem.TOLERANCE) {
+        if (z < objectiveValue - TOLERANCE) {
             for (int i = 0; i < FSize; ++i)
                 setVariableOn(F.get(i));
             result = solve(z);
@@ -599,9 +611,9 @@ public class BalasHook extends ZeroOneILPProblem implements ILPSolver {
                     lhsNegative[i] += c;
             }
 
-            if (lhsNegative[i] - ZeroOneILPProblem.TOLERANCE > slack[index])
+            if (lhsNegative[i] - TOLERANCE > slack[index])
                 return null;
-            if (Math.abs(slack[index] - lhsNegative[i]) < ZeroOneILPProblem.TOLERANCE)
+            if (Math.abs(slack[index] - lhsNegative[i]) < TOLERANCE)
                 atEquality.add(index);
         }
 
@@ -668,10 +680,10 @@ public class BalasHook extends ZeroOneILPProblem implements ILPSolver {
 
         Sort.sort(indexes, new Sort.IntComparator() {
             public int compare(int i1, int i2) {
-                if (Math.abs(violations[i1] - violations[i2]) < ZeroOneILPProblem.TOLERANCE) {
+                if (Math.abs(violations[i1] - violations[i2]) < TOLERANCE) {
                     double c1 = objectiveCoefficients.get(eligible.get(i1));
                     double c2 = objectiveCoefficients.get(eligible.get(i2));
-                    if (Math.abs(c1 - c2) < ZeroOneILPProblem.TOLERANCE)
+                    if (Math.abs(c1 - c2) < TOLERANCE)
                         return i1 - i2;
                     if (c1 < c2)
                         return -1;
@@ -707,6 +719,18 @@ public class BalasHook extends ZeroOneILPProblem implements ILPSolver {
      **/
     public boolean getBooleanValue(int index) {
         return solution[index] == 1;
+    }
+
+    @Override
+    public int getIntegerValue(int index) {
+        // not implemented yet
+        return 0;
+    }
+
+    @Override
+    public double getRealValue(int index) {
+        // not implemented yet
+        return 0;
     }
 
 

@@ -53,16 +53,9 @@ NB: If you need to run `mvn clean` at any point, make sure to create `target/cla
 running `mvn compile/install` since it is required for the java-source compilation process.
 
 ## Using ILP inference 
-LBJava uses the Gurobi solver for inference and therefore the Gurobi library needs to be installed 
-prior to compilation. To download and install Gurobi visit [http://www.gurobi.com/](http://www.gurobi.com/)
-
-Make sure to include Gurobi in your PATH and LD_LIBRARY variables
-```
-    export GUROBI_HOME="PATH-TO-GUROBI/linux64"
-    export PATH="${PATH}:${GUROBI_HOME}/bin"
-    export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${GUROBI_HOME}/lib"
-```
-
+LBJava uses the the solvers included in [illinois-inference](../inference) for 
+inference. We refer the interested reader to the aforementioned library, 
+for more details and instructions on how to install these libraries. 
 
 ## Credits 
 This project was started by [Nicholas Rizzolo](mailto:rizzolo@gmail.com).
