@@ -26,9 +26,9 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>gurobi</groupId>
+			<groupId>com.gurobi</groupId>
 			<artifactId>gurobi</artifactId>
-			<version>5.0.1</version>
+			<version>6.5</version>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
