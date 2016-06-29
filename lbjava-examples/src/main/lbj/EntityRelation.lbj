@@ -4,7 +4,7 @@ import java.util.List;
 import edu.illinois.cs.cogcomp.lbjava.examples.entityRelation.datastruct.*;
 import edu.illinois.cs.cogcomp.lbjava.examples.entityRelation.Conll04_RelationReaderNew;
 
-import edu.illinois.cs.cogcomp.lbjava.infer.OJalgoHook;
+import edu.illinois.cs.cogcomp.infer.ilp.OJalgoHook;
 
 discrete% EntityFeatures(ConllRawToken t) <- {
     sense t.POS;
