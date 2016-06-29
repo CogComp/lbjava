@@ -4,7 +4,7 @@ import edu.illinois.cs.cogcomp.lbjava.examples.setCover.City;
 import edu.illinois.cs.cogcomp.lbjava.examples.setCover.Neighborhood;
 import edu.illinois.cs.cogcomp.lbjava.examples.setCover.ContainsStation;
 
-import edu.illinois.cs.cogcomp.lbjava.infer.OJalgoHook;
+import  edu.illinois.cs.cogcomp.infer.ilp.OJalgoHook;
 
 constraint noEmptyNeighborhoods(City c) {
   forall (Neighborhood n in c.getNeighborhoods())
