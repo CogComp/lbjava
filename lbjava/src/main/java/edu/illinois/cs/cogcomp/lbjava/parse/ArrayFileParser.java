@@ -15,9 +15,9 @@ import java.io.FileInputStream;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
 
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.ExceptionlessInputStream;
 import edu.illinois.cs.cogcomp.lbjava.classify.FeatureVector;
 import edu.illinois.cs.cogcomp.lbjava.learn.Learner;
-import edu.illinois.cs.cogcomp.lbjava.util.ExceptionlessInputStream;
 
 
 /**
@@ -191,9 +191,8 @@ public class ArrayFileParser implements Parser {
             if (exampleFileName != null) {
                 if (zipped) {
                     ZipFile zip = new ZipFile(exampleFileName);
-                    in =
-                            new DataInputStream(new BufferedInputStream(zip.getInputStream(zip
-                                    .getEntry(ExceptionlessInputStream.zipEntryName))));
+                    in = new DataInputStream(new BufferedInputStream(zip.getInputStream(zip
+                            .getEntry(ExceptionlessInputStream.zipEntryName))));
                 } else
                     in =
                             new DataInputStream(new BufferedInputStream(new FileInputStream(
