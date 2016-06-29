@@ -26,6 +26,11 @@
 
 	<dependencies>
 		<dependency>
+			<groupId>edu.illinois.cs.cogcomp</groupId>
+			<artifactId>illinois-inference</artifactId>
+			<version>0.6.0</version>
+		</dependency>
+		<dependency>
 			<groupId>nz.ac.waikato.cms.weka</groupId>
 			<artifactId>weka-stable</artifactId>
 			<version>3.6.10</version>
