@@ -15,17 +15,17 @@ import java.util.Date;
 import java.util.Iterator;
 
 import de.bwaldvogel.liblinear.FeatureNode;
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.ExceptionlessInputStream;
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.ExceptionlessOutputStream;
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.IVector;
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.OVector;
 import edu.illinois.cs.cogcomp.lbjava.classify.Classifier;
 import edu.illinois.cs.cogcomp.lbjava.classify.DiscretePrimitiveStringFeature;
 import edu.illinois.cs.cogcomp.lbjava.classify.Feature;
 import edu.illinois.cs.cogcomp.lbjava.classify.FeatureVector;
 import edu.illinois.cs.cogcomp.lbjava.classify.ScoreSet;
 import edu.illinois.cs.cogcomp.lbjava.util.ByteString;
-import edu.illinois.cs.cogcomp.lbjava.util.ExceptionlessInputStream;
-import edu.illinois.cs.cogcomp.lbjava.util.ExceptionlessOutputStream;
 import edu.illinois.cs.cogcomp.lbjava.util.FVector;
-import edu.illinois.cs.cogcomp.lbjava.util.IVector;
-import edu.illinois.cs.cogcomp.lbjava.util.OVector;
 
 
 /**

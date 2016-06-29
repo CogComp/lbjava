@@ -19,13 +19,13 @@ import java.util.Date;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.ExceptionlessInputStream;
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.ExceptionlessOutputStream;
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.Sort;
 import edu.illinois.cs.cogcomp.lbjava.parse.ArrayFileParser;
 import edu.illinois.cs.cogcomp.lbjava.parse.FoldParser;
 import edu.illinois.cs.cogcomp.lbjava.parse.FoldSeparator;
 import edu.illinois.cs.cogcomp.lbjava.parse.Parser;
-import edu.illinois.cs.cogcomp.lbjava.util.ExceptionlessInputStream;
-import edu.illinois.cs.cogcomp.lbjava.util.ExceptionlessOutputStream;
-import edu.illinois.cs.cogcomp.lbjava.util.Sort;
 import edu.illinois.cs.cogcomp.lbjava.util.StudentT;
 import edu.illinois.cs.cogcomp.lbjava.util.TableFormat;
 

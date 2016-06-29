@@ -10,9 +10,8 @@ package edu.illinois.cs.cogcomp.lbjava.learn;
 import java.io.PrintStream;
 
 import edu.illinois.cs.cogcomp.lbjava.classify.FeatureVector;
-import edu.illinois.cs.cogcomp.lbjava.util.ExceptionlessInputStream;
-import edu.illinois.cs.cogcomp.lbjava.util.ExceptionlessOutputStream;
-
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.ExceptionlessInputStream;
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.ExceptionlessOutputStream;
 
 /**
  * This is an implementation of the approximate "variance algorithm" of <i>Confidence Weighted

@@ -16,6 +16,8 @@ import java.io.PrintStream;
 import java.io.Serializable;
 import java.net.URL;
 
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.ExceptionlessInputStream;
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.ExceptionlessOutputStream;
 import edu.illinois.cs.cogcomp.lbjava.classify.Classifier;
 import edu.illinois.cs.cogcomp.lbjava.classify.DiscreteFeature;
 import edu.illinois.cs.cogcomp.lbjava.classify.DiscretePrimitiveStringFeature;
@@ -26,10 +28,7 @@ import edu.illinois.cs.cogcomp.lbjava.classify.LabelVectorReturner;
 import edu.illinois.cs.cogcomp.lbjava.classify.RealFeature;
 import edu.illinois.cs.cogcomp.lbjava.classify.ScoreSet;
 import edu.illinois.cs.cogcomp.lbjava.util.ClassUtils;
-import edu.illinois.cs.cogcomp.lbjava.util.ExceptionlessInputStream;
-import edu.illinois.cs.cogcomp.lbjava.util.ExceptionlessOutputStream;
 import edu.illinois.cs.cogcomp.lbjava.util.FVector;
-
 
 /**
  * Extend this class to create a new {@link Classifier} that learns to mimic one an oracle
