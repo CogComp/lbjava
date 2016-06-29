@@ -3,7 +3,6 @@
 [![Build Status](https://semaphoreci.com/api/v1/projects/02a1d3da-4dc5-41c0-963c-b5605e4abc67/605145/badge.svg)](https://semaphoreci.com/danyaljj/lbjava)
 
 - [LBJava core](lbjava/README.md) 
-- [Illinois-Inference](inference/README.md) 
 - [LBJava examples](lbjava-examples/README.md) 
 - [LBJava maven plugin](lbjava-mvn-plugin/README.md)
 

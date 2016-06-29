@@ -53,7 +53,7 @@ NB: If you need to run `mvn clean` at any point, make sure to create `target/cla
 running `mvn compile/install` since it is required for the java-source compilation process.
 
 ## Using ILP inference 
-LBJava uses the the solvers included in [illinois-inference](../inference) for 
+LBJava uses the the solvers included in [illinois-inference](https://gitlab-beta.engr.illinois.edu/cogcomp/inference/) for 
 inference. We refer the interested reader to the aforementioned library, 
 for more details and instructions on how to install these libraries. 
 
