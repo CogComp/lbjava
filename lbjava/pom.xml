@@ -26,10 +26,9 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.gurobi</groupId>
-			<artifactId>gurobi</artifactId>
-			<version>6.5</version>
-			<optional>true</optional>
+			<groupId>edu.illinois.cs.cogcomp</groupId>
+			<artifactId>illinois-inference</artifactId>
+			<version>0.6.0</version>
 		</dependency>
 		<dependency>
 			<groupId>nz.ac.waikato.cms.weka</groupId>
@@ -46,11 +45,6 @@
 			<artifactId>junit</artifactId>
 			<version>4.11</version>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.ojalgo</groupId>
-			<artifactId>ojalgo</artifactId>
-			<version>37.1.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.commons</groupId>

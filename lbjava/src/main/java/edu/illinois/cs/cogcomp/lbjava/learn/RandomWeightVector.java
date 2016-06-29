@@ -10,9 +10,8 @@ package edu.illinois.cs.cogcomp.lbjava.learn;
 import java.io.PrintStream;
 import java.util.Random;
 
-import edu.illinois.cs.cogcomp.lbjava.util.ExceptionlessInputStream;
-import edu.illinois.cs.cogcomp.lbjava.util.ExceptionlessOutputStream;
-
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.ExceptionlessInputStream;
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.ExceptionlessOutputStream;
 
 /**
  * This weight vector operates similarly to its parent in the class hierarchy, but it halucinates

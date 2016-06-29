@@ -13,15 +13,11 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.*;
 import edu.illinois.cs.cogcomp.lbjava.classify.Feature;
 import edu.illinois.cs.cogcomp.lbjava.util.ByteString;
 import edu.illinois.cs.cogcomp.lbjava.util.ClassUtils;
-import edu.illinois.cs.cogcomp.lbjava.util.ExceptionlessInputStream;
-import edu.illinois.cs.cogcomp.lbjava.util.ExceptionlessOutputStream;
 import edu.illinois.cs.cogcomp.lbjava.util.FVector;
-import edu.illinois.cs.cogcomp.lbjava.util.IVector;
-import edu.illinois.cs.cogcomp.lbjava.util.IVector2D;
-import edu.illinois.cs.cogcomp.lbjava.util.Sort;
 import edu.illinois.cs.cogcomp.lbjava.util.TableFormat;
 
 

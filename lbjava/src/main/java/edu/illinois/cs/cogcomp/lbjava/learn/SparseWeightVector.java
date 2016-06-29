@@ -14,12 +14,11 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Map;
 
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.DVector;
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.ExceptionlessInputStream;
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.ExceptionlessOutputStream;
 import edu.illinois.cs.cogcomp.lbjava.classify.Feature;
 import edu.illinois.cs.cogcomp.lbjava.util.ClassUtils;
-import edu.illinois.cs.cogcomp.lbjava.util.DVector;
-import edu.illinois.cs.cogcomp.lbjava.util.ExceptionlessInputStream;
-import edu.illinois.cs.cogcomp.lbjava.util.ExceptionlessOutputStream;
-
 
 /**
  * This class is used as a weight vector in sparse learning algorithms. {@link Feature}s are
