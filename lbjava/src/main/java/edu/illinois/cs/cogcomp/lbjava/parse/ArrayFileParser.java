@@ -191,8 +191,9 @@ public class ArrayFileParser implements Parser {
             if (exampleFileName != null) {
                 if (zipped) {
                     ZipFile zip = new ZipFile(exampleFileName);
-                    in = new DataInputStream(new BufferedInputStream(zip.getInputStream(zip
-                            .getEntry(ExceptionlessInputStream.zipEntryName))));
+                    in =
+                            new DataInputStream(new BufferedInputStream(zip.getInputStream(zip
+                                    .getEntry(ExceptionlessInputStream.zipEntryName))));
                 } else
                     in =
                             new DataInputStream(new BufferedInputStream(new FileInputStream(
