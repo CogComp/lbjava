@@ -66,7 +66,7 @@ public class AdaGradTest {
     }
 
     /**
-     * Test user specified loss function, i.e. "lms" -> least-mean-square, to use
+     * Test user specified loss function, i.e. "lms" -&gt; least-mean-square, to use
      */
     @Test
     public void testCustomLossFunction() {

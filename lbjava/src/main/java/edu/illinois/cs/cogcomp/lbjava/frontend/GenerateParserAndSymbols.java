@@ -19,10 +19,9 @@ import java_cup.Main;
 
 /**
  * A wrapper for running {@link java_cup.Main} to generate the {@link parser} and {@link sym}
- * classes, as well as {@link SymbolNames}. <br/>
- * This replaces the old automake configuration (and perl scripts) with a Maven compatible version. <br/>
- * <b>NB:</b> java_cup.Main was last updated in 1996 back when people didn't capitalize their class
- * names. Maybe an update is due?
+ * classes, as well as {@link SymbolNames}. This replaces the old automake configuration (and perl
+ * scripts) with a Maven compatible version. <b>NB:</b> java_cup.Main was last updated in 1996 back
+ * when people didn't capitalize their class names. Maybe an update is due?
  * 
  * @author Christos Christodoulopoulos
  *

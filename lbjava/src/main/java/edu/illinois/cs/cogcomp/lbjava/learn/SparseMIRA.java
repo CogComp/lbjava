@@ -408,7 +408,7 @@ public class SparseMIRA extends Learner {
      * is known to produce conjunctive features. It is necessary because when given a string label
      * from the collection, we will not know how to construct the appropriate conjunctive feature
      * key for lookup in the label lexicon. So, we must go through each feature in the label lexicon
-     * and use {@link classify.Feature#valueEquals(String)}.
+     * and use {@link Feature#valueEquals(String)}.
      *
      * @param exampleFeatures The example's array of feature indices.
      * @param exampleValues The example's array of feature values.
@@ -519,7 +519,7 @@ public class SparseMIRA extends Learner {
      * known to produce conjunctive features. It is necessary because when given a string label from
      * the collection, we will not know how to construct the appropriate conjunctive feature key for
      * lookup in the label lexicon. So, we must go through each feature in the label lexicon and use
-     * {@link classify.Feature#valueEquals(String)}.
+     * {@link Feature#valueEquals(String)}.
      *
      * @param exampleFeatures The example's array of feature indices.
      * @param exampleValues The example's array of feature values.

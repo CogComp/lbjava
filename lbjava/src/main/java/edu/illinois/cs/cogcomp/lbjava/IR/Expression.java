@@ -8,7 +8,7 @@
 package edu.illinois.cs.cogcomp.lbjava.IR;
 
 import java.util.HashSet;
-
+import edu.illinois.cs.cogcomp.lbjava.SemanticAnalysis;
 
 /**
  * Abstract expression class.

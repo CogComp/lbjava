@@ -85,7 +85,7 @@ import edu.illinois.cs.cogcomp.lbjava.parse.Parser;
  * useful information, and generally checks that things appear only where they are expected. More
  * specifically, the following data is arranged:
  *
- * <table cellspacing=8>
+ * <table cellspacing=8 summary="">
  * <tr valign=top>
  * <td align=right>A1</td>
  * <td>
@@ -207,10 +207,9 @@ import edu.illinois.cs.cogcomp.lbjava.parse.Parser;
  * <tr valign=top>
  * <td align=right>A20</td>
  * <td>
- * When a <code>with<code> clause is specified with an
- *       {@link InstanceCreationExpression} as an argument,
- *       {@link LearningClassifierExpression#learnerName} is set to the name
- *       of the class instantiated.</td>
+ * When a <code>with</code> clause is specified with an {@link InstanceCreationExpression} as an
+ * argument, {@link LearningClassifierExpression#learnerName} is set to the name of the class
+ * instantiated.</td>
  * </tr>
  * <tr valign=top>
  * <td align=right>A21</td>
@@ -223,7 +222,7 @@ import edu.illinois.cs.cogcomp.lbjava.parse.Parser;
  * <p>
  * And the following conditions are checked for:
  *
- * <table cellspacing=8>
+ * <table cellspacing=8 summary="">
  * <tr valign=top>
  * <td align=right>B1</td>
  * <td>No named classifier is defined more than once.</td>

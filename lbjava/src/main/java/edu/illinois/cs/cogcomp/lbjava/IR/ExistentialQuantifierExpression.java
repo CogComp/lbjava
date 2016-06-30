@@ -12,13 +12,11 @@ import edu.illinois.cs.cogcomp.lbjava.frontend.TokenValue;
 
 
 /**
- * An existential quantifier has the form: <blockquote>
- * <code>exists <i>argument</i> in (<i>expression</i>)
- *   <i>constraint-expression</i>
- * </blockquote>
- * where <code><i>expression</i></code> must evaluate to a <code>Collection</code>, and the
- * existential quantifier expression is sastisfied iff <code><i>constraint-expression</i></code> is
- * satisfied for any setting of <code><i>argument</i></code> taken from the <code>Collection</code>.
+ * An existential quantifier has the form: <blockquote> <code>exists</code> <i>argument</i> in
+ * (<i>expression</i>) <i>constraint-expression</i> </blockquote> where
+ * <code><i>expression</i></code> must evaluate to a <code>Collection</code>, and the existential
+ * quantifier expression is sastisfied iff <code><i>constraint-expression</i></code> is satisfied
+ * for any setting of <code><i>argument</i></code> taken from the <code>Collection</code>.
  *
  * @author Nick Rizzolo
  **/

@@ -11,7 +11,7 @@ import java.util.HashSet;
 
 import edu.illinois.cs.cogcomp.lbjava.Pass;
 import edu.illinois.cs.cogcomp.lbjava.frontend.TokenValue;
-
+import edu.illinois.cs.cogcomp.lbjava.SemanticAnalysis;
 
 /**
  * This class represents a method call.

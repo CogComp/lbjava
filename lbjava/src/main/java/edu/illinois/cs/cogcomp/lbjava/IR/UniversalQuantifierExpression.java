@@ -12,14 +12,11 @@ import edu.illinois.cs.cogcomp.lbjava.frontend.TokenValue;
 
 
 /**
- * A universal quantifier has the form: <blockquote>
- * <code>forall <i>argument</i> in (<i>expression</i>)
- *   <i>constraint-expression</i>
- * </blockquote>
- * where <code><i>expression</i></code> must evaluate to a <code>Collection</code>, and the
- * universal quantifier expression is sastisfied iff <code><i>constraint-expression</i></code> is
- * satisfied for all settings of <code><i>argument</i></code> taken from the <code>Collection</code>
- * .
+ * A universal quantifier has the form: <blockquote> <code>forall</code> <i>argument</i> in
+ * (<i>expression</i>) <i>constraint-expression</i> </blockquote> where
+ * <code><i>expression</i></code> must evaluate to a <code>Collection</code>, and the universal
+ * quantifier expression is sastisfied iff <code><i>constraint-expression</i></code> is satisfied
+ * for all settings of <code><i>argument</i></code> taken from the <code>Collection</code> .
  *
  * @author Nick Rizzolo
  **/
