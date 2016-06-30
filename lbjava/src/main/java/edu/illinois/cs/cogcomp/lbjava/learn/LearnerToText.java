@@ -19,7 +19,7 @@ import edu.illinois.cs.cogcomp.lbjava.util.ClassUtils;
  *
  * <blockquote><code> learner.write(System.out); </code></blockquote>
  *
- * <h4>Usage</h4> <blockquote> <code>
+ * <h3>Usage</h3> <blockquote> <code>
  *     java edu.illinois.cs.cogcomp.lbjava.learn.LearnerToText &lt;learner&gt;
  *   </code> </blockquote>
  *

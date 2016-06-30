@@ -25,7 +25,7 @@ import edu.illinois.cs.cogcomp.lbjava.classify.FeatureVector;
  * <p>
  * In the expression above, <i>w</i> is the weight vector, <i>y</i> represents the label of the
  * example vector <i>x</i>, <i>*</i> stands for inner product. If this expression turns out to be
- * non-positive (i.e., if <i>y(w*x) >= 1</i>), no update is made for that example.
+ * non-positive (i.e., if <i>y(w*x) &gt;= 1</i>), no update is made for that example.
  *
  * <p>
  * It is assumed that {@link Learner#labeler} is a single discrete classifier that produces the same
@@ -38,12 +38,12 @@ import edu.illinois.cs.cogcomp.lbjava.classify.FeatureVector;
  * <p>
  * This algorithm's user-configurable parameters are stored in member fields of this class. They may
  * be set via either a constructor that names each parameter explicitly or a constructor that takes
- * an instance of {@link learn.PassiveAggressive.Parameters Parameters} as input. The documentation
- * in each member field in this class indicates the default value of the associated parameter when
+ * an instance of {@link PassiveAggressive.Parameters Parameters} as input. The documentation in
+ * each member field in this class indicates the default value of the associated parameter when
  * using the former type of constructor. The documentation of the associated member field in the
- * {@link learn.PassiveAggressive.Parameters Parameters} class indicates the default value of the
+ * {@link PassiveAggressive.Parameters Parameters} class indicates the default value of the
  * parameter when using the latter type of constructor. Note that this learner will not actually use
- * any user-supplied value for {@link learn.LinearThresholdUnit.Parameters#learningRate} as this is
+ * any user-supplied value for {@link LinearThresholdUnit.Parameters#learningRate} as this is
  * computed automatically.
  *
  * @author Michael Paul
