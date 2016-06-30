@@ -19,7 +19,7 @@ public abstract class RealFeature extends Feature {
     /**
      * For internal use only.
      *
-     * @see Feature#readFeature(edu.illinois.cs.cogcomp.lbjava.util.ExceptionlessInputStream)
+     * @see Feature#readFeature(edu.illinois.cs.cogcomp.core.datastructures.vectors.ExceptionlessInputStream)
      **/
     protected RealFeature() {}
 
