@@ -158,6 +158,10 @@ public class SparseNetworkLearner extends Learner {
         return conjunctiveLabels;
     }
 
+    public void setConjunctiveLabels(boolean setConjunctiveLabels) {
+        conjunctiveLabels = setConjunctiveLabels;
+    }
+
     /**
      * returns the i-th LTU; the type of this depends on the type of the baseLTU (see above).
      */
