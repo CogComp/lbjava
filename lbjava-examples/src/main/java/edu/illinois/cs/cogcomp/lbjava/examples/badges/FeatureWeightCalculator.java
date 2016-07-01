@@ -8,7 +8,6 @@
 package edu.illinois.cs.cogcomp.lbjava.examples.badges;
 
 import edu.illinois.cs.cogcomp.lbjava.classify.Feature;
-import edu.illinois.cs.cogcomp.lbjava.classify.FeatureVector;
 import edu.illinois.cs.cogcomp.lbjava.classify.ScoreSet;
 import edu.illinois.cs.cogcomp.lbjava.learn.Lexicon;
 

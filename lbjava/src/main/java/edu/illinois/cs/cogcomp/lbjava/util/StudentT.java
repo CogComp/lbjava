@@ -12,7 +12,7 @@ package edu.illinois.cs.cogcomp.lbjava.util;
  * A collection of statistical methods supporting computations related to the Student's T
  * distribution.
  *
- * <table cellspacing=4>
+ * <table cellspacing=4 summary="">
  * <tr>
  * <th>Date:</th>
  * <td>2002 as part of Fmath</td>
@@ -30,7 +30,7 @@ package edu.illinois.cs.cogcomp.lbjava.util;
  * </tr>
  * </table>
  *
- * <h4>Documentation</h4>
+ * <h3>Documentation</h3>
  * <p>
  * See Michael Thomas Flanagan's Java library on-line web page:<br>
  * <a target=_top

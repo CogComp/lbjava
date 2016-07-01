@@ -9,9 +9,8 @@ package edu.illinois.cs.cogcomp.lbjava.learn;
 
 import java.io.PrintStream;
 
-import edu.illinois.cs.cogcomp.lbjava.util.ExceptionlessInputStream;
-import edu.illinois.cs.cogcomp.lbjava.util.ExceptionlessOutputStream;
-
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.ExceptionlessInputStream;
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.ExceptionlessOutputStream;
 
 /**
  * Simple sparse Winnow implementation. It is assumed that {@link Learner#labeler} is a single

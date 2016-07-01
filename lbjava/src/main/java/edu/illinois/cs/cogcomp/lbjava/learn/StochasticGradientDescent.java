@@ -9,13 +9,12 @@ package edu.illinois.cs.cogcomp.lbjava.learn;
 
 import java.io.PrintStream;
 
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.ExceptionlessInputStream;
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.ExceptionlessOutputStream;
 import edu.illinois.cs.cogcomp.lbjava.classify.Feature;
 import edu.illinois.cs.cogcomp.lbjava.classify.FeatureVector;
 import edu.illinois.cs.cogcomp.lbjava.classify.RealPrimitiveStringFeature;
 import edu.illinois.cs.cogcomp.lbjava.classify.ScoreSet;
-import edu.illinois.cs.cogcomp.lbjava.util.ExceptionlessInputStream;
-import edu.illinois.cs.cogcomp.lbjava.util.ExceptionlessOutputStream;
-
 
 /**
  * Gradient descent is a batch learning algorithm for function approximation in which the learner
@@ -136,7 +135,7 @@ public class StochasticGradientDescent extends Learner {
      **/
     public Learner.Parameters getParameters() {
         Parameters p = new Parameters(super.getParameters());
-        p.weightVector = weightVector.emptyClone();
+        p.weightVector = weightVector;
         p.learningRate = learningRate;
         return p;
     }

@@ -14,11 +14,9 @@ import edu.illinois.cs.cogcomp.lbjava.frontend.TokenValue;
 
 
 /**
- * An "at most" quantifier has the form: <blockquote>
- * <code>atmost <i>expression</i> of <i>argument</i> in
- *   (<i>expression</i>) <i>constraint-expression</i>
- * </blockquote>
- * where the first <code><i>expression</i></code> must evaluate to an <code>int</code>, the second
+ * An "at most" quantifier has the form: <blockquote> <code>atmost</code> <i>expression</i> of
+ * <i>argument</i> in (<i>expression</i>) <i>constraint-expression</i> </blockquote> where the first
+ * <code><i>expression</i></code> must evaluate to an <code>int</code>, the second
  * <code><i>expression</i></code> must evaluate to a <code>Collection</code>, and the "at most"
  * quantifier expression is sastisfied iff when taking settings of <code><i>argument</i></code> from
  * the <code>Collection</code>, <code><i>constraint-expression</i></code> is satisfied at most as

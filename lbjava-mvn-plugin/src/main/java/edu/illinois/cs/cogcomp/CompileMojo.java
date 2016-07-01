@@ -19,7 +19,7 @@ import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.plugins.annotations.ResolutionScope;
 
 /**
- * Compiles & executes LBJava code
+ * Compiles &amp; executes LBJava code
  * 
  */
 @Mojo(name = "compile", requiresDependencyResolution = ResolutionScope.COMPILE)

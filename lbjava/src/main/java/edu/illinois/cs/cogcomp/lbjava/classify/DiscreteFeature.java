@@ -7,11 +7,10 @@
  */
 package edu.illinois.cs.cogcomp.lbjava.classify;
 
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.ExceptionlessInputStream;
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.ExceptionlessOutputStream;
 import edu.illinois.cs.cogcomp.lbjava.learn.Lexicon;
 import edu.illinois.cs.cogcomp.lbjava.util.ByteString;
-import edu.illinois.cs.cogcomp.lbjava.util.ExceptionlessInputStream;
-import edu.illinois.cs.cogcomp.lbjava.util.ExceptionlessOutputStream;
-
 
 /**
  * A discrete feature takes on one value from a set of discontinuous values. The set of values that

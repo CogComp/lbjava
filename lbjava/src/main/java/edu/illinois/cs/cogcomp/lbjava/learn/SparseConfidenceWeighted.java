@@ -10,9 +10,9 @@ package edu.illinois.cs.cogcomp.lbjava.learn;
 import java.io.PrintStream;
 
 import edu.illinois.cs.cogcomp.lbjava.classify.FeatureVector;
-import edu.illinois.cs.cogcomp.lbjava.util.ExceptionlessInputStream;
-import edu.illinois.cs.cogcomp.lbjava.util.ExceptionlessOutputStream;
-
+import edu.illinois.cs.cogcomp.lbjava.classify.Classifier;
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.ExceptionlessInputStream;
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.ExceptionlessOutputStream;
 
 /**
  * This is an implementation of the approximate "variance algorithm" of <i>Confidence Weighted
@@ -37,7 +37,7 @@ import edu.illinois.cs.cogcomp.lbjava.util.ExceptionlessOutputStream;
  * <p>
  * It is assumed that {@link Learner#labeler} is a single discrete classifier that produces the same
  * feature for every example object and that the values that feature may take are available through
- * the {@link classify.Classifier#allowableValues()} method. The second value returned from
+ * the {@link Classifier#allowableValues()} method. The second value returned from
  * {@link Classifier#allowableValues()} is treated as "positive", and it is assumed there are
  * exactly 2 allowable values. Assertions will produce error messages if these assumptions do not
  * hold.

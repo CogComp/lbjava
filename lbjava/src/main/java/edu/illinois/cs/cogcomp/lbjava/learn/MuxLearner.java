@@ -9,17 +9,17 @@ package edu.illinois.cs.cogcomp.lbjava.learn;
 
 import java.io.PrintStream;
 
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.ExceptionlessInputStream;
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.ExceptionlessOutputStream;
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.OVector;
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.Sort;
 import edu.illinois.cs.cogcomp.lbjava.classify.Classifier;
 import edu.illinois.cs.cogcomp.lbjava.classify.DiscretePrimitiveStringFeature;
 import edu.illinois.cs.cogcomp.lbjava.classify.Feature;
 import edu.illinois.cs.cogcomp.lbjava.classify.FeatureVector;
 import edu.illinois.cs.cogcomp.lbjava.classify.ScoreSet;
-import edu.illinois.cs.cogcomp.lbjava.util.ExceptionlessInputStream;
-import edu.illinois.cs.cogcomp.lbjava.util.ExceptionlessOutputStream;
+import edu.illinois.cs.cogcomp.lbjava.learn.MuxLearner;
 import edu.illinois.cs.cogcomp.lbjava.util.FVector;
-import edu.illinois.cs.cogcomp.lbjava.util.OVector;
-import edu.illinois.cs.cogcomp.lbjava.util.Sort;
-
 
 /**
  * A <code>MuxLearner</code> uses one of many <code>Learner</code>s indexed by the first feature in
@@ -40,11 +40,11 @@ import edu.illinois.cs.cogcomp.lbjava.util.Sort;
  * <p>
  * This algorithm's user-configurable parameters are stored in member fields of this class. They may
  * be set via either a constructor that names each parameter explicitly or a constructor that takes
- * an instance of {@link learn.MuxLearner.Parameters Parameters} as input. The documentation in each
+ * an instance of {@link MuxLearner.Parameters Parameters} as input. The documentation in each
  * member field in this class indicates the default value of the associated parameter when using the
  * former type of constructor. The documentation of the associated member field in the
- * {@link learn.MuxLearner.Parameters Parameters} class indicates the default value of the parameter
- * when using the latter type of constructor.
+ * {@link MuxLearner.Parameters Parameters} class indicates the default value of the parameter when
+ * using the latter type of constructor.
  *
  * @author Nick Rizzolo
  **/

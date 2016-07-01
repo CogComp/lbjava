@@ -9,11 +9,10 @@ package edu.illinois.cs.cogcomp.lbjava.learn;
 
 import java.io.PrintStream;
 
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.ExceptionlessInputStream;
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.ExceptionlessOutputStream;
 import edu.illinois.cs.cogcomp.lbjava.classify.Classifier;
 import edu.illinois.cs.cogcomp.lbjava.classify.FeatureVector;
-import edu.illinois.cs.cogcomp.lbjava.util.ExceptionlessInputStream;
-import edu.illinois.cs.cogcomp.lbjava.util.ExceptionlessOutputStream;
-
 
 /**
  * The Binary MIRA learning algorithm implementation. This algorithm operates very similarly to
@@ -29,8 +28,8 @@ import edu.illinois.cs.cogcomp.lbjava.util.ExceptionlessOutputStream;
  * <p>
  * In the expression above, <i>w</i> is the weight vector, <i>y</i> represents the label of the
  * example vector <i>x</i>, <i>*</i> stands for inner product, and <i>beta</i> is a user supplied
- * parameter. If this expression turns out to be non-positive (i.e., if <i>y(w*x) >= beta/2</i>), no
- * update is made for that example.
+ * parameter. If this expression turns out to be non-positive (i.e., if <i>y(w*x) &gt;= beta/2</i>),
+ * no update is made for that example.
  *
  * <p>
  * It is assumed that {@link Learner#labeler} is a single discrete classifier that produces the same

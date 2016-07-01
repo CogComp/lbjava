@@ -11,11 +11,11 @@ import java.util.Arrays;
 
 import edu.illinois.cs.cogcomp.lbjava.classify.Score;
 import edu.illinois.cs.cogcomp.lbjava.parse.LineByLine;
-import edu.illinois.cs.cogcomp.lbjava.util.DVector;
-import edu.illinois.cs.cogcomp.lbjava.util.DVector2D;
-import edu.illinois.cs.cogcomp.lbjava.util.IVector;
-import edu.illinois.cs.cogcomp.lbjava.util.IVector2D;
-import edu.illinois.cs.cogcomp.lbjava.util.Sort;
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.DVector;
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.DVector2D;
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.IVector;
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.IVector2D;
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.Sort;
 
 
 /**
@@ -366,7 +366,7 @@ public class ZeroOneILPProblem {
      * <p>
      * This method is called by the other constraint adding methods in this class. It sorts the
      * variables and their coefficients so that the presence of a given variable can be determined
-     * with {@link edu.illinois.cs.cogcomp.lbjava.util.IVector2D#binarySearch(int,int)}.
+     * with {@link IVector2D#binarySearch(int,int)}.
      *
      * @param i The indexes of the variables with non-zero coefficients.
      * @param a The coefficients of the variables with the given indexes.

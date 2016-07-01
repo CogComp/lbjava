@@ -7,15 +7,14 @@
  */
 package edu.illinois.cs.cogcomp.lbjava.learn;
 
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.ExceptionlessInputStream;
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.ExceptionlessOutputStream;
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.IVector;
 import edu.illinois.cs.cogcomp.lbjava.classify.DiscreteConjunctiveFeature;
 import edu.illinois.cs.cogcomp.lbjava.classify.DiscreteReferrer;
 import edu.illinois.cs.cogcomp.lbjava.classify.Feature;
 import edu.illinois.cs.cogcomp.lbjava.classify.RealConjunctiveFeature;
 import edu.illinois.cs.cogcomp.lbjava.classify.RealReferrer;
-import edu.illinois.cs.cogcomp.lbjava.util.ExceptionlessInputStream;
-import edu.illinois.cs.cogcomp.lbjava.util.ExceptionlessOutputStream;
-import edu.illinois.cs.cogcomp.lbjava.util.IVector;
-
 
 /**
  * Instances of this class are intended to store features that are children of other features and

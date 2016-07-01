@@ -9,6 +9,8 @@ package edu.illinois.cs.cogcomp.lbjava.util;
 
 import java.util.Arrays;
 
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.ExceptionlessInputStream;
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.ExceptionlessOutputStream;
 import edu.illinois.cs.cogcomp.lbjava.classify.Feature;
 
 

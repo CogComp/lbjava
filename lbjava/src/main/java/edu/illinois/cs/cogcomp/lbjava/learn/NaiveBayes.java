@@ -14,16 +14,15 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Map;
 
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.ExceptionlessInputStream;
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.ExceptionlessOutputStream;
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.OVector;
 import edu.illinois.cs.cogcomp.lbjava.classify.Classifier;
 import edu.illinois.cs.cogcomp.lbjava.classify.Feature;
 import edu.illinois.cs.cogcomp.lbjava.classify.FeatureVector;
 import edu.illinois.cs.cogcomp.lbjava.classify.RealFeature;
 import edu.illinois.cs.cogcomp.lbjava.classify.Score;
 import edu.illinois.cs.cogcomp.lbjava.classify.ScoreSet;
-import edu.illinois.cs.cogcomp.lbjava.util.ExceptionlessInputStream;
-import edu.illinois.cs.cogcomp.lbjava.util.ExceptionlessOutputStream;
-import edu.illinois.cs.cogcomp.lbjava.util.OVector;
-
 
 /**
  * Naive Bayes is a multi-class learner that uses prediction value counts and feature counts given a
@@ -48,11 +47,11 @@ import edu.illinois.cs.cogcomp.lbjava.util.OVector;
  * <p>
  * This algorithm's user-configurable parameters are stored in member fields of this class. They may
  * be set via either a constructor that names each parameter explicitly or a constructor that takes
- * an instance of {@link NaiveBayesTest.NaiveBayes.Parameters Parameters} as input. The
- * documentation in each member field in this class indicates the default value of the associated
- * parameter when using the former type of constructor. The documentation of the associated member
- * field in the {@link NaiveBayesTest.NaiveBayes.Parameters Parameters} class indicates the default
- * value of the parameter when using the latter type of constructor.
+ * an instance of {@link NaiveBayes.Parameters Parameters} as input. The documentation in each
+ * member field in this class indicates the default value of the associated parameter when using the
+ * former type of constructor. The documentation of the associated member field in the
+ * {@link NaiveBayes.Parameters Parameters} class indicates the default value of the parameter when
+ * using the latter type of constructor.
  *
  * @see NaiveBayesVector
  * @author Nick Rizzolo
@@ -636,7 +635,7 @@ public class NaiveBayes extends Learner {
          * <br>
          *
          * <i>exp(dot(e)) / (sum of all labels' prior counts)) =</i><br>
-         * <i>P(e's label && e)</i>
+         * <i>P(e's label &amp;&amp; e)</i>
          *
          * @param exampleFeatures The example's array of feature indices.
          * @param exampleValues The example's array of feature values.

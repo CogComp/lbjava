@@ -12,12 +12,11 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Map;
 
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.DVector;
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.ExceptionlessInputStream;
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.ExceptionlessOutputStream;
 import edu.illinois.cs.cogcomp.lbjava.classify.Classifier;
 import edu.illinois.cs.cogcomp.lbjava.classify.Feature;
-import edu.illinois.cs.cogcomp.lbjava.util.DVector;
-import edu.illinois.cs.cogcomp.lbjava.util.ExceptionlessInputStream;
-import edu.illinois.cs.cogcomp.lbjava.util.ExceptionlessOutputStream;
-
 
 /**
  * An approximation to voted Perceptron, in which a weighted average of the weight vectors arrived

@@ -3,7 +3,7 @@
 	<parent>
         <artifactId>lbjava-project</artifactId>
         <groupId>edu.illinois.cs.cogcomp</groupId>
-        <version>1.2.18</version>
+        <version>1.2.22</version>
     </parent>
 
 	<modelVersion>4.0.0</modelVersion>
@@ -26,10 +26,9 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>gurobi</groupId>
-			<artifactId>gurobi</artifactId>
-			<version>5.0.1</version>
-			<optional>true</optional>
+			<groupId>edu.illinois.cs.cogcomp</groupId>
+			<artifactId>illinois-inference</artifactId>
+			<version>0.6.0</version>
 		</dependency>
 		<dependency>
 			<groupId>nz.ac.waikato.cms.weka</groupId>
@@ -46,11 +45,6 @@
 			<artifactId>junit</artifactId>
 			<version>4.11</version>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.ojalgo</groupId>
-			<artifactId>ojalgo</artifactId>
-			<version>37.1.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.commons</groupId>

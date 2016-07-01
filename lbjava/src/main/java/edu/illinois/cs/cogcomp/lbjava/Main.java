@@ -42,7 +42,7 @@ import edu.illinois.cs.cogcomp.lbjava.frontend.sym;
  * <dl>
  * <dt>where [options] is one or more of the following:</dt>
  * <dd>
- * <table>
+ * <table summary="">
  * <tr>
  * <td valign=top><code>-c</code></td>
  * <td>

@@ -7,6 +7,9 @@
  */
 package edu.illinois.cs.cogcomp.lbjava.util;
 
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.ExceptionlessInputStream;
+import edu.illinois.cs.cogcomp.core.datastructures.vectors.ExceptionlessOutputStream;
+
 import java.util.Arrays;
 
 
