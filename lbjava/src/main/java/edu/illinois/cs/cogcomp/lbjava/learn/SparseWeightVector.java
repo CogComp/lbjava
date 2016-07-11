@@ -91,7 +91,7 @@ public class SparseWeightVector implements Cloneable, Serializable {
      * @param featureIndex The feature index.
      * @param w The new weight.
      **/
-    protected void setWeight(int featureIndex, double w) {
+    public void setWeight(int featureIndex, double w) {
         setWeight(featureIndex, w, defaultWeight);
     }
 
@@ -102,7 +102,7 @@ public class SparseWeightVector implements Cloneable, Serializable {
      * @param w The new weight.
      * @param defaultW The default weight.
      **/
-    protected void setWeight(int featureIndex, double w, double defaultW) {
+    public void setWeight(int featureIndex, double w, double defaultW) {
         weights.set(featureIndex, w, defaultW);
     }
 
