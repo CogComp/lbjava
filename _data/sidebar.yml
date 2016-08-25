@@ -1,0 +1,53 @@
+# This is your sidebar TOC. The sidebar code loops through sections here and provides the appropriate formatting.
+
+# Sidebar
+entries:
+- title: Sidebar
+  subcategories:
+
+  - title: User Manual
+    items:
+    - title: Intro
+      url: /lbjava/doc/INTRO.html
+
+    - title: Definitions
+      url: /lbjava/doc/DEFINITIONS.html
+
+    - title: 20 Newsgroup
+      url: /lbjava/doc/20NEWSGROUP.html
+
+    - title: Algorithms
+      url: /lbjava/doc/ALGORITHMS.html
+
+    - title: LBJ Language
+      url: /lbjava/doc/LBJLANGUAGE.html
+
+    - title: LBJ Library
+      url: /lbjava/doc/LBJLIBRARY.html
+
+    - title: Installation
+      url: /lbjava/doc/INSTALLATION.html
+
+    - title: Regression
+      url: /lbjava/doc/REGRESSION.html
+
+
+  - title: Tutorials
+    items:
+    - title: Badges
+      url: /lbjava-examples/src/main/java/edu/illinois/cs/cogcomp/lbjava/examples/badges/README.html
+
+    - title: Entity Relation
+      url: /lbjava-examples/src/main/java/edu/illinois/cs/cogcomp/lbjava/examples/entityRelation/README.html
+
+    - title: NewsGroup
+      url: /lbjava-examples/src/main/java/edu/illinois/cs/cogcomp/lbjava/examples/newsgroup/README.html
+
+    - title: Sentiment
+      url: /lbjava-examples/src/main/java/edu/illinois/cs/cogcomp/lbjava/examples/sentiment/README.html
+
+    - title: Set Cover
+      url: /lbjava-examples/src/main/java/edu/illinois/cs/cogcomp/lbjava/examples/setCover/README.html
+
+    - title: Spam
+      url: /lbjava-examples/src/main/java/edu/illinois/cs/cogcomp/lbjava/examples/spam/README.html
