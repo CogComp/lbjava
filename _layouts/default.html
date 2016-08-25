@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+  <head>
+
+    {% include base.html %}
+    {% include head.html %}
+
+  </head>
+
+<body>
+
+   {% include topnav.html %}
+
+
+    <!-- Page Content -->
+    <div class="container">
+        <div class="col-lg-12">&nbsp;</div>
+
+            {% include sidebar.html %}
+
+            <!-- Content Column -->
+            <div class="col-md-9">
+
+                {{content}}
+
+                Base is: {{ base }}
+                Depth is: {{depth }}
+                Page is: {{ page.url }}
+
+            </div><!-- /.row -->
+
+    </div>    <!-- /.container -->
+
+</body>
+{% if site.google_analytics %}
+{% include google_analytics.html %}
+{% endif %}
+
+</html>
+

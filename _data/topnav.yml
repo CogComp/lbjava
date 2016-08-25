@@ -1,0 +1,23 @@
+## Topnav single links
+## if you want to list an external url, use external_url instead of url. the theme will apply a different link base.
+topnav:
+- title: Topnav
+  subcategories:
+
+    - title: Github Repo
+      external_url: https://github.com/mayhewsw/lbjava
+
+
+#Topnav dropdowns
+topnav_dropdowns:
+- title: Topnav dropdowns
+  subcategories:
+    - title: CogComp Links
+
+      items:
+        - title: Cogcomp Home
+          external_url: https://cogcomp.cs.illinois.edu
+
+        - title: LBJava API
+          external_url: http://cogcomp.cs.illinois.edu/software/doc/LBJava/apidocs/
+
