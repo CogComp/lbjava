@@ -1,3 +1,8 @@
+---
+title: Entity Relation Classification
+---
+
+
 # Entity Relation Classification 
 This a sample classification project based on Learning Based Java (LBJava). 
 

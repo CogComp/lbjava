@@ -1,4 +1,8 @@
-#3 Tutorial: 20 Newsgroups
+---
+title: 20NEWSGROUP
+---
+
+# 3 Tutorial: 20 Newsgroups
 
 We begin our discussion of the LBJava language with a tutorial that illustrates
 its most common usage.  This tutorial is intended for a first time user of the
