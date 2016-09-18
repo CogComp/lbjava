@@ -50,7 +50,7 @@ public class ArrayParser implements Parser {
     public Object next() {
         if (index >= examples.length)
             return null;
-        return (Object[]) examples[index++];
+        return examples[index++];
     }
 
 
