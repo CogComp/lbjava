@@ -2,7 +2,7 @@
 title: LBJLANGUAGE
 ---
 
-# 4 The LBJ Language
+# 4 The LBJava Language
 Now that we have defined the building blocks of classifier computation, we next describe LBJ’s
 syntax and semantics for programming with these building blocks.
 
