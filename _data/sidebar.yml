@@ -7,28 +7,28 @@ entries:
 
   - title: User Manual
     items:
-    - title: Intro
+    - title: 1. Intro
       url: /lbjava/doc/INTRO.html
 
-    - title: Definitions
+    - title: 2. Definitions
       url: /lbjava/doc/DEFINITIONS.html
 
-    - title: 20 Newsgroup
+    - title: 3. 20 Newsgroup
       url: /lbjava/doc/20NEWSGROUP.html
 
-    - title: Algorithms
+    - title: 4. Algorithms
       url: /lbjava/doc/ALGORITHMS.html
 
-    - title: LBJ Language
+    - title: 5. LBJ Language
       url: /lbjava/doc/LBJLANGUAGE.html
 
-    - title: LBJ Library
+    - title: 6. LBJ Library
       url: /lbjava/doc/LBJLIBRARY.html
 
-    - title: Installation
+    - title: 7. Installation
       url: /lbjava/doc/INSTALLATION.html
 
-    - title: Regression
+    - title: 8. Regression
       url: /lbjava/doc/REGRESSION.html
 
 

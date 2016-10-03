@@ -3,7 +3,7 @@ topnav_title: LBJava
 homepage_title: LBJava Documentation
 site_title: LBJava
 company_name: CogComp
-footer_image_location: ../common_images/logo.png
+footer_image_location: /common_images/logo.png
 # variables
 
 theme_file: theme-blue.css

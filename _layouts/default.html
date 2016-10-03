@@ -1,34 +1,40 @@
 <!DOCTYPE html>
-  <head>
+<head>
 
     {% include base.html %}
     {% include head.html %}
 
-  </head>
+</head>
 
 <body>
 
-   {% include topnav.html %}
+{% include topnav.html %}
 
 
-    <!-- Page Content -->
-    <div class="container">
-        <div class="col-lg-12">&nbsp;</div>
-
+<!-- Page Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
             {% include sidebar.html %}
+        </div>
 
-            <!-- Content Column -->
-            <div class="col-md-9">
+        <!-- Content Column -->
+        <div class="col-md-9">
 
-                {{content}}
+            {{content}}
 
-                Base is: {{ base }}
-                Depth is: {{depth }}
+            <div class="alert alert-info" role="alert">
+                Base is: {{ base }} <br />
+                Depth is: {{depth }} <br />
                 Page is: {{ page.url }}
+            </div>
 
-            </div><!-- /.row -->
 
-    </div>    <!-- /.container -->
+        </div><!-- /.row -->
+    </div>
+    {% include footer.html %}
+
+</div>    <!-- /.container -->
 
 </body>
 {% if site.google_analytics %}
@@ -36,7 +42,7 @@
 {% endif %}
 
 
-{% include footer.html %}
+
 
 </html>
 
