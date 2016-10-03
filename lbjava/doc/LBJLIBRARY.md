@@ -475,6 +475,7 @@ For example, if a learning classifier named `MyTagger` has been trained for mult
 the  compiler, the lexicon and example file will be created with the names `MyTagger.lex`
 and `MyTagger.ex` respectively. Then the following code in an application will continue training
 the classifier for an additional round:
+
 ```java 
 MyTagger tagger = new MyTagger();
 Classifier extractor = tagger.getExtractor();
