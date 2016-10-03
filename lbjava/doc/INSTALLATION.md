@@ -2,4 +2,6 @@
 title: INSTALLATION
 ---
 
-How to install LBJava.
+# 4 Installation
+
+How to install LBJava. Coming soon...

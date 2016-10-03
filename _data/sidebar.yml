@@ -19,10 +19,10 @@ entries:
     - title: 4. Algorithms
       url: /lbjava/doc/ALGORITHMS.html
 
-    - title: 5. LBJ Language
+    - title: 5. LBJava Language
       url: /lbjava/doc/LBJLANGUAGE.html
 
-    - title: 6. LBJ Library
+    - title: 6. LBJava Library
       url: /lbjava/doc/LBJLIBRARY.html
 
     - title: 7. Installation
