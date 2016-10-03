@@ -1,76 +1,27 @@
-<!-- Content Row -->
-<div class="row">
-    <!-- Sidebar Column -->
-    <div class="col-md-3">
 
-        <script>
+<div id="mysidebar">
+<nav class="bs-docs-sidebar hidden-print hidden-sm hidden-xs affix">
+    <ul class="nav bs-docs-sidenav">
 
-            $(document).ready(function() {
-                // Initialize navgoco with default options
-                $("#mysidebar").navgoco({
-                    caretHtml: '',
-                    accordion: true,
-                    openClass: 'active', // open
-                    save: false, // leave false or nav highlighting doesn't work right
-                    cookie: {
-                        name: 'navgoco',
-                        expires: false,
-                        path: '/'
-                    },
-                    slide: {
-                        duration: 400,
-                        easing: 'swing'
-                    }
-                });
+        {% for entry in sidebar %}
+        {% for subcategory in entry.subcategories %}
+        <li>
 
-                $("#collapseAll").click(function(e) {
-                    e.preventDefault();
-                    $("#mysidebar").navgoco('toggle', false);
-                });
+            <a href="#" class="h4">{{ subcategory.title }}</a>
 
-                $("#expandAll").click(function(e) {
-                    e.preventDefault();
-                    $("#mysidebar").navgoco('toggle', true);
-                });
-
-            });
-
-        </script>
-
-        <ul id="mysidebar" class="nav">
-
-            <!--<span class="siteTagline">{{site.sidebar_tagline}}</span>-->
-            <!--<span class="versionTagline">{{site.sidebar_version}}</span>-->
-
-            {% for entry in sidebar %}
-                {% for subcategory in entry.subcategories %}
-                <li><a href="#">{{ subcategory.title }}</a>
-                    <ul>
-                        {% for item in subcategory.items %}
-
-                            {% if item.external_url %}
-                                <li><a href="{{item.external_url}}" target="_blank">{{subcategory.title}}</a></li>
-                            {% elsif page.url == item.url %}
-                                <li class="active"><a href="{{item.url | prepend:base }}">{{item.title}}</a></li>
-                            {% else %}
-                                <li><a href="{{item.url | prepend:base }}">{{item.title}}</a></li>
-                            {% endif %}
-
-                        {% endfor %}
-                    </ul>
+            <ul class="nav">
+                {% for item in subcategory.items %}
+                <li><a href="{{ item.url }}">{{item.title}}</a></li>
                 {% endfor %}
-                </li>
-            {% endfor %}
-        </ul>
+            </ul>
+        </li>
+        {% endfor %}
+        {% endfor %}
+
+    </ul>
+    <a href="#top" class="back-to-top"> Back to top </a>
+</nav>
+</div>
 
 
-                <!-- if you aren't using the accordion, uncomment this block:
 
-                     <p class="external">
-                         <a href="#" id="collapseAll">Collapse All</a> | <a href="#" id="expandAll">Expand All</a>
-                     </p>
-                 -->
-
-    </div>
-    <!-- this highlights the active parent class in the navgoco sidebar. this is critical so that the parent expands when you're viewing a page. This must appear below the sidebar code above. Otherwise, if placed inside customscripts.js, the script runs before the sidebar code runs and the class never gets inserted.-->
-    <script>$("li.active").parents('li').toggleClass("active");</script>

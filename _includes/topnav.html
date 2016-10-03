@@ -1,5 +1,5 @@
 <!-- Navigation -->
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container topnavlinks">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -9,10 +9,16 @@
                 <span class="icon-bar"></span>
             </button>
 
-            <a class="fa fa-home fa-lg navbar-brand" href="{{ base }}/index.html">&nbsp;<span class="projectTitle"> {{site.topnav_title}}</span></a>
+            <a class="navbar-brand" href="{{ base }}/index.html">
+                <img src="{{ base }}/common_images/logo.png" style="height:20px; width:20px" />
 
+            </a>
 
+            <a class="navbar-brand" href="{{ base }}/index.html">
+                {{site.topnav_title}}
+            </a>
         </div>
+
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <!-- entries without drop-downs appear here -->
@@ -54,11 +60,8 @@
                         {% endfor %}
                     {% endfor %}
                 </li>
-
-
-
-                {% include feedback.html %}
-
+             </ul>
         </div>
         <!-- /.container -->
+    </div>
 </nav>

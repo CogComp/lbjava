@@ -27,7 +27,7 @@ To include LBJava in your Maven project, add the following snippet with the
    Note that you also add to need the
    `<repository>` element for the CogComp maven repository in the `<repositories>` element.
     
-```xml 
+~~~xml
     <dependencies>
          ...
         <dependency>
@@ -45,7 +45,7 @@ To include LBJava in your Maven project, add the following snippet with the
             <url>http://cogcomp.cs.illinois.edu/m2repo/</url>
         </repository>
     </repositories>
-```
+~~~
 
 ## Compiling LBJava code in your projects
 To compile the `.lbj` files into Java code you will need to use the [LBJava maven plugin](../lbjava-mvn-plugin/README.md).
