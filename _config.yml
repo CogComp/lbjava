@@ -6,14 +6,6 @@ company_name: CogComp
 footer_image_location: /common_images/logo.png
 # variables
 
-theme_file: theme-blue.css
-
-highlighter: rouge
-markdown: kramdown
-kramdown:
-  input: GFM
-  auto_ids: true
-
 defaults:
   -
     scope:
