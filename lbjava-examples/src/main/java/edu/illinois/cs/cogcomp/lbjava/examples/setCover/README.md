@@ -34,7 +34,7 @@ To run:
 
 ```
 ./test.sh
- ```
+```
 
 To clean:
 
@@ -58,6 +58,7 @@ You also need to get the Gurobi license and put it somewhere on your machine.
 export GRB_LICENSE_FILE=ADDRESS_TO_LICENSE_FILE
 ```
 
+File structure:
 
 ```
 ├── class
