@@ -459,10 +459,10 @@ public class TranslateToJava extends Pass {
         out.println(tabs + "System.exit(1);");
         tabs = "    ";
         out.println(tabs + "}\n");
-        out.println(tabs + "File modelfile = new java.io.File(modelPath);\n");
+        out.println(tabs + "java.io.File modelfile = new java.io.File(modelPath);\n");
         out.println(tabs + "if (modelfile.exists()) {");
         tabs = "      ";
-        out.println(tabs + "System.out.println(\"Model file read from \"+modelfile.getAbsolutePath()");
+        out.println(tabs + "System.out.println(\"Model file read from \"+modelfile.getAbsolutePath());");
         out.println(tabs + "readModel(lcFilePath);");
         out.println(tabs + "readLexiconOnDemand(lexFilePath);");
         tabs = "    ";
@@ -470,7 +470,7 @@ public class TranslateToJava extends Pass {
         out.println(tabs + "else if (IOUtilities.existsInClasspath(" + lceName
                 + ".class, modelPath)) {");
         tabs = "      ";
-        out.println(tabs + "System.out.println(\"Model file \"+modelfile.getAbsolutePath()+\" located in a jar file");
+        out.println(tabs + "System.out.println(\"Model file \"+modelfile.getAbsolutePath()+\" located in a jar file\");");
        out.println(tabs + "readModel(IOUtilities.loadFromClasspath(" + lceName
                 + ".class, modelPath));");
         out.println(tabs + "readLexiconOnDemand(IOUtilities.loadFromClasspath(" + lceName
