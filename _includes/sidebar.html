@@ -11,7 +11,7 @@
 
             <ul class="nav">
                 {% for item in subcategory.items %}
-                <li><a href="{{ item.url }}">{{item.title}}</a></li>
+                <li><a href="{{ item.url | prepend: site.github.url }}">{{item.title}}</a></li>
                 {% endfor %}
             </ul>
         </li>
