@@ -247,6 +247,7 @@ public class Main {
 
         if (ast == null)
             return;
+        
         // Happens if --lexerOutput, --parserOutput, or --semanticOutput is
         // enabled.
 
