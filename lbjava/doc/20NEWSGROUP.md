@@ -71,8 +71,8 @@ does not include a parser for newsgroup posts, we can still make use of
 necessary to read text out of a file.  This abstract class also provides
 implementations of the `reset()` and `close()` methods. The `NewsgroupParser` class 
 in the following snippet, simply extends it to
-take advantage of that functionality; it won't be necessary to override `
-reset()` or `close()`. `NewsgroupParser` takes as input a file
+take advantage of that functionality; it won't be necessary to override `reset()`
+or `close()`. `NewsgroupParser` takes as input a file
 containing the names of other files, assuming that each of those files
 represents a single newgroup post.  For brevity, we have hidden in `Post`'s 
 constructor the code that actually does the work of filling the fields
@@ -191,7 +191,7 @@ extraction classifier is `BagOfWords`, the example objects come from
 `NewsgroupParser`, and the learning algorithm is `SparseNetworkLearner`.
 We explore each of these ideas in more detail below.
 
- - `learn`: We say that `NewsgroupClassifier is trying to mimic `NewsgroupLabel`
+ - `learn`: We say that `NewsgroupClassifier` is trying to mimic `NewsgroupLabel`
     because it will attempt to return features with the same
     values and for the same example objects that `NewsgroupLabel` would have
     returned them.  Note that the particular feature values being returned have
@@ -572,7 +572,7 @@ labeler, and parser to `TestDiscrete`, like this:
  with `get` to retrieve individual statistics. The example code below retrieves the overall precision,
  recall, F1, and accuracy measures in an array.
  
- ```java 
+ ```java
  TestDiscrete tester = new TestDiscrete();
  ...
  tester.reportPrediction(classifier.discreteValue(ngPost),
