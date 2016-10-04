@@ -6,3 +6,5 @@ author: Stephen Mayhew
 ---
 
 Coming soon!
+
+{% include_relative SpamClassifierApplication.java %}
