@@ -19,19 +19,13 @@ entries:
     - title: 3. 20 Newsgroup
       url: /lbjava/doc/20NEWSGROUP.html
 
-    - title: 4. Algorithms
-      url: /lbjava/doc/ALGORITHMS.html
-
-    - title: 5. LBJava Language
+    - title: 4. LBJava Language
       url: /lbjava/doc/LBJLANGUAGE.html
 
-    - title: 6. LBJava Library
+    - title: 5. LBJava Library
       url: /lbjava/doc/LBJLIBRARY.html
 
-    - title: 7. Installation
-      url: /lbjava/doc/INSTALLATION.html
-
-    - title: 8. Regression
+    - title: 6. Regression
       url: /lbjava/doc/REGRESSION.html
 
 
