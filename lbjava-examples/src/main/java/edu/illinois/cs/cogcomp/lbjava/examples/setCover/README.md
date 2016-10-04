@@ -1,10 +1,9 @@
 ---
 title: Set Cover Problem
 layout: page
+lead: Solve the set cover problem
+authors: Daniel Khashabi
 ---
-
-
-# Set Cover problem
 
 ## Description 
 This tarball contains the LBJ implementation of the solution to a set cover
