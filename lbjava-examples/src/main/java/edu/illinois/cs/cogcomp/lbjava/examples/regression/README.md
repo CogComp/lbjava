@@ -1,7 +1,3 @@
----
-title: Regression Example
----
-
 # Regression Example
 
 This is a sample regression project using Stochastic Gradient Descent learning algorithm.

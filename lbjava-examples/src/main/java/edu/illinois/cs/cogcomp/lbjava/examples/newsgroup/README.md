@@ -1,8 +1,4 @@
----
-title: Newsgroup Classification
----
-
-# Newsgroup Classification
+#
 
 This a sample classification project based on Learning Based Java (LBJava).
 

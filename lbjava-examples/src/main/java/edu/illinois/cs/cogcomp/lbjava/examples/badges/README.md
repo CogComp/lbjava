@@ -1,8 +1,4 @@
----
-title: LBJava classification
----
-
-# LBJava classification
+#
 
 This a sample classification project based on Learning Based Java (LBJava).
 
