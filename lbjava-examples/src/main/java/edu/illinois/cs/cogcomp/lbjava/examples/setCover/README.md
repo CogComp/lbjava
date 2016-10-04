@@ -1,4 +1,9 @@
-# Set Cover problem 
+---
+title: Set Cover Problem
+---
+
+
+# Set Cover problem
 
 ## Description 
 This tarball contains the LBJ implementation of the solution to a set cover
