@@ -22,17 +22,17 @@
         <div class="col-md-9">
 
 
-            <div class="alert alert-warning" role="alert">
-               Warning: this is a work in progress! For a more complete reference go to: <a href="https://github.com/IllinoisCogComp/lbjava">this page</a>.
-            </div>
+            <!--<div class="alert alert-warning" role="alert">-->
+               <!--Warning: this is a work in progress! For a more complete reference go to: <a href="https://github.com/IllinoisCogComp/lbjava">this page</a>.-->
+            <!--</div>-->
 
             {{content}}
 
-            <div class="alert alert-info" role="alert">
-                Base is: {{ base }} <br />
-                Depth is: {{depth }} <br />
-                Page is: {{ page.url }}
-            </div>
+            <!--<div class="alert alert-info" role="alert">-->
+                <!--Base is: {{ base }} <br />-->
+                <!--Depth is: {{depth }} <br />-->
+                <!--Page is: {{ page.url }}-->
+            <!--</div>-->
 
 
         </div><!-- /.row -->
@@ -46,6 +46,16 @@
 {% include google_analytics.html %}
 {% endif %}
 
+<!-- This is a way to convert links to .md files to links to .html files,
+ taken from: https://github.com/github/pages-gem/issues/69 -->
+<script language="javascript">
+    var x = document.links.length;
+    for (i = 0; i < x; i++) {
+        var thisHREF = document.links[i].href;
+        if (thisHREF.indexOf(window.location.hostname) > -1) thisHREF = thisHREF.replace(".md",".html");
+        document.links[i].setAttribute('href', thisHREF);
+    }
+</script>
 
 
 

@@ -5,19 +5,9 @@ topnav:
   subcategories:
 
     - title: Github Repo
+      icon: /common_images/GitHub-Mark-32px.png
       external_url: https://github.com/mayhewsw/lbjava
 
-
-#Topnav dropdowns
-topnav_dropdowns:
-- title: Topnav dropdowns
-  subcategories:
-    - title: CogComp Links
-
-      items:
-        - title: Cogcomp Home
-          external_url: https://cogcomp.cs.illinois.edu
-
-        - title: LBJava API
-          external_url: http://cogcomp.cs.illinois.edu/software/doc/LBJava/apidocs/
+    - title: Cogcomp Home
+      external_url: https://cogcomp.cs.illinois.edu
 

@@ -5,6 +5,9 @@ entries:
 - title: Sidebar
   subcategories:
 
+  - title: LBJava API
+    url: http://cogcomp.cs.illinois.edu/software/doc/LBJava/apidocs/
+
   - title: User Manual
     items:
     - title: 1. Intro

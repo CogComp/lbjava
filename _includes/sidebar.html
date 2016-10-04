@@ -7,7 +7,7 @@
         {% for subcategory in entry.subcategories %}
         <li>
 
-            <a href="#" class="h4">{{ subcategory.title }}</a>
+            <a href="{{ subcategory.url }}" class="h4">{{ subcategory.title }}</a>
 
             <ul class="nav">
                 {% for item in subcategory.items %}
