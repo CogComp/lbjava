@@ -1,8 +1,4 @@
----
-title: LBJLANGUAGE
----
-
-# 4 The LBJava Language
+# 4 The LBJava Language 
 Now that we have defined the building blocks of classifier computation, we next describe LBJava’s
 syntax and semantics for programming with these building blocks.
 
@@ -19,7 +15,7 @@ classifiers using special operators. As such, the syntax of classifier specifica
 to treat classifiers as expressions and assign them to names. This section defines the
 syntax of classifier specification more precisely, including the syntax of classifiers learned from
 data. It also details the behavior of the LBJava compiler when classifiers are specified in terms of
-training data and when changes are made to an LBJava source file.
+training data and when changes are made to an LBJava source file. 
 
 ### 4.1.1 Classifier Declarations 
 
@@ -274,11 +270,11 @@ classifier expression in the `using` clause does all the feature extraction on e
 both training and evaluation. It will often be a composite generator.
 
 The instance creation expression in the `from` clause should create an object of a class that
-implements the `LBJ2.parser.Parser` interface in the library (see Section 5.4.1). This clause
+implements the `parser.Parser` interface in the library (see Section 5.4.1). This clause
 is optional. If it appears, the LBJava compiler will automatically perform training on the learner
 represented by this learning classifier expression at compile-time. Whether it appears or not, the
 programmer may continue training the learner on-line in the application via methods defined in
-`LBJ2.learn.Learner` in the library (see Section 5.2.1).
+`learn.Learner` in the library (see Section 5.2.1).
 
 When the `from` clause appears, the LBJava compiler retrieves objects from the specified parser
 until it finally returns `null`. One at a time, the feature extraction classifier is applied to each
@@ -289,7 +285,7 @@ specifies a number of rounds, or the number of passes over the training data to 
 the classifier during training.
 
 The instance creation expression in the `with` clause should create an object of a class derived
-from the `LBJ2.learn.Learner` class in the library. This clause is also optional. If it appears, the
+from the `learn.Learner` class in the library. This clause is also optional. If it appears, the
 generated Java class implementing this learning classifier will be derived from the class named
 in the `with` clause. Otherwise, the default learner for the declared return type of this learning
 classifier will be substituted with default parameter settings.
@@ -333,7 +329,7 @@ subsets (folds). If the `split-strategy` argument is not provided, the default v
    are as equally sized as possible.
       
  - `manual` - The user may write their parser so that it returns the unique instance of the
-   `LBJ2.parse.FoldSeparator` class (see the `separator` field) wherever a fold boundary is
+   `parse.FoldSeparator` class (see the `separator` field) wherever a fold boundary is
    desired. Each time this object appears, it represents a partition between two folds. Thus,
    if the k-fold cross validation is desired, it should appear k − 1 times. The integer provided
    after the `cval` keyword is ignored and may be omitted in this case. 
@@ -341,8 +337,8 @@ subsets (folds). If the `split-strategy` argument is not provided, the default v
 The `testingMetric` and `alpha` clauses are sub-clauses of `cval`, and, consequently, have no
 effect when the `cval` clause is not present. The `testingMetric` clause gives the user the opportunity
 to provide a custom testing methodology. The object provided to the `testingMetric`
-clause must implement the `LBJ2.learn.TestingMetric` interface. If this clause is not provided,
-then it will default to the `LBJ2.learn.Accuracy` metric, which simply returns the ratio of correct
+clause must implement the `learn.TestingMetric` interface. If this clause is not provided,
+then it will default to the `learn.Accuracy` metric, which simply returns the ratio of correct
 predictions made by the classifier on the testing fold to the total number of examples contained
 within said fold.
 
@@ -483,7 +479,7 @@ resulting value will be converted to a `String`.
  define a classifier using arbitrary Java. However, the current version of LBJava suffers from one
  major limitation. All J2SE 1.4.2 statement and expression syntax is accepted, excluding class
  and interface definitions. In particular, this means that anonymous classes currently cannot be
- defined or instantiated inside an LBJava method body.
+ defined or instantiated inside an LBJava method body. 
  
 ## 4.2 Constraints 
 Many modern applications involve the repeated application of one or more learning classifiers in
@@ -664,12 +660,12 @@ The `subjectto` clause may also contain arbitrary Java, just like any other cons
 Finally, the `with` clause specifies which inference algorithm to use. It functions similarly to
 the `with` clause of a learning classifier expression (see Section 4.1.2.6).
 
-## 4.4 "Makefile" Behavior
+## 4.4 “Makefile” Behavior 
 
 An LBJava source file also functions as a makefile in the following sense. First, code will only be
 generated for a classifier definition when it is determined that a change has been made5
 in the
-LBJava source for that classifier since the last time the compiler was executed
+LBJava source for that classifier since the last time the compiler was executed 
 (When the file(s) containing the translated code for a given classifier do not exist, this is, of course, also interpreted
 as a change having been made). 
 Second, a learning
@@ -687,3 +683,55 @@ line parameters (see Section 6.2). For example, if the classifiers in an LBJava 
 to take classes from the programmer’s internal representation as input, the LBJava compiler will
 automatically compile the Java source files containing those class’ implementations if their class
 files don’t already exist or are out of date.
+
+## 4.5 Parameter Tuning Syntax
+
+Parameter turning is essential in machine learning, as it allows the programmers to find the best parameters in the learning algorithms to perform to their maximum extent. LBJava has intuitive syntax to tune parameters easily. Please see the subsections below to learn more.
+
+### 4.5.1 Set of Parameters
+
+We want to try a set of predefined parameters.
+
+The syntax is:
+```
+{{value1, value2, value3}}
+```
+
+For example, we want the algorithm to try 5, 10, 20, 30, 40 iterations.
+
+The `LBJava` code looks like:
+```
+{{5, 10, 20, 30, 40}} rounds
+```
+
+Another example, we want the algorithm to try different learning rates, such as 0.5, 0.1, 0.005.
+
+The `LBJava` code looks like:
+```
+p.learningRate = {{0.5, 0.1, 0.005}};
+```
+
+### 4.5.2 Parameters in Steps
+
+We want to try a set of parameters, within a range, with steps.
+
+Let's denote the range from `start`, to `end`, with step size `step_size`.
+
+The syntax is:
+```
+{{step_size -> start : end}}
+```
+
+For example, we want to try thickness in `SparseAvergedPerceptron`, from 3 to 0.5, with step size 1.
+
+The `LBJava` code looks like:
+```
+p.thinkness = {{ 1 -> 3 : 0.5}};
+```
+
+### 4.5.3 Cross Validation
+
+Cross validation is useful, and essential to avoid overfitting problem. For k-fold cross validation, the syntax is: 
+```
+cval k "random"
+```
