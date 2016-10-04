@@ -1,5 +1,6 @@
 ---
 title: Set Cover Problem
+layout: page
 ---
 
 
@@ -29,24 +30,37 @@ operates similarly to ContainsStation except that it respects the constraints.
 SetCoverSolver is a program that takes raw data representing a City as input
 and produces the constrained predictions.
 
-=== How to run === 
-To run: 
-./test.sh 
+## How to run
+To run:
 
-To clean: 
+```
+./test.sh
+```
+
+To clean:
+
+```
 ./clean.sh
-
+```
 
 Note: You need to have Gurobi, the optimization package installed on your computer. 
-You can download it from: www.gurobi.com, and set a global variable in ~/.bashrc, pointing to the Gurobi: 
-	export GUROBI_HOME=/shared/austen/khashab2/Gurobi/gurobi603/linux64
-	export PATH="${PATH}:${GUROBI_HOME}/bin"
-	export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${GUROBI_HOME}/lib"
+You can download it from: www.gurobi.com, and set a global variable in `~/.bashrc`, pointing to the Gurobi:
+
+```
+export GUROBI_HOME=/shared/austen/khashab2/Gurobi/gurobi603/linux64
+export PATH="${PATH}:${GUROBI_HOME}/bin"
+export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${GUROBI_HOME}/lib"
+```
+
 You also need to get the Gurobi license and put it somewhere on your machine. 
-	export GRB_LICENSE_FILE=ADDRESS_TO_LICENSE_FILE
 
+```
+export GRB_LICENSE_FILE=ADDRESS_TO_LICENSE_FILE
+```
 
-=== Files In This Project === 
+## Files In This Project
+
+```
 ├── class
 ├── clean.sh
 ├── example.txt
@@ -66,4 +80,4 @@ You also need to get the Gurobi license and put it somewhere on your machine.
 │       ├── Neighborhood.java
 │       └── SetCoverSolver.java
 └── test.sh
-
+```
