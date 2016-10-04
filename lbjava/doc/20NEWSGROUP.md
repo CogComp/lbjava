@@ -374,7 +374,7 @@ Referring once again to this
 we first examine our
 chosen directory structure starting from the root directory of the distribution.
 
-```java 
+```
 $ ls
 20news.LBJava class LBJava test.sh
 README data src train.sh
@@ -556,28 +556,28 @@ Alternatively, we can call `TestDiscrete` from within our Java application. This
 if our parser’s constructor isn’t so simple, or when we’d like to do further processing with the
 performance numbers themselves. The simplest way to do so is to pass instances of our classifier,
 labeler, and parser to `TestDiscrete`, like this:
+
+```java
+NewsgroupLabel oracle = new NewsgroupLabel();
+Parser parser = new NewsgroupParser("data/20news.test");
+TestDiscrete tester = TestDiscrete.testDiscrete(classifier, oracle, parser);
+tester.printPerformance(System.out);
+```
  
- ```java
- NewsgroupLabel oracle = new NewsgroupLabel();
- Parser parser = new NewsgroupParser("data/20news.test");
- TestDiscrete tester = TestDiscrete.testDiscrete(classifier, oracle, parser);
- tester.printPerformance(System.out);
- ```
+This Java code does exactly the same thing as the command line above. We can also
+exert more fine grained control over the computed statistics. Starting from a new instance of
+`TestDiscrete`, we can call `reportPrediction(String,String)` every time we acquire both a
+prediction value and a label. Then we can either call the `printPerformance(PrintStream)`
+method to produce the standard output in table form or any of the methods whose names start
+with `get` to retrieve individual statistics. The example code below retrieves the overall precision,
+recall, F1, and accuracy measures in an array.
  
- This Java code does exactly the same thing as the command line above. We can also
- exert more fine grained control over the computed statistics. Starting from a new instance of
- `TestDiscrete`, we can call `reportPrediction(String,String)` every time we acquire both a
- prediction value and a label. Then we can either call the `printPerformance(PrintStream)`
- method to produce the standard output in table form or any of the methods whose names start
- with `get` to retrieve individual statistics. The example code below retrieves the overall precision,
- recall, F1, and accuracy measures in an array.
- 
- ```java
- TestDiscrete tester = new TestDiscrete();
- ...
- tester.reportPrediction(classifier.discreteValue(ngPost),
-                                    oracle.discreteValue(ngPost));
- ...
- double[] performance = tester.getOverallStats();
- System.out.println("Overall Accuracy: " + performance[3]);
- ```
+```java
+TestDiscrete tester = new TestDiscrete();
+...
+tester.reportPrediction(classifier.discreteValue(ngPost),
+                                   oracle.discreteValue(ngPost));
+...
+double[] performance = tester.getOverallStats();
+System.out.println("Overall Accuracy: " + performance[3]);
+```

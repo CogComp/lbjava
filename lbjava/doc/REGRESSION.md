@@ -103,6 +103,7 @@ real MyLabel(MyData d) <- {
     return d.getLabel();
 }
 ```
+
 #### 6.2.3 Classifier
 
 Since we are using a classifier with real output type, we need to choose a training method compatible this output type. In this example we use Stochastic Gradient Descent. (visit [Training Algorithms](ALGORITHMS.md) for complete list of training algorithms with the expected output types.)
