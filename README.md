@@ -28,5 +28,3 @@ From the root directory run the following command:
 ## Licensing
 To see the full license for this software, see [LICENSE](LICENSE) or visit the download 
 page for this software and press "Download". The next screen displays the license. 
-
-Cool!
