@@ -12,7 +12,7 @@ the problem is formulated as an Integer Linear Program.  In LBJ, we'll write
 the constraints in First Order Logic, and they'll be translated into the same
 linear inequalities shown on the web page:
 
-http://mat.gsia.cmu.edu/orclass/integer/node8.html
+`http://mat.gsia.cmu.edu/orclass/integer/node8.html`
 
 Classes City and Neighborhood are used as the internal representation of our
 problem's data.  An instance of class City will become the "head" object of an
