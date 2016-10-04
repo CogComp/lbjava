@@ -1,9 +1,10 @@
 ---
 title: Entity Relation Classification
 authors: Hao Wu, Parisa Kordjamshidi, Daniel Khashabi
+layout: page
+lead: Build a simple classifier for entities and relations
 ---
 
-# Entity Relation Classification
 This a sample classification project based on Learning Based Java (LBJava). 
 
 ## Details 

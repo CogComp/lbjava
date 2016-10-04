@@ -1,10 +1,9 @@
 ---
 title: Regression Example
 authors: Yiming Jiang
+lead: See how to use LBJava for regression
+layout: page
 ---
-
-
-# Regression Example
 
 This is a sample regression project using Stochastic Gradient Descent learning algorithm.
 
