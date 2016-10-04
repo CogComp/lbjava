@@ -8,7 +8,6 @@
         <li>
 
             <a href="{{ subcategory.url }}" class="h4">{{ subcategory.title }}</a>
-            <a href="#" class="h4">{{ subcategory.title }}</a>
             <ul class="nav">
                 {% for item in subcategory.items %}
                 <li><a href="{{ item.url | prepend: site.github.url }}">{{item.title}}</a></li>
