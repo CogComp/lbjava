@@ -1,6 +1,8 @@
 ---
 title: Spam Classification
 layout: page
+lead: Classify documents as spam or ham using LBJava
+author: Stephen Mayhew
 ---
 
-# Spam Classification
+Coming soon!
