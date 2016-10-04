@@ -2,7 +2,7 @@
 title: INTRO
 ---
 
-# 1 Introduction
+# 1. Introduction
 
 Learning Based Java is a modeling language for the rapid development of
 software systems with one or more learned functions, designed for use with the

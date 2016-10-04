@@ -664,7 +664,7 @@ The `subjectto` clause may also contain arbitrary Java, just like any other cons
 Finally, the `with` clause specifies which inference algorithm to use. It functions similarly to
 the `with` clause of a learning classifier expression (see Section 4.1.2.6).
 
-## 4.4 “Makefile” Behavior 
+## 4.4 "Makefile" Behavior
 
 An LBJava source file also functions as a makefile in the following sense. First, code will only be
 generated for a classifier definition when it is determined that a change has been made5
