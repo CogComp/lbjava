@@ -988,24 +988,9 @@ public class Train extends Pass {
             out.println("  static");
             out.println("  {");
             out.println("    _lcFilePath = " + getName() + ".class.getResource(\"" + getName()
-                    + ".lc\");\n");
-
-            out.println("    if (_lcFilePath == null)");
-            out.println("    {");
-            out.println("      System.err.println(\"ERROR: Can't locate " + getName()
-                    + ".lc in the class path.\");");
-            out.println("      System.exit(1);");
-            out.println("    }\n");
-
+                    + ".lc\");");
             out.println("    _lexFilePath = " + getName() + ".class.getResource(\"" + getName()
-                    + ".lex\");\n");
-
-            out.println("    if (_lexFilePath == null)");
-            out.println("    {");
-            out.println("      System.err.println(\"ERROR: Can't locate " + getName()
-                    + ".lex in the class path.\");");
-            out.println("      System.exit(1);");
-            out.println("    }");
+                    + ".lex\");");
 
             if (tuningParameters) {
                 out.println("\n    parametersPath = " + getName() + ".class.getResource(\""
@@ -1013,17 +998,31 @@ public class Train extends Pass {
 
                 out.println("    if (parametersPath == null)");
                 out.println("    {");
-                out.println("      System.err.println(\"ERROR: Can't locate " + getName()
+                out.println("      throw new RuntimeException(\"ERROR: Can't locate " + getName()
                         + ".p in the class path.\");");
-                out.println("      System.exit(1);");
                 out.println("    }");
             }
             out.println("  }\n");
 
             out.println("  private static void loadInstance()");
             out.println("  {");
+            
             out.println("    if (instance == null)");
             out.println("    {");
+
+
+            out.println("      if (_lcFilePath == null)");
+            out.println("      {");
+            out.println("        throw new RuntimeException(\"Can't locate " + getName()
+                    + ".lc in the class path.\");");
+            out.println("      }");
+
+            out.println("      if (_lexFilePath == null)");
+            out.println("      {");
+            out.println("        throw new RuntimeException(\"Can't locate " + getName()
+                    + ".lc in the class path.\");");
+            out.println("      }");
+            
             out.println("      instance = (" + getName() + ") Learner.readLearner(_lcFilePath);");
             out.println("      instance.readLexiconOnDemand(_lexFilePath);");
             out.println("    }");
