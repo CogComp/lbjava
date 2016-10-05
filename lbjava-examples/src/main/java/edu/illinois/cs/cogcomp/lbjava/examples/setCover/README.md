@@ -1,4 +1,9 @@
-# Set Cover problem 
+---
+title: Set Cover Problem
+layout: page
+lead: Solve the set cover problem
+authors: Daniel Khashabi
+---
 
 ## Description 
 This tarball contains the LBJ implementation of the solution to a set cover
@@ -7,7 +12,7 @@ the problem is formulated as an Integer Linear Program.  In LBJ, we'll write
 the constraints in First Order Logic, and they'll be translated into the same
 linear inequalities shown on the web page:
 
-http://mat.gsia.cmu.edu/orclass/integer/node8.html
+`http://mat.gsia.cmu.edu/orclass/integer/node8.html`
 
 Classes City and Neighborhood are used as the internal representation of our
 problem's data.  An instance of class City will become the "head" object of an
@@ -24,24 +29,37 @@ operates similarly to ContainsStation except that it respects the constraints.
 SetCoverSolver is a program that takes raw data representing a City as input
 and produces the constrained predictions.
 
-=== How to run === 
-To run: 
-./test.sh 
+## How to run
+To run:
 
-To clean: 
+```
+./test.sh
+```
+
+To clean:
+
+```
 ./clean.sh
-
+```
 
 Note: You need to have Gurobi, the optimization package installed on your computer. 
-You can download it from: www.gurobi.com, and set a global variable in ~/.bashrc, pointing to the Gurobi: 
-	export GUROBI_HOME=/shared/austen/khashab2/Gurobi/gurobi603/linux64
-	export PATH="${PATH}:${GUROBI_HOME}/bin"
-	export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${GUROBI_HOME}/lib"
+You can download it from: www.gurobi.com, and set a global variable in `~/.bashrc`, pointing to the Gurobi:
+
+```
+export GUROBI_HOME=/shared/austen/khashab2/Gurobi/gurobi603/linux64
+export PATH="${PATH}:${GUROBI_HOME}/bin"
+export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${GUROBI_HOME}/lib"
+```
+
 You also need to get the Gurobi license and put it somewhere on your machine. 
-	export GRB_LICENSE_FILE=ADDRESS_TO_LICENSE_FILE
 
+```
+export GRB_LICENSE_FILE=ADDRESS_TO_LICENSE_FILE
+```
 
-=== Files In This Project === 
+## Files In This Project
+
+```
 ├── class
 ├── clean.sh
 ├── example.txt
@@ -61,4 +79,4 @@ You also need to get the Gurobi license and put it somewhere on your machine.
 │       ├── Neighborhood.java
 │       └── SetCoverSolver.java
 └── test.sh
-
+```
