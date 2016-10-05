@@ -28,6 +28,9 @@ entries:
     - title: 6. Regression
       url: /lbjava/doc/REGRESSION.html
 
+    - title: Algorithms
+      url: /lbjava/doc/ALGORITHMS.html
+
 
   - title: Tutorials
     items:
