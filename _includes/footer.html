@@ -1,0 +1,15 @@
+<footer>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-9 footer">
+            <hr>
+            &copy;{{ site.time | date: "%Y"  }} {{site.company_name}}. All rights reserved.
+            <br />
+            {% if page.last_updated %}
+            <p>Page last updated:</p> {{page.last_updated}} <br/>
+            {% endif %} Site last generated: {{ site.time | date: "%b %-d, %Y"  }}
+            <br />
+            <p><img src="{{ base }}/common_images/logo.png" style="width:20px; height:20px" /></p>
+        </div>
+    </div>
+</footer>

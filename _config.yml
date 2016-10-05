@@ -1,0 +1,14 @@
+# project definitions
+topnav_title: LBJava
+homepage_title: LBJava Documentation
+site_title: LBJava
+company_name: CogComp
+footer_image_location: /common_images/logo.png
+# variables
+
+defaults:
+  -
+    scope:
+      path: "" # an empty string here means all files in the project
+    values:
+      layout: "default"

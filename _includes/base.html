@@ -1,0 +1,22 @@
+{% assign base = '.' %}
+{% assign depth = page.url | split: '/' | size | minus: 1 %}
+{% if    depth == 1 %}{% assign base = '.' %}
+{% elsif depth == 2 %}{% assign base = '..' %}
+{% elsif depth == 3 %}{% assign base = '../..' %}
+{% elsif depth == 4 %}{% assign base = '../../..' %}
+{% elsif depth == 5 %}{% assign base = '../../../..' %}
+{% elsif depth == 6 %}{% assign base = '../../../../..' %}
+{% elsif depth == 7 %}{% assign base = '../../../../../..' %}
+{% elsif depth == 8 %}{% assign base = '../../../../../../..' %}
+{% elsif depth == 9 %}{% assign base = '../../../../../../../..' %}
+{% elsif depth == 10 %}{% assign base = '../../../../../../../../..' %}
+{% elsif depth == 11 %}{% assign base = '../../../../../../../../../..' %}
+{% elsif depth == 12 %}{% assign base = '../../../../../../../../../../..' %}
+{% elsif depth == 13 %}{% assign base = '../../../../../../../../../../../..' %}
+{% elsif depth == 14 %}{% assign base = '../../../../../../../../../../../../..' %}
+{% elsif depth == 15 %}{% assign base = '../../../../../../../../../../../../../..' %}{% endif %}
+
+
+{% assign sidebar = site.data.sidebar.entries %}
+{% assign topnav = site.data.topnav.topnav %}
+{% assign topnav_dropdowns = site.data.topnav.topnav_dropdowns %}
