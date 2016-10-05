@@ -7,6 +7,6 @@ author: Stephen Mayhew
 
 Coming soon!
 
-```
+{% highlight java %}
 {% include_relative SpamClassifierApplication.java %}
-```
+{% endhighlight %}
