@@ -1,3 +1,7 @@
+---
+title: ALGORITHMS
+---
+
 # Learning Algorithms
 
 Here is a list of learning algorithm in LBJava.

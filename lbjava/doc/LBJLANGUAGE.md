@@ -1,4 +1,8 @@
-# 4 The LBJava Language 
+---
+title: LBJava Language
+---
+
+# 4. The LBJava Language
 Now that we have defined the building blocks of classifier computation, we next describe LBJava’s
 syntax and semantics for programming with these building blocks.
 
