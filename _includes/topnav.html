@@ -20,9 +20,32 @@
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+            <ul class="nav navbar-nav visible-xs-block visible-sm-block">
+
+                {% for entry in sidebar %}
+                {% for subcategory in entry.subcategories %}
+
+                    <!--need a separate structure for external links.-->
+                    {% if subcategory.url != nil %}
+                        <li><a href="{{ subcategory.url }}" target="_blank">{{ subcategory.title }}</a></li>
+                    {% else %}
+                        <li class="dropdown">
+                            <a href="#" data-toggle="dropdown" class="dropdown-toggle">{{ subcategory.title }}</a>
+                            <ul class="dropdown-menu">
+                                {% for item in subcategory.items %}
+                                    <li><a href="{{ item.url | prepend: site.github.url }}">{{item.title}}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                    {% endif %}
+
+                {% endfor %}
+                {% endfor %}
+
+            </ul>
+
             <ul class="nav navbar-nav navbar-right">
-                <!-- entries without drop-downs appear here -->
-                <!-- conditional logic to control which topnav appears for the audience defined in the configuration file.-->
 
                 {% for entry in topnav %}
                     {% for subcategory in entry.subcategories %}
