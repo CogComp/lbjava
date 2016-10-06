@@ -6,7 +6,7 @@ topnav:
 
     - title: Github Repo
       icon: /common_images/GitHub-Mark-32px.png
-      external_url: https://github.com/mayhewsw/lbjava
+      external_url: https://github.com/IllinoisCogComp/lbjava
 
     - title: Cogcomp Home
       external_url: https://cogcomp.cs.illinois.edu
