@@ -21,7 +21,7 @@ import edu.illinois.cs.cogcomp.infer.ilp.ILPSolver;
  *
  * @author Nick Rizzolo
  **/
-public class BalasHook extends ZeroOneILPProblem implements ILPSolver {
+public abstract class BalasHook extends ZeroOneILPProblem implements ILPSolver {
     private static boolean debug = false;
 
 

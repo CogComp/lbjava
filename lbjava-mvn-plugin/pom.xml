@@ -5,7 +5,7 @@
     <parent>
         <artifactId>lbjava-project</artifactId>
         <groupId>edu.illinois.cs.cogcomp</groupId>
-        <version>1.2.26</version>
+        <version>1.2.26-singleprecision</version>
     </parent>
 
     <artifactId>lbjava-maven-plugin</artifactId>
