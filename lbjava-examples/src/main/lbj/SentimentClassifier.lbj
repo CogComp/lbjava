@@ -1,10 +1,10 @@
-package edu.illinois.cs.cogcomp.lbjava.examples.sentiment;
+package edu.cs.cogcomp.lbjava.examples.sentiment;
 
 import java.util.List;
 
-import edu.illinois.cs.cogcomp.lbjava.examples.Document;
-import edu.illinois.cs.cogcomp.lbjava.examples.DocumentReader;
-import edu.illinois.cs.cogcomp.lbjava.examples.sentiment.SentimentDataReader;
+import edu.cs.cogcomp.lbjava.examples.Document;
+import edu.cs.cogcomp.lbjava.examples.DocumentReader;
+import edu.cs.cogcomp.lbjava.examples.sentiment.SentimentDataReader;
 
 /** Simply produces "bag of words" features. */
 discrete% WordFeatures(Document d) <- {

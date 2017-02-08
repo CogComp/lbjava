@@ -27,7 +27,7 @@ To include LBJava in your Maven project, add the following snippet with the
     <dependencies>
          ...
         <dependency>
-            <groupId>edu.illinois.cs.cogcomp</groupId>
+            <groupId>edu.cs.cogcomp</groupId>
             <artifactId>LBJava</artifactId>
             <version>#version#</version>
         </dependency>
@@ -58,7 +58,7 @@ Briefly, you need to add the `<pluginRepositories>` and `<build>` snippets into 
 <build>
  <plugins>
    <plugin>
-     <groupId>edu.illinois.cs.cogcomp</groupId>
+     <groupId>edu.cs.cogcomp</groupId>
      <artifactId>lbjava-maven-plugin</artifactId>
      <version>LBJAVA-VERSION</version>
      <configuration>
@@ -80,7 +80,7 @@ NB: If you need to run `mvn clean` at any point, make sure to create `target/cla
 running `mvn compile/install` since it is required for the java-source compilation process.
 
 ## Using ILP inference 
-LBJava uses the the solvers included in [illinois-inference](https://gitlab-beta.engr.illinois.edu/cogcomp/inference/) for 
+LBJava uses the the solvers included in [illinois-inference](https://github.com/IllinoisCogComp/illinois-cogcomp-nlp/tree/master/inference) for 
 inference. We refer the interested reader to the aforementioned library, 
 for more details and instructions on how to install these libraries. 
 

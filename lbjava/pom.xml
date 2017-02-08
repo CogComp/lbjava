@@ -2,8 +2,8 @@
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<parent>
         <artifactId>lbjava-project</artifactId>
-        <groupId>edu.illinois.cs.cogcomp</groupId>
-        <version>1.2.26</version>
+        <groupId>edu.cs.cogcomp</groupId>
+        <version>1.2.27</version>
     </parent>
 
 	<modelVersion>4.0.0</modelVersion>
@@ -124,7 +124,7 @@
 						<filePair>
 							<inputFile>src/main/lex/scanner.jlex</inputFile>
 							<outputFile>
-								src/main/java/edu/illinois/cs/cogcomp/lbjava/frontend/Yylex.java
+								src/main/java/edu/cs/cogcomp/lbjava/frontend/Yylex.java
 							</outputFile>
 						</filePair>
 					</files>
@@ -172,7 +172,7 @@
 								<argument>target/dependency/java-cup-0.11a.jar</argument>
 								<argument>-d</argument>
 								<argument>target/classes</argument>
-								<argument>src/main/java/edu/illinois/cs/cogcomp/lbjava/frontend/GenerateParserAndSymbols.java</argument>
+								<argument>src/main/java/edu/cs/cogcomp/lbjava/frontend/GenerateParserAndSymbols.java</argument>
 							</arguments>
 						</configuration>
 					</execution>
@@ -183,7 +183,7 @@
 							<goal>java</goal>
 						</goals>
 						<configuration>
-							<mainClass>edu.illinois.cs.cogcomp.lbjava.frontend.GenerateParserAndSymbols</mainClass>
+							<mainClass>edu.cs.cogcomp.lbjava.frontend.GenerateParserAndSymbols</mainClass>
 						</configuration>
 					</execution>
 				</executions>

@@ -1,8 +1,8 @@
-package edu.illinois.cs.cogcomp.lbjava.examples.setCover;
+package edu.cs.cogcomp.lbjava.examples.setCover;
 
-import edu.illinois.cs.cogcomp.lbjava.examples.setCover.City;
-import edu.illinois.cs.cogcomp.lbjava.examples.setCover.Neighborhood;
-import edu.illinois.cs.cogcomp.lbjava.examples.setCover.ContainsStation;
+import edu.cs.cogcomp.lbjava.examples.setCover.City;
+import edu.cs.cogcomp.lbjava.examples.setCover.Neighborhood;
+import edu.cs.cogcomp.lbjava.examples.setCover.ContainsStation;
 
 import edu.illinois.cs.cogcomp.infer.ilp.OJalgoHook;
 

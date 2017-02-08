@@ -17,7 +17,7 @@
 /// Modified by Christos Christodoulopoulos to be used inside Maven
 /// --------------------------------------------------------------------------
 
-package edu.illinois.cs.cogcomp.lbjava.frontend;
+package edu.cs.cogcomp.lbjava.frontend;
 
 import java_cup.runtime.Symbol;
 

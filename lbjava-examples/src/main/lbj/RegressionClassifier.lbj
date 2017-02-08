@@ -1,9 +1,9 @@
-package edu.illinois.cs.cogcomp.lbjava.examples.regression;
+package edu.cs.cogcomp.lbjava.examples.regression;
 
 import java.util.List;
 
-import edu.illinois.cs.cogcomp.lbjava.examples.regression.MyData;
-import edu.illinois.cs.cogcomp.lbjava.examples.regression.MyDataReader;
+import edu.cs.cogcomp.lbjava.examples.regression.MyData;
+import edu.cs.cogcomp.lbjava.examples.regression.MyDataReader;
 
 real[] MyFeatures(MyData d) <- {
     for (int i = 0; i < d.getFeatures().size(); i++) {
