@@ -1,4 +1,4 @@
-package edu.illinois.cs.cogcomp.lbjava.examples.badges;
+package edu.cs.cogcomp.lbjava.examples.badges;
 
 import java.util.List;
 

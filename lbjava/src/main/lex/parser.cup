@@ -23,10 +23,10 @@
   * Modified by Christos Christodoulopoulos to be used inside Maven
  **/
 
-package edu.illinois.cs.cogcomp.lbjava.frontend;
+package edu.cs.cogcomp.lbjava.frontend;
 
 import java.util.LinkedList;
-import edu.illinois.cs.cogcomp.lbjava.IR.*;
+import edu.cs.cogcomp.lbjava.IR.*;
 
 
 parser code

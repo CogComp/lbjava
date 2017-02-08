@@ -1,8 +1,8 @@
-package edu.illinois.cs.cogcomp.lbjava.examples.entityRelation;
+package edu.cs.cogcomp.lbjava.examples.entityRelation;
 
 import java.util.List;
-import edu.illinois.cs.cogcomp.lbjava.examples.entityRelation.datastruct.*;
-import edu.illinois.cs.cogcomp.lbjava.examples.entityRelation.Conll04_RelationReaderNew;
+import edu.cs.cogcomp.lbjava.examples.entityRelation.datastruct.*;
+import edu.cs.cogcomp.lbjava.examples.entityRelation.Conll04_RelationReaderNew;
 
 import edu.illinois.cs.cogcomp.infer.ilp.OJalgoHook;
 

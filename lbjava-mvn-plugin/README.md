@@ -28,7 +28,7 @@ Put the following into your pom.xml:
    ...
    
    <plugin>
-     <groupId>edu.illinois.cs.cogcomp</groupId>
+     <groupId>edu.cs.cogcomp</groupId>
      <artifactId>lbjava-maven-plugin</artifactId>
      <version>LBJAVA-VERSION</version>
      <configuration>
@@ -59,7 +59,7 @@ Parameters are:
 Note that some parameters are optional and have default values. Note also that these 
 are simply the flags given to LBJava's Main class. These are documented in the LBJava User Guide.
 
-**NB**: In case you get a repository error you should add edu.illinois.cs.cogcomp as a plugin repository:
+**NB**: In case you get a repository error you should add `edu.cs.cogcomp` as a plugin repository:
 
 ```xml 
 <pluginRepositories>
@@ -86,7 +86,7 @@ Here's an example without the optional parameters. This is as simple as it gets,
    ...
    
    <plugin>
-     <groupId>edu.illinois.cs.cogcomp</groupId>
+     <groupId>edu.cs.cogcomp</groupId>
      <artifactId>lbjava-maven-plugin</artifactId>
      <version>LBJAVA-VERSION</version>
      <configuration>
@@ -139,7 +139,7 @@ the plugin definition as follows:
 
 ```xml
 <plugin>
-    <groupId>edu.illinois.cs.cogcomp</groupId>
+    <groupId>edu.cs.cogcomp</groupId>
     <artifactId>lbjava-maven-plugin</artifactId>
     <version>LBJAVA-VERSION</version>
     <configuration>
@@ -172,10 +172,10 @@ the following:
 │   └── main
 │       ├── java
 │       │   └── edu
-│       │       └── illinois
-│       │           └── cs
-│       │               └── cogcomp
-│       │                   └── [java files]
+│       │       └── cs
+│       │           └── cogcomp
+│       │               └── [java files]
+│       │                   
 │       ├── lbjava
 │       │   └── MyLBJClassifier.lbj
 │       └── resources
@@ -183,10 +183,10 @@ the following:
 └── target
     └── classes
         └── edu
-            └── illinois
-                └── cs
-                    └── cogcomp
-                        └── [generated class files]
+            └── cs 
+                └── cogcomp
+                    └── [generated class files]
+                        
 ```
 
 ### <a name="how"></a>How it works
@@ -194,7 +194,7 @@ the following:
 The way it works is simple: under the hood, the plugin calls 
 
 ```
-java ... edu.illinois.cs.cogcomp.lbjava.Main ...
+java ... edu.cs.cogcomp.lbjava.Main ...
 ```
 
 with parameters defined in the pom.xml (see [POM file](#pom) section).
@@ -224,7 +224,7 @@ that the plugin should be allowed to execute. To do this add the following:
                         <pluginExecutions>
                             <pluginExecution>
                                 <pluginExecutionFilter>
-                                    <groupId>edu.illinois.cs.cogcomp</groupId>
+                                    <groupId>edu.cs.cogcomp</groupId>
                                     <artifactId>lbjava-maven-plugin</artifactId>
                                     <versionRange>LBJAVA-VERSION</versionRange>
                                     <goals>
