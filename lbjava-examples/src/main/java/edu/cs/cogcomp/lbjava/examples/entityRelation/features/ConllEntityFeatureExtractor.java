@@ -36,7 +36,7 @@ public class ConllEntityFeatureExtractor {
     }
 
     public HashMap<String, Double> extractEntityFeatures(ConllRawSentence s, int index,
-                                                         boolean isLowerCase) {
+            boolean isLowerCase) {
         HashMap<String, Double> features = new HashMap<String, Double>();
         ConllRawToken ct = s.sentTokens.elementAt(index);
         features.put("PHRASE:" + ct.getPhrase(isLowerCase), 1.0);
