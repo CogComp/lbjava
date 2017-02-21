@@ -225,7 +225,7 @@ classifier expressions, the cast propagates down to those classifier expressions
 A conjunction is written with the double ampersand operator (`&&`) in between two classifier
 expressions (see Figure 4.1 for an example). The conjunction of two classifiers results in a new
 classifier that combines the values of the features returned by its argument classifiers. The nature
-of the combination depends on the feature return types of the argument classifiers. Table bellow
+of the combination depends on the feature return types of the argument classifiers. Table below
 enumerates all possibilities and gives the feature return type of the resulting conjunctive classifier.
 
 
@@ -324,7 +324,7 @@ subsets (folds). If the `split-strategy` argument is not provided, the default v
  i.e. `[ — 1 — | — 2 — | ... | — K — ]`
 
  - `kth` - The `kth` split strategy also attempts to partition the set of examples in to `K` equally
-   sized subsets with a round-robin style assignement scheme. The `x`’th example encountered 
+   sized subsets with a round-robin style assignment scheme. The `x`’th example encountered 
     is assigned to the `(x%K)`’th subset.
     i.e. `[ 1 2 3 4 ... K 1 2 3 4 ... K ... ]`
     
