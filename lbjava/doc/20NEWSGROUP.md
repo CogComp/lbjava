@@ -74,7 +74,7 @@ in the following snippet, simply extends it to
 take advantage of that functionality; it won't be necessary to override `reset()`
 or `close()`. `NewsgroupParser` takes as input a file
 containing the names of other files, assuming that each of those files
-represents a single newgroup post.  For brevity, we have hidden in `Post`'s 
+represents a single newsgroup post.  For brevity, we have hidden in `Post`'s 
 constructor the code that actually does the work of filling the fields
 of a `Post` object.
 
@@ -540,7 +540,7 @@ At the bottom of the table will always be the overall accuracy of the classifier
  <img width="503" alt="screen shot 2015-11-17 at 3 46 18 am" src="https://cloud.githubusercontent.com/assets/2441454/11207928/d9eb9f3a-8cdd-11e5-8f34-989f3ddebd78.png">
 
  The `TestDiscrete` class also supports the notion of a null label, which is a label intended to
- represent the absense of a prediction. The 20 Newsgroups task doesn’t make use of this concept,
+ represent the absence of a prediction. The 20 Newsgroups task doesn’t make use of this concept,
  but if our task were, e.g., named entity classification in which every phrase is potentially a named
  entity, then the classifier will likely output a prediction we interpret as meaning “this phrase is
  not a named entity.” In that case, we will also be interested in overall precision, recall, and F1

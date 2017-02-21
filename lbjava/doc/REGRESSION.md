@@ -4,7 +4,7 @@ title: REGRESSION
 
 # 6. A working example: Regression
 
-As mentioned in [Section 2 Basics and definitions](DEFINITION.md#feature), there are two feature types in LBJava: `discrete` and `real`. In machine learning, classification refers to the problem of predicting the class of unlabeled data for which the output type is `discrete`. On the hther hand, regression refers to the problem that the desired output is continuous or `real`. [Section 3 A working example: classifying newsgroup documents into topics](20NEWSGROUP.md) gives an example of how to use LBJava for `discrete` type and this tutorial is dedicated to `real` type.
+As mentioned in [Section 2 Basics and definitions](DEFINITION.md#feature), there are two feature types in LBJava: `discrete` and `real`. In machine learning, classification refers to the problem of predicting the class of unlabeled data for which the output type is `discrete`. On the other hand, regression refers to the problem that the desired output is continuous or `real`. [Section 3 A working example: classifying newsgroup documents into topics](20NEWSGROUP.md) gives an example of how to use LBJava for `discrete` type and this tutorial is dedicated to `real` type.
 
 ## 6.1 Setting Up
 
