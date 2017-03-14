@@ -1,6 +1,6 @@
 # Learning Based Java 
 
-[![Build Status](https://semaphoreci.com/api/v1/cogcomp/lbjava/branches/master/badge.svg)](https://semaphoreci.com/cogcomp/lbjava)
+[![Build Status](https://semaphoreci.com/api/v1/cogcomp/lbjava-2/branches/master/badge.svg)](https://semaphoreci.com/cogcomp/lbjava-2)
 [![Build status](https://ci.appveyor.com/api/projects/status/vql7prdpsayqe2qb/branch/master?svg=true)](https://ci.appveyor.com/project/bhargavm/lbjava/branch/master)
 
 - [LBJava core](lbjava/README.md) 
