@@ -16,6 +16,7 @@ import edu.illinois.cs.cogcomp.lbjava.classify.DiscretePrimitiveStringFeature;
 import edu.illinois.cs.cogcomp.lbjava.classify.Feature;
 import edu.illinois.cs.cogcomp.lbjava.classify.FeatureVector;
 import edu.illinois.cs.cogcomp.lbjava.classify.ScoreSet;
+import edu.illinois.cs.cogcomp.lbjava.learn.featurepruning.LinearThresholdUnitOptimizer;
 import edu.illinois.cs.cogcomp.lbjava.util.FVector;
 
 
@@ -57,6 +58,7 @@ import edu.illinois.cs.cogcomp.lbjava.util.FVector;
  *
  * @author Nick Rizzolo
  **/
+@SuppressWarnings("serial")
 public abstract class LinearThresholdUnit extends Learner {
     /** Default for {@link #initialWeight}. */
     public static final double defaultInitialWeight = 0;
@@ -68,6 +70,8 @@ public abstract class LinearThresholdUnit extends Learner {
     public static final double defaultLearningRate = 0.1;
     /** Default for {@link #weightVector}. */
     public static final SparseWeightVector defaultWeightVector = new SparseWeightVector();
+    /** any weight less than this is considered irrelevant. This is for prunning. */
+    public static final double defaultFeaturePruningThreshold = 0.000001;
 
     /**
      * The rate at which weights are updated; default {@link #defaultLearningRate}.
@@ -100,6 +104,8 @@ public abstract class LinearThresholdUnit extends Learner {
     protected double negativeThickness;
     /** The label producing classifier's allowable values. */
     protected String[] allowableValues;
+    /** feature pruning threshold caps magnitude of useful features. */
+    public double featurePruningThreshold;
 
     /**
      * Default constructor. The learning rate and threshold take default values, while the name of
@@ -160,6 +166,21 @@ public abstract class LinearThresholdUnit extends Learner {
     }
 
     /**
+     * Use this constructor to fit a thick separator, where the positive and negative sides of the
+     * hyperplane will be given the specified separate thicknesses, while the name of the classifier
+     * gets the empty string.
+     *
+     * @param r The desired learning rate value.
+     * @param t The desired threshold value.
+     * @param pt The desired positive thickness.
+     * @param nt The desired negative thickness.
+     * @param fpt The feature pruning threshold.
+     */
+    public LinearThresholdUnit(double r, double t, double pt, double nt, double fpt) {
+        this("", r, t, pt, nt, fpt);
+    }
+
+    /**
      * Initializing constructor. Sets the threshold, positive thickness, and negative thickness to
      * their default values.
      *
@@ -217,7 +238,21 @@ public abstract class LinearThresholdUnit extends Learner {
      * @param nt The desired negative thickness.
      **/
     protected LinearThresholdUnit(String n, double r, double t, double pt, double nt) {
-        this(n, r, t, pt, nt, (SparseWeightVector) defaultWeightVector.clone());
+        this(n, r, t, pt, nt, defaultFeaturePruningThreshold);
+    }
+    
+    /**
+     * Takes the rate, threshold, positive thickness, and negative thickness and vector.
+     *
+     * @param n The name of the classifier.
+     * @param r The desired learning rate.
+     * @param t The desired value for the threshold.
+     * @param pt The desired positive thickness.
+     * @param nt The desired negative thickness.
+     * @param v An initial weight vector.
+     **/
+    protected LinearThresholdUnit(String n, double r, double t, double pt, double nt, SparseWeightVector v) {
+        this(n, r, t, pt, nt, defaultFeaturePruningThreshold, v);
     }
 
     /**
@@ -229,9 +264,25 @@ public abstract class LinearThresholdUnit extends Learner {
      * @param t The desired value for the threshold.
      * @param pt The desired positive thickness.
      * @param nt The desired negative thickness.
+     * @param fpt The feature pruning threshold.
+     **/
+    protected LinearThresholdUnit(String n, double r, double t, double pt, double nt, double fpt) {
+        this(n, r, t, pt, nt, fpt, (SparseWeightVector) defaultWeightVector.clone());
+    }
+
+    /**
+     * Initializing constructor. Sets the threshold, positive thickness, and negative thickness to
+     * the specified values.
+     *
+     * @param n The name of the classifier.
+     * @param r The desired learning rate.
+     * @param t The desired value for the threshold.
+     * @param pt The desired positive thickness.
+     * @param nt The desired negative thickness.
+     * @param fpt The feature pruning threshold.
      * @param v An initial weight vector.
      **/
-    protected LinearThresholdUnit(String n, double r, double t, double pt, double nt,
+    protected LinearThresholdUnit(String n, double r, double t, double pt, double nt, double fpt,
             SparseWeightVector v) {
         super(n);
         Parameters p = new Parameters();
@@ -240,6 +291,7 @@ public abstract class LinearThresholdUnit extends Learner {
         p.learningRate = r;
         p.positiveThickness = pt;
         p.negativeThickness = nt;
+        p.featurePruningThreshold = fpt;
         setParameters(p);
     }
 
@@ -291,6 +343,7 @@ public abstract class LinearThresholdUnit extends Learner {
         bias = p.initialWeight;
         positiveThickness = p.thickness + p.positiveThickness;
         negativeThickness = p.thickness + p.negativeThickness;
+        featurePruningThreshold = p.featurePruningThreshold;
     }
 
     /**
@@ -307,6 +360,7 @@ public abstract class LinearThresholdUnit extends Learner {
         p.threshold = threshold;
         p.positiveThickness = positiveThickness;
         p.negativeThickness = negativeThickness;
+        p.featurePruningThreshold = featurePruningThreshold;
         return p;
     }
 
@@ -532,6 +586,15 @@ public abstract class LinearThresholdUnit extends Learner {
 
 
     /**
+     * When training is complete, optimize the feature set by discarding low value 
+     * weights.
+     */
+    public void doneTraining() {
+        super.doneTraining();
+        LinearThresholdUnitOptimizer ltuo = new LinearThresholdUnitOptimizer(this);
+        ltuo.optimize();
+    }
+    /**
      * An LTU returns two scores; one for the negative classification and one for the positive
      * classification. By default, the score for the positive classification is the result of
      * {@link #score(Object)} minus the {@link #threshold}, and the score for the negative
@@ -751,7 +814,8 @@ public abstract class LinearThresholdUnit extends Learner {
         public double positiveThickness;
         /** The thickness of the hyperplane on the negative side; default 0. */
         public double negativeThickness;
-
+        /** feature pruning threshold caps magnitude of useful features. */
+        public double featurePruningThreshold;
 
         /** Sets all the default values. */
         public Parameters() {
@@ -760,6 +824,7 @@ public abstract class LinearThresholdUnit extends Learner {
             initialWeight = defaultInitialWeight;
             threshold = defaultThreshold;
             thickness = defaultThickness;
+            featurePruningThreshold = defaultFeaturePruningThreshold;
         }
 
 
@@ -781,6 +846,7 @@ public abstract class LinearThresholdUnit extends Learner {
             thickness = p.thickness;
             positiveThickness = p.positiveThickness;
             negativeThickness = p.negativeThickness;
+            featurePruningThreshold = p.featurePruningThreshold;
         }
 
 
@@ -801,7 +867,6 @@ public abstract class LinearThresholdUnit extends Learner {
          **/
         public String nonDefaultString() {
             String result = super.nonDefaultString();
-
             if (learningRate != LinearThresholdUnit.defaultLearningRate)
                 result += ", learningRate = " + learningRate;
             if (initialWeight != LinearThresholdUnit.defaultInitialWeight)
@@ -814,10 +879,22 @@ public abstract class LinearThresholdUnit extends Learner {
                 result += ", positiveThickness = " + positiveThickness;
             if (negativeThickness != 0)
                 result += ", negativeThickness = " + negativeThickness;
-
+            if (featurePruningThreshold != LinearThresholdUnit.defaultFeaturePruningThreshold)
+                result += ", featurePruningThreshold = " + featurePruningThreshold;
             if (result.startsWith(", "))
                 result = result.substring(2);
             return result;
         }
     }
+
+
+    /**
+     * Given the index of the weights to prune, discard them, then shrink the weight vector down
+     * to save memory.
+     * @param uselessfeatures the features being pruned.
+     * @param numberFeatures the total number of features before pruning.
+     */
+	public void pruneWeights(int[] uselessfeatures, int numberFeatures) {
+		this.getWeightVector().pruneWeights(uselessfeatures, numberFeatures);
+	}
 }

@@ -63,3 +63,4 @@ lbjava-examples/src/main/java/edu/illinois/cs/cogcomp/lbjava/examples/spam/SpamC
 lbjava-examples/src/main/java/edu/illinois/cs/cogcomp/lbjava/examples/regression/MyFeatures.java
 lbjava-examples/src/main/java/edu/illinois/cs/cogcomp/lbjava/examples/regression/MyLabel.java
 lbjava-examples/src/main/java/edu/illinois/cs/cogcomp/lbjava/examples/regression/SGDClassifier.java
+/.metadata/

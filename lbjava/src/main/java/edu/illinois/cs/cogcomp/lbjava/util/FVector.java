@@ -7,6 +7,7 @@
  */
 package edu.illinois.cs.cogcomp.lbjava.util;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 
 import edu.illinois.cs.cogcomp.core.datastructures.vectors.ExceptionlessInputStream;
@@ -187,6 +188,32 @@ public class FVector implements Cloneable, java.io.Serializable {
             vector[j - 1] = vector[j];
         vector[--size] = null;
         return result;
+    }
+
+
+    /**
+     * Remove all the features specfied by the indices. This is MUCH faster 
+     * than removing them one at a time.
+     *
+     * @param indexes The indexes of the elements to remove.
+     **/
+    public void remove(int[] indexes) {
+        Arrays.sort(indexes);
+        int sourceindex = 0;
+        int discardindex = 0;
+        for (int targetindex = 0; targetindex < size; targetindex++) {
+            if (discardindex < indexes.length && targetindex == indexes[discardindex]) {
+                // skip this one (by simply not coping it and not inc the sourceindex), inc discardindex
+                discardindex++;
+            } else {
+                vector[sourceindex] = vector[targetindex];
+                sourceindex++;
+            }
+        }
+        if (discardindex != indexes.length)
+            // this should nver happen.
+            throw new RuntimeException("There was a problem removing some of the indexes!");
+        size -= indexes.length;
     }
 
 

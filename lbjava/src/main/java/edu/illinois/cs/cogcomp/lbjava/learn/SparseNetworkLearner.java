@@ -10,6 +10,7 @@ package edu.illinois.cs.cogcomp.lbjava.learn;
 import java.io.PrintStream;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Map.Entry;
 
 import edu.illinois.cs.cogcomp.core.datastructures.vectors.ExceptionlessInputStream;
 import edu.illinois.cs.cogcomp.core.datastructures.vectors.ExceptionlessOutputStream;
@@ -19,6 +20,7 @@ import edu.illinois.cs.cogcomp.lbjava.classify.DiscretePrimitiveStringFeature;
 import edu.illinois.cs.cogcomp.lbjava.classify.Feature;
 import edu.illinois.cs.cogcomp.lbjava.classify.FeatureVector;
 import edu.illinois.cs.cogcomp.lbjava.classify.ScoreSet;
+import edu.illinois.cs.cogcomp.lbjava.learn.featurepruning.SparseNetworkOptimizer;
 
 /**
  * A <code>SparseNetworkLearner</code> uses multiple {@link LinearThresholdUnit}s to make a
@@ -44,7 +46,6 @@ import edu.illinois.cs.cogcomp.lbjava.classify.ScoreSet;
 public class SparseNetworkLearner extends Learner {
     private static final long serialVersionUID = 1L;
 
-
     /** Default for {@link #baseLTU}. */
     public static final LinearThresholdUnit defaultBaseLTU = new SparseAveragedPerceptron();
 
@@ -69,7 +70,6 @@ public class SparseNetworkLearner extends Learner {
 
     /** Whether or not this learner's labeler produces conjunctive features. */
     protected boolean conjunctiveLabels;
-
 
     /**
      * Instantiates this multi-class learner with the default learning algorithm:
@@ -185,7 +185,6 @@ public class SparseNetworkLearner extends Learner {
         setLTU(p.baseLTU);
     }
 
-
     /**
      * Retrieves the parameters that are set in this learner.
      *
@@ -198,7 +197,6 @@ public class SparseNetworkLearner extends Learner {
         return p;
     }
 
-
     /**
      * Sets the <code>baseLTU</code> variable. This method will <i>not</i> have any effect on the
      * LTUs that already exist in the network. However, new LTUs created after this method is
@@ -210,7 +208,6 @@ public class SparseNetworkLearner extends Learner {
         baseLTU = ltu;
         baseLTU.name = name + "$baseLTU";
     }
-
 
     /**
      * Sets the labeler.
@@ -228,7 +225,6 @@ public class SparseNetworkLearner extends Learner {
 
         super.setLabeler(l);
     }
-
 
     /**
      * Sets the extractor.
@@ -254,7 +250,6 @@ public class SparseNetworkLearner extends Learner {
         ltu.initialize(numExamples, numFeatures);
         network.set(label, ltu);
     }
-
 
     /**
      * Each example is treated as a positive example for the linear threshold unit associated with
@@ -290,7 +285,17 @@ public class SparseNetworkLearner extends Learner {
             ltu.learn(exampleFeatures, exampleValues, l, labelValues);
         }
     }
-
+    
+    /** 
+     * When we complete learning, we will do an optimization.
+     */
+    public void doneTraining() {
+        super.doneTraining();
+        
+        // do the optimization
+        SparseNetworkOptimizer optimizer = new SparseNetworkOptimizer(this);
+        optimizer.optimize();
+    }
 
     /** Simply calls <code>doneLearning()</code> on every LTU in the network. */
     public void doneLearning() {
@@ -304,13 +309,11 @@ public class SparseNetworkLearner extends Learner {
         }
     }
 
-
     /** Sets the number of examples and features. */
     public void initialize(int ne, int nf) {
         numExamples = ne;
         numFeatures = nf;
     }
-
 
     /**
      * Simply calls {@link LinearThresholdUnit#doneWithRound()} on every LTU in the network.
@@ -326,13 +329,11 @@ public class SparseNetworkLearner extends Learner {
         }
     }
 
-
     /** Clears the network. */
     public void forget() {
         super.forget();
         network = new OVector();
     }
-
 
     /**
      * Returns scores for only those labels in the given collection. If the given collection is
@@ -351,7 +352,6 @@ public class SparseNetworkLearner extends Learner {
         Object[] exampleArray = getExampleArray(example, false);
         return scores((int[]) exampleArray[0], (double[]) exampleArray[1], candidates);
     }
-
 
     /**
      * Returns scores for only those labels in the given collection. If the given collection is
@@ -404,7 +404,6 @@ public class SparseNetworkLearner extends Learner {
         return result;
     }
 
-
     /**
      * This method is a surrogate for {@link #scores(int[],double[],Collection)} when the labeler is
      * known to produce conjunctive features. It is necessary because when given a string label from
@@ -438,7 +437,6 @@ public class SparseNetworkLearner extends Learner {
         return result;
     }
 
-
     /**
      * Produces a set of scores indicating the degree to which each possible discrete classification
      * value is associated with the given example object. These scores are just the scores of each
@@ -464,7 +462,6 @@ public class SparseNetworkLearner extends Learner {
 
         return result;
     }
-
 
     /**
      * Returns the classification of the given example as a single feature instead of a
@@ -494,7 +491,6 @@ public class SparseNetworkLearner extends Learner {
         return bestValue == -1 ? null : predictions.get(bestValue);
     }
 
-
     /**
      * This implementation uses a winner-take-all comparison of the outputs from the individual
      * linear threshold units' score methods.
@@ -507,7 +503,6 @@ public class SparseNetworkLearner extends Learner {
         return featureValue(exampleFeatures, exampleValues).getStringValue();
     }
 
-
     /**
      * This implementation uses a winner-take-all comparison of the outputs from the individual
      * linear threshold units' score methods.
@@ -519,7 +514,6 @@ public class SparseNetworkLearner extends Learner {
     public FeatureVector classify(int[] exampleFeatures, double[] exampleValues) {
         return new FeatureVector(featureValue(exampleFeatures, exampleValues));
     }
-
 
     /**
      * Using this method, the winner-take-all competition is narrowed to involve only those labels
@@ -534,7 +528,6 @@ public class SparseNetworkLearner extends Learner {
         Object[] exampleArray = getExampleArray(example, false);
         return valueOf((int[]) exampleArray[0], (double[]) exampleArray[1], candidates);
     }
-
 
     /**
      * Using this method, the winner-take-all competition is narrowed to involve only those labels
@@ -596,7 +589,6 @@ public class SparseNetworkLearner extends Learner {
         return predictions.get(bestValue);
     }
 
-
     /**
      * This method is a surrogate for {@link #valueOf(int[],double[],Collection)} when the labeler
      * is known to produce conjunctive features. It is necessary because when given a string label
@@ -634,7 +626,6 @@ public class SparseNetworkLearner extends Learner {
         return predictions.get(bestValue);
     }
 
-
     /**
      * Writes the algorithm's internal representation as text.
      *
@@ -659,7 +650,6 @@ public class SparseNetworkLearner extends Learner {
         out.close();
     }
 
-
     /**
      * Writes the learned function's internal representation in binary form.
      *
@@ -682,7 +672,6 @@ public class SparseNetworkLearner extends Learner {
         out.close();
     }
 
-
     /**
      * Reads the binary representation of a learner with this object's run-time type, overwriting
      * any and all learned or manually specified parameters as well as the label lexicon but without
@@ -699,7 +688,6 @@ public class SparseNetworkLearner extends Learner {
         for (int i = 0; i < N; ++i)
             network.add(Learner.readLearner(in));
     }
-
 
     /** Returns a deep clone of this learning algorithm. */
     public Object clone() {
@@ -727,7 +715,6 @@ public class SparseNetworkLearner extends Learner {
         return clone;
     }
 
-
     /**
      * Simply a container for all of {@link SparseNetworkLearner}'s configurable parameters. Using
      * instances of this class should make code more readable and constructors less complicated.
@@ -743,12 +730,10 @@ public class SparseNetworkLearner extends Learner {
          **/
         public LinearThresholdUnit baseLTU;
 
-
         /** Sets all the default values. */
         public Parameters() {
             baseLTU = (LinearThresholdUnit) defaultBaseLTU.clone();
         }
-
 
         /**
          * Sets the parameters from the parent's parameters object, giving defaults to all
@@ -759,13 +744,11 @@ public class SparseNetworkLearner extends Learner {
             baseLTU = (LinearThresholdUnit) defaultBaseLTU.clone();
         }
 
-
         /** Copy constructor. */
         public Parameters(Parameters p) {
             super(p);
             baseLTU = p.baseLTU;
         }
-
 
         /**
          * Calls the appropriate <code>Learner.setParameters(Parameters)</code> method for this
@@ -776,7 +759,6 @@ public class SparseNetworkLearner extends Learner {
         public void setParameters(Learner l) {
             ((SparseNetworkLearner) l).setParameters(this);
         }
-
 
         /**
          * Creates a string representation of these parameters in which only those parameters that
