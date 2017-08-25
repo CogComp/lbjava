@@ -21,7 +21,9 @@ import gnu.trove.set.hash.TIntHashSet;
 
 /**
  * This class will optimize the SparseNetworkLearner by discarding all features
- * associated with no sufficiently high weight values.
+ * associated with no sufficiently high weight values. For the network learner, we
+ * much check the weights across all the binary learners to determin the value 
+ * of a particular feature.
  * @author redman
  */
 public class SparseNetworkOptimizer extends LexiconOptimizer {

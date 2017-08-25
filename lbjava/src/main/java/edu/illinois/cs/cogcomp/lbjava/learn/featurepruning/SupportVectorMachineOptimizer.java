@@ -26,9 +26,6 @@ public class SupportVectorMachineOptimizer extends LexiconOptimizer {
     /** the number of classes, if the numclasses is two, consider it binary and change to one. */
     public int numberclasses = -1;
     
-    /** turn this on to produce TONS of diagnostics, lists what feature are pruned and what remain. */
-    final private boolean debug = false;
-    
     /** the biasfeatures are 0 for no added bias features, or 1 if bias is added. */
     public int biasfeatures = 0;
     
@@ -51,50 +48,7 @@ public class SupportVectorMachineOptimizer extends LexiconOptimizer {
         // we need to figure out if we have a bias feature introduced
         this.biasfeatures = svm.getBiasFeatures();
     }
-    
-    /** 
-     * When done, check the results to make sure none of the feature weights have changed.
-     */
-    public void optimize () {
-        class FeatureFeatures {
-            Feature feature;
-            double processedweight;
-            double realweight;
-            FeatureFeatures (Feature feature, double pw, double rw, int i) {
-                this.feature = feature;
-                this.processedweight = pw;
-                this.realweight = rw;
-            }
-            public String toString() {
-                return this.feature.toStringNoPackage()+":"+processedweight+":"+realweight;
-            }
-        }
-        /* the feature weights are used to validate the result at the end. */
-        ArrayList<FeatureFeatures> featureweights = new ArrayList<>();
         
-        // Get all the feature weights so we can make sure they line up when done.
-        for (int i = 0; i < lexicon.size();i++)
-            featureweights.add(new FeatureFeatures(lexicon.lookupKey(i),getWeight(i),svm.getWeights()[i], i));
-        super.optimize();
-        
-        // get each feature, if it's gone, make sure it sucks, if it's not, ensure it doesn't
-        int kept = 0;
-        int discarded = 0;
-        for (FeatureFeatures entry : featureweights) {
-            if (lexicon.contains(entry.feature)) {
-                int newindex = lexicon.lookup(entry.feature);
-                kept++;
-                if (debug)
-                    System.out.println("Kept "+entry+" lexicon feature:"+lexicon.lookupKey(newindex).toStringNoPackage()+":"+svm.getWeights()[newindex]);
-            } else {
-                discarded++;
-                if (debug)
-                    System.out.println("Discarded "+entry);
-            }
-        }
-        System.out.println("SVM optimization @ t="+this.threshold+" resulted in "+discarded+" discarded features of "+(discarded+kept)+" total features.");
-    }
-    
     /**
      * Determine if the provided feature has sum of weights greater than a threshold value, 
      * and discard the feature if it falls below.

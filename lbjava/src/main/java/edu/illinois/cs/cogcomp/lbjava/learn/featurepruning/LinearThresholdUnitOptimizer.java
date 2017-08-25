@@ -19,7 +19,7 @@ import edu.illinois.cs.cogcomp.lbjava.learn.SparseAveragedPerceptron;
 import gnu.trove.set.hash.TIntHashSet;
 
 /**
- * This class will optimize any working LinearThresholdUnit or subclass by pruning
+ * This class will optimize any working LinearThresholdUnit subclass by pruning
  * low value features.
  * @author redman
  */
