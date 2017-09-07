@@ -95,33 +95,23 @@ public class SparseNetworkOptimizer extends LexiconOptimizer {
     protected int[] identifyUselessFeatures() {
         Lexicon lex = networkLearner.demandLexicon();
         if (lex != null) {
-            HashSet<Feature> whitelist = compileWhitelist(lex);
 
             // we have the conjunctive features, if left, right, or the parent itself has a non zero weight,
             // consider non of the features (parent, left or right) useless, whitelist them.
+            HashSet<Feature> whitelist = compileWhitelist(lex);
             int count = 0;
             int numberfeatures = lex.size();
-            int numberclasses = networkLearner.getNetwork().size();
             int[] all = new int[numberfeatures];
             TIntHashSet defunct = new TIntHashSet();
+            
+            // For each feature, determin it's value. We will interate over a map with features as key
+            // and the integer index of the feature. If the feature is whitelisted, we keep, otherwise
+            // check for uselessness and if so, add to the list.
             for (Object e : lex.getMap().entrySet()) {
                 Entry<Feature, Integer> entry = (Entry<Feature, Integer>) e;
-                int fi = entry.getValue();
                 if (!whitelist.contains(entry.getKey())) {
-                    int i = 0;
-                    for (; i < numberclasses; ++i) {
-                        LinearThresholdUnit ltu = (LinearThresholdUnit) networkLearner.getNetwork().get(i);
-                        if (ltu == null) {
-                            System.out.println("THERE WAS NO LTU AT " + i);
-                            continue;
-                        }
-                        double wt = ltu.getWeightVector().getRawWeights().get(fi);
-
-                        // if the value is sufficiently large, then we have a good weight and should keep.
-                        if ((wt > 0 && wt > this.threshold) || (wt < 0 && wt < -this.threshold))
-                            break;
-                    }
-                    if (i == numberclasses) {
+                    int fi = entry.getValue();
+                    if (!hasWeight(lexicon, entry.getKey())) {
                         all[count] = fi;
                         if (defunct.contains(fi)) {
                             System.err.println("There was a feature discarded twice during feature pruning!");
