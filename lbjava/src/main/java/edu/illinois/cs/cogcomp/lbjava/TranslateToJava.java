@@ -438,44 +438,47 @@ public class TranslateToJava extends Pass {
         out.println("  }\n");
 
         // XXX Changed to add ability to read model/lexicon from classpath
-        String tabs = "\t";
+        String tabs = "  ";
         out.println(tabs + "public " + lceName + "(String modelPath, String lexiconPath) { "
                 + "this(new Parameters(), modelPath, lexiconPath); }\n");
         out.println(tabs + "public " + lceName
                 + "(Parameters p, String modelPath, String lexiconPath) {");
-        tabs = "\t\t";
+        tabs = "    ";
         out.println(tabs + "super(p);");
         out.println(tabs + "try {");
-        tabs = "\t\t\t";
+        tabs = "      ";
         out.println(tabs + "lcFilePath = new java.net.URL(\"file:\" + " + "modelPath);");
         out.println(tabs + "lexFilePath = new java.net.URL(\"file:\" + " + "lexiconPath);");
-        tabs = "\t\t";
+        tabs = "    ";
         out.println(tabs + "}");
         out.println(tabs + "catch (Exception e) {");
-        tabs = "\t\t\t";
+        tabs = "      ";
         out.println(tabs + "System.err.println(\"ERROR: Can't create model or "
                 + "lexicon URL: \" + e);");
         out.println(tabs + "e.printStackTrace();");
         out.println(tabs + "System.exit(1);");
-        tabs = "\t\t";
+        tabs = "    ";
         out.println(tabs + "}\n");
-        out.println(tabs + "if (new java.io.File(modelPath).exists()) {");
-        tabs = "\t\t\t";
+        out.println(tabs + "java.io.File modelfile = new java.io.File(modelPath);\n");
+        out.println(tabs + "if (modelfile.exists()) {");
+        tabs = "      ";
+        out.println(tabs + "System.out.println(\"Model file read from \"+modelfile.getAbsolutePath());");
         out.println(tabs + "readModel(lcFilePath);");
         out.println(tabs + "readLexiconOnDemand(lexFilePath);");
-        tabs = "\t\t";
+        tabs = "    ";
         out.println(tabs + "}");
         out.println(tabs + "else if (IOUtilities.existsInClasspath(" + lceName
                 + ".class, modelPath)) {");
-        tabs = "\t\t\t";
-        out.println(tabs + "readModel(IOUtilities.loadFromClasspath(" + lceName
+        tabs = "      ";
+        out.println(tabs + "System.out.println(\"Model file \"+modelfile.getAbsolutePath()+\" located in a jar file\");");
+       out.println(tabs + "readModel(IOUtilities.loadFromClasspath(" + lceName
                 + ".class, modelPath));");
         out.println(tabs + "readLexiconOnDemand(IOUtilities.loadFromClasspath(" + lceName
                 + ".class, lexiconPath));");
-        tabs = "\t\t";
+        tabs = "    ";
         out.println(tabs + "}");
         out.println(tabs + "else {");
-        tabs = "\t\t\t";
+        tabs = "      ";
         out.println(tabs + "containingPackage = \"" + AST.globalSymbolTable.getPackage() + "\";");
         out.println(tabs + "name = \"" + lceName + "\";");
         out.println(tabs + "setLabeler(new " + lce.labeler.name + "());");
@@ -485,10 +488,10 @@ public class TranslateToJava extends Pass {
             out.println(tabs + "setExtractor(" + fieldClass + "." + lce.extractor.name + ");");
         } else
             out.println(tabs + "setExtractor(new " + lce.extractor.name + "());");
-        tabs = "\t\t";
+        tabs = "    ";
         out.println(tabs + "}\n");
         out.println(tabs + "isClone = false;");
-        tabs = "\t";
+        tabs = "  ";
         out.println(tabs + "}\n");
 
         Type input = lce.argument.getType();

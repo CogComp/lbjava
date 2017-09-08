@@ -1,8 +1,12 @@
-#7 A working example: Regression
+---
+title: REGRESSION
+---
 
-As mentioned in [Section 2 Basics and definitions](DEFINITION.md#feature), there are two feature types in LBJava: `discrete` and `real`. In machine learning, classification refers to the problem of predicting the class of unlabeled data for which the output type is `discrete`. On the hther hand, regression refers to the problem that the desired output is continuous or `real`. [Section 3 A working example: classifying newsgroup documents into topics](20NEWSGROUP.md) gives an example of how to use LBJava for `discrete` type and this tutorial is dedicated to `real` type.
+# 6. A working example: Regression
 
-##7.1 Setting Up
+As mentioned in [Section 2 Basics and definitions](DEFINITION.md#feature), there are two feature types in LBJava: `discrete` and `real`. In machine learning, classification refers to the problem of predicting the class of unlabeled data for which the output type is `discrete`. On the other hand, regression refers to the problem that the desired output is continuous or `real`. [Section 3 A working example: classifying newsgroup documents into topics](20NEWSGROUP.md) gives an example of how to use LBJava for `discrete` type and this tutorial is dedicated to `real` type.
+
+## 6.1 Setting Up
 
 Let's name a class as `MyData` and use it for internal representation.
 
@@ -58,13 +62,11 @@ public Object next() {
 }
 ```
 
-
-
-##7.2 Classifier Declarations
+## 6.2 Classifier Declarations
 
 For declaring the classifier, we need to use [Section 4 LBJava Language](LBJLANGUAGE.md).
 
-####7.2.1 Feature
+#### 6.2.1 Feature
 
 The features are declared as following:
 
@@ -92,7 +94,7 @@ If type `real[]` is used, the features become `10 20 10` to classifier. However,
 
 Please refer to [Section 4.1.2.4 Conjunctions](LBJLANGUAGE.md) for details on types.
 
-####7.2.2 Label
+#### 6.2.2 Label
 
 The label is declared as following:
 
@@ -101,7 +103,8 @@ real MyLabel(MyData d) <- {
     return d.getLabel();
 }
 ```
-####7.2.3 Classifier
+
+#### 6.2.3 Classifier
 
 Since we are using a classifier with real output type, we need to choose a training method compatible this output type. In this example we use Stochastic Gradient Descent. (visit [Training Algorithms](ALGORITHMS.md) for complete list of training algorithms with the expected output types.)
 
@@ -117,9 +120,9 @@ real SGDClassifier(MyData d) <-
 end
 ```
 
-##7.3 Using `SGDClassifier` in a Java Program
+## 6.3 Using `SGDClassifier` in a Java Program
 
-###7.3.1 Generate `SGDClassifier`
+### 6.3.1 Generate `SGDClassifier`
 
 To compile your LBJava file and execute the LBJava code, run the following:
 
@@ -142,6 +145,7 @@ If you only want generate the Java translations of the LBJava code but not execu
 ```
 mvn lbjava:generate
 ```
+
 Then to compile all classes run:
 
 ```
@@ -164,7 +168,7 @@ or `lbjava:compile-only`) you need to run `lbjava:clean` before compiling again.
 
 **Acknowledgement** to Christos Christodoulopoulos.
 
-###7.3.1 Use `SGDClassifier` programmatically
+### 6.3.1 Use `SGDClassifier` programmatically
 
 Once `SGDClassifier` is generated from the previous step, you may invoke it programmatically.
 
@@ -183,7 +187,7 @@ trainer.train(1000);
 First read training data set into `MyDataReader` and create a `SGDClassifier`.
 Pass `SGDClassifier` to `BatchTrainer` and invoke method `train` for number of times.
 
-##7.4 Testing a Real Classifier
+## 6.4 Testing a Real Classifier
 
 Here is the sample code to use `TestReal` class:
 
