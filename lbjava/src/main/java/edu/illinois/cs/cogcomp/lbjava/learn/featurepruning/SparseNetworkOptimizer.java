@@ -67,7 +67,7 @@ public class SparseNetworkOptimizer extends LexiconOptimizer {
                 sum += Math.abs(avg);
                 
                 // if the value is sufficiently large, then we have a good weight and should keep.
-                if (sum > this.threshold)
+                if (sum >= this.threshold)
                     return true;
             }
         } else {
@@ -77,7 +77,7 @@ public class SparseNetworkOptimizer extends LexiconOptimizer {
                 sum += Math.abs(wt);
                 
                 // if the value is sufficiently large, then we have a good weight and should keep.
-                if (sum > this.threshold)
+                if (sum >= this.threshold)
                     return true;
             }
         }
@@ -118,6 +118,7 @@ public class SparseNetworkOptimizer extends LexiconOptimizer {
                         } else {
                             defunct.add(fi);
                         }
+                        
                         this.uselessFeatureNames.add(entry.getKey());
                         count++;
                     }
