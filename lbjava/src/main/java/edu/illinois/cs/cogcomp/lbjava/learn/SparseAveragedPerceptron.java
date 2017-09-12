@@ -61,6 +61,15 @@ public class SparseAveragedPerceptron extends SparsePerceptron {
      * {@link SparseAveragedPerceptron.AveragedWeightVector}.
      **/
     protected AveragedWeightVector awv;
+    
+    /**
+     * @return the awv the averaged weight vector
+     */
+    public AveragedWeightVector getAveragedWeightVector() {
+        return awv;
+    }
+
+
     /** Keeps the extra information necessary to compute the averaged bias. */
     protected double averagedBias;
 
@@ -729,5 +738,46 @@ public class SparseAveragedPerceptron extends SparsePerceptron {
         public SparseWeightVector emptyClone() {
             return new AveragedWeightVector();
         }
+        
+        /**
+         * If we prune worthless weights, we must also prune useless averages.
+         * @param uselessfeatures useless features.
+         * @param numfeatures since this weight vec does not know how many features there are, it must be passed in
+         */
+    	public void pruneWeights(int[] uselessfeatures, int numfeatures) {
+    		if (uselessfeatures.length == 0) 
+    			return;
+    		super.pruneWeights(uselessfeatures, numfeatures);
+    		
+    		// create a new smaller weight vector for the pruned weights.
+    		int oldsize = this.averagedWeights.size();
+    		if (oldsize > numfeatures) {
+    			throw new RuntimeException("There was an averaged weight vector with more weights("+oldsize+
+    					") than the number of features("+numfeatures+")!");
+    		}
+    		int newsize = numfeatures - uselessfeatures.length;
+    		double [] newvec = new double[newsize];
+    		
+    		// copy the weights from the old vector.
+    		int uselessindex = 0;
+    		int newvecindex = 0;
+    		for (int oldindex = 0; oldindex < oldsize; oldindex++) {
+    			if (uselessindex < uselessfeatures.length && uselessfeatures[uselessindex] == oldindex) {
+    				// this is a useless feature, we will skip it.
+    				uselessindex++;
+    			} else {
+    				newvec[newvecindex] = averagedWeights.get(oldindex);
+    				newvecindex++;
+    			}
+    		}
+    		
+    		// compress the array.
+    		if (newvecindex != newsize) {
+    			double[] tmp = new double[newvecindex];
+    			System.arraycopy(newvec, 0, tmp, 0, newvecindex);;
+    			newvec = tmp;
+    		}
+    		this.averagedWeights = new DVector(newvec);
+    	}
     }
 }

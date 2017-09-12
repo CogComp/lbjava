@@ -9,12 +9,15 @@ package edu.illinois.cs.cogcomp.lbjava.learn;
 
 import java.io.Serializable;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 import edu.illinois.cs.cogcomp.core.datastructures.vectors.*;
+import edu.illinois.cs.cogcomp.lbjava.classify.DiscreteConjunctiveFeature;
 import edu.illinois.cs.cogcomp.lbjava.classify.Feature;
+import edu.illinois.cs.cogcomp.lbjava.classify.RealConjunctiveFeature;
 import edu.illinois.cs.cogcomp.lbjava.util.ByteString;
 import edu.illinois.cs.cogcomp.lbjava.util.ClassUtils;
 import edu.illinois.cs.cogcomp.lbjava.util.FVector;
@@ -305,7 +308,7 @@ public class Lexicon implements Cloneable, Serializable {
      *
      * @param f The feature to look up.
      * @return The integer key that the feature maps to.
-     **/
+     **/ 
     public int lookup(Feature f) {
         return lookup(f, false, -1);
     }
@@ -661,6 +664,36 @@ public class Lexicon implements Cloneable, Serializable {
         pruneCutoff = -1;
     }
 
+    /**
+     * Discard features at the provided indices. This operation is performed
+     * last to first so we can do it in place. This method will sort the input
+     * array.
+     * @param dumpthese the indexes of the features to dump.
+     */
+    public void discardPrunedFeatures(int [] dumpthese) {
+    	Arrays.sort(dumpthese);
+    	lexiconInv.remove(dumpthese);
+        
+        // this compresses the FVector
+        lexiconInv = new FVector(lexiconInv);
+        if (lexicon != null) {
+            
+            // reconstitute the lexicon.
+            lexicon.clear();
+            for (int i = 0; i < lexiconInv.size();i++) {
+                lexicon.put(lexiconInv.get(i), new Integer(i));
+            }
+            
+            // sanity check, make sure the indices in the lexicon map matches the index in the feature vector
+            for (int i = 0; i < lexiconInv.size();i++) {
+                if (i != ((Integer)lexicon.get(lexiconInv.get(i))).intValue()) {
+                    throw new RuntimeException("After optimization pruning, the index in the lexicon did "
+                        + "not match the inverted index.");
+                }
+            }
+        }
+    }
+
 
     /**
      * <!-- clone() --> Returns a deep clone of this lexicon implemented as a <code>HashMap</code>.
@@ -742,10 +775,9 @@ public class Lexicon implements Cloneable, Serializable {
         ByteString previousBSIdentifier = null;
         out.writeInt(indexes.length);
         out.writeInt(pruneCutoff);
-
         for (int i = 0; i < indexes.length; ++i) {
             Feature f = inverse.get(indexes[i]);
-            previousClassName =
+             previousClassName =
                     f.lexWrite(out, this, previousClassName, previousPackage, previousClassifier,
                             previousSIdentifier, previousBSIdentifier);
             previousPackage = f.getPackage();
@@ -757,7 +789,6 @@ public class Lexicon implements Cloneable, Serializable {
 
             out.writeInt(indexes[i]);
         }
-
         if (featureCounts == null)
             out.writeInt(0);
         else
@@ -801,14 +832,12 @@ public class Lexicon implements Cloneable, Serializable {
         pruneCutoff = in.readInt();
         lexicon = null;
         lexiconInv = new FVector(N);
-
         for (int i = 0; i < N; ++i) {
             Feature f =
                     Feature.lexReadFeature(in, this, previousClass, previousPackage,
                             previousClassifier, previousSIdentifier, previousBSIdentifier);
             int index = in.readInt();
             lexiconInv.set(index, f);
-
             previousClass = f.getClass();
             previousPackage = f.getPackage();
             previousClassifier = f.getGeneratingClassifier();
@@ -817,7 +846,7 @@ public class Lexicon implements Cloneable, Serializable {
             else if (f.hasByteStringIdentifier())
                 previousBSIdentifier = f.getByteStringIdentifier();
         }
-
+        
         if (readCounts) {
             featureCounts = new IVector();
             featureCounts.read(in);

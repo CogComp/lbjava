@@ -880,53 +880,57 @@ public class Train extends Pass {
             if (!lce.onlyCodeGeneration) {
                 // If there's a "from" clause, train.
                 try {
-                    if (lce.parser != null) {
-                        System.out.println("Training " + getName());
-                        if (preExtract) {
-                            preExtractAndPrune();
-                            System.gc();
-                        } else
-                            learner.saveLexicon();
-                        int trainingRounds = 1;
-
-                        if (tuningParameters) {
-                            String parametersPath = getName();
-                            if (Main.classDirectory != null)
-                                parametersPath =
-                                        Main.classDirectory + File.separator + parametersPath;
-                            parametersPath += ".p";
-
-                            Learner.Parameters bestParameters = tune();
-                            trainingRounds = bestParameters.rounds;
-                            Learner.writeParameters(bestParameters, parametersPath);
-                            System.out.println("  " + getName()
-                                    + ": Training on entire training set");
-                        } else {
-                            if (lce.rounds != null)
-                                trainingRounds = Integer.parseInt(((Constant) lce.rounds).value);
-
-                            if (lce.K != null) {
-                                int[] rounds = {trainingRounds};
-                                int k = Integer.parseInt(lce.K.value);
-                                double alpha = Double.parseDouble(lce.alpha.value);
-                                trainer.crossValidation(rounds, k, lce.splitPolicy, alpha,
-                                        testingMetric, true);
+                    learner.beginTraining();
+                    try {
+                        if (lce.parser != null) {
+                            System.out.println("Training " + getName());
+                            if (preExtract) {
+                                preExtractAndPrune();
+                                System.gc();
+                            } else
+                                learner.saveLexicon();
+                            int trainingRounds = 1;
+    
+                            if (tuningParameters) {
+                                String parametersPath = getName();
+                                if (Main.classDirectory != null)
+                                    parametersPath =
+                                            Main.classDirectory + File.separator + parametersPath;
+                                parametersPath += ".p";
+    
+                                Learner.Parameters bestParameters = tune();
+                                trainingRounds = bestParameters.rounds;
+                                Learner.writeParameters(bestParameters, parametersPath);
                                 System.out.println("  " + getName()
                                         + ": Training on entire training set");
+                            } else {
+                                if (lce.rounds != null)
+                                    trainingRounds = Integer.parseInt(((Constant) lce.rounds).value);
+    
+                                if (lce.K != null) {
+                                    int[] rounds = {trainingRounds};
+                                    int k = Integer.parseInt(lce.K.value);
+                                    double alpha = Double.parseDouble(lce.alpha.value);
+                                    trainer.crossValidation(rounds, k, lce.splitPolicy, alpha,
+                                            testingMetric, true);
+                                    System.out.println("  " + getName()
+                                            + ": Training on entire training set");
+                                }
                             }
-                        }
-
-                        trainer.train(lce.startingRound, trainingRounds);
-
-                        if (testParser != null) {
-                            System.out.println("Testing " + getName());
-                            new Accuracy(true).test(learner, learner.getLabeler(), testParser);
-                        }
-
-                        System.out.println("Writing " + getName());
-                    } else
-                        learner.saveLexicon(); // Writes .lex even if lexicon is empty.
-
+                            trainer.train(lce.startingRound, trainingRounds);
+                        } else
+                            learner.saveLexicon(); // Writes .lex even if lexicon is empty.
+                    } finally {
+                        learner.doneTraining();
+                    }
+                    
+                    if (lce.parser != null && testParser != null) {
+                        System.out.println("Testing " + getName());
+                        new Accuracy(true).test(learner, learner.getLabeler(), testParser);
+                    }
+                    
+                    // save the final model.
+                    System.out.println("Writing " + getName());
                     learner.save(); // Doesn't write .lex if lexicon is empty.
                 } catch (Exception e) {
                     System.err.println("LBJava ERROR: Exception while training " + getName() + ":");
