@@ -24,6 +24,7 @@ import edu.illinois.cs.cogcomp.lbjava.classify.DiscretePrimitiveStringFeature;
 import edu.illinois.cs.cogcomp.lbjava.classify.Feature;
 import edu.illinois.cs.cogcomp.lbjava.classify.FeatureVector;
 import edu.illinois.cs.cogcomp.lbjava.classify.ScoreSet;
+import edu.illinois.cs.cogcomp.lbjava.learn.featurepruning.SupportVectorMachineOptimizer;
 import edu.illinois.cs.cogcomp.lbjava.util.ByteString;
 import edu.illinois.cs.cogcomp.lbjava.util.FVector;
 
@@ -64,6 +65,10 @@ import edu.illinois.cs.cogcomp.lbjava.util.FVector;
  * @author Michael Paul
  **/
 public class SupportVectorMachine extends Learner {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
     /** Default for {@link #solverType}. */
     public static final String defaultSolverType = "L2LOSS_SVM";
     /** Default for {@link #C}. */
@@ -72,6 +77,11 @@ public class SupportVectorMachine extends Learner {
     public static final double defaultEpsilon = 0.1;
     /** Default for {@link #bias}. */
     public static final double defaultBias = 1.0;
+    /** any weight less than this is considered irrelevant. This is for prunning. */
+    public static final double defaultFeaturePruningThreshold = 0.000001;
+    
+    /** feature pruning threshold caps magnitude of useful features. */
+    public double featurePruningThreshold;
 
     /**
      * Keeps track of whether the doneLearning() warning message has been printed.
@@ -113,6 +123,14 @@ public class SupportVectorMachine extends Learner {
     protected double bias;
     /** The number of bias features; there are either 0 or 1 of them. */
     protected int biasFeatures;
+
+    /**
+     * @return the biasFeatures
+     */
+    public int getBiasFeatures() {
+        return biasFeatures;
+    }
+
 
     /** Controls if <code>liblinear</code>-related messages are output */
     protected boolean displayLL = false;
@@ -211,6 +229,20 @@ public class SupportVectorMachine extends Learner {
     }
 
     /**
+     * Initializing constructor. The name of the classifier gets the empty string.
+     *
+     * @param c The desired C value.
+     * @param e The desired epsilon value.
+     * @param b The desired bias.
+     * @param s The solver type.
+     * @param d Toggles if the <code>liblinear</code>-related output should be displayed.
+     * @param fpt the feature pruning threshold.
+     **/
+    public SupportVectorMachine(double c, double e, double b, String s, boolean d, double fpt) {
+        this("", c, e, b, s, d, fpt);
+    }
+
+    /**
      * Initializing constructor. C, epsilon, the bias, and the solver type take the default values.
      *
      * @param n The name of the classifier.
@@ -276,6 +308,20 @@ public class SupportVectorMachine extends Learner {
      * @param d Toggles if the <code>liblinear</code>-related output should be displayed.
      **/
     public SupportVectorMachine(String n, double c, double e, double b, String s, boolean d) {
+        this(n, c, e, b, s, d, SupportVectorMachine.defaultFeaturePruningThreshold);
+    }
+    
+    /**
+     * Initializing constructor.
+     *
+     * @param n The name of the classifier.
+     * @param c The desired C value.
+     * @param e The desired epsilon value.
+     * @param b The desired bias.
+     * @param s The solver type.
+     * @param d Toggles if the <code>liblinear</code>-related output should be displayed.
+     **/
+    public SupportVectorMachine(String n, double c, double e, double b, String s, boolean d, double fpt) {
         super(n);
         newLabelLexicon = labelLexicon;
         Parameters p = new Parameters();
@@ -284,9 +330,11 @@ public class SupportVectorMachine extends Learner {
         p.bias = b;
         p.solverType = s;
         p.displayLL = d;
+        p.featurePruningThreshold = fpt;
         allowableValues = new String[0];
         setParameters(p);
     }
+
 
     /**
      * Initializing constructor. Sets all member variables to their associated settings in the
@@ -317,8 +365,22 @@ public class SupportVectorMachine extends Learner {
         return weights;
     }
 
+    /**
+     * @return the numFeatures
+     */
+    public int getNumFeatures() {
+        return numFeatures;
+    }
+
     public int getNumClasses() {
         return numClasses;
+    }
+    
+    /**
+     * @return the solverType
+     */
+    public String getSolverType() {
+        return solverType;
     }
 
     /**
@@ -333,6 +395,7 @@ public class SupportVectorMachine extends Learner {
         biasFeatures = (bias >= 0) ? 1 : 0;
         solverType = p.solverType;
         displayLL = p.displayLL;
+        featurePruningThreshold = p.featurePruningThreshold;
     }
 
 
@@ -349,6 +412,7 @@ public class SupportVectorMachine extends Learner {
         p.bias = bias;
         p.solverType = solverType;
         p.displayLL = displayLL;
+        p.featurePruningThreshold = this.featurePruningThreshold;
         return p;
     }
 
@@ -403,6 +467,7 @@ public class SupportVectorMachine extends Learner {
      * @param exampleLabels The example's array of label indices.
      * @param labelValues The example's array of label values.
      **/
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     public void learn(final int[] exampleFeatures, double[] exampleValues, int[] exampleLabels,
             double[] labelValues) {
         // Expand the size of the example arrays if they are full.
@@ -600,12 +665,22 @@ public class SupportVectorMachine extends Learner {
         weights = trainedModel.getFeatureWeights();
         allExamples = null;
         allLabels = null;
-
         if (displayLL)
             System.out.println("  Finished training at " + new Date());
     }
 
 
+    /**
+     * Optimize the model by doing feature pruning, drop the low value weights.
+     */
+    public void doneTraining() {
+        super.doneTraining();
+        
+        // optimize the resulting model by discarding low weight features.
+        SupportVectorMachineOptimizer svmo = new SupportVectorMachineOptimizer(this);
+        svmo.optimize();
+    }
+    
     /**
      * Writes the algorithm's internal representation as text. In the first line of output, the name
      * of the classifier is printed, followed by {@link #C}, {@link #epsilon}, {@link #bias}, and
@@ -895,7 +970,7 @@ public class SupportVectorMachine extends Learner {
             numClasses = 1;
             label = 0;
         }
-
+        
         for (int i = 0; i < exampleFeatures.length; i++) {
             int f = exampleFeatures[i];
 
@@ -928,6 +1003,43 @@ public class SupportVectorMachine extends Learner {
         return valueOf((int[]) array[0], (double[]) array[1], candidates);
     }
 
+
+    /**
+     * Given the index of the weights to prune, discard them, then shrink the weight vector down
+     * to save memory.
+     * @param uselessfeatures the indices of the features being pruned.
+     * @param numberFeatures the total number of features before pruning.
+     */
+    public void pruneWeights(int[] uselessfeatures, int numberFeatures) {
+        int sz = numberFeatures - uselessfeatures.length;
+        double[] newweights = new double[sz+biasFeatures];
+        int nextToPrune = 0;
+        int newweightindex = 0;
+        for (int i = 0; i < weights.length; i++) {
+            if (nextToPrune < uselessfeatures.length && i == uselessfeatures[nextToPrune]) {
+                if (Math.abs(weights[i]) > this.featurePruningThreshold)
+                    throw new IllegalArgumentException("Pruning a high value weight : "+weights[i]+" at "+i);
+                nextToPrune++;
+            } else {
+                if (newweightindex >= newweights.length)
+                    throw new IllegalArgumentException("Attempted to overpopulate the new weight : indx="
+                                    +i+" features="+numberFeatures+" useless="+uselessfeatures.length);
+                newweights[newweightindex] = weights[i];
+                newweightindex++;
+            }
+        }
+        
+        // do some sanity checks.
+        if (newweightindex != newweights.length)
+            throw new IllegalArgumentException("The new pruned weight vector was not fully populated!");
+        if (nextToPrune != uselessfeatures.length)
+            throw new IllegalArgumentException("Not all the prunable features were pruned!");
+        
+        // all good, do the replacement.
+        System.out.println("SVM.pruneWeights: "+sz+" features, "+newweights.length+" weights size");
+        numFeatures = sz;
+        weights = newweights;
+    }
 
     /**
      * Using this method, the winner-take-all competition is narrowed to involve only those labels
@@ -1062,6 +1174,14 @@ public class SupportVectorMachine extends Learner {
          * </ul>
          **/
         public String solverType;
+        
+        /**
+         * @return the solverType
+         */
+        public String getSolverType() {
+            return solverType;
+        }
+
         /**
          * The cost parameter C; default {@link SupportVectorMachine#defaultC}
          **/
@@ -1081,7 +1201,9 @@ public class SupportVectorMachine extends Learner {
          * <code>false</code>
          **/
         public boolean displayLL;
-
+        
+        /** feature pruning threshold caps magnitude of useful features. */
+        public double featurePruningThreshold;
 
         /** Sets all the default values. */
         public Parameters() {
@@ -1090,6 +1212,7 @@ public class SupportVectorMachine extends Learner {
             epsilon = defaultEpsilon;
             bias = defaultBias;
             displayLL = false;
+            featurePruningThreshold = defaultFeaturePruningThreshold;
         }
 
 
@@ -1104,6 +1227,7 @@ public class SupportVectorMachine extends Learner {
             epsilon = defaultEpsilon;
             bias = defaultBias;
             displayLL = false;
+            featurePruningThreshold = defaultFeaturePruningThreshold;
         }
 
 
@@ -1115,6 +1239,7 @@ public class SupportVectorMachine extends Learner {
             epsilon = p.epsilon;
             bias = p.bias;
             displayLL = p.displayLL;
+            featurePruningThreshold = p.featurePruningThreshold;
         }
 
 
@@ -1168,6 +1293,8 @@ public class SupportVectorMachine extends Learner {
                 result += ", epsilon = " + epsilon;
             if (bias != SupportVectorMachine.defaultBias)
                 result += ", bias = " + bias;
+            if (featurePruningThreshold != defaultFeaturePruningThreshold)
+                result += ", feature pruning threshold = " + featurePruningThreshold;
 
             if (result.startsWith(", "))
                 result = result.substring(2);

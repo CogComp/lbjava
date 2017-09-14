@@ -66,6 +66,9 @@ public abstract class Learner extends Classifier {
 
     /** The number of candidate examples when a global object is passed here. */
     protected int candidates = 1;
+    
+    /** this is set while training. */
+    protected boolean intraining = false;
 
     /**
      * This constructor is used by the LBJava compiler; it should never be called by a programmer.
@@ -259,7 +262,6 @@ public abstract class Learner extends Classifier {
         return lcFilePath;
     }
 
-
     /**
      * Sets the location of the lexicon as a regular file on this file system.
      *
@@ -289,7 +291,6 @@ public abstract class Learner extends Classifier {
         return lexFilePath;
     }
 
-
     /**
      * Establishes a new feature counting policy for this learner's lexicon.
      *
@@ -303,7 +304,6 @@ public abstract class Learner extends Classifier {
         demandLexicon();
         lexicon.countFeatures(policy);
     }
-
 
     /**
      * Returns this learner's feature lexicon after discarding any feature counts it may have been
@@ -320,7 +320,6 @@ public abstract class Learner extends Classifier {
         return lexicon;
     }
 
-
     /**
      * Returns a new, emtpy learner into which all of the parameters that control the behavior of
      * the algorithm have been copied. Here, "emtpy" means no learning has taken place.
@@ -330,7 +329,6 @@ public abstract class Learner extends Classifier {
         clone.forget();
         return clone;
     }
-
 
     /**
      * Trains the learning algorithm given an object as an example. By default, this simply converts
@@ -344,7 +342,6 @@ public abstract class Learner extends Classifier {
         learn((int[]) exampleArray[0], (double[]) exampleArray[1], (int[]) exampleArray[2],
                 (double[]) exampleArray[3]);
     }
-
 
     /**
      * Trains the learning algorithm given a feature vector as an example. This simply converts the
@@ -633,6 +630,15 @@ public abstract class Learner extends Classifier {
                         + getClass().getName() + "'.");
     }
 
+    /**
+     * Start training, this might involve training many models, for cross validation, 
+     * parameter tuning and so on.
+     **/
+    public void beginTraining() {
+        intraining = true;
+    }
+
+
 
     /**
      * Overridden by subclasses to perform any required post-processing computations after all
@@ -640,6 +646,21 @@ public abstract class Learner extends Classifier {
      * {@link #learn(Object[])}. By default this method does nothing.
      **/
     public void doneLearning() {}
+
+
+    /**
+     * Overridden by subclasses to perform any required post-training computations optimizations, 
+     * in particular, feature subset reduction. This default method does nothing.
+     */
+    public void doneTraining() {
+        if (intraining) {
+            intraining = false;
+        } else {
+            throw new RuntimeException("calling doneLearning without previously calling beginTraining"
+                + " violates the lifecycle contract. Or perhaps the subclass does not call the superclass "
+                + "method. Contact the developer.");
+        }
+    }
 
 
     /**

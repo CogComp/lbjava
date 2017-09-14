@@ -29,7 +29,9 @@ import edu.illinois.cs.cogcomp.lbjava.util.ClassUtils;
  * @author Nick Rizzolo
  **/
 public class SparseWeightVector implements Cloneable, Serializable {
-    /**
+    /** default. */
+	private static final long serialVersionUID = 1L;
+	/**
      * When a feature appears in an example but not in this vector, it is assumed to have this
      * weight.
      **/
@@ -40,7 +42,7 @@ public class SparseWeightVector implements Cloneable, Serializable {
     /** The weights in the vector indexed by their {@link Lexicon} key. */
     protected DVector weights;
 
-    /** Simply instantiates {@link #weights}. */
+	/** Simply instantiates {@link #weights}. */
     public SparseWeightVector() {
         this(new DVector(defaultCapacity));
     }
@@ -106,6 +108,13 @@ public class SparseWeightVector implements Cloneable, Serializable {
         weights.set(featureIndex, w, defaultW);
     }
 
+    /**
+     * For those cases where we need the raw weights (during model optimization).
+     * @return the unmolested weights.
+     */
+    public DVector getRawWeights() {
+		return weights;
+	}
 
     /**
      * Takes the dot product of this <code>SparseWeightVector</code> with the argument vector, using
@@ -317,7 +326,8 @@ public class SparseWeightVector implements Cloneable, Serializable {
      * @param min Sets the minimum width for the textual representation of all features.
      * @param lex The feature lexicon.
      **/
-    public void toStringJustWeights(PrintStream out, int min, Lexicon lex) {
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+	public void toStringJustWeights(PrintStream out, int min, Lexicon lex) {
         Map map = lex.getMap();
         Map.Entry[] entries = (Map.Entry[]) map.entrySet().toArray(new Map.Entry[map.size()]);
         Arrays.sort(entries, new Comparator() {
@@ -420,7 +430,8 @@ public class SparseWeightVector implements Cloneable, Serializable {
         String name = in.readString();
         if (name == null)
             return null;
-        Class c = ClassUtils.getClass(name);
+        @SuppressWarnings("rawtypes")
+		Class c = ClassUtils.getClass(name);
         SparseWeightVector result = null;
 
         try {
@@ -482,4 +493,44 @@ public class SparseWeightVector implements Cloneable, Serializable {
     public SparseWeightVector emptyClone() {
         return new SparseWeightVector();
     }
+
+    /**
+     * delete all irrelevant feature weights.
+     * @param uselessfeatures useless features.
+     * @param numfeatures since this weight vec does not know how many features there are, it must be passed in
+     */
+	public void pruneWeights(int[] uselessfeatures, int numfeatures) {
+		if (uselessfeatures.length == 0) 
+			return;
+		
+		// create a new smaller weight vector for the pruned weights.
+		int oldsize = weights.size();
+		if (oldsize > numfeatures) {
+			throw new RuntimeException("There was a weight vector with more weights("+oldsize+
+					") than the number of features("+numfeatures+")!");
+		}
+		int newsize = numfeatures - uselessfeatures.length;
+		double [] newvec = new double[newsize];
+		
+		// copy the weights from the old vector.
+		int uselessindex = 0;
+		int newvecindex = 0;
+		for (int oldindex = 0; oldindex < oldsize; oldindex++) {
+			if (uselessindex < uselessfeatures.length && uselessfeatures[uselessindex] == oldindex) {
+				// this is a useless feature, we will skip it.
+				uselessindex++;
+			} else {
+				newvec[newvecindex] = weights.get(oldindex);
+				newvecindex++;
+			}
+		}
+		
+		// compress the array.
+		if (newvecindex != newsize) {
+			double[] tmp = new double[newvecindex];
+			System.arraycopy(newvec, 0, tmp, 0, newvecindex);;
+			newvec = tmp;
+		}
+		this.weights = new DVector(newvec);
+	}
 }
