@@ -1,7 +1,6 @@
-package edu.illinois.cs.cogcomp.lbjava.learner.neuralnet.lbj;
+package edu.illinois.cs.cogcomp.lbjava.examples.neuralnet;
 
 import edu.illinois.cs.cogcomp.lbjava.neuralnet.*;
-import edu.illinois.cs.cogcomp.lbjava.learner.*;
 
 /** 
 The input features are simple the set of real values 
