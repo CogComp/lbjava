@@ -177,12 +177,4 @@
         </profile>
     </profiles>
 
-    <distributionManagement>
-        <repository>
-            <id>CogcompSoftware</id>
-            <name>CogcompSoftware</name>
-            <url>scp://bilbo.cs.illinois.edu:/mounts/bilbo/disks/0/www/cogcomp/html/m2repo</url>
-        </repository>
-    </distributionManagement>
-
 </project>
