@@ -5,7 +5,7 @@
  * Developed by: The Cognitive Computations Group, University of Illinois at Urbana-Champaign
  * http://cogcomp.cs.illinois.edu/
  */
-package edu.illinois.cs.cogcomp.lbjava.neuralnet;
+package edu.illinois.cs.cogcomp.lbjava.examples.neuralnet;
 
 import java.io.BufferedReader;
 import java.io.File;

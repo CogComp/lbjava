@@ -28,6 +28,7 @@ A learned text classifier; its definition comes from data.
 real NNBrownDataClassifier(NeuralNetExample d) <-
   learn NNOutputVector
   using NNInputVector
+  from new BrownReader("data/brown/their-brown80.feat")
   with NeuralNetLearner {
     inputCount = 4000;
     hiddenCount=100;

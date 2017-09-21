@@ -5,10 +5,16 @@
  * Developed by: The Cognitive Computations Group, University of Illinois at Urbana-Champaign
  * http://cogcomp.cs.illinois.edu/
  */
-package edu.illinois.cs.cogcomp.lbjava.neuralnet;
+package edu.illinois.cs.cogcomp.lbjava.examples.neuralnet;
 
 import java.io.IOException;
 import java.util.Random;
+
+import edu.illinois.cs.cogcomp.lbjava.neuralnet.Activator;
+import edu.illinois.cs.cogcomp.lbjava.neuralnet.Layer;
+import edu.illinois.cs.cogcomp.lbjava.neuralnet.NNTrainingInterface;
+import edu.illinois.cs.cogcomp.lbjava.neuralnet.SimpleNNTrainer;
+import edu.illinois.cs.cogcomp.lbjava.neuralnet.ThreadedNNTrainer;
 
 /**
  * This class will manage a neural network, it will train it up if necessary, create
@@ -163,9 +169,9 @@ public class NeuralNetwork implements Activator {
             NeuralNetwork nn = new NeuralNetwork(hls);
             NNTrainingInterface learner = null;
             if (threads <= 1) {
-            	learner = new SimpleNNTrainer(nn.layers, learningRate, momentum);
+            	    learner = new SimpleNNTrainer(nn.layers, learningRate, momentum);
             } else {
-            	learner = new ThreadedNNTrainer(nn.layers, learningRate, momentum);
+            	    learner = new ThreadedNNTrainer(nn.layers, learningRate, momentum);
             }
             long time = System.currentTimeMillis();
             learner.train(examples, outputs, epochs);

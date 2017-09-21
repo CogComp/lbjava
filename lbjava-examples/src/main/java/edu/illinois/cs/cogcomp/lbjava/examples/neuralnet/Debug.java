@@ -5,14 +5,16 @@
  * Developed by: The Cognitive Computations Group, University of Illinois at Urbana-Champaign
  * http://cogcomp.cs.illinois.edu/
  */
-package edu.illinois.cs.cogcomp.lbjava.neuralnet;
+package edu.illinois.cs.cogcomp.lbjava.examples.neuralnet;
 
 import edu.illinois.cs.cogcomp.lbjava.classify.Classifier;
 
 /**
+ * This was used for debugging during development, thought it might be useful in the future
+ * although it is completely useless right now. 
  * @author redman
- *
  */
+@SuppressWarnings("unused")
 public class Debug {
 	/** running ANN by default. */
 	static private final String NN = "NeuralNet";
@@ -21,7 +23,7 @@ public class Debug {
 	static private final String SGD = "StoichasticGradientDescent";
 	
 	/** the method we are running. */
-	static private String method = NN;
+    static private String method = NN;
     
     /** scales the weight deltas for each iteration. */
     static private float learningRate = .3f;
