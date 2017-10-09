@@ -1,0 +1,39 @@
+package edu.illinois.cs.cogcomp.lbjava.examples.neuralnet;
+
+import edu.illinois.cs.cogcomp.lbjava.neuralnet.*;
+
+/** 
+The input features are simple the set of real values 
+that serve as input to the neural net.
+ */
+real[] NNInputVector(NeuralNetExample input) <- {
+    float[] datapoints = input.getInputFeatures();
+    for (int i = 0; i < datapoints.length; i++) {
+	    sense datapoints[i];
+	}
+}
+
+/**
+The output vector contains the data outputs, for this class
+just one floating point number.
+*/
+real NNOutputVector(NeuralNetExample d) <- {
+    float[] datapoints = d.getOutputLabels();
+    return datapoints[0];
+}
+
+/** 
+A learned text classifier; its definition comes from data. 
+*/
+real NNBrownDataClassifier(NeuralNetExample d) <-
+  learn NNOutputVector
+  using NNInputVector
+  from new BrownReader("data/brown/their-brown80.feat")
+  with NeuralNetLearner {
+    inputCount = 4000;
+    hiddenCount=100;
+    outputCount=1;
+    learningRate=.3f;
+    momentum=.7f;
+  }
+end
