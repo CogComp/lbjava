@@ -16,5 +16,4 @@ public class SparseNetworkLearningPruneTest {
 	@Test
 	public void test() {
 	}
-
 }
