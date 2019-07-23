@@ -22,6 +22,7 @@ import edu.illinois.cs.cogcomp.lbjava.util.ByteString;
 import edu.illinois.cs.cogcomp.lbjava.util.ClassUtils;
 import edu.illinois.cs.cogcomp.lbjava.util.FVector;
 import edu.illinois.cs.cogcomp.lbjava.util.TableFormat;
+import gnu.trove.map.hash.THashMap;
 
 
 /**
@@ -132,7 +133,7 @@ public class Lexicon implements Cloneable, Serializable {
 
     // Member variables.
     /** The map of features to integer keys. */
-    protected Map lexicon;
+    protected Map<Feature, Integer> lexicon;
     /** The inverted map of integer keys to their features. */
     protected FVector lexiconInv;
     /** The encoding to use for new features added to this lexicon. */
@@ -182,7 +183,7 @@ public class Lexicon implements Cloneable, Serializable {
 
     /** Clears the data structures associated with this instance. */
     public void clear() {
-        lexicon = new HashMap();
+        lexicon = new THashMap();
         lexiconInv = new FVector();
         lexiconChildren = null;
         pruneCutoff = -1;
@@ -709,7 +710,7 @@ public class Lexicon implements Cloneable, Serializable {
         }
 
         if (lexicon != null) {
-            clone.lexicon = new HashMap();
+            clone.lexicon = new THashMap();
             clone.lexicon.putAll(lexicon);
         }
         clone.lexiconInv = (FVector) lexiconInv.clone();

@@ -221,7 +221,7 @@ public class DiscretePrimitiveStringFeature extends DiscreteFeature {
      * @return The hash code of this feature.
      **/
     public int hashCode() {
-        return 31 * super.hashCode() + 17 * identifier.hashCode() + value.hashCode();
+        return super.hashCode() + 17 * identifier.hashCode() + value.hashCode();
     }
 
 
@@ -237,8 +237,7 @@ public class DiscretePrimitiveStringFeature extends DiscreteFeature {
             return false;
         if (o instanceof DiscretePrimitiveStringFeature) {
             DiscretePrimitiveStringFeature f = (DiscretePrimitiveStringFeature) o;
-            return identifier.equals(f.identifier) && valueIndex > -1 ? valueIndex == f.valueIndex
-                    : value.equals(f.value);
+            return identifier.equals(f.identifier) && value.equals(f.value);
         }
 
         DiscretePrimitiveFeature f = (DiscretePrimitiveFeature) o;
