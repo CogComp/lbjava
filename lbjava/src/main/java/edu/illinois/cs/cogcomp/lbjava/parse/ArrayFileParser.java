@@ -36,6 +36,8 @@ import edu.illinois.cs.cogcomp.lbjava.learn.Learner;
 public class ArrayFileParser implements Parser {
     /** Reader for file currently being parsed. */
     protected DataInputStream in;
+    /** the zip file must also be closed, if this is compressed file. */
+    protected ZipFile zipFile=null;
     /** The name of the file to parse. */
     protected String exampleFileName;
     /** A single array from which all examples can be parsed. */
@@ -190,13 +192,11 @@ public class ArrayFileParser implements Parser {
         try {
             if (exampleFileName != null) {
                 if (zipped) {
-                    ZipFile zip = new ZipFile(exampleFileName);
-                    in =
-                            new DataInputStream(new BufferedInputStream(zip.getInputStream(zip
+                    zipFile = new ZipFile(exampleFileName);
+                    in = new DataInputStream(new BufferedInputStream(zipFile.getInputStream(zipFile
                                     .getEntry(ExceptionlessInputStream.zipEntryName))));
                 } else
-                    in =
-                            new DataInputStream(new BufferedInputStream(new FileInputStream(
+                    in = new DataInputStream(new BufferedInputStream(new FileInputStream(
                                     exampleFileName)));
             } else if (zipped) {
                 ZipInputStream zip = new ZipInputStream(new ByteArrayInputStream(exampleData));
@@ -218,6 +218,9 @@ public class ArrayFileParser implements Parser {
             return;
         try {
             in.close();
+            if (zipFile != null) {
+            	zipFile.close();
+            }
         } catch (Exception e) {
             System.err.println("Can't close '" + exampleFileName + "':");
             e.printStackTrace();

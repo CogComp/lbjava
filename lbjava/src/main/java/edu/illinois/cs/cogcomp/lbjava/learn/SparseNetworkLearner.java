@@ -8,9 +8,9 @@
 package edu.illinois.cs.cogcomp.lbjava.learn;
 
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.Map.Entry;
 
 import edu.illinois.cs.cogcomp.core.datastructures.vectors.ExceptionlessInputStream;
 import edu.illinois.cs.cogcomp.core.datastructures.vectors.ExceptionlessOutputStream;
@@ -687,6 +687,44 @@ public class SparseNetworkLearner extends Learner {
         network = new OVector(N);
         for (int i = 0; i < N; ++i)
             network.add(Learner.readLearner(in));
+    }
+    
+    /**
+     * This method will discard learners not associated with the provided labels. For labels that are 
+     * not needed at runtime, this would improve performance as well as memory footprint. For example,
+     * imagine you have a 4 class model, PER, ORG, LOC and OTHER, but you could care less about OTHER. 
+     * In this case, you could eliminate that label and improve the performance of the model proportionally.
+     * <p>
+     * <b>Use of this feature may cause terms previously classified by a discarded classifier to be labeled
+     * as one of the remaining classes.</b>
+     * </p>
+     * @param keepers A list of the only labels to keep.
+     */
+    public void pruneUnusedLabels(ArrayList<String> keepers) {
+        int N = network.size();
+        for (int i = 0; i < N; ++i) {
+            LinearThresholdUnit ltu = (LinearThresholdUnit) network.get(i);
+            if (ltu == null)
+                continue;
+            
+            // get the label and determine if it should be pruned.
+            String label = labelLexicon.lookupKey(i).getStringValue();
+            if (label.length() > 2) {
+	            // Take off the B-, I-, L- or U-
+	            label = label.substring(2);
+	            boolean keepit = false;
+	            for (String checkme : keepers) {
+	            	if (label.equals(checkme)) {
+	            		keepit = true;
+	            		break;
+	            	}
+	            }
+	            if (!keepit)
+	            	network.set(i, null);
+            } else {
+            	// keep other("O"), this is like a non-label to begin with.
+            }
+        }
     }
 
     /** Returns a deep clone of this learning algorithm. */
